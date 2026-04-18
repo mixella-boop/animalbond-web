@@ -32,7 +32,7 @@ async function getRecentAnimals(): Promise<Animal[]> {
 async function getPartners(): Promise<Partner[]> {
   const { data, error } = await supabase
     .from('partners')
-    .select('id, name, category, city, description, logo_url, website_url')
+    .select('id, name, category, city, description, logo_url, url')
     .eq('is_active', true)
     .order('created_at', { ascending: false })
     .limit(4)

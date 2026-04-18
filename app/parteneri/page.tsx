@@ -42,7 +42,7 @@ export default function ParteneriPage() {
 
       let query = supabase
         .from('partners')
-        .select('id, name, category, city, description, logo_url, website_url, is_active')
+        .select('id, name, category, city, description, logo_url, url, is_active')
         .eq('is_active', true)
         .order('name', { ascending: true })
 
@@ -174,9 +174,9 @@ export default function ParteneriPage() {
                 )}
 
                 {/* Website */}
-                {partner.website_url && (
+                {partner.url && (
                   <a
-                    href={partner.website_url}
+                    href={partner.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-auto flex items-center gap-1.5 text-primary font-semibold text-sm hover:underline"

@@ -37,7 +37,7 @@ export type Partner = {
   city: string | null
   description: string | null
   logo_url: string | null
-  website_url: string | null
+  url: string | null
   is_active: boolean
   created_at: string
 }
