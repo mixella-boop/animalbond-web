@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal, Partner } from '@/lib/supabase'
+import type { Testimonial } from './povesti/page'
 
 async function getRecentAnimals(): Promise<Animal[]> {
   const now = new Date().toISOString()
@@ -27,6 +28,16 @@ async function getRecentAnimals(): Promise<Animal[]> {
   }
 
   return data as Animal[]
+}
+
+async function getRecentTestimonials(): Promise<Testimonial[]> {
+  const { data } = await supabase
+    .from('testimonials')
+    .select('*, profiles (username, full_name)')
+    .eq('is_approved', true)
+    .order('created_at', { ascending: false })
+    .limit(3)
+  return (data as Testimonial[]) || []
 }
 
 async function getPartners(): Promise<Partner[]> {
@@ -62,7 +73,7 @@ const categoryLabel: Record<string, string> = {
 }
 
 export default async function HomePage() {
-  const [animals, partners] = await Promise.all([getRecentAnimals(), getPartners()])
+  const [animals, partners, testimonials] = await Promise.all([getRecentAnimals(), getPartners(), getRecentTestimonials()])
 
   return (
     <div>
@@ -265,6 +276,45 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ===== TESTIMONIALE ===== */}
+      {testimonials.length > 0 && (
+        <section className="py-14 px-4 sm:px-6 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-text-main">Povești de adopție</h2>
+                <p className="text-text-muted mt-1">Oameni care au găsit un prieten prin AnimalBond</p>
+              </div>
+              <Link href="/povesti" className="hidden sm:block text-primary font-semibold hover:underline">
+                Toate poveștile →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {testimonials.map((t) => (
+                <Link href="/povesti" key={t.id} className="group block bg-white rounded-card shadow-card border border-border-light overflow-hidden hover:shadow-card-hover transition-all">
+                  {t.photo_url ? (
+                    <div className="aspect-[4/3] overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={t.photo_url} alt={t.animal_name || ''} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
+                    </div>
+                  ) : (
+                    <div className="aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center text-5xl">🐾</div>
+                  )}
+                  <div className="p-4">
+                    {t.animal_name && <p className="text-primary font-semibold text-sm mb-1">🐾 {t.animal_name}</p>}
+                    <p className="text-text-main text-sm leading-relaxed line-clamp-3">{t.text}</p>
+                    <p className="text-text-muted text-xs mt-2">@{t.profiles?.username || 'anonim'}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className="text-center mt-6 sm:hidden">
+              <Link href="/povesti" className="text-primary font-semibold hover:underline">Toate poveștile →</Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ===== DOWNLOAD APP ===== */}
       <section className="py-14 px-4 sm:px-6 bg-white">

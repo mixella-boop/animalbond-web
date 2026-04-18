@@ -33,6 +33,12 @@ export default function Navbar() {
               Parteneri
             </Link>
             <Link
+              href="/povesti"
+              className="text-text-main hover:text-primary transition-colors font-medium"
+            >
+              Povești
+            </Link>
+            <Link
               href="/despre"
               className="text-text-main hover:text-primary transition-colors font-medium"
             >
@@ -80,6 +86,13 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
             >
               Parteneri
+            </Link>
+            <Link
+              href="/povesti"
+              className="text-text-main hover:text-primary transition-colors font-medium py-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              Povești
             </Link>
             <Link
               href="/despre"
