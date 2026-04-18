@@ -198,14 +198,14 @@ export default function ParteneriPage() {
         <div className="text-4xl mb-3">🏥</div>
         <h2 className="text-2xl font-bold mb-3">Vrei să fii partener?</h2>
         <p className="text-white/80 mb-6 max-w-lg mx-auto">
-          Promovare gratuită pentru cabinetul tău veterinar sau magazinul de animale.
-          Ajunge la mii de proprietari de animale din zona ta.
+          Devino partener AnimalBond și ajunge la mii de proprietari de animale din zona ta.
+          Vizibilitate pentru cabinetul tău veterinar sau magazinul de animale.
         </p>
         <Link
           href="/partner-apply"
           className="inline-block bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-pink-50 transition-colors"
         >
-          Înscrie-te gratuit →
+          Înscrie-te ca partener →
         </Link>
       </div>
     </div>

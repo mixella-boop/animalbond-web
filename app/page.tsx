@@ -246,15 +246,15 @@ export default async function HomePage() {
             Ești cabinet vet sau magazin pentru animale?
           </h2>
           <p className="text-white/80 mb-8 text-lg leading-relaxed">
-            Înscrie-te gratuit ca partener AnimalBond și ajunge la mii de proprietari de animale
-            din zona ta. Promovare gratuită în aplicație și pe site.
+            Devino partener AnimalBond și ajunge la mii de proprietari de animale din zona ta.
+            Vizibilitate în aplicație și pe site pentru cabinetul sau magazinul tău.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/partner-apply"
               className="bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-50 transition-colors shadow-lg"
             >
-              Înscrie-te gratuit →
+              Înscrie-te ca partener →
             </Link>
             <Link
               href="/parteneri"
