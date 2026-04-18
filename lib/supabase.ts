@@ -13,9 +13,8 @@ export type Animal = {
   breed: string | null
   age_years: number | null
   age_months: number | null
-  sex: string | null
-  location_city: string | null
-  location_county: string | null
+  gender: string | null
+  location: string | null
   description: string | null
   status: string | null
   expires_at: string | null
@@ -26,8 +25,8 @@ export type Animal = {
 export type AnimalPhoto = {
   id: string
   animal_id: string
-  photo_url: string
-  is_main: boolean
+  url: string
+  is_primary: boolean
   order_index: number
 }
 

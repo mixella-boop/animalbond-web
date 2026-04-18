@@ -25,7 +25,7 @@ export default function AnimalGallery({ photos, animalName }: Props) {
       {/* Poza mare */}
       <div className="relative aspect-[4/3] rounded-card overflow-hidden bg-gray-100 shadow-card mb-3">
         <Image
-          src={photos[activeIdx].photo_url}
+          src={photos[activeIdx].url}
           alt={`${animalName} - poza ${activeIdx + 1}`}
           fill
           className="object-cover"
@@ -72,7 +72,7 @@ export default function AnimalGallery({ photos, animalName }: Props) {
               }`}
             >
               <Image
-                src={photo.photo_url}
+                src={photo.url}
                 alt={`${animalName} - miniatură ${idx + 1}`}
                 fill
                 className="object-cover"

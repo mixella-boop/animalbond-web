@@ -16,9 +16,9 @@ async function getAnimal(id: string): Promise<Animal | null> {
   const { data, error } = await supabase
     .from('animals')
     .select(`
-      id, name, species, breed, age_years, age_months, sex,
-      location_city, location_county, description, status, expires_at, created_at,
-      animal_photos (id, photo_url, is_main, order_index)
+      id, name, species, breed, age_years, age_months, gender,
+      location, description, status, expires_at, created_at,
+      animal_photos (id, url, is_primary, order_index)
     `)
     .eq('id', id)
     .single()
@@ -30,8 +30,8 @@ async function getAnimal(id: string): Promise<Animal | null> {
 function getSortedPhotos(photos?: AnimalPhoto[]): AnimalPhoto[] {
   if (!photos || photos.length === 0) return []
   return [...photos].sort((a, b) => {
-    if (a.is_main && !b.is_main) return -1
-    if (!a.is_main && b.is_main) return 1
+    if (a.is_primary && !b.is_primary) return -1
+    if (!a.is_primary && b.is_primary) return 1
     return a.order_index - b.order_index
   })
 }
@@ -57,7 +57,7 @@ const speciesEmoji: Record<string, string> = {
 
 const sexLabel: Record<string, string> = {
   male: 'Mascul', female: 'Femelă', m: 'Mascul', f: 'Femelă',
-  mascul: 'Mascul', femela: 'Femelă', femelă: 'Femelă',
+  mascul: 'Mascul', femela: 'Femelă', femelă: 'Femelă', unknown: 'Necunoscut',
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -69,12 +69,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const photos = getSortedPhotos(animal.animal_photos)
-  const mainPhoto = photos[0]?.photo_url
+  const mainPhoto = photos[0]?.url
   const description = animal.description
     ? animal.description.slice(0, 150) + (animal.description.length > 150 ? '...' : '')
     : `Adoptă ${animal.name} — ${speciesLabel[animal.species?.toLowerCase()] || animal.species} disponibil pentru adopție pe AnimalBond.`
 
-  const location = [animal.location_city, animal.location_county].filter(Boolean).join(', ')
+  const location = animal.location || ''
   const title = `Adopție ${animal.name} — ${animal.breed || speciesLabel[animal.species?.toLowerCase()] || animal.species}${location ? `, ${location}` : ''}`
 
   return {
@@ -108,7 +108,7 @@ export default async function AnimalPage({ params }: PageProps) {
   const isAdopted = animal.status === 'adopted'
   const species = animal.species?.toLowerCase()
   const emoji = speciesEmoji[species] || '🐾'
-  const location = [animal.location_city, animal.location_county].filter(Boolean).join(', ')
+  const location = animal.location || ''
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
@@ -151,7 +151,7 @@ export default async function AnimalPage({ params }: PageProps) {
           <div className="grid grid-cols-2 gap-3 mb-6">
             {[
               { label: 'Vârstă', value: formatAge(animal.age_years, animal.age_months), icon: '🎂' },
-              { label: 'Sex', value: sexLabel[animal.sex?.toLowerCase() || ''] || animal.sex || 'Necunoscut', icon: '⚥' },
+              { label: 'Sex', value: sexLabel[animal.gender?.toLowerCase() || ''] || animal.gender || 'Necunoscut', icon: '⚥' },
               { label: 'Locație', value: location || 'Necunoscută', icon: '📍' },
               { label: 'Status', value: isAdopted ? 'Adoptat' : isExpired ? 'Expirat' : 'Disponibil', icon: '✅' },
             ].map((item) => (

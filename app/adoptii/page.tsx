@@ -24,10 +24,10 @@ const SPECIES_ALIASES: Record<string, string[]> = {
 
 function getMainPhoto(animal: Animal): string | null {
   if (!animal.animal_photos || animal.animal_photos.length === 0) return null
-  const main = animal.animal_photos.find((p) => p.is_main)
-  if (main) return main.photo_url
+  const main = animal.animal_photos.find((p) => p.is_primary)
+  if (main) return main.url
   const sorted = [...animal.animal_photos].sort((a, b) => a.order_index - b.order_index)
-  return sorted[0]?.photo_url ?? null
+  return sorted[0]?.url ?? null
 }
 
 const PAGE_SIZE = 12
@@ -50,8 +50,8 @@ export default function AdoptiiPage() {
         .from('animals')
         .select(`
           id, name, species, breed, age_years, age_months,
-          location_city, location_county, status, expires_at, created_at,
-          animal_photos (id, photo_url, is_main, order_index)
+          location, status, expires_at, created_at,
+          animal_photos (id, url, is_primary, order_index)
         `)
         .neq('status', 'adopted')
         .or(`expires_at.is.null,expires_at.gt.${now}`)
@@ -64,9 +64,7 @@ export default function AdoptiiPage() {
       }
 
       if (locationFilter) {
-        query = query.or(
-          `location_city.ilike.%${locationFilter}%,location_county.ilike.%${locationFilter}%`
-        )
+        query = query.ilike('location', `%${locationFilter}%`)
       }
 
       const { data, error } = await query
@@ -227,8 +225,7 @@ export default function AdoptiiPage() {
                 breed={animal.breed}
                 age_years={animal.age_years}
                 age_months={animal.age_months}
-                location_city={animal.location_city}
-                location_county={animal.location_county}
+                location={animal.location}
                 photoUrl={getMainPhoto(animal)}
                 expiresAt={animal.expires_at}
               />

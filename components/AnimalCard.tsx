@@ -8,8 +8,7 @@ type AnimalCardProps = {
   breed: string | null
   age_years?: number | null
   age_months?: number | null
-  location_city?: string | null
-  location_county?: string | null
+  location?: string | null
   photoUrl?: string | null
   expiresAt?: string | null
 }
@@ -62,14 +61,12 @@ export default function AnimalCard({
   breed,
   age_years,
   age_months,
-  location_city,
-  location_county,
+  location,
   photoUrl,
   expiresAt,
 }: AnimalCardProps) {
   const emoji = speciesEmoji[species?.toLowerCase()] || '🐾'
   const label = speciesLabel[species?.toLowerCase()] || species
-  const location = [location_city, location_county].filter(Boolean).join(', ')
   const age = formatAge(age_years, age_months)
 
   // Verificare expirare
