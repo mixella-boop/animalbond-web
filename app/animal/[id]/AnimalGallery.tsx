@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import type { AnimalPhoto } from '@/lib/supabase'
 
 type Props = {
@@ -24,14 +23,11 @@ export default function AnimalGallery({ photos, animalName }: Props) {
     <div>
       {/* Poza mare */}
       <div className="relative aspect-[4/3] rounded-card overflow-hidden bg-gray-100 shadow-card mb-3">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={photos[activeIdx].url}
           alt={`${animalName} - poza ${activeIdx + 1}`}
-          fill
-          unoptimized
-          className="object-cover"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          priority={activeIdx === 0}
+          className="object-cover w-full h-full"
         />
         {photos.length > 1 && (
           <>
@@ -51,7 +47,6 @@ export default function AnimalGallery({ photos, animalName }: Props) {
             </button>
           </>
         )}
-        {/* Counter */}
         {photos.length > 1 && (
           <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
             {activeIdx + 1} / {photos.length}
@@ -72,13 +67,11 @@ export default function AnimalGallery({ photos, animalName }: Props) {
                   : 'border-border-light hover:border-primary/50'
               }`}
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={photo.url}
                 alt={`${animalName} - miniatură ${idx + 1}`}
-                fill
-                unoptimized
-                className="object-cover"
-                sizes="64px"
+                className="object-cover w-full h-full"
               />
             </button>
           ))}

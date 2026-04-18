@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 type AnimalCardProps = {
   id: string
@@ -79,13 +78,11 @@ export default function AnimalCard({
         {/* Poza */}
         <div className="relative aspect-[4/3] bg-gray-100">
           {photoUrl ? (
-            <Image
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               src={photoUrl}
               alt={`${name} - ${label}`}
-              fill
-              unoptimized
-              className="object-cover"
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              className="object-cover w-full h-full"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-5xl bg-gradient-to-br from-pink-50 to-red-50">
