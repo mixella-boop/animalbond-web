@@ -11,7 +11,8 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl text-primary">
+          <Link href="/" className="flex items-center gap-1.5 font-bold text-xl text-primary">
+            <span className="text-2xl">🐾</span>
             <span className="text-2xl">🐾</span>
             <span>AnimalBond</span>
           </Link>
