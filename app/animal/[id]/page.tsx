@@ -7,7 +7,7 @@ import type { Animal, AnimalPhoto } from '@/lib/supabase'
 import AnimalGallery from './AnimalGallery'
 
 type PageProps = {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 async function getAnimal(id: string): Promise<Animal | null> {
@@ -59,7 +59,8 @@ const sexLabel: Record<string, string> = {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const animal = await getAnimal(params.id)
+  const { id } = await params
+  const animal = await getAnimal(id)
 
   if (!animal) {
     return { title: 'Animal negăsit | AnimalBond' }
@@ -93,7 +94,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function AnimalPage({ params }: PageProps) {
-  const animal = await getAnimal(params.id)
+  const { id } = await params
+  const animal = await getAnimal(id)
 
   if (!animal) {
     notFound()
