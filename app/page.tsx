@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
@@ -267,39 +269,60 @@ export default async function HomePage() {
 
       {/* ===== DOWNLOAD APP ===== */}
       <section className="py-14 px-4 sm:px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-5xl mb-4">📱</div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-text-main mb-4">
-            Descarcă aplicația AnimalBond
-          </h2>
-          <p className="text-text-muted mb-8 text-lg max-w-xl mx-auto">
-            Contactează proprietarii, salvează animale favorite și primește notificări pentru animale noi din zona ta.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#"
-              className="flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors"
-            >
-              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-              </svg>
-              <span>
-                <div className="text-xs opacity-75">Descarcă din</div>
-                <div className="text-base leading-tight">App Store</div>
-              </span>
-            </a>
-            <a
-              href="#"
-              className="flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors"
-            >
-              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.18 23.76c.38.21.82.24 1.23.09l12.5-7.21-2.73-2.72-11 10.84zm16.26-9.38L16.76 12l2.68-2.38-11.44-6.6c-.48-.28-1.04-.27-1.5-.04L17.44 14.38zM2.08 1.76C2.03 1.97 2 2.2 2 2.45v19.1c0 .26.03.49.09.7l11.2-11.02-11.21-9.47zm12.01 11.5L12 12l-9.14 8.98L14.09 13.26z" />
-              </svg>
-              <span>
-                <div className="text-xs opacity-75">Descarcă din</div>
-                <div className="text-base leading-tight">Google Play</div>
-              </span>
-            </a>
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center gap-10">
+            {/* Text + butoane */}
+            <div className="flex-1 text-center lg:text-left">
+              <div className="text-5xl mb-4">📱</div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-text-main mb-4">
+                Descarcă aplicația AnimalBond
+              </h2>
+              <p className="text-text-muted mb-8 text-lg max-w-xl">
+                Contactează proprietarii, salvează animale favorite și primește notificări pentru animale noi din zona ta.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a
+                  href="#"
+                  className="flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors"
+                >
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                  </svg>
+                  <span>
+                    <div className="text-xs opacity-75">Descarcă din</div>
+                    <div className="text-base leading-tight">App Store</div>
+                  </span>
+                </a>
+                <a
+                  href="#"
+                  className="flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors"
+                >
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.18 23.76c.38.21.82.24 1.23.09l12.5-7.21-2.73-2.72-11 10.84zm16.26-9.38L16.76 12l2.68-2.38-11.44-6.6c-.48-.28-1.04-.27-1.5-.04L17.44 14.38zM2.08 1.76C2.03 1.97 2 2.2 2 2.45v19.1c0 .26.03.49.09.7l11.2-11.02-11.21-9.47zm12.01 11.5L12 12l-9.14 8.98L14.09 13.26z" />
+                  </svg>
+                  <span>
+                    <div className="text-xs opacity-75">Descarcă din</div>
+                    <div className="text-base leading-tight">Google Play</div>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            {/* QR Code */}
+            <div className="flex flex-col items-center gap-3">
+              <div className="bg-white border-2 border-border-light rounded-2xl p-4 shadow-card">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&color=333333&bgcolor=ffffff&data=https://animalbond2025.vercel.app"
+                  alt="QR code descărcare AnimalBond"
+                  width={160}
+                  height={160}
+                />
+              </div>
+              <p className="text-sm text-text-muted text-center max-w-[160px]">
+                Scanează pentru a deschide aplicația
+              </p>
+            </div>
           </div>
         </div>
       </section>
