@@ -28,6 +28,7 @@ export default function AnimalGallery({ photos, animalName }: Props) {
           src={photos[activeIdx].url}
           alt={`${animalName} - poza ${activeIdx + 1}`}
           fill
+          unoptimized
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, 50vw"
           priority={activeIdx === 0}
@@ -75,6 +76,7 @@ export default function AnimalGallery({ photos, animalName }: Props) {
                 src={photo.url}
                 alt={`${animalName} - miniatură ${idx + 1}`}
                 fill
+                unoptimized
                 className="object-cover"
                 sizes="64px"
               />

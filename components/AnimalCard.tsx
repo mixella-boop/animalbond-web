@@ -83,6 +83,7 @@ export default function AnimalCard({
               src={photoUrl}
               alt={`${name} - ${label}`}
               fill
+              unoptimized
               className="object-cover"
               sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
             />
