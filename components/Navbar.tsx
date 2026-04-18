@@ -27,6 +27,12 @@ export default function Navbar() {
               Adopții
             </Link>
             <Link
+              href="/ajutor-medical"
+              className="text-red-500 hover:text-red-600 transition-colors font-medium"
+            >
+              💊 Ajutor medical
+            </Link>
+            <Link
               href="/parteneri"
               className="text-text-main hover:text-primary transition-colors font-medium"
             >
@@ -79,6 +85,13 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
             >
               Adopții
+            </Link>
+            <Link
+              href="/ajutor-medical"
+              className="text-red-500 hover:text-red-600 transition-colors font-medium py-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              💊 Ajutor medical
             </Link>
             <Link
               href="/parteneri"
