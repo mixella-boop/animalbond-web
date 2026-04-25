@@ -1,12 +1,8 @@
-export const dynamic = 'force-dynamic'
+'use client'
 
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
-import Link from 'next/link'
-
-export const metadata = {
-  title: 'Ajutor medical animale | AnimalBond',
-  description: 'Animale care au nevoie urgentă de ajutor medical. Contactează prin aplicația AnimalBond.',
-}
+import { COUNTRIES } from '@/lib/countries'
 
 type MedicalAnimal = {
   id: string
@@ -18,6 +14,7 @@ type MedicalAnimal = {
   status: string
   expires_at: string | null
   created_at: string
+  country: string | null
   animal_photos: { url: string; is_primary: boolean }[]
 }
 
@@ -33,27 +30,42 @@ function getMainPhoto(animal: MedicalAnimal): string | null {
     || null
 }
 
-async function getMedicalAnimals(): Promise<MedicalAnimal[]> {
-  const now = new Date().toISOString()
-  const { data, error } = await supabase
-    .from('animals')
-    .select('id, name, species, breed, location, description, status, expires_at, created_at, animal_photos (url, is_primary)')
-    .eq('type', 'medical')
-    .eq('status', 'available')
-    .or(`expires_at.is.null,expires_at.gt.${now}`)
-    .order('created_at', { ascending: false })
+export default function AjutorMedicalPage() {
+  const [animals, setAnimals] = useState<MedicalAnimal[]>([])
+  const [loading, setLoading] = useState(true)
+  const [country, setCountry] = useState('')
 
-  if (error) { console.error(error); return [] }
-  return (data as MedicalAnimal[]) || []
-}
+  const fetchAnimals = useCallback(async (countryFilter: string) => {
+    const now = new Date().toISOString()
+    let query = supabase
+      .from('animals')
+      .select('id, name, species, breed, location, description, status, expires_at, created_at, country, animal_photos (url, is_primary)')
+      .eq('type', 'medical')
+      .neq('status', 'adopted')
+      .neq('status', 'pending_approval')
+      .or(`expires_at.is.null,expires_at.gt.${now}`)
+      .order('created_at', { ascending: false })
 
-export default async function AjutorMedicalPage() {
-  const animals = await getMedicalAnimals()
+    if (countryFilter) {
+      query = query.eq('country', countryFilter)
+    }
+
+    const { data, error } = await query
+    if (error) { console.error(error); return }
+    setAnimals((data as MedicalAnimal[]) || [])
+  }, [])
+
+  useEffect(() => {
+    setLoading(true)
+    fetchAnimals(country).finally(() => setLoading(false))
+  }, [country, fetchAnimals])
+
+  const selectedCountry = COUNTRIES.find(c => c.code === country)
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       {/* Header */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-8">
         <div className="text-5xl mb-4">💊</div>
         <h1 className="text-3xl sm:text-4xl font-bold text-text-main mb-3">
           Ajutor medical urgent
@@ -71,7 +83,7 @@ export default async function AjutorMedicalPage() {
       </div>
 
       {/* Banner urgent */}
-      <div className="bg-red-50 border border-red-200 rounded-2xl p-4 mb-8 flex items-center gap-3">
+      <div className="bg-red-50 border border-red-200 rounded-2xl p-4 mb-6 flex items-center gap-3">
         <span className="text-2xl shrink-0">🚨</span>
         <p className="text-red-800 text-sm leading-relaxed">
           <strong>Fiecare oră contează.</strong> Contactul se face direct prin aplicație —
@@ -79,17 +91,74 @@ export default async function AjutorMedicalPage() {
         </p>
       </div>
 
+      {/* Filtru țară */}
+      <div className="bg-white rounded-card shadow-card border border-border-light p-4 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+        <label className="text-xs font-semibold text-text-muted uppercase tracking-wide shrink-0">
+          Filtrează după țară:
+        </label>
+        <div className="flex items-center gap-3 flex-1">
+          <select
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            className="border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
+          >
+            <option value="">🌍 Toate țările</option>
+            {COUNTRIES.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.flag} {c.name}
+              </option>
+            ))}
+          </select>
+          {country && (
+            <button
+              onClick={() => setCountry('')}
+              className="text-xs text-text-muted hover:text-primary transition-colors underline"
+            >
+              ✕ Șterge filtrul
+            </button>
+          )}
+        </div>
+        {country && (
+          <p className="text-sm text-text-muted">
+            Cazuri din {selectedCountry?.flag} {selectedCountry?.name}
+          </p>
+        )}
+      </div>
+
       {/* Grid animale */}
-      {animals.length === 0 ? (
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-card shadow-card border border-red-100 overflow-hidden animate-pulse">
+              <div className="aspect-[4/3] bg-gray-200" />
+              <div className="p-4 space-y-2">
+                <div className="h-5 bg-gray-200 rounded w-3/4" />
+                <div className="h-4 bg-gray-200 rounded w-1/2" />
+                <div className="h-16 bg-gray-200 rounded" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : animals.length === 0 ? (
         <div className="text-center py-20">
           <div className="text-6xl mb-4">💚</div>
           <h2 className="text-xl font-semibold text-text-main mb-2">Niciun caz urgent momentan</h2>
-          <p className="text-text-muted">Revino curând sau descarcă aplicația pentru notificări în timp real.</p>
+          <p className="text-text-muted">
+            {country
+              ? 'Nu există cazuri active în țara selectată.'
+              : 'Revino curând sau descarcă aplicația pentru notificări în timp real.'}
+          </p>
+          {country && (
+            <button onClick={() => setCountry('')} className="mt-4 text-primary font-semibold hover:underline text-sm">
+              Vezi toate țările
+            </button>
+          )}
         </div>
       ) : (
         <>
           <p className="text-text-muted text-sm mb-6">
-            {animals.length} {animals.length === 1 ? 'caz activ' : 'cazuri active'} care au nevoie de ajutor
+            {animals.length} {animals.length === 1 ? 'caz activ' : 'cazuri active'}
+            {country && ` în ${selectedCountry?.flag} ${selectedCountry?.name}`}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {animals.map((animal) => {
@@ -100,30 +169,26 @@ export default async function AjutorMedicalPage() {
                   key={animal.id}
                   className="bg-white rounded-card shadow-card border border-red-100 overflow-hidden hover:shadow-card-hover transition-all"
                 >
-                  {/* Poza */}
                   <div className="relative aspect-[4/3] bg-red-50">
                     {photo ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={photo} alt={animal.name} className="object-cover w-full h-full" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-5xl">
-                        {emoji}
-                      </div>
+                      <div className="w-full h-full flex items-center justify-center text-5xl">{emoji}</div>
                     )}
                     <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                       💊 Nevoie urgentă
                     </div>
+                    {animal.country && (
+                      <div className="absolute top-2 right-2 bg-white/90 text-xs font-bold px-2 py-1 rounded-full">
+                        {COUNTRIES.find(c => c.code === animal.country)?.flag || animal.country}
+                      </div>
+                    )}
                   </div>
-
-                  {/* Info */}
                   <div className="p-4">
                     <h3 className="font-bold text-text-main text-lg mb-1">{animal.name}</h3>
-                    {animal.breed && (
-                      <p className="text-text-muted text-sm mb-1">{animal.breed}</p>
-                    )}
-                    {animal.location && (
-                      <p className="text-text-muted text-sm mb-2">📍 {animal.location}</p>
-                    )}
+                    {animal.breed && <p className="text-text-muted text-sm mb-1">{animal.breed}</p>}
+                    {animal.location && <p className="text-text-muted text-sm mb-2">📍 {animal.location}</p>}
                     {animal.description && (
                       <p className="text-text-main text-sm leading-relaxed line-clamp-3 mb-3">
                         {animal.description}

@@ -3,32 +3,9 @@ export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
-import AnimalCard from '@/components/AnimalCard'
-import type { Animal, Partner } from '@/lib/supabase'
+import HomeAnimalsSection from '@/components/HomeAnimalsSection'
+import type { Partner } from '@/lib/supabase'
 import type { Testimonial } from './povesti/page'
-
-async function getRecentAnimals(): Promise<Animal[]> {
-  const now = new Date().toISOString()
-
-  const { data, error } = await supabase
-    .from('animals')
-    .select(`
-      id, name, species, breed, age_years, age_months,
-      location, status, expires_at, created_at,
-      animal_photos (id, url, is_primary, order_index)
-    `)
-    .neq('status', 'adopted')
-    .or(`expires_at.is.null,expires_at.gt.${now}`)
-    .order('created_at', { ascending: false })
-    .limit(6)
-
-  if (error) {
-    console.error('Eroare la animals:', error)
-    return []
-  }
-
-  return data as Animal[]
-}
 
 async function getRecentTestimonials(): Promise<Testimonial[]> {
   const { data } = await supabase
@@ -73,7 +50,7 @@ const categoryLabel: Record<string, string> = {
 }
 
 export default async function HomePage() {
-  const [animals, partners, testimonials] = await Promise.all([getRecentAnimals(), getPartners(), getRecentTestimonials()])
+  const [partners, testimonials] = await Promise.all([getPartners(), getRecentTestimonials()])
 
   return (
     <div>
@@ -106,60 +83,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ===== ULTIMELE ANIMALE ===== */}
-      <section className="py-14 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-text-main">
-                Ultimele animale adăugate
-              </h2>
-              <p className="text-text-muted mt-1">Animale care așteaptă o casă chiar acum</p>
-            </div>
-            <Link
-              href="/adoptii"
-              className="hidden sm:block text-primary font-semibold hover:underline"
-            >
-              Vezi toate →
-            </Link>
-          </div>
-
-          {animals.length > 0 ? (
-            <>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
-                {animals.map((animal) => (
-                  <AnimalCard
-                    key={animal.id}
-                    id={animal.id}
-                    name={animal.name}
-                    species={animal.species}
-                    breed={animal.breed}
-                    age_years={animal.age_years}
-                    age_months={animal.age_months}
-                    location={animal.location}
-                    photoUrl={getMainPhoto(animal)}
-                    expiresAt={animal.expires_at}
-                  />
-                ))}
-              </div>
-              <div className="text-center mt-8 sm:hidden">
-                <Link
-                  href="/adoptii"
-                  className="text-primary font-semibold hover:underline"
-                >
-                  Vezi toate animalele →
-                </Link>
-              </div>
-            </>
-          ) : (
-            <div className="text-center py-16 text-text-muted">
-              <div className="text-5xl mb-4">🔍</div>
-              <p className="text-lg">Nu există animale disponibile momentan.</p>
-              <p className="text-sm mt-2">Revino curând sau descarcă aplicația pentru notificări.</p>
-            </div>
-          )}
-        </div>
-      </section>
+      {/* ===== ULTIMELE ANIMALE (cu filtru țară) ===== */}
+      <HomeAnimalsSection />
 
       {/* ===== CUM FUNCTIONEAZA ===== */}
       <section id="cum-functioneaza" className="bg-white py-14 px-4 sm:px-6">

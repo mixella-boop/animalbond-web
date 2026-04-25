@@ -14,13 +14,28 @@ const SPECIES_OPTIONS = [
   { value: 'other', label: '🐾 Altele' },
 ]
 
-// Alias-uri pentru specii (în caz că în DB e în română)
 const SPECIES_ALIASES: Record<string, string[]> = {
   dog: ['dog', 'caine', 'câine'],
   cat: ['cat', 'pisica', 'pisică'],
   rabbit: ['rabbit', 'iepure'],
   bird: ['bird', 'pasare', 'pasăre'],
 }
+
+const COUNTRY_OPTIONS = [
+  { value: '', label: '🌍 Toate țările' },
+  { value: 'RO', label: '🇷🇴 România' },
+  { value: 'MD', label: '🇲🇩 Moldova' },
+  { value: 'DE', label: '🇩🇪 Germania' },
+  { value: 'AT', label: '🇦🇹 Austria' },
+  { value: 'IT', label: '🇮🇹 Italia' },
+  { value: 'FR', label: '🇫🇷 Franța' },
+  { value: 'ES', label: '🇪🇸 Spania' },
+  { value: 'GB', label: '🇬🇧 UK' },
+  { value: 'NL', label: '🇳🇱 Olanda' },
+  { value: 'BE', label: '🇧🇪 Belgia' },
+  { value: 'HU', label: '🇭🇺 Ungaria' },
+  { value: 'BG', label: '🇧🇬 Bulgaria' },
+]
 
 function getMainPhoto(animal: Animal): string | null {
   if (!animal.animal_photos || animal.animal_photos.length === 0) return null
@@ -40,20 +55,31 @@ export default function AdoptiiPage() {
   const [page, setPage] = useState(0)
 
   const [species, setSpecies] = useState('')
+  const [country, setCountry] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
   const [locationInput, setLocationInput] = useState('')
 
   const fetchAnimals = useCallback(
-    async (pageNum: number, speciesFilter: string, locationFilter: string, replace: boolean) => {
+    async (
+      pageNum: number,
+      speciesFilter: string,
+      countryFilter: string,
+      locationFilter: string,
+      replace: boolean
+    ) => {
       const now = new Date().toISOString()
       let query = supabase
         .from('animals')
         .select(`
           id, name, species, breed, age_years, age_months,
-          location, status, expires_at, created_at,
+          location, status, expires_at, created_at, type, country,
           animal_photos (id, url, is_primary, order_index)
         `)
+        // Doar anunțuri de adopție
+        .eq('type', 'adoption')
+        // Exclude adoptate și neaprobate
         .neq('status', 'adopted')
+        .neq('status', 'pending_approval')
         .or(`expires_at.is.null,expires_at.gt.${now}`)
         .order('created_at', { ascending: false })
         .range(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE - 1)
@@ -61,6 +87,10 @@ export default function AdoptiiPage() {
       if (speciesFilter) {
         const aliases = SPECIES_ALIASES[speciesFilter] || [speciesFilter]
         query = query.in('species', aliases)
+      }
+
+      if (countryFilter) {
+        query = query.eq('country', countryFilter)
       }
 
       if (locationFilter) {
@@ -86,18 +116,17 @@ export default function AdoptiiPage() {
     []
   )
 
-  // Initial load & filter changes
   useEffect(() => {
     setLoading(true)
     setPage(0)
-    fetchAnimals(0, species, locationSearch, true).finally(() => setLoading(false))
-  }, [species, locationSearch, fetchAnimals])
+    fetchAnimals(0, species, country, locationSearch, true).finally(() => setLoading(false))
+  }, [species, country, locationSearch, fetchAnimals])
 
   const handleLoadMore = async () => {
     setLoadingMore(true)
     const nextPage = page + 1
     setPage(nextPage)
-    await fetchAnimals(nextPage, species, locationSearch, false)
+    await fetchAnimals(nextPage, species, country, locationSearch, false)
     setLoadingMore(false)
   }
 
@@ -105,6 +134,8 @@ export default function AdoptiiPage() {
     e.preventDefault()
     setLocationSearch(locationInput)
   }
+
+  const hasActiveFilters = species || country || locationSearch
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
@@ -119,58 +150,93 @@ export default function AdoptiiPage() {
       </div>
 
       {/* Filtre */}
-      <div className="bg-white rounded-card shadow-card border border-border-light p-4 mb-8 flex flex-col sm:flex-row gap-3">
-        {/* Specie */}
-        <div className="flex-1">
-          <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
-            Specie
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {SPECIES_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                onClick={() => setSpecies(opt.value)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors border ${
-                  species === opt.value
-                    ? 'bg-primary text-white border-primary'
-                    : 'bg-white text-text-main border-border-light hover:border-primary hover:text-primary'
-                }`}
-              >
-                {opt.label}
-              </button>
-            ))}
+      <div className="bg-white rounded-card shadow-card border border-border-light p-4 mb-8 flex flex-col gap-4">
+        {/* Rând 1: Specie + Țară */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          {/* Specie */}
+          <div className="flex-1">
+            <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
+              Specie
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {SPECIES_OPTIONS.map((opt) => (
+                <button
+                  key={opt.value}
+                  onClick={() => setSpecies(opt.value)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors border ${
+                    species === opt.value
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-text-main border-border-light hover:border-primary hover:text-primary'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Țară */}
+          <div className="sm:w-48">
+            <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
+              Țară
+            </label>
+            <select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              className="w-full border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
+            >
+              {COUNTRY_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
-        {/* Locatie */}
-        <div className="sm:w-64">
-          <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
-            Județ / Oraș
-          </label>
-          <form onSubmit={handleLocationSearch} className="flex gap-2">
-            <input
-              type="text"
-              value={locationInput}
-              onChange={(e) => setLocationInput(e.target.value)}
-              placeholder="Ex: Cluj, Iași..."
-              className="flex-1 border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30"
-            />
-            <button
-              type="submit"
-              className="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors"
-            >
-              🔍
-            </button>
-          </form>
-          {locationSearch && (
+        {/* Rând 2: Locație */}
+        <div className="flex flex-col sm:flex-row gap-4 items-end">
+          <div className="sm:w-72">
+            <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
+              Județ / Oraș
+            </label>
+            <form onSubmit={handleLocationSearch} className="flex gap-2">
+              <input
+                type="text"
+                value={locationInput}
+                onChange={(e) => setLocationInput(e.target.value)}
+                placeholder="Ex: Cluj, Iași..."
+                className="flex-1 border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30"
+              />
+              <button
+                type="submit"
+                className="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors"
+              >
+                🔍
+              </button>
+            </form>
+            {locationSearch && (
+              <button
+                onClick={() => { setLocationSearch(''); setLocationInput('') }}
+                className="text-xs text-text-muted hover:text-primary mt-1 transition-colors"
+              >
+                ✕ Șterge filtrul locație
+              </button>
+            )}
+          </div>
+
+          {/* Reset toate filtrele */}
+          {hasActiveFilters && (
             <button
               onClick={() => {
+                setSpecies('')
+                setCountry('')
                 setLocationSearch('')
                 setLocationInput('')
               }}
-              className="text-xs text-text-muted hover:text-primary mt-1 transition-colors"
+              className="text-sm text-text-muted hover:text-primary transition-colors underline pb-0.5"
             >
-              ✕ Șterge filtrul
+              Resetează toate filtrele
             </button>
           )}
         </div>
@@ -202,6 +268,7 @@ export default function AdoptiiPage() {
           <button
             onClick={() => {
               setSpecies('')
+              setCountry('')
               setLocationSearch('')
               setLocationInput('')
             }}
@@ -213,7 +280,7 @@ export default function AdoptiiPage() {
       ) : (
         <>
           <p className="text-text-muted text-sm mb-4">
-            {animals.length} animale găsite{species || locationSearch ? ' (cu filtre aplicate)' : ''}
+            {animals.length} animale găsite{hasActiveFilters ? ' (cu filtre aplicate)' : ''}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
             {animals.map((animal) => (
@@ -232,7 +299,6 @@ export default function AdoptiiPage() {
             ))}
           </div>
 
-          {/* Load more */}
           {hasMore && (
             <div className="text-center mt-10">
               <button
