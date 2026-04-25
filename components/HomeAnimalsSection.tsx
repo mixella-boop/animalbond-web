@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase'
 import { COUNTRIES } from '@/lib/countries'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
+import { useLanguage } from '@/context/LanguageContext'
 
 function getMainPhoto(animal: Animal): string | null {
   if (!animal.animal_photos || animal.animal_photos.length === 0) return null
@@ -16,6 +17,7 @@ function getMainPhoto(animal: Animal): string | null {
 }
 
 export default function HomeAnimalsSection() {
+  const { t } = useLanguage()
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
   const [country, setCountry] = useState('')
@@ -59,9 +61,9 @@ export default function HomeAnimalsSection() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-text-main">
-              Ultimele animale adăugate
+              {t('section_animals_title')}
             </h2>
-            <p className="text-text-muted mt-1">Animale care așteaptă o casă chiar acum</p>
+            <p className="text-text-muted mt-1">{t('section_animals_subtitle')}</p>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
             <select
@@ -69,7 +71,7 @@ export default function HomeAnimalsSection() {
               onChange={(e) => setCountry(e.target.value)}
               className="border border-border-light rounded-full px-4 py-2 text-sm focus:outline-none focus:border-primary bg-white text-text-main"
             >
-              <option value="">🌍 Toate țările</option>
+              <option value="">{t('filter_all_countries')}</option>
               {COUNTRIES.map((c) => (
                 <option key={c.code} value={c.code}>
                   {c.flag} {c.name}
@@ -80,7 +82,7 @@ export default function HomeAnimalsSection() {
               href={`/adoptii${country ? `?country=${country}` : ''}`}
               className="hidden sm:block text-primary font-semibold hover:underline text-sm whitespace-nowrap"
             >
-              Vezi toate →
+              {t('section_animals_see_all')}
             </Link>
           </div>
         </div>
@@ -102,7 +104,7 @@ export default function HomeAnimalsSection() {
           <>
             {country && (
               <p className="text-text-muted text-sm mb-4">
-                {selectedCountry?.flag} {selectedCountry?.name} — {animals.length} animale găsite
+                {selectedCountry?.flag} {selectedCountry?.name} — {animals.length} {t('found_animals')}
               </p>
             )}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
@@ -123,7 +125,7 @@ export default function HomeAnimalsSection() {
             </div>
             <div className="text-center mt-8 sm:hidden">
               <Link href="/adoptii" className="text-primary font-semibold hover:underline">
-                Vezi toate animalele →
+                {t('section_animals_see_all')}
               </Link>
             </div>
           </>
@@ -132,12 +134,13 @@ export default function HomeAnimalsSection() {
             <div className="text-5xl mb-4">🔍</div>
             <p className="text-lg">
               {country
-                ? `Niciun animal disponibil în ${selectedCountry?.flag} ${selectedCountry?.name} momentan.`
-                : 'Nu există animale disponibile momentan.'}
+                ? `${t('section_animals_empty')} ${selectedCountry?.flag} ${selectedCountry?.name}`
+                : t('section_animals_empty')}
             </p>
+            <p className="text-sm mt-1">{t('section_animals_empty_sub')}</p>
             {country && (
               <button onClick={() => setCountry('')} className="mt-3 text-primary font-semibold hover:underline text-sm">
-                Vezi toate țările
+                {t('medical_see_all')}
               </button>
             )}
           </div>

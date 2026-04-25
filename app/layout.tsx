@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { LanguageProvider } from '@/context/LanguageContext'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://animalbond.ro'),
@@ -66,9 +67,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-background">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   )

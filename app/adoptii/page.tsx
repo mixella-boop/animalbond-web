@@ -4,9 +4,10 @@ import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
+import { useLanguage } from '@/context/LanguageContext'
 
 const SPECIES_OPTIONS = [
-  { value: '', label: 'Toate speciile' },
+  { value: '', label: '' },
   { value: 'dog', label: '🐶 Câini' },
   { value: 'cat', label: '🐱 Pisici' },
   { value: 'rabbit', label: '🐰 Iepuri' },
@@ -22,7 +23,7 @@ const SPECIES_ALIASES: Record<string, string[]> = {
 }
 
 const COUNTRY_OPTIONS = [
-  { value: '', label: '🌍 Toate țările' },
+  { value: '', label: '' },
   { value: 'RO', label: '🇷🇴 România' },
   { value: 'MD', label: '🇲🇩 Moldova' },
   { value: 'DE', label: '🇩🇪 Germania' },
@@ -48,6 +49,7 @@ function getMainPhoto(animal: Animal): string | null {
 const PAGE_SIZE = 12
 
 export default function AdoptiiPage() {
+  const { t } = useLanguage()
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
@@ -142,10 +144,10 @@ export default function AdoptiiPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-text-main mb-2">
-          Animale disponibile pentru adopție
+          {t('adoptii_title')}
         </h1>
         <p className="text-text-muted">
-          Găsește companionul perfect din mii de animale care așteaptă o casă
+          {t('adoptii_subtitle')}
         </p>
       </div>
 
@@ -156,7 +158,7 @@ export default function AdoptiiPage() {
           {/* Specie */}
           <div className="flex-1">
             <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
-              Specie
+              {t('filter_species')}
             </label>
             <div className="flex flex-wrap gap-2">
               {SPECIES_OPTIONS.map((opt) => (
@@ -169,7 +171,7 @@ export default function AdoptiiPage() {
                       : 'bg-white text-text-main border-border-light hover:border-primary hover:text-primary'
                   }`}
                 >
-                  {opt.label}
+                  {opt.value === '' ? t('filter_all_species') : opt.label}
                 </button>
               ))}
             </div>
@@ -178,7 +180,7 @@ export default function AdoptiiPage() {
           {/* Țară */}
           <div className="sm:w-48">
             <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
-              Țară
+              {t('filter_country')}
             </label>
             <select
               value={country}
@@ -187,7 +189,7 @@ export default function AdoptiiPage() {
             >
               {COUNTRY_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
-                  {opt.label}
+                  {opt.value === '' ? t('filter_all_countries') : opt.label}
                 </option>
               ))}
             </select>
@@ -198,14 +200,14 @@ export default function AdoptiiPage() {
         <div className="flex flex-col sm:flex-row gap-4 items-end">
           <div className="sm:w-72">
             <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
-              Județ / Oraș
+              {t('filter_location')}
             </label>
             <form onSubmit={handleLocationSearch} className="flex gap-2">
               <input
                 type="text"
                 value={locationInput}
                 onChange={(e) => setLocationInput(e.target.value)}
-                placeholder="Ex: Cluj, Iași..."
+                placeholder={t('filter_location_placeholder')}
                 className="flex-1 border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30"
               />
               <button
@@ -220,7 +222,7 @@ export default function AdoptiiPage() {
                 onClick={() => { setLocationSearch(''); setLocationInput('') }}
                 className="text-xs text-text-muted hover:text-primary mt-1 transition-colors"
               >
-                ✕ Șterge filtrul locație
+                {t('filter_clear_location')}
               </button>
             )}
           </div>
@@ -236,7 +238,7 @@ export default function AdoptiiPage() {
               }}
               className="text-sm text-text-muted hover:text-primary transition-colors underline pb-0.5"
             >
-              Resetează toate filtrele
+              {t('filter_reset')}
             </button>
           )}
         </div>
@@ -260,10 +262,10 @@ export default function AdoptiiPage() {
         <div className="text-center py-20">
           <div className="text-6xl mb-4">🔍</div>
           <h2 className="text-xl font-semibold text-text-main mb-2">
-            Niciun animal găsit
+            {t('no_animals_title')}
           </h2>
           <p className="text-text-muted mb-6">
-            Încearcă să schimbi filtrele sau caută în altă zonă.
+            {t('no_animals_sub')}
           </p>
           <button
             onClick={() => {
@@ -274,13 +276,13 @@ export default function AdoptiiPage() {
             }}
             className="text-primary font-semibold hover:underline"
           >
-            Resetează filtrele
+            {t('reset_filters')}
           </button>
         </div>
       ) : (
         <>
           <p className="text-text-muted text-sm mb-4">
-            {animals.length} animale găsite{hasActiveFilters ? ' (cu filtre aplicate)' : ''}
+            {animals.length} {t('found_animals')}{hasActiveFilters ? ` (${t('found_animals_filtered')})` : ''}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
             {animals.map((animal) => (
@@ -312,10 +314,10 @@ export default function AdoptiiPage() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                     </svg>
-                    Se încarcă...
+                    {t('loading')}
                   </span>
                 ) : (
-                  'Încarcă mai multe'
+                  t('load_more')
                 )}
               </button>
             </div>

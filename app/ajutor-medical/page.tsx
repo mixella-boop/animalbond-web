@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { COUNTRIES } from '@/lib/countries'
+import { useLanguage } from '@/context/LanguageContext'
 
 type MedicalAnimal = {
   id: string
@@ -31,6 +32,7 @@ function getMainPhoto(animal: MedicalAnimal): string | null {
 }
 
 export default function AjutorMedicalPage() {
+  const { t } = useLanguage()
   const [animals, setAnimals] = useState<MedicalAnimal[]>([])
   const [loading, setLoading] = useState(true)
   const [country, setCountry] = useState('')
@@ -68,17 +70,16 @@ export default function AjutorMedicalPage() {
       <div className="text-center mb-8">
         <div className="text-5xl mb-4">💊</div>
         <h1 className="text-3xl sm:text-4xl font-bold text-text-main mb-3">
-          Ajutor medical urgent
+          {t('medical_title')}
         </h1>
         <p className="text-text-muted text-lg max-w-xl mx-auto mb-6">
-          Aceste animale au nevoie de îngrijire medicală urgentă.
-          Descarcă aplicația AnimalBond pentru a contacta direct și a oferi ajutor.
+          {t('medical_subtitle')}
         </p>
         <a
           href="#download-app"
           className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-primary-dark transition-colors shadow-lg"
         >
-          💙 Vreau să ajut
+          {t('medical_cta')}
         </a>
       </div>
 
@@ -86,15 +87,14 @@ export default function AjutorMedicalPage() {
       <div className="bg-red-50 border border-red-200 rounded-2xl p-4 mb-6 flex items-center gap-3">
         <span className="text-2xl shrink-0">🚨</span>
         <p className="text-red-800 text-sm leading-relaxed">
-          <strong>Fiecare oră contează.</strong> Contactul se face direct prin aplicație —
-          descarcă AnimalBond și ajunge la persoana care are nevoie de sprijin.
+          <strong>{t('medical_banner')}</strong> {t('medical_banner_sub')}
         </p>
       </div>
 
       {/* Filtru țară */}
       <div className="bg-white rounded-card shadow-card border border-border-light p-4 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-3">
         <label className="text-xs font-semibold text-text-muted uppercase tracking-wide shrink-0">
-          Filtrează după țară:
+          {t('medical_filter_label')}
         </label>
         <div className="flex items-center gap-3 flex-1">
           <select
@@ -102,7 +102,7 @@ export default function AjutorMedicalPage() {
             onChange={(e) => setCountry(e.target.value)}
             className="border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
           >
-            <option value="">🌍 Toate țările</option>
+            <option value="">{t('filter_all_countries')}</option>
             {COUNTRIES.map((c) => (
               <option key={c.code} value={c.code}>
                 {c.flag} {c.name}
@@ -114,13 +114,13 @@ export default function AjutorMedicalPage() {
               onClick={() => setCountry('')}
               className="text-xs text-text-muted hover:text-primary transition-colors underline"
             >
-              ✕ Șterge filtrul
+              {t('filter_clear')}
             </button>
           )}
         </div>
         {country && (
           <p className="text-sm text-text-muted">
-            Cazuri din {selectedCountry?.flag} {selectedCountry?.name}
+            {t('filter_cases_from')} {selectedCountry?.flag} {selectedCountry?.name}
           </p>
         )}
       </div>
@@ -142,23 +142,21 @@ export default function AjutorMedicalPage() {
       ) : animals.length === 0 ? (
         <div className="text-center py-20">
           <div className="text-6xl mb-4">💚</div>
-          <h2 className="text-xl font-semibold text-text-main mb-2">Niciun caz urgent momentan</h2>
+          <h2 className="text-xl font-semibold text-text-main mb-2">{t('medical_empty_title')}</h2>
           <p className="text-text-muted">
-            {country
-              ? 'Nu există cazuri active în țara selectată.'
-              : 'Revino curând sau descarcă aplicația pentru notificări în timp real.'}
+            {country ? t('medical_empty_country') : t('medical_empty_sub')}
           </p>
           {country && (
             <button onClick={() => setCountry('')} className="mt-4 text-primary font-semibold hover:underline text-sm">
-              Vezi toate țările
+              {t('medical_see_all')}
             </button>
           )}
         </div>
       ) : (
         <>
           <p className="text-text-muted text-sm mb-6">
-            {animals.length} {animals.length === 1 ? 'caz activ' : 'cazuri active'}
-            {country && ` în ${selectedCountry?.flag} ${selectedCountry?.name}`}
+            {animals.length} {animals.length === 1 ? t('medical_active_case') : t('medical_active_cases')}
+            {country && ` ${t('medical_in_country')} ${selectedCountry?.flag} ${selectedCountry?.name}`}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {animals.map((animal) => {
@@ -177,7 +175,7 @@ export default function AjutorMedicalPage() {
                       <div className="w-full h-full flex items-center justify-center text-5xl">{emoji}</div>
                     )}
                     <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      💊 Nevoie urgentă
+                      {t('medical_badge')}
                     </div>
                     {animal.country && (
                       <div className="absolute top-2 right-2 bg-white/90 text-xs font-bold px-2 py-1 rounded-full">

@@ -3,9 +3,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { lang, setLang, t } = useLanguage()
 
   return (
     <nav className="bg-white border-b border-border-light sticky top-0 z-50 shadow-sm">
@@ -19,107 +21,92 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link
-              href="/adoptii"
-              className="text-text-main hover:text-primary transition-colors font-medium"
-            >
-              Adopții
+          <div className="hidden md:flex items-center gap-6">
+            <Link href="/adoptii" className="text-text-main hover:text-primary transition-colors font-medium">
+              {t('nav_adoptii')}
             </Link>
-            <Link
-              href="/ajutor-medical"
-              className="text-red-500 hover:text-red-600 transition-colors font-medium"
-            >
-              💊 Ajutor medical
+            <Link href="/ajutor-medical" className="text-red-500 hover:text-red-600 transition-colors font-medium">
+              {t('nav_medical')}
             </Link>
-            <Link
-              href="/parteneri"
-              className="text-text-main hover:text-primary transition-colors font-medium"
-            >
-              Parteneri
+            <Link href="/parteneri" className="text-text-main hover:text-primary transition-colors font-medium">
+              {t('nav_parteneri')}
             </Link>
-            <Link
-              href="/povesti"
-              className="text-text-main hover:text-primary transition-colors font-medium"
-            >
-              Povești
+            <Link href="/povesti" className="text-text-main hover:text-primary transition-colors font-medium">
+              {t('nav_povesti')}
             </Link>
-            <Link
-              href="/despre"
-              className="text-text-main hover:text-primary transition-colors font-medium"
-            >
-              Despre
+            <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium">
+              {t('nav_despre')}
             </Link>
+
+            {/* Language toggle */}
+            <button
+              onClick={() => setLang(lang === 'ro' ? 'en' : 'ro')}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border-light hover:border-primary hover:text-primary transition-colors text-sm font-medium text-text-main"
+              title={lang === 'ro' ? 'Switch to English' : 'Schimbă în Română'}
+            >
+              <span>{lang === 'ro' ? '🇷🇴' : '🇬🇧'}</span>
+              <span>{lang === 'ro' ? 'RO' : 'EN'}</span>
+            </button>
+
             <a
               href="#download"
               className="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors text-sm"
             >
-              Descarcă app
+              {t('nav_download')}
             </a>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden p-2 rounded-lg text-text-main hover:bg-gray-100 transition-colors"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Meniu"
-          >
-            {menuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
+          {/* Mobile: lang toggle + hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={() => setLang(lang === 'ro' ? 'en' : 'ro')}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-border-light text-sm font-medium text-text-main"
+            >
+              <span>{lang === 'ro' ? '🇷🇴' : '🇬🇧'}</span>
+              <span>{lang === 'ro' ? 'RO' : 'EN'}</span>
+            </button>
+            <button
+              className="p-2 rounded-lg text-text-main hover:bg-gray-100 transition-colors"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Meniu"
+            >
+              {menuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
         {menuOpen && (
           <div className="md:hidden py-4 border-t border-border-light flex flex-col gap-4">
-            <Link
-              href="/adoptii"
-              className="text-text-main hover:text-primary transition-colors font-medium py-2"
-              onClick={() => setMenuOpen(false)}
-            >
-              Adopții
+            <Link href="/adoptii" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
+              {t('nav_adoptii')}
             </Link>
-            <Link
-              href="/ajutor-medical"
-              className="text-red-500 hover:text-red-600 transition-colors font-medium py-2"
-              onClick={() => setMenuOpen(false)}
-            >
-              💊 Ajutor medical
+            <Link href="/ajutor-medical" className="text-red-500 hover:text-red-600 transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
+              {t('nav_medical')}
             </Link>
-            <Link
-              href="/parteneri"
-              className="text-text-main hover:text-primary transition-colors font-medium py-2"
-              onClick={() => setMenuOpen(false)}
-            >
-              Parteneri
+            <Link href="/parteneri" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
+              {t('nav_parteneri')}
             </Link>
-            <Link
-              href="/povesti"
-              className="text-text-main hover:text-primary transition-colors font-medium py-2"
-              onClick={() => setMenuOpen(false)}
-            >
-              Povești
+            <Link href="/povesti" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
+              {t('nav_povesti')}
             </Link>
-            <Link
-              href="/despre"
-              className="text-text-main hover:text-primary transition-colors font-medium py-2"
-              onClick={() => setMenuOpen(false)}
-            >
-              Despre
+            <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
+              {t('nav_despre')}
             </Link>
             <a
               href="#download"
               className="bg-primary text-white px-5 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors text-sm text-center"
               onClick={() => setMenuOpen(false)}
             >
-              Descarcă app
+              {t('nav_download')}
             </a>
           </div>
         )}
