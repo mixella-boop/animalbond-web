@@ -33,14 +33,6 @@ async function getPartners(): Promise<Partner[]> {
   return data as Partner[]
 }
 
-function getMainPhoto(animal: Animal): string | null {
-  if (!animal.animal_photos || animal.animal_photos.length === 0) return null
-  const main = animal.animal_photos.find((p) => p.is_primary)
-  if (main) return main.url
-  const sorted = [...animal.animal_photos].sort((a, b) => a.order_index - b.order_index)
-  return sorted[0]?.url ?? null
-}
-
 const categoryLabel: Record<string, string> = {
   vet: '🏥 Cabinet veterinar',
   food: '🥩 Hrană animale',
