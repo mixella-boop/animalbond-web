@@ -74,8 +74,8 @@ export default function AdoptiiPage() {
         .from('animals')
         .select(`
           id, name, species, breed, age_years, age_months,
-          location, status, expires_at, created_at, type, country,
-          animal_photos (id, url, is_primary, order_index)
+          location, status, expires_at, created_at, type, country, gender, description,
+          animal_photos (id, animal_id, url, is_primary, order_index)
         `)
         // Doar anunțuri de adopție
         .eq('type', 'adoption')
