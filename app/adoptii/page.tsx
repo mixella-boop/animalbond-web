@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
+import { COUNTRY_TO_LANG } from '@/lib/i18n'
 
 const SPECIES_OPTIONS = [
   { value: '', label: '' },
@@ -49,7 +50,7 @@ function getMainPhoto(animal: Animal): string | null {
 const PAGE_SIZE = 12
 
 export default function AdoptiiPage() {
-  const { t } = useLanguage()
+  const { t, setLang } = useLanguage()
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
@@ -184,7 +185,10 @@ export default function AdoptiiPage() {
             </label>
             <select
               value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={(e) => {
+                setCountry(e.target.value)
+                if (e.target.value && COUNTRY_TO_LANG[e.target.value]) setLang(COUNTRY_TO_LANG[e.target.value])
+              }}
               className="w-full border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
             >
               {COUNTRY_OPTIONS.map((opt) => (

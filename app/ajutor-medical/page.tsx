@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { COUNTRIES } from '@/lib/countries'
 import { useLanguage } from '@/context/LanguageContext'
+import { COUNTRY_TO_LANG } from '@/lib/i18n'
 
 type MedicalAnimal = {
   id: string
@@ -32,10 +33,15 @@ function getMainPhoto(animal: MedicalAnimal): string | null {
 }
 
 export default function AjutorMedicalPage() {
-  const { t } = useLanguage()
+  const { t, setLang } = useLanguage()
   const [animals, setAnimals] = useState<MedicalAnimal[]>([])
   const [loading, setLoading] = useState(true)
   const [country, setCountry] = useState('')
+
+  const handleCountryChange = (code: string) => {
+    setCountry(code)
+    if (code && COUNTRY_TO_LANG[code]) setLang(COUNTRY_TO_LANG[code])
+  }
 
   const fetchAnimals = useCallback(async (countryFilter: string) => {
     const now = new Date().toISOString()
@@ -99,7 +105,7 @@ export default function AjutorMedicalPage() {
         <div className="flex items-center gap-3 flex-1">
           <select
             value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            onChange={(e) => handleCountryChange(e.target.value)}
             className="border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
           >
             <option value="">{t('filter_all_countries')}</option>
@@ -196,7 +202,7 @@ export default function AjutorMedicalPage() {
                       href="#download-app"
                       className="block text-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors"
                     >
-                      💙 Ajut prin aplicație
+                      {t('medical_help_btn')}
                     </a>
                   </div>
                 </div>
@@ -209,9 +215,9 @@ export default function AjutorMedicalPage() {
       {/* CTA download */}
       <div id="download-app" className="mt-16 bg-gradient-to-br from-red-500 to-primary rounded-2xl p-8 text-center text-white">
         <div className="text-4xl mb-3">📱</div>
-        <h2 className="text-2xl font-bold mb-3">Descarcă AnimalBond</h2>
+        <h2 className="text-2xl font-bold mb-3">{t('medical_download_title')}</h2>
         <p className="text-white/80 mb-6 max-w-md mx-auto">
-          Contactează direct, oferă ajutor și salvează vieți. Gratuit pe iOS și Android.
+          {t('medical_download_sub')}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="#" className="flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">

@@ -4,10 +4,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
+import { LANG_OPTIONS } from '@/lib/i18n'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { lang, setLang, t } = useLanguage()
+
+  const currentLang = LANG_OPTIONS.find(l => l.code === lang) ?? LANG_OPTIONS[0]
 
   return (
     <nav className="bg-white border-b border-border-light sticky top-0 z-50 shadow-sm">
@@ -38,15 +41,21 @@ export default function Navbar() {
               {t('nav_despre')}
             </Link>
 
-            {/* Language toggle */}
-            <button
-              onClick={() => setLang(lang === 'ro' ? 'en' : 'ro')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border-light hover:border-primary hover:text-primary transition-colors text-sm font-medium text-text-main"
-              title={lang === 'ro' ? 'Switch to English' : 'Schimbă în Română'}
-            >
-              <span>{lang === 'ro' ? '🇷🇴' : '🇬🇧'}</span>
-              <span>{lang === 'ro' ? 'RO' : 'EN'}</span>
-            </button>
+            {/* Language selector */}
+            <div className="relative">
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value as typeof lang)}
+                className="appearance-none flex items-center gap-1.5 pl-3 pr-7 py-1.5 rounded-full border border-border-light hover:border-primary hover:text-primary transition-colors text-sm font-medium text-text-main bg-white cursor-pointer focus:outline-none focus:border-primary"
+              >
+                {LANG_OPTIONS.map(l => (
+                  <option key={l.code} value={l.code}>
+                    {l.flag} {l.label}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-text-muted text-xs">▾</div>
+            </div>
 
             <a
               href="#download"
@@ -56,15 +65,22 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile: lang toggle + hamburger */}
+          {/* Mobile: lang select + hamburger */}
           <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={() => setLang(lang === 'ro' ? 'en' : 'ro')}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-border-light text-sm font-medium text-text-main"
-            >
-              <span>{lang === 'ro' ? '🇷🇴' : '🇬🇧'}</span>
-              <span>{lang === 'ro' ? 'RO' : 'EN'}</span>
-            </button>
+            <div className="relative">
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value as typeof lang)}
+                className="appearance-none pl-2 pr-6 py-1.5 rounded-full border border-border-light text-sm font-medium text-text-main bg-white cursor-pointer focus:outline-none"
+              >
+                {LANG_OPTIONS.map(l => (
+                  <option key={l.code} value={l.code}>
+                    {l.flag} {l.label}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-text-muted text-xs">▾</div>
+            </div>
             <button
               className="p-2 rounded-lg text-text-main hover:bg-gray-100 transition-colors"
               onClick={() => setMenuOpen(!menuOpen)}

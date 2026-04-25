@@ -7,6 +7,7 @@ import { COUNTRIES } from '@/lib/countries'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
+import { COUNTRY_TO_LANG } from '@/lib/i18n'
 
 function getMainPhoto(animal: Animal): string | null {
   if (!animal.animal_photos || animal.animal_photos.length === 0) return null
@@ -17,7 +18,7 @@ function getMainPhoto(animal: Animal): string | null {
 }
 
 export default function HomeAnimalsSection() {
-  const { t } = useLanguage()
+  const { t, setLang } = useLanguage()
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
   const [country, setCountry] = useState('')
@@ -68,7 +69,10 @@ export default function HomeAnimalsSection() {
           <div className="flex items-center gap-3 flex-wrap">
             <select
               value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={(e) => {
+                setCountry(e.target.value)
+                if (e.target.value && COUNTRY_TO_LANG[e.target.value]) setLang(COUNTRY_TO_LANG[e.target.value])
+              }}
               className="border border-border-light rounded-full px-4 py-2 text-sm focus:outline-none focus:border-primary bg-white text-text-main"
             >
               <option value="">{t('filter_all_countries')}</option>
