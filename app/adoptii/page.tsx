@@ -7,13 +7,13 @@ import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import { COUNTRY_TO_LANG } from '@/lib/i18n'
 
-const SPECIES_OPTIONS = [
-  { value: '', label: '' },
-  { value: 'dog', label: '🐶 Câini' },
-  { value: 'cat', label: '🐱 Pisici' },
-  { value: 'rabbit', label: '🐰 Iepuri' },
-  { value: 'bird', label: '🐦 Păsări' },
-  { value: 'other', label: '🐾 Altele' },
+const SPECIES_KEYS = [
+  { value: '', key: 'filter_all_species' as const },
+  { value: 'dog', key: 'species_btn_dogs' as const },
+  { value: 'cat', key: 'species_btn_cats' as const },
+  { value: 'rabbit', key: 'species_btn_rabbits' as const },
+  { value: 'bird', key: 'species_btn_birds' as const },
+  { value: 'other', key: 'species_btn_others' as const },
 ]
 
 const SPECIES_ALIASES: Record<string, string[]> = {
@@ -162,7 +162,7 @@ export default function AdoptiiPage() {
               {t('filter_species')}
             </label>
             <div className="flex flex-wrap gap-2">
-              {SPECIES_OPTIONS.map((opt) => (
+              {SPECIES_KEYS.map((opt) => (
                 <button
                   key={opt.value}
                   onClick={() => setSpecies(opt.value)}
@@ -172,7 +172,7 @@ export default function AdoptiiPage() {
                       : 'bg-white text-text-main border-border-light hover:border-primary hover:text-primary'
                   }`}
                 >
-                  {opt.value === '' ? t('filter_all_species') : opt.label}
+                  {t(opt.key)}
                 </button>
               ))}
             </div>

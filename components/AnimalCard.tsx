@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useLanguage } from '@/context/LanguageContext'
 
 type AnimalCardProps = {
   id: string
@@ -26,33 +29,6 @@ const speciesEmoji: Record<string, string> = {
   altele: '🐾',
 }
 
-const speciesLabel: Record<string, string> = {
-  dog: 'Câine',
-  cat: 'Pisică',
-  rabbit: 'Iepure',
-  bird: 'Pasăre',
-  hamster: 'Hamster',
-  other: 'Alt animal',
-  caine: 'Câine',
-  pisica: 'Pisică',
-  iepure: 'Iepure',
-  pasare: 'Pasăre',
-  altele: 'Alt animal',
-}
-
-function formatAge(years?: number | null, months?: number | null): string {
-  if (!years && !months) return 'Vârstă necunoscută'
-  if (years && years > 0) {
-    if (years === 1) return '1 an'
-    return `${years} ani`
-  }
-  if (months && months > 0) {
-    if (months === 1) return '1 lună'
-    return `${months} luni`
-  }
-  return 'Vârstă necunoscută'
-}
-
 export default function AnimalCard({
   id,
   name,
@@ -64,11 +40,37 @@ export default function AnimalCard({
   photoUrl,
   expiresAt,
 }: AnimalCardProps) {
+  const { t } = useLanguage()
+
+  const speciesLabelMap: Record<string, string> = {
+    dog: t('species_btn_dogs').replace(/^🐶\s*/, ''),
+    cat: t('species_btn_cats').replace(/^🐱\s*/, ''),
+    rabbit: t('species_btn_rabbits').replace(/^🐰\s*/, ''),
+    bird: t('species_btn_birds').replace(/^🐦\s*/, ''),
+    hamster: 'Hamster',
+    other: t('species_btn_others').replace(/^🐾\s*/, ''),
+    caine: t('species_btn_dogs').replace(/^🐶\s*/, ''),
+    pisica: t('species_btn_cats').replace(/^🐱\s*/, ''),
+    iepure: t('species_btn_rabbits').replace(/^🐰\s*/, ''),
+    pasare: t('species_btn_birds').replace(/^🐦\s*/, ''),
+    altele: t('species_btn_others').replace(/^🐾\s*/, ''),
+  }
+
+  const formatAge = (years?: number | null, months?: number | null): string => {
+    if (!years && !months) return t('card_age_unknown')
+    if (years && years > 0) {
+      return `${years} ${years === 1 ? t('card_age_year') : t('card_age_years')}`
+    }
+    if (months && months > 0) {
+      return `${months} ${months === 1 ? t('card_age_month') : t('card_age_months')}`
+    }
+    return t('card_age_unknown')
+  }
+
   const emoji = speciesEmoji[species?.toLowerCase()] || '🐾'
-  const label = speciesLabel[species?.toLowerCase()] || species
+  const label = speciesLabelMap[species?.toLowerCase()] || species
   const age = formatAge(age_years, age_months)
 
-  // Verificare expirare
   const isExpiring =
     expiresAt && new Date(expiresAt) < new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
 
@@ -96,7 +98,7 @@ export default function AnimalCard({
           {/* Badge expirare */}
           {isExpiring && (
             <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
-              Expiră curând
+              {t('card_expires_soon')}
             </div>
           )}
         </div>
@@ -128,7 +130,7 @@ export default function AnimalCard({
           </div>
           <div className="mt-3">
             <span className="text-primary text-sm font-semibold group-hover:underline">
-              Vezi detalii →
+              {t('card_see_details')}
             </span>
           </div>
         </div>

@@ -5,23 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Partner } from '@/lib/supabase'
-
-const CATEGORY_OPTIONS = [
-  { value: '', label: 'Toți partenerii' },
-  { value: 'vet', label: '🏥 Cabinete vet' },
-  { value: 'food', label: '🥩 Hrană animale' },
-  { value: 'accessories', label: '🎾 Accesorii' },
-  { value: 'insurance', label: '🛡️ Asigurări' },
-  { value: 'other', label: '🤝 Altele' },
-]
-
-const categoryLabel: Record<string, string> = {
-  vet: '🏥 Cabinet veterinar',
-  food: '🥩 Hrană animale',
-  accessories: '🎾 Accesorii',
-  insurance: '🛡️ Asigurări',
-  other: '🤝 Altele',
-}
+import { useLanguage } from '@/context/LanguageContext'
 
 const categoryColor: Record<string, string> = {
   vet: 'bg-blue-100 text-blue-700',
@@ -32,9 +16,27 @@ const categoryColor: Record<string, string> = {
 }
 
 export default function ParteneriPage() {
+  const { t } = useLanguage()
   const [partners, setPartners] = useState<Partner[]>([])
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('')
+
+  const CATEGORY_OPTIONS = [
+    { value: '', label: t('partners_cat_all') },
+    { value: 'vet', label: t('partners_cat_vet') },
+    { value: 'food', label: t('partners_cat_food') },
+    { value: 'accessories', label: t('partners_cat_accessories') },
+    { value: 'insurance', label: t('partners_cat_insurance') },
+    { value: 'other', label: t('partners_cat_other') },
+  ]
+
+  const categoryLabel: Record<string, string> = {
+    vet: t('partners_label_vet'),
+    food: t('partners_label_food'),
+    accessories: t('partners_label_accessories'),
+    insurance: t('partners_label_insurance'),
+    other: t('partners_label_other'),
+  }
 
   useEffect(() => {
     async function fetchPartners() {
@@ -69,10 +71,10 @@ export default function ParteneriPage() {
       {/* Header */}
       <div className="text-center mb-10">
         <h1 className="text-3xl sm:text-4xl font-bold text-text-main mb-3">
-          Partenerii AnimalBond 🤝
+          {t('partners_title')}
         </h1>
         <p className="text-text-muted text-lg max-w-xl mx-auto">
-          Cabinete veterinare, magazine și servicii de încredere pentru tine și animalul tău
+          {t('partners_subtitle')}
         </p>
       </div>
 
@@ -109,23 +111,21 @@ export default function ParteneriPage() {
         <div className="text-center py-16">
           <div className="text-5xl mb-4">🔍</div>
           <p className="text-text-muted text-lg">
-            {category
-              ? 'Nu există parteneri în această categorie momentan.'
-              : 'Nu există parteneri activi momentan.'}
+            {category ? t('partners_empty_cat') : t('partners_empty')}
           </p>
           {category && (
             <button
               onClick={() => setCategory('')}
               className="mt-4 text-primary font-semibold hover:underline"
             >
-              Arată toți partenerii
+              {t('partners_show_all')}
             </button>
           )}
         </div>
       ) : (
         <>
           <p className="text-text-muted text-sm mb-4 text-center">
-            {partners.length} parteneri{category ? ' în această categorie' : ' activi'}
+            {partners.length} {category ? t('partners_count_cat') : t('partners_count_active')}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {partners.map((partner) => (
@@ -184,7 +184,7 @@ export default function ParteneriPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
-                    Vizitează site-ul
+                    {t('partners_visit_site')}
                   </a>
                 )}
               </div>
@@ -196,16 +196,15 @@ export default function ParteneriPage() {
       {/* Banner devino partener */}
       <div className="mt-16 bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-8 text-center text-white">
         <div className="text-4xl mb-3">🏥</div>
-        <h2 className="text-2xl font-bold mb-3">Vrei să fii partener?</h2>
+        <h2 className="text-2xl font-bold mb-3">{t('partners_cta_title')}</h2>
         <p className="text-white/80 mb-6 max-w-lg mx-auto">
-          Devino partener AnimalBond și ajunge la mii de proprietari de animale din zona ta.
-          Vizibilitate pentru cabinetul tău veterinar sau magazinul de animale.
+          {t('partners_cta_sub')}
         </p>
         <Link
           href="/partner-apply"
           className="inline-block bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-pink-50 transition-colors"
         >
-          Înscrie-te ca partener →
+          {t('partners_cta_btn')}
         </Link>
       </div>
     </div>
