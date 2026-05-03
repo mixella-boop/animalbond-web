@@ -6,6 +6,7 @@ import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import { COUNTRY_TO_LANG } from '@/lib/i18n'
+import { COUNTRIES } from '@/lib/countries'
 
 const SPECIES_KEYS = [
   { value: '', key: 'filter_all_species' as const },
@@ -23,20 +24,10 @@ const SPECIES_ALIASES: Record<string, string[]> = {
   bird: ['bird', 'pasare', 'pasăre'],
 }
 
+// Generat dinamic din lista completă de țări
 const COUNTRY_OPTIONS = [
   { value: '', label: '' },
-  { value: 'RO', label: '🇷🇴 România' },
-  { value: 'MD', label: '🇲🇩 Moldova' },
-  { value: 'DE', label: '🇩🇪 Germania' },
-  { value: 'AT', label: '🇦🇹 Austria' },
-  { value: 'IT', label: '🇮🇹 Italia' },
-  { value: 'FR', label: '🇫🇷 Franța' },
-  { value: 'ES', label: '🇪🇸 Spania' },
-  { value: 'GB', label: '🇬🇧 UK' },
-  { value: 'NL', label: '🇳🇱 Olanda' },
-  { value: 'BE', label: '🇧🇪 Belgia' },
-  { value: 'HU', label: '🇭🇺 Ungaria' },
-  { value: 'BG', label: '🇧🇬 Bulgaria' },
+  ...COUNTRIES.map(c => ({ value: c.code, label: `${c.flag} ${c.name}` })),
 ]
 
 function getMainPhoto(animal: Animal): string | null {
@@ -301,6 +292,7 @@ export default function AdoptiiPage() {
                 location={animal.location}
                 photoUrl={getMainPhoto(animal)}
                 expiresAt={animal.expires_at}
+                type={animal.type}
               />
             ))}
           </div>

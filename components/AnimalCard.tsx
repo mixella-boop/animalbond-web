@@ -13,6 +13,15 @@ type AnimalCardProps = {
   location?: string | null
   photoUrl?: string | null
   expiresAt?: string | null
+  type?: string | null
+}
+
+// Aceleași culori ca în app mobilă — folosim style inline (Tailwind nu generează clase dinamice)
+const TYPE_COLOR: Record<string, string> = {
+  adoption:  '#FF6B6B',
+  sale:      '#F59E0B',
+  medical:   '#6366F1',
+  breeding:  '#10B981',
 }
 
 const speciesEmoji: Record<string, string> = {
@@ -39,6 +48,7 @@ export default function AnimalCard({
   location,
   photoUrl,
   expiresAt,
+  type,
 }: AnimalCardProps) {
   const { t } = useLanguage()
 
@@ -76,7 +86,10 @@ export default function AnimalCard({
 
   return (
     <Link href={`/animal/${id}`} className="group block">
-      <div className="bg-card-bg rounded-card shadow-card hover:shadow-card-hover transition-all duration-200 overflow-hidden border border-border-light group-hover:-translate-y-0.5">
+      <div
+        className="bg-card-bg rounded-card shadow-card hover:shadow-card-hover transition-all duration-200 overflow-hidden border border-border-light group-hover:-translate-y-0.5"
+        style={{ borderTopWidth: 4, borderTopColor: TYPE_COLOR[type ?? ''] ?? TYPE_COLOR['adoption'], borderTopStyle: 'solid' }}
+      >
         {/* Poza */}
         <div className="relative aspect-[4/3] bg-gray-100">
           {photoUrl ? (
