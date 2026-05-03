@@ -34,6 +34,9 @@ export default function Navbar() {
             <Link href="/parteneri" className="text-text-main hover:text-primary transition-colors font-medium">
               {t('nav_parteneri')}
             </Link>
+            <Link href="/campanii" className="text-orange-500 hover:text-orange-600 transition-colors font-medium">
+              💝 {t('nav_campanii')}
+            </Link>
             <Link href="/povesti" className="text-text-main hover:text-primary transition-colors font-medium">
               {t('nav_povesti')}
             </Link>
@@ -46,7 +49,8 @@ export default function Navbar() {
               <select
                 value={lang}
                 onChange={(e) => setLang(e.target.value as typeof lang)}
-                className="appearance-none flex items-center gap-1.5 pl-3 pr-7 py-1.5 rounded-full border border-border-light hover:border-primary hover:text-primary transition-colors text-sm font-medium text-text-main bg-white cursor-pointer focus:outline-none focus:border-primary"
+                className="appearance-none pl-3 pr-8 py-1.5 rounded-full border-2 border-primary bg-primary/10 text-primary font-bold text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40 hover:bg-primary hover:text-white transition-colors animate-[wiggle_2s_ease-in-out_3]"
+                title="Schimbă limba / Change language"
               >
                 {LANG_OPTIONS.map(l => (
                   <option key={l.code} value={l.code}>
@@ -54,7 +58,7 @@ export default function Navbar() {
                   </option>
                 ))}
               </select>
-              <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-text-muted text-xs">▾</div>
+              <div className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-primary text-xs font-bold">▾</div>
             </div>
 
             <a
@@ -71,7 +75,8 @@ export default function Navbar() {
               <select
                 value={lang}
                 onChange={(e) => setLang(e.target.value as typeof lang)}
-                className="appearance-none pl-2 pr-6 py-1.5 rounded-full border border-border-light text-sm font-medium text-text-main bg-white cursor-pointer focus:outline-none"
+                className="appearance-none pl-2 pr-6 py-1.5 rounded-full border-2 border-primary bg-primary/10 text-primary font-bold text-sm cursor-pointer focus:outline-none"
+                title="Schimbă limba"
               >
                 {LANG_OPTIONS.map(l => (
                   <option key={l.code} value={l.code}>
@@ -79,7 +84,7 @@ export default function Navbar() {
                   </option>
                 ))}
               </select>
-              <div className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-text-muted text-xs">▾</div>
+              <div className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-primary text-xs font-bold">▾</div>
             </div>
             <button
               className="p-2 rounded-lg text-text-main hover:bg-gray-100 transition-colors"
@@ -110,6 +115,9 @@ export default function Navbar() {
             </Link>
             <Link href="/parteneri" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_parteneri')}
+            </Link>
+            <Link href="/campanii" className="text-orange-500 hover:text-orange-600 transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
+              💝 {t('nav_campanii')}
             </Link>
             <Link href="/povesti" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_povesti')}

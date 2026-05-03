@@ -24,7 +24,22 @@ const SPECIES_ALIASES: Record<string, string[]> = {
   bird: ['bird', 'pasare', 'pasăre'],
 }
 
-// Generat dinamic din lista completă de țări
+const TYPE_COLORS: Record<string, { bg: string; border: string; accent: string }> = {
+  '':         { bg: '#F3F4F6', border: '#9CA3AF', accent: '#6B7280' },
+  adoption:   { bg: '#FFE4E4', border: '#FF6B6B', accent: '#FF6B6B' },
+  sale:       { bg: '#FEF3C7', border: '#F59E0B', accent: '#D97706' },
+  medical:    { bg: '#EEF2FF', border: '#6366F1', accent: '#6366F1' },
+  breeding:   { bg: '#D1FAE5', border: '#10B981', accent: '#059669' },
+}
+
+const TYPE_FILTER_KEYS = [
+  { value: '', key: 'type_all' as const },
+  { value: 'adoption', key: 'type_adoption' as const },
+  { value: 'medical', key: 'type_medical' as const },
+  { value: 'sale', key: 'type_sale' as const },
+  { value: 'breeding', key: 'type_breeding' as const },
+]
+
 const COUNTRY_OPTIONS = [
   { value: '', label: '' },
   ...COUNTRIES.map(c => ({ value: c.code, label: `${c.flag} ${c.name}` })),
@@ -40,7 +55,7 @@ function getMainPhoto(animal: Animal): string | null {
 
 const PAGE_SIZE = 12
 
-export default function AdoptiiPage() {
+export default function FeedPage() {
   const { t, setLang } = useLanguage()
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
@@ -48,6 +63,7 @@ export default function AdoptiiPage() {
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(0)
 
+  const [typeFilter, setTypeFilter] = useState('')
   const [species, setSpecies] = useState('')
   const [country, setCountry] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
@@ -56,6 +72,7 @@ export default function AdoptiiPage() {
   const fetchAnimals = useCallback(
     async (
       pageNum: number,
+      typeF: string,
       speciesFilter: string,
       countryFilter: string,
       locationFilter: string,
@@ -69,14 +86,15 @@ export default function AdoptiiPage() {
           location, status, expires_at, created_at, type, country, gender, description,
           animal_photos (id, animal_id, url, is_primary, order_index)
         `)
-        // Doar anunțuri de adopție
-        .eq('type', 'adoption')
-        // Exclude adoptate și neaprobate
         .neq('status', 'adopted')
         .neq('status', 'pending_approval')
         .or(`expires_at.is.null,expires_at.gt.${now}`)
         .order('created_at', { ascending: false })
         .range(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE - 1)
+
+      if (typeF) {
+        query = query.eq('type', typeF)
+      }
 
       if (speciesFilter) {
         const aliases = SPECIES_ALIASES[speciesFilter] || [speciesFilter]
@@ -113,14 +131,14 @@ export default function AdoptiiPage() {
   useEffect(() => {
     setLoading(true)
     setPage(0)
-    fetchAnimals(0, species, country, locationSearch, true).finally(() => setLoading(false))
-  }, [species, country, locationSearch, fetchAnimals])
+    fetchAnimals(0, typeFilter, species, country, locationSearch, true).finally(() => setLoading(false))
+  }, [typeFilter, species, country, locationSearch, fetchAnimals])
 
   const handleLoadMore = async () => {
     setLoadingMore(true)
     const nextPage = page + 1
     setPage(nextPage)
-    await fetchAnimals(nextPage, species, country, locationSearch, false)
+    await fetchAnimals(nextPage, typeFilter, species, country, locationSearch, false)
     setLoadingMore(false)
   }
 
@@ -129,22 +147,50 @@ export default function AdoptiiPage() {
     setLocationSearch(locationInput)
   }
 
-  const hasActiveFilters = species || country || locationSearch
+  const hasActiveFilters = typeFilter || species || country || locationSearch
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-text-main mb-2">
-          {t('adoptii_title')}
+          {t('feed_title')}
         </h1>
         <p className="text-text-muted">
-          {t('adoptii_subtitle')}
+          {t('feed_subtitle')}
         </p>
       </div>
 
       {/* Filtre */}
       <div className="bg-white rounded-card shadow-card border border-border-light p-4 mb-8 flex flex-col gap-4">
+
+        {/* Rând 0: Tip anunț */}
+        <div>
+          <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
+            Tip
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {TYPE_FILTER_KEYS.map((opt) => {
+              const tc = TYPE_COLORS[opt.value]
+              const isActive = typeFilter === opt.value
+              return (
+                <button
+                  key={opt.value}
+                  onClick={() => setTypeFilter(opt.value)}
+                  style={{
+                    backgroundColor: isActive ? tc.accent : tc.bg,
+                    borderColor: tc.accent,
+                    color: isActive ? '#fff' : tc.accent,
+                  }}
+                  className="px-3 py-1.5 rounded-full text-sm font-semibold border transition-colors"
+                >
+                  {t(opt.key)}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
         {/* Rând 1: Specie + Țară */}
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Specie */}
@@ -226,6 +272,7 @@ export default function AdoptiiPage() {
           {hasActiveFilters && (
             <button
               onClick={() => {
+                setTypeFilter('')
                 setSpecies('')
                 setCountry('')
                 setLocationSearch('')
@@ -264,6 +311,7 @@ export default function AdoptiiPage() {
           </p>
           <button
             onClick={() => {
+              setTypeFilter('')
               setSpecies('')
               setCountry('')
               setLocationSearch('')
