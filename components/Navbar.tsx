@@ -26,7 +26,7 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
             <Link href="/adoptii" className="text-text-main hover:text-primary transition-colors font-medium">
-              {t('nav_adoptii')}
+              {t('feed_title')}
             </Link>
             <Link href="/ajutor-medical" className="text-red-500 hover:text-red-600 transition-colors font-medium">
               {t('nav_medical')}
@@ -108,7 +108,7 @@ export default function Navbar() {
         {menuOpen && (
           <div className="md:hidden py-4 border-t border-border-light flex flex-col gap-4">
             <Link href="/adoptii" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
-              {t('nav_adoptii')}
+              {t('feed_title')}
             </Link>
             <Link href="/ajutor-medical" className="text-red-500 hover:text-red-600 transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_medical')}
