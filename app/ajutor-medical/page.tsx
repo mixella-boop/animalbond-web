@@ -189,12 +189,13 @@ export default function AjutorMedicalPage() {
                 <Link
                   key={animal.id}
                   href={`/animal/${animal.id}`}
-                  className="bg-white rounded-card shadow-card border border-red-100 overflow-hidden hover:shadow-card-hover transition-all block"
+                  className="bg-white rounded-card shadow-card border border-indigo-100 overflow-hidden hover:shadow-card-hover hover:-translate-y-1 transition-all block cursor-pointer group"
+                  style={{ borderTop: '5px solid #6366F1' }}
                 >
-                  <div className="relative aspect-[4/3] bg-red-50">
+                  <div className="relative aspect-[4/3] bg-indigo-50">
                     {photo ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={photo} alt={animal.name} className="object-cover w-full h-full" />
+                      <img src={photo} alt={animal.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-5xl">{emoji}</div>
                     )}
@@ -208,7 +209,7 @@ export default function AjutorMedicalPage() {
                     )}
                   </div>
                   <div className="p-4">
-                    <h3 className="font-bold text-text-main text-lg mb-1">{animal.name}</h3>
+                    <h3 className="font-bold text-text-main text-lg mb-1 group-hover:text-indigo-600 transition-colors">{animal.name}</h3>
                     {animal.breed && <p className="text-text-muted text-sm mb-1">{animal.breed}</p>}
                     {animal.location && <p className="text-text-muted text-sm mb-2">📍 {animal.location}</p>}
                     {animal.description && (
@@ -216,8 +217,8 @@ export default function AjutorMedicalPage() {
                         {animal.description}
                       </p>
                     )}
-                    <span className="block text-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">
-                      {t('medical_help_btn')}
+                    <span className="block text-center bg-indigo-600 group-hover:bg-indigo-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">
+                      {t('medical_help_btn')} →
                     </span>
                   </div>
                 </Link>
