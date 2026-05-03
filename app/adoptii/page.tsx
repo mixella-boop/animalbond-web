@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
@@ -68,6 +68,36 @@ export default function FeedPage() {
   const [country, setCountry] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
   const [locationInput, setLocationInput] = useState('')
+
+  // Country search dropdown
+  const [countrySearch, setCountrySearch] = useState('')
+  const [countryOpen, setCountryOpen] = useState(false)
+  const countryRef = useRef<HTMLDivElement>(null)
+
+  const filteredCountries = COUNTRIES.filter(c =>
+    c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+    c.code.toLowerCase().includes(countrySearch.toLowerCase())
+  )
+
+  const selectedCountryObj = COUNTRIES.find(c => c.code === country)
+
+  // Închide dropdown la click afară
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (countryRef.current && !countryRef.current.contains(e.target as Node)) {
+        setCountryOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const handleSelectCountry = (code: string) => {
+    setCountry(code)
+    setCountrySearch('')
+    setCountryOpen(false)
+    if (code && COUNTRY_TO_LANG[code]) setLang(COUNTRY_TO_LANG[code])
+  }
 
   const fetchAnimals = useCallback(
     async (
@@ -215,25 +245,63 @@ export default function FeedPage() {
             </div>
           </div>
 
-          {/* Țară */}
-          <div className="sm:w-48">
+          {/* Țară — dropdown cu căutare */}
+          <div className="sm:w-56" ref={countryRef}>
             <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
-              {t('filter_country')}
+              🌍 {t('filter_country')}
             </label>
-            <select
-              value={country}
-              onChange={(e) => {
-                setCountry(e.target.value)
-                if (e.target.value && COUNTRY_TO_LANG[e.target.value]) setLang(COUNTRY_TO_LANG[e.target.value])
-              }}
-              className="w-full border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
-            >
-              {COUNTRY_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.value === '' ? t('filter_all_countries') : opt.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              {/* Trigger */}
+              {country && !countryOpen ? (
+                <div className="flex items-center gap-2 w-full border-2 border-primary rounded-lg px-3 py-2 bg-primary/5 cursor-pointer" onClick={() => setCountryOpen(true)}>
+                  <span className="text-base">{selectedCountryObj?.flag}</span>
+                  <span className="text-sm font-semibold text-primary flex-1">{selectedCountryObj?.name}</span>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleSelectCountry('') }}
+                    className="text-primary hover:text-primary-dark font-bold text-lg leading-none"
+                  >×</button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 w-full border-2 border-border-light rounded-lg px-3 py-2 bg-white focus-within:border-primary transition-colors">
+                  <span className="text-text-muted">🔍</span>
+                  <input
+                    type="text"
+                    value={countrySearch}
+                    onChange={(e) => { setCountrySearch(e.target.value); setCountryOpen(true) }}
+                    onFocus={() => setCountryOpen(true)}
+                    placeholder={t('filter_all_countries')}
+                    className="flex-1 text-sm bg-transparent outline-none text-text-main placeholder:text-text-muted"
+                  />
+                  {countrySearch && (
+                    <button onClick={() => setCountrySearch('')} className="text-text-muted hover:text-text-main">×</button>
+                  )}
+                </div>
+              )}
+
+              {/* Dropdown lista */}
+              {countryOpen && (
+                <div className="absolute z-30 top-full left-0 right-0 mt-1 bg-white border border-border-light rounded-xl shadow-lg max-h-56 overflow-y-auto">
+                  <button
+                    onClick={() => handleSelectCountry('')}
+                    className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors ${!country ? 'font-semibold text-primary' : 'text-text-muted'}`}
+                  >
+                    🌍 {t('filter_all_countries')}
+                  </button>
+                  {filteredCountries.length === 0 ? (
+                    <p className="px-3 py-2 text-sm text-text-muted">Nicio țară găsită</p>
+                  ) : filteredCountries.map(c => (
+                    <button
+                      key={c.code}
+                      onClick={() => handleSelectCountry(c.code)}
+                      className={`w-full text-left px-3 py-2 text-sm flex items-center gap-2 hover:bg-primary/5 transition-colors ${country === c.code ? 'bg-primary/10 font-semibold text-primary' : 'text-text-main'}`}
+                    >
+                      <span>{c.flag}</span>
+                      <span>{c.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
