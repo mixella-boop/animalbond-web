@@ -19,6 +19,8 @@ export type Animal = {
   status: string | null
   expires_at: string | null
   created_at: string
+  type: string | null
+  country: string | null
   animal_photos?: AnimalPhoto[]
 }
 
