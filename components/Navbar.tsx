@@ -6,11 +6,39 @@ import { useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { LANG_OPTIONS } from '@/lib/i18n'
 
+function ComingSoonModal({ onClose }: { onClose: () => void }) {
+  const { t } = useLanguage()
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="text-5xl mb-4">🚀</div>
+        <h3 className="text-xl font-bold text-text-main mb-2">{t('coming_soon')}</h3>
+        <p className="text-text-muted text-sm leading-relaxed mb-6">{t('coming_soon_desc')}</p>
+        <button
+          onClick={onClose}
+          className="bg-primary text-white px-6 py-2.5 rounded-full font-semibold hover:bg-primary-dark transition-colors"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [showComingSoon, setShowComingSoon] = useState(false)
   const { lang, setLang, t } = useLanguage()
 
   return (
+    <>
+    {showComingSoon && <ComingSoonModal onClose={() => setShowComingSoon(false)} />}
     <nav className="bg-white border-b border-border-light sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
@@ -59,12 +87,12 @@ export default function Navbar() {
               <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white text-xs font-bold">▾</div>
             </div>
 
-            <a
-              href="#download"
+            <button
+              onClick={() => setShowComingSoon(true)}
               className="bg-primary text-white px-4 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors text-sm whitespace-nowrap shrink-0"
             >
               {t('nav_download')}
-            </a>
+            </button>
           </div>
 
           {/* Mobile: lang select + hamburger */}
@@ -123,16 +151,16 @@ export default function Navbar() {
             <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_despre')}
             </Link>
-            <a
-              href="#download"
+            <button
+              onClick={() => { setShowComingSoon(true); setMenuOpen(false) }}
               className="bg-primary text-white px-5 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors text-sm text-center"
-              onClick={() => setMenuOpen(false)}
             >
               {t('nav_download')}
-            </a>
+            </button>
           </div>
         )}
       </div>
     </nav>
+    </>
   )
 }
