@@ -1,10 +1,25 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { COUNTRIES } from '@/lib/countries'
 import { useLanguage } from '@/context/LanguageContext'
 import { COUNTRY_TO_LANG } from '@/lib/i18n'
+
+function ComingSoonModal({ onClose }: { onClose: () => void }) {
+  const { t } = useLanguage()
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl" onClick={e => e.stopPropagation()}>
+        <div className="text-5xl mb-4">🚀</div>
+        <h3 className="text-xl font-bold text-text-main mb-2">{t('coming_soon')}</h3>
+        <p className="text-text-muted text-sm leading-relaxed mb-6">{t('coming_soon_desc')}</p>
+        <button onClick={onClose} className="bg-primary text-white px-6 py-2.5 rounded-full font-semibold hover:bg-primary-dark transition-colors">OK</button>
+      </div>
+    </div>
+  )
+}
 
 type MedicalAnimal = {
   id: string
@@ -37,6 +52,7 @@ export default function AjutorMedicalPage() {
   const [animals, setAnimals] = useState<MedicalAnimal[]>([])
   const [loading, setLoading] = useState(true)
   const [country, setCountry] = useState('')
+  const [showComingSoon, setShowComingSoon] = useState(false)
 
   const handleCountryChange = (code: string) => {
     setCountry(code)
@@ -72,6 +88,7 @@ export default function AjutorMedicalPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+      {showComingSoon && <ComingSoonModal onClose={() => setShowComingSoon(false)} />}
       {/* Header */}
       <div className="text-center mb-8">
         <div className="text-5xl mb-4">💊</div>
@@ -81,12 +98,12 @@ export default function AjutorMedicalPage() {
         <p className="text-text-muted text-lg max-w-xl mx-auto mb-6">
           {t('medical_subtitle')}
         </p>
-        <a
-          href="#download-app"
+        <button
+          onClick={() => setShowComingSoon(true)}
           className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-primary-dark transition-colors shadow-lg"
         >
           {t('medical_cta')}
-        </a>
+        </button>
       </div>
 
       {/* Banner urgent */}
@@ -169,9 +186,10 @@ export default function AjutorMedicalPage() {
               const photo = getMainPhoto(animal)
               const emoji = speciesEmoji[animal.species?.toLowerCase()] || '🐾'
               return (
-                <div
+                <Link
                   key={animal.id}
-                  className="bg-white rounded-card shadow-card border border-red-100 overflow-hidden hover:shadow-card-hover transition-all"
+                  href={`/animal/${animal.id}`}
+                  className="bg-white rounded-card shadow-card border border-red-100 overflow-hidden hover:shadow-card-hover transition-all block"
                 >
                   <div className="relative aspect-[4/3] bg-red-50">
                     {photo ? (
@@ -198,14 +216,11 @@ export default function AjutorMedicalPage() {
                         {animal.description}
                       </p>
                     )}
-                    <a
-                      href="#download-app"
-                      className="block text-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors"
-                    >
+                    <span className="block text-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">
                       {t('medical_help_btn')}
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </Link>
               )
             })}
           </div>
@@ -220,18 +235,18 @@ export default function AjutorMedicalPage() {
           {t('medical_download_sub')}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#" className="flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+          <button onClick={() => setShowComingSoon(true)} className="flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
             </svg>
             App Store
-          </a>
-          <a href="#" className="flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+          </button>
+          <button onClick={() => setShowComingSoon(true)} className="flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3.18 23.76c.38.21.82.24 1.23.09l12.5-7.21-2.73-2.72-11 10.84zm16.26-9.38L16.76 12l2.68-2.38-11.44-6.6c-.48-.28-1.04-.27-1.5-.04L17.44 14.38zM2.08 1.76C2.03 1.97 2 2.2 2 2.45v19.1c0 .26.03.49.09.7l11.2-11.02-11.21-9.47zm12.01 11.5L12 12l-9.14 8.98L14.09 13.26z" />
             </svg>
             Google Play
-          </a>
+          </button>
         </div>
       </div>
     </div>

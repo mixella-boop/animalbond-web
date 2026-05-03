@@ -293,10 +293,10 @@ export default function AnimalDetailClient({ animal }: Props) {
         {/* Back */}
         <div className="mt-10 pt-6 border-t border-border-light">
           <Link
-            href="/adoptii"
+            href={animalType === 'medical' ? '/ajutor-medical' : '/adoptii'}
             className="text-primary font-semibold hover:underline flex items-center gap-2"
           >
-            {t('animal_back')}
+            ← {animalType === 'medical' ? t('nav_medical') : t('animal_back')}
           </Link>
         </div>
       </div>
