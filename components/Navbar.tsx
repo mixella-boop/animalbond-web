@@ -57,6 +57,9 @@ export default function Navbar() {
             <Link href="/ajutor-medical" className="text-red-500 hover:text-red-600 transition-colors font-medium text-sm whitespace-nowrap">
               {t('nav_medical')}
             </Link>
+            <Link href="/pierdute-gasite" className="text-blue-600 hover:text-blue-700 transition-colors font-medium text-sm whitespace-nowrap">
+              {t('nav_lostfound')}
+            </Link>
             <Link href="/parteneri" className="text-text-main hover:text-primary transition-colors font-medium text-sm whitespace-nowrap">
               {t('nav_parteneri')}
             </Link>
@@ -138,6 +141,9 @@ export default function Navbar() {
             </Link>
             <Link href="/ajutor-medical" className="text-red-500 hover:text-red-600 transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_medical')}
+            </Link>
+            <Link href="/pierdute-gasite" className="text-blue-600 hover:text-blue-700 transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
+              {t('nav_lostfound')}
             </Link>
             <Link href="/parteneri" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_parteneri')}
