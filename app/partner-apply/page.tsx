@@ -22,6 +22,8 @@ type FormData = {
   website: string
   description: string
   gdpr_consent: boolean
+  // honeypot — câmp invizibil; dacă e completat, e bot
+  _hp_name: string
 }
 
 const INITIAL: FormData = {
@@ -34,6 +36,7 @@ const INITIAL: FormData = {
   website: '',
   description: '',
   gdpr_consent: false,
+  _hp_name: '',
 }
 
 export default function PartnerApplyPage() {
@@ -59,6 +62,12 @@ export default function PartnerApplyPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Honeypot: dacă câmpul ascuns e completat, e bot — silențios ignorăm
+    if (form._hp_name) {
+      setSuccess(true)
+      return
+    }
 
     const validationError = validate()
     if (validationError) {
@@ -163,6 +172,20 @@ export default function PartnerApplyPage() {
 
       {/* Formular */}
       <form onSubmit={handleSubmit} className="bg-white rounded-card shadow-card border border-border-light p-6 sm:p-8 space-y-5">
+        {/* Honeypot — invizibil pentru useri, completat automat de boti */}
+        <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} tabIndex={-1}>
+          <label htmlFor="_hp_name">Nu completa acest câmp</label>
+          <input
+            id="_hp_name"
+            type="text"
+            name="_hp_name"
+            value={form._hp_name}
+            onChange={(e) => update('_hp_name', e.target.value)}
+            autoComplete="off"
+            tabIndex={-1}
+          />
+        </div>
+
         <h2 className="font-bold text-text-main text-xl border-b border-border-light pb-3">
           Detalii companie
         </h2>
