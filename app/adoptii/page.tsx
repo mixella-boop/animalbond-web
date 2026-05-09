@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
@@ -62,6 +63,7 @@ export default function FeedPage() {
   const [loadingMore, setLoadingMore] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(0)
+  const [lfBanner, setLfBanner] = useState<{ count: number; photos: string[] } | null>(null)
 
   const [typeFilter, setTypeFilter] = useState('')
   const [species, setSpecies] = useState('')
@@ -98,6 +100,37 @@ export default function FeedPage() {
     setCountryOpen(false)
     if (code && COUNTRY_TO_LANG[code]) setLang(COUNTRY_TO_LANG[code])
   }
+
+  // Fetch banner lost/found (count + 2 poze preview)
+  useEffect(() => {
+    const now = new Date().toISOString()
+    const fetchBanner = async () => {
+      const [countRes, photoRes] = await Promise.all([
+        supabase
+          .from('animals')
+          .select('id', { count: 'exact', head: true })
+          .in('type', ['lost', 'found'])
+          .eq('status', 'available')
+          .or(`expires_at.is.null,expires_at.gt.${now}`),
+        supabase
+          .from('animals')
+          .select('id, animal_photos (url, is_primary)')
+          .in('type', ['lost', 'found'])
+          .eq('status', 'available')
+          .or(`expires_at.is.null,expires_at.gt.${now}`)
+          .order('created_at', { ascending: false })
+          .limit(2),
+      ])
+      const count = countRes.count ?? 0
+      const photos: string[] = ((photoRes.data as any[]) || []).flatMap((a: any) => {
+        const arr: { url: string; is_primary: boolean }[] = a.animal_photos || []
+        const url = arr.find(p => p.is_primary)?.url || arr[0]?.url
+        return url ? [url] : []
+      })
+      if (count > 0) setLfBanner({ count, photos })
+    }
+    fetchBanner()
+  }, [])
 
   const fetchAnimals = useCallback(
     async (
@@ -262,18 +295,21 @@ export default function FeedPage() {
                   >×</button>
                 </div>
               ) : (
-                <div className="flex items-center gap-2 w-full border-2 border-border-light rounded-lg px-3 py-2 bg-white focus-within:border-primary transition-colors">
-                  <span className="text-text-muted">🔍</span>
+                <div className="relative flex items-center border-2 border-border-light rounded-lg bg-white focus-within:border-primary transition-colors">
+                  <span className="pl-3 text-text-muted shrink-0">🔍</span>
                   <input
                     type="text"
                     value={countrySearch}
                     onChange={(e) => { setCountrySearch(e.target.value); setCountryOpen(true) }}
                     onFocus={() => setCountryOpen(true)}
                     placeholder={t('filter_all_countries')}
-                    className="flex-1 text-sm bg-transparent outline-none text-text-main placeholder:text-text-muted"
+                    className="flex-1 min-w-0 px-2 py-2 text-sm bg-transparent outline-none text-text-main placeholder:text-text-muted pr-7"
                   />
                   {countrySearch && (
-                    <button onClick={() => setCountrySearch('')} className="text-text-muted hover:text-text-main">×</button>
+                    <button
+                      onClick={() => setCountrySearch('')}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-main w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-100 text-base leading-none"
+                    >×</button>
                   )}
                 </div>
               )}
@@ -353,6 +389,36 @@ export default function FeedPage() {
           )}
         </div>
       </div>
+
+      {/* Banner Lost/Found */}
+      {lfBanner && (
+        <Link
+          href="/pierdute-gasite"
+          className="flex flex-col sm:flex-row items-center gap-4 bg-white rounded-2xl shadow-card border border-red-100 p-4 mb-6 hover:shadow-card-hover transition-all group"
+        >
+          <div className="flex gap-2 shrink-0">
+            {lfBanner.photos.length > 0 ? (
+              lfBanner.photos.map((url, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={i} src={url} alt="" className="w-12 h-12 rounded-xl object-cover border-2 border-red-100" />
+              ))
+            ) : (
+              <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-xl border-2 border-red-100">🐾</div>
+            )}
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <p className="font-bold text-text-main text-sm sm:text-base group-hover:text-primary transition-colors">
+              {t('lf_home_title')}
+            </p>
+            <p className="text-text-muted text-xs sm:text-sm mt-0.5">
+              {t('lf_home_count').replace('{count}', String(lfBanner.count))}
+            </p>
+          </div>
+          <span className="shrink-0 text-primary font-semibold text-sm group-hover:underline">
+            {t('lf_home_btn')}
+          </span>
+        </Link>
+      )}
 
       {/* Rezultate */}
       {loading ? (
