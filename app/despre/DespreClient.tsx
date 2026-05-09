@@ -104,12 +104,6 @@ export default function DespreClient() {
         <h2 className="text-2xl font-bold text-text-main mb-4">{t('about_contact_title')}</h2>
         <div className="space-y-3 text-text-muted">
           <div className="flex items-center gap-3">
-            <span className="text-xl">📧</span>
-            <a href="mailto:contact@animalbond.club" className="text-primary hover:underline font-medium">
-              contact@animalbond.club
-            </a>
-          </div>
-          <div className="flex items-center gap-3">
             <span className="text-xl">📱</span>
             <span>{t('about_app_text')}</span>
           </div>
@@ -117,6 +111,14 @@ export default function DespreClient() {
             <span className="text-xl">🤝</span>
             <Link href="/partner-apply" className="text-primary hover:underline font-medium">
               {t('about_partnerships_text')}
+            </Link>
+          </div>
+          <div className="pt-2">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors"
+            >
+              💬 {t('about_contact_title')}
             </Link>
           </div>
         </div>
