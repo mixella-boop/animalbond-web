@@ -34,3 +34,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #FF6B6B;
 }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  15% { transform: rotate(-6deg) scale(1.05); }
+  30% { transform: rotate(6deg) scale(1.05); }
+  45% { transform: rotate(-4deg) scale(1.03); }
+  60% { transform: rotate(4deg) scale(1.03); }
+  75% { transform: rotate(-2deg) scale(1.01); }
+  90% { transform: rotate(2deg) scale(1.01); }
+}
