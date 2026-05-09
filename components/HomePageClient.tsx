@@ -18,9 +18,10 @@ const categoryLabel: Record<string, string> = {
 type Props = {
   partners: Partner[]
   testimonials: Testimonial[]
+  lostFoundBanner: { count: number; photos: string[] }
 }
 
-export default function HomePageClient({ partners, testimonials }: Props) {
+export default function HomePageClient({ partners, testimonials, lostFoundBanner }: Props) {
   const { t } = useLanguage()
 
   return (
@@ -55,6 +56,50 @@ export default function HomePageClient({ partners, testimonials }: Props) {
 
       {/* ===== ULTIMELE ANIMALE ===== */}
       <HomeAnimalsSection />
+
+      {/* ===== BANNER PIERDUTE / GĂSITE ===== */}
+      {lostFoundBanner.count > 0 && (
+        <section className="py-8 px-4 sm:px-6 bg-gradient-to-r from-red-50 via-orange-50 to-teal-50">
+          <div className="max-w-5xl mx-auto">
+            <Link
+              href="/pierdute-gasite"
+              className="flex flex-col sm:flex-row items-center gap-4 bg-white rounded-2xl shadow-card border border-red-100 p-5 hover:shadow-card-hover transition-all group"
+            >
+              {/* Poze preview */}
+              <div className="flex gap-2 shrink-0">
+                {lostFoundBanner.photos.length > 0 ? (
+                  lostFoundBanner.photos.map((url, i) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={i}
+                      src={url}
+                      alt=""
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover border-2 border-red-100"
+                    />
+                  ))
+                ) : (
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-red-50 flex items-center justify-center text-2xl border-2 border-red-100">🐾</div>
+                )}
+              </div>
+
+              {/* Text */}
+              <div className="flex-1 text-center sm:text-left">
+                <p className="font-bold text-text-main text-base sm:text-lg group-hover:text-primary transition-colors">
+                  {t('lf_home_title')}
+                </p>
+                <p className="text-text-muted text-sm mt-0.5">
+                  {t('lf_home_count').replace('{count}', String(lostFoundBanner.count))}
+                </p>
+              </div>
+
+              {/* CTA */}
+              <span className="shrink-0 text-primary font-semibold text-sm group-hover:underline">
+                {t('lf_home_btn')}
+              </span>
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* ===== CUM FUNCȚIONEAZĂ ===== */}
       <section id="cum-functioneaza" className="bg-white py-14 px-4 sm:px-6">

@@ -39,6 +39,8 @@ const TYPE_COLOR: Record<string, string> = {
   sale:     '#F59E0B',
   medical:  '#6366F1',
   breeding: '#10B981',
+  lost:     '#E53935',
+  found:    '#00838F',
 }
 
 const TYPE_BG: Record<string, string> = {
@@ -46,6 +48,8 @@ const TYPE_BG: Record<string, string> = {
   sale:     'from-yellow-50 to-amber-50',
   medical:  'from-indigo-50 to-purple-50',
   breeding: 'from-emerald-50 to-green-50',
+  lost:     'from-red-50 to-orange-50',
+  found:    'from-teal-50 to-cyan-50',
 }
 
 const TYPE_BORDER: Record<string, string> = {
@@ -53,6 +57,8 @@ const TYPE_BORDER: Record<string, string> = {
   sale:     'border-amber-200',
   medical:  'border-indigo-200',
   breeding: 'border-emerald-200',
+  lost:     'border-red-200',
+  found:    'border-teal-200',
 }
 
 // Coming Soon modal component
@@ -131,12 +137,16 @@ export default function AnimalDetailClient({ animal }: Props) {
     animalType === 'sale'     ? 'animal_cta_title_sale' :
     animalType === 'medical'  ? 'animal_cta_title_medical' :
     animalType === 'breeding' ? 'animal_cta_title_breeding' :
+    animalType === 'lost'     ? 'animal_cta_title_lost' :
+    animalType === 'found'    ? 'animal_cta_title_found' :
     'animal_cta_title'
 
   const ctaDescKey: Parameters<typeof t>[0] =
     animalType === 'sale'     ? 'animal_cta_desc_sale' :
     animalType === 'medical'  ? 'animal_cta_desc_medical' :
     animalType === 'breeding' ? 'animal_cta_desc_breeding' :
+    animalType === 'lost'     ? 'animal_cta_desc_lost' :
+    animalType === 'found'    ? 'animal_cta_desc_found' :
     'animal_cta_desc'
 
   // Accent color for type
@@ -153,7 +163,12 @@ export default function AnimalDetailClient({ animal }: Props) {
         <div className="flex items-center gap-2 text-sm text-text-muted mb-6">
           <Link href="/" className="hover:text-primary transition-colors">{t('animal_home')}</Link>
           <span>/</span>
-          <Link href="/adoptii" className="hover:text-primary transition-colors">{t('feed_title')}</Link>
+          <Link
+            href={(animalType === 'lost' || animalType === 'found') ? '/pierdute-gasite' : animalType === 'medical' ? '/ajutor-medical' : '/adoptii'}
+            className="hover:text-primary transition-colors"
+          >
+            {(animalType === 'lost' || animalType === 'found') ? t('lf_page_title') : t('feed_title')}
+          </Link>
           <span>/</span>
           <span className="text-text-main font-medium">{animal.name}</span>
         </div>
@@ -169,7 +184,9 @@ export default function AnimalDetailClient({ animal }: Props) {
                 animalType === 'adoption' ? 'type_adoption' :
                 animalType === 'sale'     ? 'type_sale' :
                 animalType === 'medical'  ? 'type_medical' :
-                animalType === 'breeding' ? 'type_breeding' : 'type_adoption'
+                animalType === 'breeding' ? 'type_breeding' :
+                animalType === 'lost'     ? 'type_lost' :
+                animalType === 'found'    ? 'type_found' : 'type_adoption'
               )}
             </span>
           </div>
@@ -293,10 +310,18 @@ export default function AnimalDetailClient({ animal }: Props) {
         {/* Back */}
         <div className="mt-10 pt-6 border-t border-border-light">
           <Link
-            href={animalType === 'medical' ? '/ajutor-medical' : '/adoptii'}
+            href={
+              animalType === 'medical' ? '/ajutor-medical' :
+              (animalType === 'lost' || animalType === 'found') ? '/pierdute-gasite' :
+              '/adoptii'
+            }
             className="text-primary font-semibold hover:underline flex items-center gap-2"
           >
-            ← {animalType === 'medical' ? t('nav_medical') : t('animal_back')}
+            ← {
+              animalType === 'medical' ? t('nav_medical') :
+              (animalType === 'lost' || animalType === 'found') ? t('lf_page_title') :
+              t('animal_back')
+            }
           </Link>
         </div>
       </div>

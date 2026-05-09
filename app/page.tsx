@@ -26,7 +26,43 @@ async function getPartners(): Promise<Partner[]> {
   return data as Partner[]
 }
 
+async function getLostFoundBanner(): Promise<{ count: number; photos: string[] }> {
+  const now = new Date().toISOString()
+
+  // Count real (fără date)
+  const { count } = await supabase
+    .from('animals')
+    .select('id', { count: 'exact', head: true })
+    .in('type', ['lost', 'found'])
+    .eq('status', 'available')
+    .or(`expires_at.is.null,expires_at.gt.${now}`)
+
+  // Ultimele 2 poze pentru preview
+  const { data: photoData } = await supabase
+    .from('animals')
+    .select('id, animal_photos (url, is_primary)')
+    .in('type', ['lost', 'found'])
+    .eq('status', 'available')
+    .or(`expires_at.is.null,expires_at.gt.${now}`)
+    .order('created_at', { ascending: false })
+    .limit(2)
+
+  const photos: string[] = (photoData || []).flatMap((a: any) => {
+    const arr: { url: string; is_primary: boolean }[] = a.animal_photos || []
+    const primary = arr.find(p => p.is_primary)?.url
+    const first = arr[0]?.url
+    const url = primary || first
+    return url ? [url] : []
+  })
+
+  return { count: count ?? 0, photos }
+}
+
 export default async function HomePage() {
-  const [partners, testimonials] = await Promise.all([getPartners(), getRecentTestimonials()])
-  return <HomePageClient partners={partners} testimonials={testimonials} />
+  const [partners, testimonials, lostFoundBanner] = await Promise.all([
+    getPartners(),
+    getRecentTestimonials(),
+    getLostFoundBanner(),
+  ])
+  return <HomePageClient partners={partners} testimonials={testimonials} lostFoundBanner={lostFoundBanner} />
 }
