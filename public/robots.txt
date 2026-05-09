@@ -3,5 +3,7 @@ Allow: /
 
 Disallow: /api/
 Disallow: /_next/
+Disallow: /auth/
+Disallow: /reset-password
 
-Sitemap: https://animalbond.ro/sitemap.xml
+Sitemap: https://animalbond.club/sitemap.xml

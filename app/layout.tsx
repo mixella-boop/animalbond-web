@@ -5,20 +5,24 @@ import Footer from '@/components/Footer'
 import { LanguageProvider } from '@/context/LanguageContext'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://animalbond.ro'),
+  metadataBase: new URL('https://animalbond.club'),
   title: {
     default: 'AnimalBond — Adopții animale din România',
     template: '%s | AnimalBond',
   },
   description:
-    'Găsește animalul perfect pentru tine. AnimalBond conectează animale fără casă cu familii iubitoare din România. Adoptă câini, pisici, iepuri și alte animale.',
-  keywords: ['adoptii animale', 'adopta un caine', 'adopta o pisica', 'animale fara stapan', 'romania', 'animalbond'],
+    'Găsește animalul perfect pentru tine. AnimalBond conectează animale fără casă cu familii iubitoare din România și Europa. Adoptă câini, pisici, iepuri și alte animale.',
+  keywords: [
+    'adoptii animale romania', 'adopta un caine', 'adopta o pisica',
+    'animale fara stapan', 'adapost animale romania', 'animale de companie adoptie',
+    'caine de adoptie', 'pisica de adoptie', 'animal pierdut romania', 'animalbond',
+  ],
   authors: [{ name: 'AnimalBond' }],
   creator: 'AnimalBond',
   openGraph: {
     type: 'website',
     locale: 'ro_RO',
-    url: 'https://animalbond.ro',
+    url: 'https://animalbond.club',
     siteName: 'AnimalBond',
     title: 'AnimalBond — Adopții animale din România',
     description:
@@ -48,6 +52,9 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  alternates: {
+    canonical: 'https://animalbond.club',
   },
 }
 

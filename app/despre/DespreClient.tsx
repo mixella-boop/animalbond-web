@@ -105,8 +105,8 @@ export default function DespreClient() {
         <div className="space-y-3 text-text-muted">
           <div className="flex items-center gap-3">
             <span className="text-xl">📧</span>
-            <a href="mailto:contact@animalbond.ro" className="text-primary hover:underline font-medium">
-              contact@animalbond.ro
+            <a href="mailto:contact@animalbond.club" className="text-primary hover:underline font-medium">
+              contact@animalbond.club
             </a>
           </div>
           <div className="flex items-center gap-3">

@@ -83,6 +83,27 @@ export default function FeedPage() {
 
   const selectedCountryObj = COUNTRIES.find(c => c.code === country)
 
+  // ─── Pre-selectare țară din cookie (setat de middleware din IP Vercel) ────────
+  useEffect(() => {
+    // Citim cookie-ul DOAR dacă userul nu a selectat deja manual o țară
+    if (!country) {
+      try {
+        const match = document.cookie.match(/(?:^|;\s*)preferred_country=([^;]*)/)
+        if (match) {
+          const cookieCountry = decodeURIComponent(match[1]).toUpperCase()
+          if (COUNTRIES.find(c => c.code === cookieCountry)) {
+            setCountry(cookieCountry)
+            // Actualizăm și limba dacă există mapping
+            if (COUNTRY_TO_LANG[cookieCountry]) setLang(COUNTRY_TO_LANG[cookieCountry])
+          }
+        }
+      } catch {
+        // Silently ignore (SSR sau cookies blocked)
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // Închide dropdown la click afară
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -99,6 +120,10 @@ export default function FeedPage() {
     setCountrySearch('')
     setCountryOpen(false)
     if (code && COUNTRY_TO_LANG[code]) setLang(COUNTRY_TO_LANG[code])
+    // Salvăm preferința manuală în cookie (30 zile) → middleware nu va mai suprascrie
+    if (code) {
+      document.cookie = `preferred_country=${code};max-age=${60 * 60 * 24 * 30};path=/;samesite=lax`
+    }
   }
 
   // Fetch banner lost/found (count + 2 poze preview)
