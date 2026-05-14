@@ -174,8 +174,8 @@ export default function FeedPage() {
           location, status, expires_at, created_at, type, country, gender, description,
           animal_photos (id, animal_id, url, is_primary, order_index)
         `)
-        .neq('status', 'adopted')
-        .neq('status', 'pending_approval')
+        .eq('status', 'available')
+        .not('type', 'in', '("lost","found")')
         .or(`expires_at.is.null,expires_at.gt.${now}`)
         .order('created_at', { ascending: false })
         .range(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE - 1)
