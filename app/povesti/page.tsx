@@ -12,6 +12,7 @@ export type Testimonial = {
   photo_url: string | null
   video_url: string | null
   created_at: string
+  country: string | null
   profiles: { username: string; full_name: string | null; country_code: string | null } | null
 }
 

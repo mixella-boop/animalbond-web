@@ -38,7 +38,7 @@ export default function TestimonialeClient() {
       } else {
         const all = (data as Testimonial[]) || []
         const filtered = country
-          ? all.filter(t => (t.profiles as any)?.country_code === country)
+          ? all.filter(t => (t as any).country === country)
           : all
         setTestimonials(filtered)
       }
