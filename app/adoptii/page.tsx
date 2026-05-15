@@ -135,36 +135,41 @@ export default function FeedPage() {
     }
   }
 
-  // Fetch banner lost/found (count + 2 poze preview)
+  // Fetch banner lost/found (count + 2 poze preview) — filtrat după țara selectată
   useEffect(() => {
     const now = new Date().toISOString()
     const fetchBanner = async () => {
-      const [countRes, photoRes] = await Promise.all([
-        supabase
-          .from('animals')
-          .select('id', { count: 'exact', head: true })
-          .in('type', ['lost', 'found'])
-          .eq('status', 'available')
-          .or(`expires_at.is.null,expires_at.gt.${now}`),
-        supabase
-          .from('animals')
-          .select('id, animal_photos (url, is_primary)')
-          .in('type', ['lost', 'found'])
-          .eq('status', 'available')
-          .or(`expires_at.is.null,expires_at.gt.${now}`)
-          .order('created_at', { ascending: false })
-          .limit(2),
-      ])
+      let countQ = supabase
+        .from('animals')
+        .select('id', { count: 'exact', head: true })
+        .in('type', ['lost', 'found'])
+        .eq('status', 'available')
+        .or(`expires_at.is.null,expires_at.gt.${now}`)
+      let photoQ = supabase
+        .from('animals')
+        .select('id, animal_photos (url, is_primary)')
+        .in('type', ['lost', 'found'])
+        .eq('status', 'available')
+        .or(`expires_at.is.null,expires_at.gt.${now}`)
+        .order('created_at', { ascending: false })
+        .limit(2)
+
+      if (country) {
+        countQ = countQ.eq('country', country)
+        photoQ = photoQ.eq('country', country)
+      }
+
+      const [countRes, photoRes] = await Promise.all([countQ, photoQ])
       const count = countRes.count ?? 0
       const photos: string[] = ((photoRes.data as any[]) || []).flatMap((a: any) => {
         const arr: { url: string; is_primary: boolean }[] = a.animal_photos || []
         const url = arr.find(p => p.is_primary)?.url || arr[0]?.url
         return url ? [url] : []
       })
-      if (count > 0) setLfBanner({ count, photos })
+      setLfBanner(count > 0 ? { count, photos } : null)
     }
     fetchBanner()
-  }, [])
+  }, [country])
 
   const fetchAnimals = useCallback(
     async (
