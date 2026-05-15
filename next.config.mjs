@@ -33,7 +33,7 @@ const nextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: https://*.supabase.co https://*.supabase.in https://ko-fi.com",
+              "img-src 'self' data: https://*.supabase.co https://*.supabase.in https://ko-fi.com https://images.pexels.com",
               "connect-src 'self' https://*.supabase.co https://*.supabase.in",
               "frame-ancestors 'none'",
             ].join('; '),
