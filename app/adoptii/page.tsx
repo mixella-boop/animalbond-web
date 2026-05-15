@@ -75,6 +75,7 @@ export default function FeedPage() {
   const [countrySearch, setCountrySearch] = useState('')
   const [countryOpen, setCountryOpen] = useState(false)
   const countryRef = useRef<HTMLDivElement>(null)
+  const countryInputRef = useRef<HTMLInputElement>(null)
 
   const filteredCountries = COUNTRIES.filter(c =>
     c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
@@ -104,6 +105,13 @@ export default function FeedPage() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Auto-focus input când se deschide dropdown-ul
+  useEffect(() => {
+    if (countryOpen) {
+      setTimeout(() => countryInputRef.current?.focus(), 50)
+    }
+  }, [countryOpen])
 
   // Închide dropdown la click afară
   useEffect(() => {
@@ -312,7 +320,7 @@ export default function FeedPage() {
             <div className="relative">
               {/* Trigger */}
               {country && !countryOpen ? (
-                <div className="flex items-center gap-2 w-full border-2 border-primary rounded-lg px-3 py-2 bg-primary/5 cursor-pointer" onClick={() => setCountryOpen(true)}>
+                <div className="flex items-center gap-2 w-full border-2 border-primary rounded-lg px-3 py-2 bg-primary/5 cursor-pointer" onClick={() => { setCountrySearch(''); setCountryOpen(true) }}>
                   <span className="text-base">{selectedCountryObj?.flag}</span>
                   <span className="text-sm font-semibold text-primary flex-1">{selectedCountryObj?.name}</span>
                   <button
@@ -324,11 +332,12 @@ export default function FeedPage() {
                 <div className="relative flex items-center border-2 border-border-light rounded-lg bg-white focus-within:border-primary transition-colors">
                   <span className="pl-3 text-text-muted shrink-0">🔍</span>
                   <input
+                    ref={countryInputRef}
                     type="text"
                     value={countrySearch}
                     onChange={(e) => { setCountrySearch(e.target.value); setCountryOpen(true) }}
                     onFocus={() => setCountryOpen(true)}
-                    placeholder={t('filter_all_countries')}
+                    placeholder={t('filter_search_country')}
                     className="flex-1 min-w-0 px-2 py-2 text-sm bg-transparent outline-none text-text-main placeholder:text-text-muted pr-7"
                   />
                   {countrySearch && (
