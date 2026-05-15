@@ -40,7 +40,7 @@ export default function TestimonialeClient() {
         const filtered = country
           ? all.filter(t => (t as any).country === country)
           : all
-        setTestimonials(filtered)
+        setTestimonials(filtered.length > 0 ? filtered : all)
       }
       setLoading(false)
     }
