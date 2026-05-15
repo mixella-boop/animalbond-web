@@ -177,7 +177,7 @@ export default function FeedPage() {
         .eq('status', 'available')
         .not('type', 'in', '("lost","found")')
         .or(`expires_at.is.null,expires_at.gt.${now}`)
-        .order('created_at', { ascending: false })
+        .order('created_at', { ascending: true })
         .range(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE - 1)
 
       if (typeF) {
