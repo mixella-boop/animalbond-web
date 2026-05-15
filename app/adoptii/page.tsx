@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
-import { COUNTRY_TO_LANG } from '@/lib/i18n'
+import { useCountry } from '@/context/CountryContext'
 import { COUNTRIES } from '@/lib/countries'
 
 const SPECIES_KEYS = [
@@ -57,7 +57,8 @@ function getMainPhoto(animal: Animal): string | null {
 const PAGE_SIZE = 12
 
 export default function FeedPage() {
-  const { t, setLang } = useLanguage()
+  const { t } = useLanguage()
+  const { country, setCountry: setGlobalCountry } = useCountry()
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
@@ -67,7 +68,6 @@ export default function FeedPage() {
 
   const [typeFilter, setTypeFilter] = useState('')
   const [species, setSpecies] = useState('')
-  const [country, setCountry] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
   const [locationInput, setLocationInput] = useState('')
 
@@ -84,27 +84,6 @@ export default function FeedPage() {
 
   const selectedCountryObj = COUNTRIES.find(c => c.code === country)
 
-  // ─── Pre-selectare țară din cookie (setat de middleware din IP Vercel) ────────
-  useEffect(() => {
-    if (!country) {
-      try {
-        const match = document.cookie.match(/(?:^|;\s*)preferred_country=([^;]*)/)
-        if (match) {
-          const cookieCountry = decodeURIComponent(match[1]).toUpperCase()
-          if (COUNTRIES.find(c => c.code === cookieCountry)) {
-            setCountry(cookieCountry)
-            if (COUNTRY_TO_LANG[cookieCountry]) setLang(COUNTRY_TO_LANG[cookieCountry])
-            return
-          }
-        }
-      } catch {
-        // Silently ignore (SSR sau cookies blocked)
-      }
-      // Niciun cookie valid → fallback România
-      setCountry('RO')
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   // Auto-focus input când se deschide dropdown-ul
   useEffect(() => {
@@ -125,14 +104,9 @@ export default function FeedPage() {
   }, [])
 
   const handleSelectCountry = (code: string) => {
-    setCountry(code)
+    setGlobalCountry(code)
     setCountrySearch('')
     setCountryOpen(false)
-    if (code && COUNTRY_TO_LANG[code]) setLang(COUNTRY_TO_LANG[code])
-    // Salvăm preferința manuală în cookie (30 zile) → middleware nu va mai suprascrie
-    if (code) {
-      document.cookie = `preferred_country=${code};max-age=${60 * 60 * 24 * 30};path=/;samesite=lax`
-    }
   }
 
   // Fetch banner lost/found (count + 2 poze preview) — filtrat după țara selectată
@@ -418,7 +392,7 @@ export default function FeedPage() {
               onClick={() => {
                 setTypeFilter('')
                 setSpecies('')
-                setCountry('')
+                setGlobalCountry('')
                 setLocationSearch('')
                 setLocationInput('')
               }}
@@ -487,7 +461,7 @@ export default function FeedPage() {
             onClick={() => {
               setTypeFilter('')
               setSpecies('')
-              setCountry('')
+              setGlobalCountry('')
               setLocationSearch('')
               setLocationInput('')
             }}

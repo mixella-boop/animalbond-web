@@ -1,6 +1,3 @@
-export const dynamic = 'force-dynamic'
-
-import { supabase } from '@/lib/supabase'
 import TestimonialeClient from './TestimonialeClient'
 
 export const metadata = {
@@ -15,24 +12,9 @@ export type Testimonial = {
   photo_url: string | null
   video_url: string | null
   created_at: string
-  profiles: { username: string; full_name: string | null } | null
+  profiles: { username: string; full_name: string | null; country_code: string | null } | null
 }
 
-async function getTestimonials(): Promise<Testimonial[]> {
-  const { data, error } = await supabase
-    .from('testimonials')
-    .select('*, profiles (username, full_name)')
-    .eq('is_approved', true)
-    .order('created_at', { ascending: false })
-
-  if (error) {
-    console.error('Eroare testimoniale:', error)
-    return []
-  }
-  return data as Testimonial[]
-}
-
-export default async function PovestiPage() {
-  const testimonials = await getTestimonials()
-  return <TestimonialeClient testimonials={testimonials} />
+export default function PovestiPage() {
+  return <TestimonialeClient />
 }

@@ -3,6 +3,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { LanguageProvider } from '@/context/LanguageContext'
+import { CountryProvider } from '@/context/CountryContext'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://animalbond.club'),
@@ -75,9 +76,11 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col bg-background">
         <LanguageProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <CountryProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </CountryProvider>
         </LanguageProvider>
       </body>
     </html>

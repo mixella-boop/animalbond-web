@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import { COUNTRIES } from '@/lib/countries'
 import { useLanguage } from '@/context/LanguageContext'
-import { COUNTRY_TO_LANG } from '@/lib/i18n'
+import { useCountry } from '@/context/CountryContext'
 
 type DonationCase = {
   id: string
@@ -39,10 +39,10 @@ function ComingSoonModal({ onClose }: { onClose: () => void }) {
 }
 
 export default function CampaniiPage() {
-  const { t, setLang } = useLanguage()
+  const { t } = useLanguage()
+  const { country, setCountry: setGlobalCountry } = useCountry()
   const [cases, setCases] = useState<DonationCase[]>([])
   const [loading, setLoading] = useState(true)
-  const [country, setCountry] = useState('')
   const [selected, setSelected] = useState<DonationCase | null>(null)
   const [showComingSoon, setShowComingSoon] = useState(false)
 
@@ -64,10 +64,9 @@ export default function CampaniiPage() {
   }, [])
 
   const handleSelectCountry = (code: string) => {
-    setCountry(code)
+    setGlobalCountry(code)
     setCountrySearch('')
     setCountryOpen(false)
-    if (code && COUNTRY_TO_LANG[code]) setLang(COUNTRY_TO_LANG[code])
   }
 
   const fetchCases = useCallback(async (countryFilter: string) => {
@@ -179,7 +178,7 @@ export default function CampaniiPage() {
           <div className="text-6xl mb-4">💝</div>
           <h2 className="text-xl font-semibold text-text-main mb-2">{t('campanii_empty_title')}</h2>
           <p className="text-text-muted">{country ? t('campanii_empty_country') : t('campanii_empty_sub')}</p>
-          {country && <button onClick={() => setCountry('')} className="mt-4 text-primary font-semibold hover:underline text-sm">{t('campanii_show_all')}</button>}
+          {country && <button onClick={() => setGlobalCountry('')} className="mt-4 text-primary font-semibold hover:underline text-sm">{t('campanii_show_all')}</button>}
         </div>
       ) : (
         <>

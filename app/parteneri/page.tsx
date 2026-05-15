@@ -1,11 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Partner } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
+import { useCountry } from '@/context/CountryContext'
+import { COUNTRIES } from '@/lib/countries'
 
 const categoryColor: Record<string, string> = {
   vet: 'bg-blue-100 text-blue-700',
@@ -17,9 +19,40 @@ const categoryColor: Record<string, string> = {
 
 export default function ParteneriPage() {
   const { t } = useLanguage()
+  const { country, setCountry: setGlobalCountry } = useCountry()
   const [partners, setPartners] = useState<Partner[]>([])
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('')
+  const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null)
+
+  // Country search dropdown
+  const [countrySearch, setCountrySearch] = useState('')
+  const [countryOpen, setCountryOpen] = useState(false)
+  const countryRef = useRef<HTMLDivElement>(null)
+  const countryInputRef = useRef<HTMLInputElement>(null)
+  const filteredCountries = COUNTRIES.filter(c =>
+    c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+    c.code.toLowerCase().includes(countrySearch.toLowerCase())
+  )
+  const selectedCountryObj = COUNTRIES.find(c => c.code === country)
+
+  useEffect(() => {
+    if (countryOpen) setTimeout(() => countryInputRef.current?.focus(), 50)
+  }, [countryOpen])
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (countryRef.current && !countryRef.current.contains(e.target as Node)) setCountryOpen(false)
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const handleSelectCountry = (code: string) => {
+    setGlobalCountry(code)
+    setCountrySearch('')
+    setCountryOpen(false)
+  }
 
   const CATEGORY_OPTIONS = [
     { value: '', label: t('partners_cat_all') },
@@ -44,13 +77,12 @@ export default function ParteneriPage() {
 
       let query = supabase
         .from('partners')
-        .select('id, name, category, city, description, logo_url, url, is_active')
+        .select('id, name, category, city, country, description, logo_url, url, phone, email, is_active')
         .eq('is_active', true)
         .order('name', { ascending: true })
 
-      if (category) {
-        query = query.eq('category', category)
-      }
+      if (category) query = query.eq('category', category)
+      if (country) query = query.or(`country.eq.${country},country.is.null`)
 
       const { data, error } = await query
 
@@ -64,7 +96,7 @@ export default function ParteneriPage() {
     }
 
     fetchPartners()
-  }, [category])
+  }, [category, country])
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
@@ -78,21 +110,85 @@ export default function ParteneriPage() {
         </p>
       </div>
 
-      {/* Filtre categorie */}
-      <div className="flex flex-wrap gap-2 justify-center mb-8">
-        {CATEGORY_OPTIONS.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => setCategory(opt.value)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
-              category === opt.value
-                ? 'bg-primary text-white border-primary'
-                : 'bg-white text-text-main border-border-light hover:border-primary hover:text-primary'
-            }`}
-          >
-            {opt.label}
-          </button>
-        ))}
+      {/* Filtre */}
+      <div className="bg-white rounded-card shadow-card border border-border-light p-4 mb-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+        {/* Categorie */}
+        <div className="flex flex-wrap gap-2 flex-1">
+          {CATEGORY_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => setCategory(opt.value)}
+              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors border ${
+                category === opt.value
+                  ? 'bg-primary text-white border-primary'
+                  : 'bg-white text-text-main border-border-light hover:border-primary hover:text-primary'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Țară */}
+        <div className="sm:w-52 shrink-0" ref={countryRef}>
+          <div className="relative">
+            {country && !countryOpen ? (
+              <div
+                className="flex items-center gap-2 w-full border-2 border-primary rounded-lg px-3 py-2 bg-primary/5 cursor-pointer"
+                onClick={() => { setCountrySearch(''); setCountryOpen(true) }}
+              >
+                <span className="text-base">{selectedCountryObj?.flag}</span>
+                <span className="text-sm font-semibold text-primary flex-1">{selectedCountryObj?.name}</span>
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleSelectCountry('') }}
+                  className="text-primary hover:text-primary-dark font-bold text-lg leading-none"
+                >×</button>
+              </div>
+            ) : (
+              <div className="relative flex items-center border-2 border-border-light rounded-lg bg-white focus-within:border-primary transition-colors">
+                <span className="pl-3 text-text-muted shrink-0">🔍</span>
+                <input
+                  ref={countryInputRef}
+                  type="text"
+                  value={countrySearch}
+                  onChange={(e) => { setCountrySearch(e.target.value); setCountryOpen(true) }}
+                  onFocus={() => setCountryOpen(true)}
+                  placeholder={t('filter_search_country')}
+                  className="flex-1 min-w-0 px-2 py-2 text-sm bg-transparent outline-none text-text-main placeholder:text-text-muted pr-7"
+                />
+                {countrySearch && (
+                  <button
+                    onClick={() => setCountrySearch('')}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-main w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-100 text-base leading-none"
+                  >×</button>
+                )}
+              </div>
+            )}
+
+            {countryOpen && (
+              <div className="absolute z-30 top-full left-0 right-0 mt-1 bg-white border border-border-light rounded-xl shadow-lg max-h-56 overflow-y-auto">
+                <button
+                  onClick={() => handleSelectCountry('')}
+                  className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors ${!country ? 'font-semibold text-primary' : 'text-text-muted'}`}
+                >
+                  🌍 {t('filter_all_countries')}
+                </button>
+                {filteredCountries.length === 0 ? (
+                  <p className="px-3 py-2 text-sm text-text-muted">Nicio țară găsită</p>
+                ) : filteredCountries.map(c => (
+                  <button
+                    key={c.code}
+                    onClick={() => handleSelectCountry(c.code)}
+                    className={`w-full text-left px-3 py-2 text-sm flex items-center gap-2 hover:bg-primary/5 transition-colors ${country === c.code ? 'bg-primary/10 font-semibold text-primary' : 'text-text-main'}`}
+                  >
+                    <span>{c.flag}</span>
+                    <span>{c.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Lista parteneri */}
@@ -111,11 +207,11 @@ export default function ParteneriPage() {
         <div className="text-center py-16">
           <div className="text-5xl mb-4">🔍</div>
           <p className="text-text-muted text-lg">
-            {category ? t('partners_empty_cat') : t('partners_empty')}
+            {category || country ? t('partners_empty_cat') : t('partners_empty')}
           </p>
-          {category && (
+          {(category || country) && (
             <button
-              onClick={() => setCategory('')}
+              onClick={() => { setCategory(''); setGlobalCountry('') }}
               className="mt-4 text-primary font-semibold hover:underline"
             >
               {t('partners_show_all')}
@@ -126,71 +222,136 @@ export default function ParteneriPage() {
         <>
           <p className="text-text-muted text-sm mb-4 text-center">
             {partners.length} {category ? t('partners_count_cat') : t('partners_count_active')}
+            {selectedCountryObj && ` · ${selectedCountryObj.flag} ${selectedCountryObj.name}`}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {partners.map((partner) => (
-              <div
+              <button
                 key={partner.id}
-                className="bg-white rounded-card shadow-card border border-border-light p-5 hover:shadow-card-hover transition-all flex flex-col"
+                onClick={() => setSelectedPartner(partner)}
+                className="bg-white rounded-card shadow-card border border-border-light p-5 hover:shadow-card-hover hover:-translate-y-1 transition-all flex flex-col text-left w-full cursor-pointer"
               >
-                {/* Logo sau placeholder */}
                 <div className="flex items-start gap-4 mb-4">
                   <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-pink-50 border border-border-light shrink-0 flex items-center justify-center">
                     {partner.logo_url ? (
-                      <Image
-                        src={partner.logo_url}
-                        alt={partner.name}
-                        fill
-                        className="object-contain p-1"
-                      />
+                      <Image src={partner.logo_url} alt={partner.name} fill className="object-contain p-1" />
                     ) : (
-                      <span className="text-2xl">
-                        {categoryLabel[partner.category]?.split(' ')[0] || '🤝'}
-                      </span>
+                      <span className="text-2xl">🤝</span>
                     )}
                   </div>
                   <div className="min-w-0">
-                    <h2 className="font-bold text-text-main text-base leading-tight truncate">
-                      {partner.name}
-                    </h2>
-                    <span
-                      className={`inline-block mt-1 text-xs font-medium px-2 py-0.5 rounded-full ${
-                        categoryColor[partner.category] || 'bg-gray-100 text-gray-700'
-                      }`}
-                    >
+                    <h2 className="font-bold text-text-main text-base leading-tight truncate">{partner.name}</h2>
+                    <span className={`inline-block mt-1 text-xs font-medium px-2 py-0.5 rounded-full ${categoryColor[partner.category] || 'bg-gray-100 text-gray-700'}`}>
                       {categoryLabel[partner.category] || partner.category}
                     </span>
-                    {partner.city && (
-                      <p className="text-text-muted text-xs mt-1">📍 {partner.city}</p>
-                    )}
+                    {partner.city && <p className="text-text-muted text-xs mt-1">📍 {partner.city}</p>}
                   </div>
                 </div>
 
-                {/* Descriere */}
                 {partner.description && (
-                  <p className="text-text-muted text-sm leading-relaxed flex-1 mb-4 line-clamp-3">
+                  <p className="text-text-muted text-sm leading-relaxed flex-1 mb-3 line-clamp-3">
                     {partner.description}
                   </p>
                 )}
 
-                {/* Website */}
-                {partner.url && (
-                  <a
-                    href={partner.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-auto flex items-center gap-1.5 text-primary font-semibold text-sm hover:underline"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                    {t('partners_visit_site')}
-                  </a>
-                )}
-              </div>
+                <span className="mt-auto text-primary font-semibold text-sm group-hover:underline">
+                  {t('partners_see_details')} →
+                </span>
+              </button>
             ))}
           </div>
         </>
+      )}
+
+      {/* Modal detaliu partener */}
+      {selectedPartner && (
+        <div
+          className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+          onClick={() => setSelectedPartner(null)}
+        >
+          <div
+            className="bg-white rounded-t-3xl sm:rounded-2xl w-full sm:max-w-lg max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Logo area */}
+            <div className="h-52 bg-pink-50 flex items-center justify-center rounded-t-3xl sm:rounded-t-2xl border-b border-border-light">
+              {selectedPartner.logo_url ? (
+                <Image
+                  src={selectedPartner.logo_url}
+                  alt={selectedPartner.name}
+                  width={200}
+                  height={160}
+                  className="object-contain max-h-40"
+                />
+              ) : (
+                <span className="text-7xl">🤝</span>
+              )}
+            </div>
+
+            <div className="p-6">
+              <div className="flex items-start justify-between gap-3 mb-1">
+                <h2 className="text-2xl font-bold text-text-main">{selectedPartner.name}</h2>
+                <button
+                  onClick={() => setSelectedPartner(null)}
+                  className="shrink-0 text-text-muted hover:text-text-main text-2xl leading-none mt-0.5"
+                >×</button>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryColor[selectedPartner.category] || 'bg-gray-100 text-gray-700'}`}>
+                  {categoryLabel[selectedPartner.category] || selectedPartner.category}
+                </span>
+                {selectedPartner.city && (
+                  <span className="text-text-muted text-xs">📍 {selectedPartner.city}</span>
+                )}
+                {selectedPartner.country && (
+                  <span className="text-text-muted text-xs">
+                    {COUNTRIES.find(c => c.code === selectedPartner.country)?.flag || selectedPartner.country}
+                  </span>
+                )}
+              </div>
+
+              {selectedPartner.description && (
+                <p className="text-text-main text-sm leading-relaxed mb-4">
+                  {selectedPartner.description}
+                </p>
+              )}
+
+              {(selectedPartner.phone || selectedPartner.email) && (
+                <div className="bg-blue-50 rounded-xl p-4 mb-4 flex flex-col gap-2">
+                  {selectedPartner.phone && (
+                    <a href={`tel:${selectedPartner.phone}`} className="text-sm text-blue-700 hover:underline">
+                      📞 {selectedPartner.phone}
+                    </a>
+                  )}
+                  {selectedPartner.email && (
+                    <a href={`mailto:${selectedPartner.email}`} className="text-sm text-blue-700 hover:underline">
+                      📧 {selectedPartner.email}
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {selectedPartner.url && (
+                <a
+                  href={selectedPartner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-center bg-primary text-white px-6 py-3 rounded-full font-bold hover:bg-primary-dark transition-colors mb-3"
+                >
+                  {t('partners_visit_site')}
+                </a>
+              )}
+
+              <button
+                onClick={() => setSelectedPartner(null)}
+                className="w-full text-text-muted text-sm hover:text-primary transition-colors py-2"
+              >
+                {t('campanii_close')}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Banner devino partener */}
