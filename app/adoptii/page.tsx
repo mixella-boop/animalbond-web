@@ -85,7 +85,6 @@ export default function FeedPage() {
 
   // ─── Pre-selectare țară din cookie (setat de middleware din IP Vercel) ────────
   useEffect(() => {
-    // Citim cookie-ul DOAR dacă userul nu a selectat deja manual o țară
     if (!country) {
       try {
         const match = document.cookie.match(/(?:^|;\s*)preferred_country=([^;]*)/)
@@ -93,13 +92,15 @@ export default function FeedPage() {
           const cookieCountry = decodeURIComponent(match[1]).toUpperCase()
           if (COUNTRIES.find(c => c.code === cookieCountry)) {
             setCountry(cookieCountry)
-            // Actualizăm și limba dacă există mapping
             if (COUNTRY_TO_LANG[cookieCountry]) setLang(COUNTRY_TO_LANG[cookieCountry])
+            return
           }
         }
       } catch {
         // Silently ignore (SSR sau cookies blocked)
       }
+      // Niciun cookie valid → fallback România
+      setCountry('RO')
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
