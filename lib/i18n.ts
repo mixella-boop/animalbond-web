@@ -20,6 +20,18 @@ export const COUNTRY_TO_LANG: Record<string, Lang> = {
   HU: 'hu',
 }
 
+// Language → default country (used when user switches language from navbar)
+// 'en' → '' means show all countries (English is international)
+export const LANG_TO_COUNTRY: Record<Lang, string> = {
+  ro: 'RO',
+  en: '',
+  de: 'DE',
+  fr: 'FR',
+  it: 'IT',
+  es: 'ES',
+  hu: 'HU',
+}
+
 export const translations = {
   ro: {
     nav_adoptii: 'Adopții',

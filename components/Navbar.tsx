@@ -4,7 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
-import { LANG_OPTIONS } from '@/lib/i18n'
+import { useCountry } from '@/context/CountryContext'
+import { LANG_OPTIONS, LANG_TO_COUNTRY, type Lang } from '@/lib/i18n'
 
 function ComingSoonModal({ onClose }: { onClose: () => void }) {
   const { t } = useLanguage()
@@ -35,6 +36,12 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [showComingSoon, setShowComingSoon] = useState(false)
   const { lang, setLang, t } = useLanguage()
+  const { setCountry } = useCountry()
+
+  const handleLangChange = (newLang: Lang) => {
+    setLang(newLang)
+    setCountry(LANG_TO_COUNTRY[newLang])
+  }
 
   return (
     <>
@@ -77,7 +84,7 @@ export default function Navbar() {
             <div className="relative">
               <select
                 value={lang}
-                onChange={(e) => setLang(e.target.value as typeof lang)}
+                onChange={(e) => handleLangChange(e.target.value as Lang)}
                 className="appearance-none pl-2 pr-7 py-1.5 rounded-full border-2 border-primary bg-primary text-white font-bold text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40 hover:bg-primary-dark transition-colors animate-pulse"
                 title="Schimbă limba / Change language"
               >
@@ -103,7 +110,7 @@ export default function Navbar() {
             <div className="relative">
               <select
                 value={lang}
-                onChange={(e) => setLang(e.target.value as typeof lang)}
+                onChange={(e) => handleLangChange(e.target.value as Lang)}
                 className="appearance-none pl-2 pr-6 py-1.5 rounded-full border-2 border-primary bg-primary text-white font-bold text-sm cursor-pointer focus:outline-none animate-pulse"
                 title="Schimbă limba"
               >

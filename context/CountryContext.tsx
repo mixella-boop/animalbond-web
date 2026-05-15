@@ -40,6 +40,8 @@ export function CountryProvider({ children }: { children: ReactNode }) {
     if (code) {
       document.cookie = `preferred_country=${code};max-age=${60 * 60 * 24 * 30};path=/;samesite=lax`
       if (COUNTRY_TO_LANG[code]) setLang(COUNTRY_TO_LANG[code])
+    } else {
+      document.cookie = `preferred_country=;max-age=0;path=/;samesite=lax`
     }
   }
 
