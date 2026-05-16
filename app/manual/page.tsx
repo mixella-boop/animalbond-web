@@ -6,7 +6,7 @@ import { useLanguage } from '@/context/LanguageContext'
 export default function ManualPage() {
   const { lang } = useLanguage()
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  // Reținem limba inițială — o folosim în src (nu vrem reload la fiecare schimbare)
+  // Reținem limba inițială — o folosim în src (evită reload la fiecare schimbare)
   const initialLang = useRef(lang)
 
   // Când se schimbă limba în navbar → postMessage către iframe (fără reload)
@@ -18,13 +18,14 @@ export default function ManualPage() {
       iframe.contentWindow?.postMessage({ type: 'setLang', lang }, '*')
     }
 
-    // Dacă iframe-ul e deja încărcat (schimbare limbă după prima render)
     send()
-
-    // Safety: dacă nu era încă încărcat, trimitem și la load
     iframe.addEventListener('load', send)
     return () => iframe.removeEventListener('load', send)
   }, [lang])
+
+  const handlePrint = () => {
+    iframeRef.current?.contentWindow?.postMessage({ type: 'print' }, '*')
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -38,14 +39,14 @@ export default function ManualPage() {
               <p className="text-xs text-gray-400">Versiunea 1.0 · 2026</p>
             </div>
           </div>
-          <a
-            href="/manual.html"
-            download="Manual_AnimalBond.html"
+          {/* Download PDF — printează conținutul în limba curentă */}
+          <button
+            onClick={handlePrint}
             className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors"
           >
             <span>⬇️</span>
-            <span className="hidden sm:inline">Descarcă</span>
-          </a>
+            <span className="hidden sm:inline">Descarcă PDF</span>
+          </button>
         </div>
       </div>
 
@@ -56,6 +57,7 @@ export default function ManualPage() {
         className="w-full border-0"
         style={{ height: 'calc(100vh - 57px)' }}
         title="Manual AnimalBond"
+        sandbox="allow-scripts allow-same-origin"
       />
     </div>
   )

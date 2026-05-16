@@ -1281,10 +1281,14 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-// Ascultă mesaje de la pagina părinte (animalbond.club/manual) pentru sync limbă
+// Ascultă mesaje de la pagina părinte (animalbond.club/manual) pentru sync limbă și print
 window.addEventListener('message', function(e) {
-  if (e.data && e.data.type === 'setLang' && typeof setLang === 'function') {
+  if (!e.data) return;
+  if (e.data.type === 'setLang' && typeof setLang === 'function') {
     setLang(e.data.lang);
+  }
+  if (e.data.type === 'print') {
+    window.print();
   }
 });
 </script></body>
