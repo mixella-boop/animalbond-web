@@ -2682,6 +2682,173 @@ export const translations = {
     lf_contact_btn: "Kapcsolat az alkalmazáson",
     lf_download_title: 'AnimalBond letöltése',
     lf_download_sub: "Tegyél fel elveszett/megtalált állat hirdetést, lépj közvetlen kapcsolatba és segíts a közösségedben.",
+
+    // Admin Partner Approvals
+    admin_partners_title: 'Cererile de parteneriat',
+    admin_partners_subtitle: 'Revizuiți și aprobați cererile de parteneriat care sunt în așteptare',
+    admin_no_pending: 'Nicio cerere în așteptare',
+    admin_confirm_gold: 'Sigur aprobați acest partener ca Gold (gratuit)?',
+    admin_confirm_payment: 'Trimiteți link de plată de 19.99€?',
+    admin_confirm_reject: 'Sigur respingeți această cerere de parteneriat?',
+    admin_gold_approved: 'Partener aprobat ca Gold!',
+    admin_payment_link_sent: 'Link de plată trimis!',
+    admin_rejected: 'Cerere respinsă',
+    partner_status_pending: 'În așteptare',
+
+    // Partner Payment Messages
+    partner_payment_required: 'Plată necesară pentru activare',
+    partner_marked_gold_success: 'Felicitări! Ești partener Gold și ești deja activ.',
+    partner_payment_sent: 'Link de plată trimis. Completează plata pentru a activa parteneriatul.',
+    partner_payment_confirmed: 'Plată confirmată! Parteneriatul tău este acum activ.',
+
+    // Sale Listing Payment
+    sale_payment_required: 'Anunțul tău de vânzare necesită o plată de 4.99€',
+    sale_payment_success: 'Plată confirmată! Anunțul tău este acum activ.',
+    sale_payment_cancel: 'Plata a fost anulată. Anunțul tău nu a fost publicat.',
+  },
+  en: {
+    // Admin Partner Approvals (EN)
+    admin_partners_title: 'Partner Applications',
+    admin_partners_subtitle: 'Review and approve pending partner applications',
+    admin_no_pending: 'No pending applications',
+    admin_confirm_gold: 'Approve this partner as Gold (free)?',
+    admin_confirm_payment: 'Send 19.99€ payment link?',
+    admin_confirm_reject: 'Reject this partnership request?',
+    admin_gold_approved: 'Partner approved as Gold!',
+    admin_payment_link_sent: 'Payment link sent!',
+    admin_rejected: 'Request rejected',
+    partner_status_pending: 'Pending',
+
+    // Partner Payment Messages
+    partner_payment_required: 'Payment required to activate',
+    partner_marked_gold_success: 'Congratulations! You are a Gold partner and now active.',
+    partner_payment_sent: 'Payment link sent. Complete payment to activate your partnership.',
+    partner_payment_confirmed: 'Payment confirmed! Your partnership is now active.',
+
+    // Sale Listing Payment
+    sale_payment_required: 'Your sale listing requires a 4.99€ payment',
+    sale_payment_success: 'Payment confirmed! Your listing is now active.',
+    sale_payment_cancel: 'Payment was cancelled. Your listing was not published.',
+  },
+  de: {
+    // Admin Partner Approvals (DE)
+    admin_partners_title: 'Partneranträge',
+    admin_partners_subtitle: 'Überprüfen und genehmigen Sie ausstehende Partneranträge',
+    admin_no_pending: 'Keine ausstehenden Anträge',
+    admin_confirm_gold: 'Diesen Partner als Gold genehmigen (kostenlos)?',
+    admin_confirm_payment: 'Zahlungslink für 19,99€ senden?',
+    admin_confirm_reject: 'Diese Partnerschaftsanfrage ablehnen?',
+    admin_gold_approved: 'Partner als Gold genehmigt!',
+    admin_payment_link_sent: 'Zahlungslink gesendet!',
+    admin_rejected: 'Anfrage abgelehnt',
+    partner_status_pending: 'Ausstehend',
+
+    // Partner Payment Messages
+    partner_payment_required: 'Zahlung zur Aktivierung erforderlich',
+    partner_marked_gold_success: 'Glückwunsch! Sie sind ein Gold-Partner und jetzt aktiv.',
+    partner_payment_sent: 'Zahlungslink gesendet. Zahlung abschließen, um Ihre Partnerschaft zu aktivieren.',
+    partner_payment_confirmed: 'Zahlung bestätigt! Ihre Partnerschaft ist jetzt aktiv.',
+
+    // Sale Listing Payment
+    sale_payment_required: 'Ihre Verkaufsangebot erfordert eine Zahlung von 4,99€',
+    sale_payment_success: 'Zahlung bestätigt! Ihr Angebot ist jetzt aktiv.',
+    sale_payment_cancel: 'Die Zahlung wurde storniert. Ihr Angebot wurde nicht veröffentlicht.',
+  },
+  fr: {
+    // Admin Partner Approvals (FR)
+    admin_partners_title: "Demandes de partenariat",
+    admin_partners_subtitle: "Examinez et approuvez les demandes de partenariat en attente",
+    admin_no_pending: "Aucune demande en attente",
+    admin_confirm_gold: "Approuver ce partenaire en tant que Gold (gratuit) ?",
+    admin_confirm_payment: "Envoyer le lien de paiement de 19,99€ ?",
+    admin_confirm_reject: "Rejeter cette demande de partenariat ?",
+    admin_gold_approved: "Partenaire approuvé en tant que Gold !",
+    admin_payment_link_sent: "Lien de paiement envoyé !",
+    admin_rejected: "Demande rejetée",
+    partner_status_pending: "En attente",
+
+    // Partner Payment Messages
+    partner_payment_required: "Paiement requis pour l'activation",
+    partner_marked_gold_success: "Félicitations ! Vous êtes un partenaire Gold et êtes désormais actif.",
+    partner_payment_sent: "Lien de paiement envoyé. Effectuez le paiement pour activer votre partenariat.",
+    partner_payment_confirmed: "Paiement confirmé ! Votre partenariat est maintenant actif.",
+
+    // Sale Listing Payment
+    sale_payment_required: "Votre annonce de vente nécessite un paiement de 4,99€",
+    sale_payment_success: "Paiement confirmé ! Votre annonce est maintenant active.",
+    sale_payment_cancel: "Le paiement a été annulé. Votre annonce n'a pas été publiée.",
+  },
+  it: {
+    // Admin Partner Approvals (IT)
+    admin_partners_title: 'Richieste di partnership',
+    admin_partners_subtitle: 'Rivedi e approva le richieste di partnership in sospeso',
+    admin_no_pending: 'Nessuna richiesta in sospeso',
+    admin_confirm_gold: 'Approvi questo partner come Gold (gratuito)?',
+    admin_confirm_payment: 'Invia il link di pagamento di 19,99€?',
+    admin_confirm_reject: 'Rifiuta questa richiesta di partnership?',
+    admin_gold_approved: 'Partner approvato come Gold!',
+    admin_payment_link_sent: 'Link di pagamento inviato!',
+    admin_rejected: 'Richiesta rifiutata',
+    partner_status_pending: 'In sospeso',
+
+    // Partner Payment Messages
+    partner_payment_required: 'Pagamento richiesto per l\'attivazione',
+    partner_marked_gold_success: 'Congratulazioni! Sei un partner Gold e ora sei attivo.',
+    partner_payment_sent: 'Link di pagamento inviato. Completa il pagamento per attivare il tuo partnership.',
+    partner_payment_confirmed: 'Pagamento confermato! Il tuo partnership è ora attivo.',
+
+    // Sale Listing Payment
+    sale_payment_required: 'Il tuo annuncio di vendita richiede un pagamento di 4,99€',
+    sale_payment_success: 'Pagamento confermato! Il tuo annuncio è ora attivo.',
+    sale_payment_cancel: 'Il pagamento è stato annullato. Il tuo annuncio non è stato pubblicato.',
+  },
+  es: {
+    // Admin Partner Approvals (ES)
+    admin_partners_title: 'Solicitudes de asociación',
+    admin_partners_subtitle: 'Revisa y aprueba las solicitudes de asociación pendientes',
+    admin_no_pending: 'Ninguna solicitud pendiente',
+    admin_confirm_gold: '¿Aprobar este socio como Gold (gratis)?',
+    admin_confirm_payment: '¿Enviar enlace de pago de 19,99€?',
+    admin_confirm_reject: '¿Rechazar esta solicitud de asociación?',
+    admin_gold_approved: '¡Socio aprobado como Gold!',
+    admin_payment_link_sent: '¡Enlace de pago enviado!',
+    admin_rejected: 'Solicitud rechazada',
+    partner_status_pending: 'Pendiente',
+
+    // Partner Payment Messages
+    partner_payment_required: 'Se requiere pago para la activación',
+    partner_marked_gold_success: '¡Felicidades! Eres un socio Gold y ahora estás activo.',
+    partner_payment_sent: 'Enlace de pago enviado. Completa el pago para activar tu asociación.',
+    partner_payment_confirmed: '¡Pago confirmado! Tu asociación ahora está activa.',
+
+    // Sale Listing Payment
+    sale_payment_required: 'Tu anuncio de venta requiere un pago de 4,99€',
+    sale_payment_success: '¡Pago confirmado! Tu anuncio ahora está activo.',
+    sale_payment_cancel: 'El pago fue cancelado. Tu anuncio no fue publicado.',
+  },
+  hu: {
+    // Admin Partner Approvals (HU)
+    admin_partners_title: 'Partneri jelentkezések',
+    admin_partners_subtitle: 'Tekintse át és hagyja jóvá a függőben lévő partneri jelentkezéseket',
+    admin_no_pending: 'Nincs függőben lévő jelentkezés',
+    admin_confirm_gold: 'Jóváhagy ezt a partnert Gold-ként (ingyenes)?',
+    admin_confirm_payment: 'Küldjön 19,99€ fizetési linket?',
+    admin_confirm_reject: 'Elutasítja ezt a partneri kérést?',
+    admin_gold_approved: 'Partner jóváhagyva Gold-ként!',
+    admin_payment_link_sent: 'Fizetési link elküldve!',
+    admin_rejected: 'Kérés elutasítva',
+    partner_status_pending: 'Függőben',
+
+    // Partner Payment Messages
+    partner_payment_required: 'Aktiváláshoz szükséges fizetés',
+    partner_marked_gold_success: 'Gratulálunk! Ön Gold partner és most aktív.',
+    partner_payment_sent: 'Fizetési link elküldve. Fejezze be a fizetést a partnerség aktiválásához.',
+    partner_payment_confirmed: 'Fizetés megerősítve! Az Ön partnersége mostantól aktív.',
+
+    // Sale Listing Payment
+    sale_payment_required: 'Az Ön értékesítési hirdetéséhez 4,99€ fizetésre van szükség',
+    sale_payment_success: 'Fizetés megerősítve! Az Ön hirdetése mostantól aktív.',
+    sale_payment_cancel: 'A fizetést törölték. Az Ön hirdetése nem lett közzétéve.',
   },
 } satisfies Record<Lang, Record<string, string>>
 
