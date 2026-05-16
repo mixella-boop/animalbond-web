@@ -3,6 +3,10 @@
 import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const PARTNER_EMAIL_FN = `${SUPABASE_URL}/functions/v1/send-partner-application-email`
+
 const CATEGORIES = [
   { value: '', label: 'Alege categoria...' },
   { value: 'vet', label: '🏥 Cabinet veterinar' },
@@ -99,6 +103,27 @@ export default function PartnerApplyPage() {
         console.error('Eroare Supabase:', dbError)
         setError('A apărut o eroare. Te rugăm să încerci din nou sau să ne contactezi direct.')
       } else {
+        // Trimite email notificare la admin (best-effort, nu blocăm succesul)
+        fetch(PARTNER_EMAIL_FN, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            company_name: form.company_name.trim(),
+            category: form.category,
+            city: form.city.trim(),
+            address: form.address.trim() || null,
+            phone: form.phone.trim(),
+            email: form.email.trim().toLowerCase(),
+            website: form.website.trim() || null,
+            description: form.description.trim() || null,
+            _hp: form._hp_name,
+          }),
+        }).catch((e) => console.error('Email notificare partener eșuat:', e))
+
         setSuccess(true)
         setForm(INITIAL)
       }
