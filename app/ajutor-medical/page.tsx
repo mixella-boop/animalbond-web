@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { COUNTRIES } from '@/lib/countries'
 import { useLanguage } from '@/context/LanguageContext'
-import { COUNTRY_TO_LANG } from '@/lib/i18n'
+import { useCountry } from '@/context/CountryContext'
 
 function ComingSoonModal({ onClose }: { onClose: () => void }) {
   const { t } = useLanguage()
@@ -48,16 +48,11 @@ function getMainPhoto(animal: MedicalAnimal): string | null {
 }
 
 export default function AjutorMedicalPage() {
-  const { t, setLang } = useLanguage()
+  const { t } = useLanguage()
+  const { country, setCountry } = useCountry()
   const [animals, setAnimals] = useState<MedicalAnimal[]>([])
   const [loading, setLoading] = useState(true)
-  const [country, setCountry] = useState('')
   const [showComingSoon, setShowComingSoon] = useState(false)
-
-  const handleCountryChange = (code: string) => {
-    setCountry(code)
-    if (code && COUNTRY_TO_LANG[code]) setLang(COUNTRY_TO_LANG[code])
-  }
 
   const fetchAnimals = useCallback(async (countryFilter: string) => {
     const now = new Date().toISOString()
@@ -122,7 +117,7 @@ export default function AjutorMedicalPage() {
         <div className="flex items-center gap-3 flex-1">
           <select
             value={country}
-            onChange={(e) => handleCountryChange(e.target.value)}
+            onChange={(e) => setCountry(e.target.value)}
             className="border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
           >
             <option value="">{t('filter_all_countries')}</option>
