@@ -56,6 +56,7 @@ export default function PierduteGasitePage() {
   const [loading, setLoading] = useState(true)
   const [typeFilter, setTypeFilter] = useState<'all' | 'lost' | 'found'>('all')
   const [showComingSoon, setShowComingSoon] = useState(false)
+  const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({})
 
   const fetchAnimals = useCallback(async (countryFilter: string) => {
     const now = new Date().toISOString()
@@ -214,9 +215,14 @@ export default function PierduteGasitePage() {
                     >
                       {badgeText}
                     </div>
-                    {photo ? (
+                    {photo && !imgErrors[animal.id] ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={photo} alt={animal.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
+                      <img
+                        src={photo}
+                        alt={animal.name}
+                        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        onError={() => setImgErrors(prev => ({ ...prev, [animal.id]: true }))}
+                      />
                     ) : (
                       <div className="flex items-center justify-center w-full h-full text-6xl">
                         {emoji}
