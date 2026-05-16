@@ -264,7 +264,7 @@ export default function PartnerApplyPage() {
               type="tel"
               value={form.phone}
               onChange={(e) => update('phone', e.target.value)}
-              placeholder="07xx xxx xxx"
+              placeholder="+40 7xx xxx xxx"
               className="w-full border border-border-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
             />
           </div>
@@ -289,7 +289,7 @@ export default function PartnerApplyPage() {
             <span className="text-text-muted font-normal text-xs">(opțional)</span>
           </label>
           <input
-            type="url"
+            type="text"
             value={form.website}
             onChange={(e) => update('website', e.target.value)}
             placeholder="https://exemplu.ro"
