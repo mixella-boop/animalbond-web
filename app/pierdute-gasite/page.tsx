@@ -65,7 +65,7 @@ export default function PierduteGasitePage() {
       .in('type', ['lost', 'found'])
       .eq('status', 'available')
       .or(`expires_at.is.null,expires_at.gt.${now}`)
-      .order('created_at', { ascending: false })
+      .order('created_at', { ascending: true })
 
     if (countryFilter) {
       query = query.eq('country', countryFilter)

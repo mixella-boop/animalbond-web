@@ -63,7 +63,7 @@ export default function AjutorMedicalPage() {
       .neq('status', 'adopted')
       .neq('status', 'pending_approval')
       .or(`expires_at.is.null,expires_at.gt.${now}`)
-      .order('created_at', { ascending: false })
+      .order('created_at', { ascending: true })
 
     if (countryFilter) {
       query = query.eq('country', countryFilter)

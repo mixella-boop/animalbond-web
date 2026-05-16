@@ -108,6 +108,15 @@ export default function TestimonialeClient() {
                     src={item.photo_url}
                     alt={item.animal_name || 'Adoptie'}
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      const el = e.currentTarget
+                      el.style.display = 'none'
+                      const parent = el.parentElement
+                      if (parent) {
+                        parent.className = 'aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center text-6xl'
+                        parent.innerHTML = '🐾'
+                      }
+                    }}
                   />
                   {item.video_url && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20">
@@ -151,12 +160,21 @@ export default function TestimonialeClient() {
             onClick={(e) => e.stopPropagation()}
           >
             {selected.photo_url && (
-              <div className="relative aspect-video overflow-hidden rounded-t-2xl">
+              <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-pink-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={selected.photo_url}
                   alt={selected.animal_name || 'Adoptie'}
                   className="object-cover w-full h-full"
+                  onError={(e) => {
+                    const el = e.currentTarget
+                    el.style.display = 'none'
+                    const parent = el.parentElement
+                    if (parent) {
+                      parent.className = 'aspect-video bg-gradient-to-br from-pink-50 to-red-50 rounded-t-2xl flex items-center justify-center text-7xl'
+                      parent.innerHTML = '🐾'
+                    }
+                  }}
                 />
               </div>
             )}
