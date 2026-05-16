@@ -2,19 +2,11 @@
 
 import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
+import { useLanguage } from '@/context/LanguageContext'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 const PARTNER_EMAIL_FN = `${SUPABASE_URL}/functions/v1/send-partner-application-email`
-
-const CATEGORIES = [
-  { value: '', label: 'Alege categoria...' },
-  { value: 'vet', label: '🏥 Cabinet veterinar' },
-  { value: 'food', label: '🥩 Magazine hrană animale' },
-  { value: 'accessories', label: '🎾 Magazine accesorii' },
-  { value: 'insurance', label: '🛡️ Asigurări animale' },
-  { value: 'other', label: '🤝 Altele' },
-]
 
 type FormData = {
   company_name: string
@@ -44,10 +36,20 @@ const INITIAL: FormData = {
 }
 
 export default function PartnerApplyPage() {
+  const { t } = useLanguage()
   const [form, setForm] = useState<FormData>(INITIAL)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
+
+  const CATEGORIES = [
+    { value: '', label: t('partner_category_ph') },
+    { value: 'vet', label: t('partner_cat_vet') },
+    { value: 'food', label: t('partner_cat_food') },
+    { value: 'accessories', label: t('partner_cat_accessories') },
+    { value: 'insurance', label: t('partner_cat_insurance') },
+    { value: 'other', label: t('partner_cat_other') },
+  ]
 
   const update = (field: keyof FormData, value: string | boolean) => {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -55,12 +57,12 @@ export default function PartnerApplyPage() {
   }
 
   const validate = (): string | null => {
-    if (!form.company_name.trim()) return 'Numele companiei este obligatoriu.'
-    if (!form.category) return 'Categoria este obligatorie.'
-    if (!form.city.trim()) return 'Orașul este obligatoriu.'
-    if (!form.phone.trim()) return 'Telefonul este obligatoriu.'
-    if (!form.email.trim() || !form.email.includes('@')) return 'Email-ul este invalid.'
-    if (!form.gdpr_consent) return 'Trebuie să accepți termenii GDPR.'
+    if (!form.company_name.trim()) return t('partner_err_company')
+    if (!form.category) return t('partner_err_category')
+    if (!form.city.trim()) return t('partner_err_city')
+    if (!form.phone.trim()) return t('partner_err_phone')
+    if (!form.email.trim() || !form.email.includes('@')) return t('partner_err_email')
+    if (!form.gdpr_consent) return t('partner_err_gdpr')
     return null
   }
 
@@ -101,7 +103,7 @@ export default function PartnerApplyPage() {
 
       if (dbError) {
         console.error('Eroare Supabase:', dbError)
-        setError('A apărut o eroare. Te rugăm să încerci din nou sau să ne contactezi direct.')
+        setError(t('partner_err_generic'))
       } else {
         // Trimite email notificare la admin (best-effort, nu blocăm succesul)
         fetch(PARTNER_EMAIL_FN, {
@@ -129,7 +131,7 @@ export default function PartnerApplyPage() {
       }
     } catch (err) {
       console.error(err)
-      setError('Eroare de rețea. Verifică conexiunea și încearcă din nou.')
+      setError(t('partner_err_network'))
     } finally {
       setLoading(false)
     }
@@ -140,27 +142,26 @@ export default function PartnerApplyPage() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-20 text-center">
         <div className="text-6xl mb-6">🎉</div>
         <h1 className="text-3xl font-bold text-text-main mb-4">
-          Cererea ta a fost trimisă!
+          {t('partner_success_title')}
         </h1>
         <p className="text-text-muted text-lg mb-4 leading-relaxed">
-          Mulțumim pentru interes! Echipa AnimalBond va analiza cererea ta și te va
-          contacta în maxim 2-3 zile lucrătoare.
+          {t('partner_success_desc')}
         </p>
         <p className="text-text-muted mb-8">
-          Până atunci, poți explora animalele disponibile sau să descarci aplicația.
+          {t('partner_success_desc2')}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="/"
             className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors"
           >
-            Înapoi la pagina principală
+            {t('partner_success_back')}
           </a>
           <button
             onClick={() => setSuccess(false)}
             className="border-2 border-primary text-primary px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-colors"
           >
-            Trimite o altă cerere
+            {t('partner_success_another')}
           </button>
         </div>
       </div>
@@ -173,20 +174,19 @@ export default function PartnerApplyPage() {
       <div className="text-center mb-10">
         <div className="text-5xl mb-4">🤝</div>
         <h1 className="text-3xl sm:text-4xl font-bold text-text-main mb-3">
-          Devino partener AnimalBond
+          {t('partner_page_title')}
         </h1>
         <p className="text-text-muted text-lg leading-relaxed max-w-lg mx-auto">
-          Înscrie cabinetul tău veterinar sau magazinul de animale și ajunge
-          la mii de proprietari din zona ta. Echipa noastră te va contacta cu detalii.
+          {t('partner_page_subtitle')}
         </p>
       </div>
 
       {/* Beneficii rapide */}
       <div className="grid grid-cols-3 gap-3 mb-10">
         {[
-          { icon: '📱', text: 'Vizibilitate în app' },
-          { icon: '🌐', text: 'Prezentare pe site' },
-          { icon: '📩', text: 'Răspuns în 2-3 zile' },
+          { icon: '📱', text: t('partner_benefit_1') },
+          { icon: '🌐', text: t('partner_benefit_2') },
+          { icon: '📩', text: t('partner_benefit_3') },
         ].map((b) => (
           <div key={b.icon} className="bg-pink-50 rounded-xl p-3 text-center border border-primary/10">
             <div className="text-2xl mb-1">{b.icon}</div>
@@ -212,19 +212,19 @@ export default function PartnerApplyPage() {
         </div>
 
         <h2 className="font-bold text-text-main text-xl border-b border-border-light pb-3">
-          Detalii companie
+          {t('partner_section_company')}
         </h2>
 
         {/* Nume companie */}
         <div>
           <label className="block text-sm font-semibold text-text-main mb-1.5">
-            Nume companie <span className="text-primary">*</span>
+            {t('partner_company_name')} <span className="text-primary">*</span>
           </label>
           <input
             type="text"
             value={form.company_name}
             onChange={(e) => update('company_name', e.target.value)}
-            placeholder="Ex: Cabinet Veterinar Dr. Popescu"
+            placeholder={t('partner_company_name_ph')}
             className="w-full border border-border-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
           />
         </div>
@@ -232,7 +232,7 @@ export default function PartnerApplyPage() {
         {/* Categorie */}
         <div>
           <label className="block text-sm font-semibold text-text-main mb-1.5">
-            Categorie <span className="text-primary">*</span>
+            {t('partner_category')} <span className="text-primary">*</span>
           </label>
           <select
             value={form.category}
@@ -251,57 +251,57 @@ export default function PartnerApplyPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-semibold text-text-main mb-1.5">
-              Oraș <span className="text-primary">*</span>
+              {t('partner_city')} <span className="text-primary">*</span>
             </label>
             <input
               type="text"
               value={form.city}
               onChange={(e) => update('city', e.target.value)}
-              placeholder="Ex: Cluj-Napoca"
+              placeholder={t('partner_city_ph')}
               className="w-full border border-border-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
             />
           </div>
           <div>
             <label className="block text-sm font-semibold text-text-main mb-1.5">
-              Adresă
+              {t('partner_address')}
             </label>
             <input
               type="text"
               value={form.address}
               onChange={(e) => update('address', e.target.value)}
-              placeholder="Str. Exemplu, nr. 1"
+              placeholder={t('partner_address_ph')}
               className="w-full border border-border-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
             />
           </div>
         </div>
 
         <h2 className="font-bold text-text-main text-xl border-b border-border-light pb-3 !mt-8">
-          Date de contact
+          {t('partner_section_contact')}
         </h2>
 
         {/* Telefon + Email */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-semibold text-text-main mb-1.5">
-              Telefon <span className="text-primary">*</span>
+              {t('partner_phone')} <span className="text-primary">*</span>
             </label>
             <input
               type="tel"
               value={form.phone}
               onChange={(e) => update('phone', e.target.value)}
-              placeholder="+40 7xx xxx xxx"
+              placeholder={t('partner_phone_ph')}
               className="w-full border border-border-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
             />
           </div>
           <div>
             <label className="block text-sm font-semibold text-text-main mb-1.5">
-              Email <span className="text-primary">*</span>
+              {t('partner_email')} <span className="text-primary">*</span>
             </label>
             <input
               type="email"
               value={form.email}
               onChange={(e) => update('email', e.target.value)}
-              placeholder="contact@exemplu.ro"
+              placeholder={t('partner_email_ph')}
               className="w-full border border-border-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
             />
           </div>
@@ -310,14 +310,14 @@ export default function PartnerApplyPage() {
         {/* Website */}
         <div>
           <label className="block text-sm font-semibold text-text-main mb-1.5">
-            Website{' '}
-            <span className="text-text-muted font-normal text-xs">(opțional)</span>
+            {t('partner_website')}{' '}
+            <span className="text-text-muted font-normal text-xs">{t('partner_optional')}</span>
           </label>
           <input
             type="text"
             value={form.website}
             onChange={(e) => update('website', e.target.value)}
-            placeholder="https://exemplu.ro"
+            placeholder={t('partner_website_ph')}
             className="w-full border border-border-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
           />
         </div>
@@ -325,14 +325,14 @@ export default function PartnerApplyPage() {
         {/* Descriere */}
         <div>
           <label className="block text-sm font-semibold text-text-main mb-1.5">
-            Descriere{' '}
-            <span className="text-text-muted font-normal text-xs">(opțional)</span>
+            {t('partner_description')}{' '}
+            <span className="text-text-muted font-normal text-xs">{t('partner_optional')}</span>
           </label>
           <textarea
             value={form.description}
             onChange={(e) => update('description', e.target.value)}
             rows={4}
-            placeholder="Descrie pe scurt serviciile oferite, specializarea, etc."
+            placeholder={t('partner_description_ph')}
             className="w-full border border-border-light rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
           />
         </div>
@@ -347,10 +347,9 @@ export default function PartnerApplyPage() {
               className="mt-0.5 w-4 h-4 accent-primary shrink-0"
             />
             <span className="text-sm text-text-muted leading-relaxed">
-              Sunt de acord cu prelucrarea datelor mele cu caracter personal de către AnimalBond
-              în scopul procesării cererii de parteneriat, conform{' '}
+              {t('partner_gdpr_1')}
               <a href="/confidentialitate" className="text-primary hover:underline">
-                Politicii de confidențialitate
+                {t('partner_gdpr_link')}
               </a>
               . <span className="text-primary">*</span>
             </span>
@@ -377,15 +376,15 @@ export default function PartnerApplyPage() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
-              Se trimite...
+              {t('partner_submitting')}
             </>
           ) : (
-            'Trimite cererea de parteneriat 🐾'
+            t('partner_submit')
           )}
         </button>
 
         <p className="text-xs text-text-muted text-center">
-          Vei primi un răspuns în maxim 2-3 zile lucrătoare pe email-ul furnizat.
+          {t('partner_footer_note')}
         </p>
       </form>
     </div>
