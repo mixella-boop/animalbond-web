@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useLanguage } from '@/context/LanguageContext'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const EDGE_FN_URL  = `${SUPABASE_URL}/functions/v1/send-contact-email`
@@ -92,14 +93,8 @@ const T: Record<Lang, {
 
 const LANGS: Lang[] = ['ro', 'en', 'de', 'fr', 'it', 'es', 'hu']
 
-function detectLang(): Lang {
-  if (typeof navigator === 'undefined') return 'ro'
-  const code = navigator.language?.toLowerCase().slice(0, 2) as Lang
-  return LANGS.includes(code) ? code : 'ro'
-}
-
 export default function ContactPage() {
-  const [lang, setLang] = useState<Lang>('ro')
+  const { lang, setLang } = useLanguage()
   const [name, setName]       = useState('')
   const [email, setEmail]     = useState('')
   const [message, setMessage] = useState('')
@@ -108,9 +103,7 @@ export default function ContactPage() {
   const [success, setSuccess] = useState(false)
   const [error, setError]     = useState('')
 
-  useEffect(() => { setLang(detectLang()) }, [])
-
-  const t = T[lang]
+  const t = T[lang as Lang] ?? T['ro']
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -159,23 +152,6 @@ export default function ContactPage() {
         <div className="text-5xl mb-4">💬</div>
         <h1 className="text-3xl sm:text-4xl font-bold text-text-main mb-3">{t.title}</h1>
         <p className="text-text-muted text-base leading-relaxed">{t.subtitle}</p>
-      </div>
-
-      {/* Selector limbă */}
-      <div className="flex flex-wrap gap-2 justify-center mb-8">
-        {LANGS.map(l => (
-          <button
-            key={l}
-            onClick={() => setLang(l)}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              lang === l
-                ? 'bg-primary text-white'
-                : 'bg-gray-100 text-text-muted hover:bg-pink-50 hover:text-primary'
-            }`}
-          >
-            {T[l].langName}
-          </button>
-        ))}
       </div>
 
       {/* Formular */}
