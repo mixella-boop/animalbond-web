@@ -151,17 +151,17 @@ export default function PartnerApplyPage() {
           Devino partener AnimalBond
         </h1>
         <p className="text-text-muted text-lg leading-relaxed max-w-lg mx-auto">
-          Înscrie cabinetul tău veterinar sau magazinul de animale gratuit și ajunge
-          la mii de proprietari din zona ta.
+          Înscrie cabinetul tău veterinar sau magazinul de animale și ajunge
+          la mii de proprietari din zona ta. Echipa noastră te va contacta cu detalii.
         </p>
       </div>
 
       {/* Beneficii rapide */}
       <div className="grid grid-cols-3 gap-3 mb-10">
         {[
-          { icon: '✅', text: '100% gratuit' },
           { icon: '📱', text: 'Vizibilitate în app' },
           { icon: '🌐', text: 'Prezentare pe site' },
+          { icon: '📩', text: 'Răspuns în 2-3 zile' },
         ].map((b) => (
           <div key={b.icon} className="bg-pink-50 rounded-xl p-3 text-center border border-primary/10">
             <div className="text-2xl mb-1">{b.icon}</div>
