@@ -45,6 +45,11 @@ export default function Footer() {
                   {t('footer_nav_about')}
                 </Link>
               </li>
+              <li>
+                <Link href="/manual" className="text-text-muted hover:text-primary transition-colors text-sm">
+                  {t('footer_nav_manual')}
+                </Link>
+              </li>
             </ul>
           </div>
 
