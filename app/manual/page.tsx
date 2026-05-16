@@ -6,18 +6,23 @@ import { useLanguage } from '@/context/LanguageContext'
 export default function ManualPage() {
   const { lang } = useLanguage()
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  // Reținem limba inițială — o folosim în src (nu vrem reload la fiecare schimbare)
+  const initialLang = useRef(lang)
 
-  // Când se schimbă limba în navbar, transmite la iframe
+  // Când se schimbă limba în navbar → postMessage către iframe (fără reload)
   useEffect(() => {
     const iframe = iframeRef.current
     if (!iframe) return
+
     const send = () => {
       iframe.contentWindow?.postMessage({ type: 'setLang', lang }, '*')
     }
-    // Trimite după ce iframe-ul s-a încărcat
-    iframe.addEventListener('load', send)
-    // Dacă e deja încărcat (re-render la schimb limbă)
+
+    // Dacă iframe-ul e deja încărcat (schimbare limbă după prima render)
     send()
+
+    // Safety: dacă nu era încă încărcat, trimitem și la load
+    iframe.addEventListener('load', send)
     return () => iframe.removeEventListener('load', send)
   }, [lang])
 
@@ -44,10 +49,10 @@ export default function ManualPage() {
         </div>
       </div>
 
-      {/* Iframe manual */}
+      {/* Iframe manual — src cu ?lang inițial, schimbările ulterioare prin postMessage */}
       <iframe
         ref={iframeRef}
-        src="/manual.html"
+        src={`/manual.html?lang=${initialLang.current}`}
         className="w-full border-0"
         style={{ height: 'calc(100vh - 57px)' }}
         title="Manual AnimalBond"

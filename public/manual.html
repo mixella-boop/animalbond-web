@@ -1273,7 +1273,11 @@ function setLang(lang) {
   });
   document.documentElement.lang = lang;
 }
-document.addEventListener('DOMContentLoaded', () => setLang('ro'));
+document.addEventListener('DOMContentLoaded', () => {
+  const urlLang = new URLSearchParams(location.search).get('lang');
+  const validLangs = ['ro','en','de','fr','it','es','hu'];
+  setLang(validLangs.includes(urlLang) ? urlLang : 'ro');
+});
 </script>
 
 <script>
