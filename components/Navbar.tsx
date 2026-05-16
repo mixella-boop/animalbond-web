@@ -79,6 +79,9 @@ export default function Navbar() {
             <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium text-sm whitespace-nowrap">
               {t('nav_despre')}
             </Link>
+            <Link href="/pricing" className="text-text-main hover:text-primary transition-colors font-medium text-sm whitespace-nowrap">
+              💳 {t('nav_pricing')}
+            </Link>
 
             {/* Language selector — pulsating */}
             <div className="relative">
@@ -163,6 +166,9 @@ export default function Navbar() {
             </Link>
             <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_despre')}
+            </Link>
+            <Link href="/pricing" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
+              💳 {t('nav_pricing')}
             </Link>
             <button
               onClick={() => { setShowComingSoon(true); setMenuOpen(false) }}
