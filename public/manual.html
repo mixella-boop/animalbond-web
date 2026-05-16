@@ -1,0 +1,1287 @@
+﻿<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual AnimalBond</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;line-height:1.7;color:#2D3748;background:#fff}
+.lang-bar{position:fixed;top:0;left:0;right:0;background:#1A202C;z-index:999;display:flex;align-items:center;gap:8px;padding:8px 20px;flex-wrap:wrap}
+.lang-bar span{color:#A0AEC0;font-size:12px;margin-right:4px}
+.lang-btn{background:transparent;border:1px solid #4A5568;color:#CBD5E0;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;transition:all .2s}
+.lang-btn.active{background:#FF6B6B;border-color:#FF6B6B;color:white;font-weight:700}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(145deg,#FF6B6B 0%,#FF8E53 60%,#FFB347 100%);color:white;padding:60px 40px;page-break-after:always;margin-top:0}
+.cover-icon{font-size:90px;margin-bottom:24px}
+.cover h1{font-size:56px;font-weight:900;letter-spacing:-2px;margin-bottom:8px}
+.cover .tagline{font-size:18px;opacity:.88;margin-bottom:16px}
+.cover .desc{font-size:14px;opacity:.8;max-width:420px;line-height:1.8;margin-bottom:40px}
+.cover .badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:6px 20px;font-size:13px}
+.cover .meta{font-size:12px;opacity:.6;margin-top:20px;line-height:2}
+.toc{padding:60px 80px;page-break-after:always}
+.toc h2{font-size:28px;color:#FF6B6B;margin-bottom:24px;border-bottom:3px solid #FF6B6B;padding-bottom:10px}
+.toc-section{margin:20px 0 6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#A0AEC0}
+.toc-item{display:flex;gap:10px;padding:6px 0;border-bottom:1px dotted #E2E8F0;font-size:13px}
+.toc-item .ch{color:#FF6B6B;font-weight:700;min-width:80px}
+.chapter{padding:60px 80px;page-break-before:always}
+.ch-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:16px;border-bottom:3px solid #FF6B6B}
+.ch-num{background:#FF6B6B;color:white;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;flex-shrink:0}
+.chapter h2{font-size:24px;color:#1A202C;font-weight:800}
+.chapter h3{font-size:16px;color:#FF6B6B;font-weight:700;margin:24px 0 8px}
+.chapter h4{font-size:13px;color:#4A5568;font-weight:700;margin:16px 0 5px;text-transform:uppercase;letter-spacing:.5px}
+p{margin-bottom:10px}
+ul,ol{margin:6px 0 12px 20px}
+li{margin-bottom:4px}
+.tip{background:#FFFBEB;border-left:4px solid #F6AD55;padding:10px 14px;margin:14px 0;border-radius:0 8px 8px 0;font-size:13px}
+.note{background:#EBF8FF;border-left:4px solid #63B3ED;padding:10px 14px;margin:14px 0;border-radius:0 8px 8px 0;font-size:13px}
+.warning{background:#FFF5F5;border-left:4px solid #FC8181;padding:10px 14px;margin:14px 0;border-radius:0 8px 8px 0;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.card{border:1px solid #E2E8F0;border-radius:10px;padding:14px;background:#FAFAFA}
+.card .ci{font-size:26px;margin-bottom:6px}
+.card .ct{font-weight:700;font-size:13px;color:#1A202C;margin-bottom:3px}
+.card .cd{font-size:12px;color:#718096;line-height:1.5}
+.steps{margin:14px 0}
+.step{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;padding:10px 12px;background:#F7FAFC;border-radius:8px;border:1px solid #E2E8F0}
+.sn{background:#FF6B6B;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0;margin-top:2px}
+.sc{flex:1}
+.sc strong{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+th{background:#FF6B6B;color:white;padding:9px 12px;text-align:left}
+td{padding:8px 12px;border-bottom:1px solid #E2E8F0}
+tr:nth-child(even) td{background:#F7FAFC}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:16px;font-size:12px;font-weight:700;margin:2px}
+.adoption{background:#FFE4E4;color:#E53E3E}
+.sale{background:#FEFCBF;color:#B7791F}
+.breeding{background:#C6F6D5;color:#276749}
+.medical{background:#EBF4FF;color:#2B6CB0}
+.gold{background:#FFF3CD;color:#856404}
+.faq-item{margin-bottom:18px}
+.faq-q{font-weight:700;color:#1A202C;margin-bottom:5px}
+.faq-a{color:#4A5568;padding-left:20px;font-size:13px}
+.divider{height:2px;background:linear-gradient(90deg,#FF6B6B,transparent);margin:24px 0;border-radius:1px}
+.footer{text-align:center;margin-top:50px;padding-top:28px;border-top:2px solid #FF6B6B;color:#718096;font-size:12px}
+@media print{
+  .lang-bar{display:none}
+  .cover{page-break-after:always}
+  .toc{page-break-after:always}
+  .chapter{page-break-before:always}
+}
+@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <span>🌐</span>
+  <button class="lang-btn active" onclick="setLang('ro')">🇷🇴 RO</button>
+  <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+  <button class="lang-btn" onclick="setLang('de')">🇩🇪 DE</button>
+  <button class="lang-btn" onclick="setLang('fr')">🇫🇷 FR</button>
+  <button class="lang-btn" onclick="setLang('it')">🇮🇹 IT</button>
+  <button class="lang-btn" onclick="setLang('es')">🇪🇸 ES</button>
+  <button class="lang-btn" onclick="setLang('hu')">🇭🇺 HU</button>
+</div>
+
+<!-- COVER -->
+<div class="cover" style="margin-top:44px">
+  <div class="cover-icon">🐾❤️</div>
+  <h1>AnimalBond</h1>
+  <p class="tagline" data-i18n="cover_tagline"></p>
+  <p class="desc" data-i18n="cover_desc"></p>
+  <div class="badge" data-i18n="cover_version"></div>
+  <p class="meta" data-i18n="cover_meta"></p>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h2 data-i18n="toc_title"></h2>
+  <div class="toc-section" data-i18n="toc_s1"></div>
+  <div class="toc-item"><span class="ch">1.</span><span data-i18n="ch1_h2"></span></div>
+  <div class="toc-item"><span class="ch">2.</span><span data-i18n="ch2_h2"></span></div>
+  <div class="toc-section" data-i18n="toc_s2"></div>
+  <div class="toc-item"><span class="ch">3.</span><span data-i18n="ch3_h2"></span></div>
+  <div class="toc-item"><span class="ch">4.</span><span data-i18n="ch4_h2"></span></div>
+  <div class="toc-item"><span class="ch">5.</span><span data-i18n="ch5_h2"></span></div>
+  <div class="toc-item"><span class="ch">6.</span><span data-i18n="ch6_h2"></span></div>
+  <div class="toc-section" data-i18n="toc_s3"></div>
+  <div class="toc-item"><span class="ch">7.</span><span data-i18n="ch7_h2"></span></div>
+  <div class="toc-item"><span class="ch">8.</span><span data-i18n="ch8_h2"></span></div>
+  <div class="toc-item"><span class="ch">9.</span><span data-i18n="ch9_h2"></span></div>
+  <div class="toc-section" data-i18n="toc_s4"></div>
+  <div class="toc-item"><span class="ch">10.</span><span data-i18n="ch10_h2"></span></div>
+  <div class="toc-item"><span class="ch">11.</span><span data-i18n="ch11_h2"></span></div>
+  <div class="toc-item"><span class="ch">12.</span><span data-i18n="ch12_h2"></span></div>
+</div>
+
+<!-- CH1 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">1</div><h2 data-i18n="ch1_h2"></h2></div>
+  <p data-i18n="ch1_p1"></p>
+  <h3 data-i18n="ch1_feat_title"></h3>
+  <div class="grid2">
+    <div class="card"><div class="ci">🏠</div><div class="ct" data-i18n="ch1_f1t"></div><div class="cd" data-i18n="ch1_f1d"></div></div>
+    <div class="card"><div class="ci">❤️</div><div class="ct" data-i18n="ch1_f2t"></div><div class="cd" data-i18n="ch1_f2d"></div></div>
+    <div class="card"><div class="ci">🔍</div><div class="ct" data-i18n="ch1_f3t"></div><div class="cd" data-i18n="ch1_f3d"></div></div>
+    <div class="card"><div class="ci">💊</div><div class="ct" data-i18n="ch1_f4t"></div><div class="cd" data-i18n="ch1_f4d"></div></div>
+    <div class="card"><div class="ci">🐾</div><div class="ct" data-i18n="ch1_f5t"></div><div class="cd" data-i18n="ch1_f5d"></div></div>
+    <div class="card"><div class="ci">⭐</div><div class="ct" data-i18n="ch1_f6t"></div><div class="cd" data-i18n="ch1_f6d"></div></div>
+  </div>
+  <h3 data-i18n="ch1_countries_title"></h3>
+  <table><tr><th data-i18n="ch1_th1"></th><th data-i18n="ch1_th2"></th><th data-i18n="ch1_th3"></th></tr>
+    <tr><td>🇷🇴 România</td><td data-i18n="lang_ro"></td><td>RON</td></tr>
+    <tr><td>🇩🇪 Deutschland</td><td data-i18n="lang_de"></td><td>EUR</td></tr>
+    <tr><td>🇫🇷 France</td><td data-i18n="lang_fr"></td><td>EUR</td></tr>
+    <tr><td>🇮🇹 Italia</td><td data-i18n="lang_it"></td><td>EUR</td></tr>
+    <tr><td>🇪🇸 España</td><td data-i18n="lang_es"></td><td>EUR</td></tr>
+    <tr><td>🇭🇺 Magyarország</td><td data-i18n="lang_hu"></td><td>HUF</td></tr>
+  </table>
+  <div class="note" data-i18n="ch1_note"></div>
+</div>
+
+<!-- CH2 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">2</div><h2 data-i18n="ch2_h2"></h2></div>
+  <h3 data-i18n="ch2_dl_title"></h3>
+  <div class="grid2">
+    <div class="card"><div class="ci">🍎</div><div class="ct">App Store</div><div class="cd" data-i18n="ch2_ios"></div></div>
+    <div class="card"><div class="ci">🤖</div><div class="ct">Google Play</div><div class="cd" data-i18n="ch2_android"></div></div>
+  </div>
+  <h3 data-i18n="ch2_create_title"></h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sc"><strong data-i18n="ch2_s1t"></strong><span data-i18n="ch2_s1d"></span></div></div>
+    <div class="step"><div class="sn">2</div><div class="sc"><strong data-i18n="ch2_s2t"></strong><span data-i18n="ch2_s2d"></span></div></div>
+    <div class="step"><div class="sn">3</div><div class="sc"><strong data-i18n="ch2_s3t"></strong><span data-i18n="ch2_s3d"></span></div></div>
+    <div class="step"><div class="sn">4</div><div class="sc"><strong data-i18n="ch2_s4t"></strong><span data-i18n="ch2_s4d"></span></div></div>
+    <div class="step"><div class="sn">5</div><div class="sc"><strong data-i18n="ch2_s5t"></strong><span data-i18n="ch2_s5d"></span></div></div>
+  </div>
+  <h3 data-i18n="ch2_types_title"></h3>
+  <table>
+    <tr><th data-i18n="th_type"></th><th data-i18n="th_who"></th><th data-i18n="th_what"></th></tr>
+    <tr><td>👤 <strong data-i18n="type_private"></strong></td><td data-i18n="ch2_t1w"></td><td data-i18n="ch2_t1c"></td></tr>
+    <tr><td>🏢 <strong data-i18n="type_shelter"></strong></td><td data-i18n="ch2_t2w"></td><td data-i18n="ch2_t2c"></td></tr>
+  </table>
+  <div class="tip" data-i18n="ch2_tip"></div>
+  <h3 data-i18n="ch2_profile_title"></h3>
+  <ul data-i18n="ch2_profile_list"></ul>
+  <div class="note" data-i18n="ch2_note"></div>
+</div>
+
+<!-- CH3 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">3</div><h2 data-i18n="ch3_h2"></h2></div>
+  <p data-i18n="ch3_p1"></p>
+  <h3 data-i18n="ch3_filters_title"></h3>
+  <h4 data-i18n="ch3_species_title"></h4>
+  <ul data-i18n="ch3_species_list"></ul>
+  <h4 data-i18n="ch3_type_title"></h4>
+  <ul data-i18n="ch3_type_list"></ul>
+  <h4 data-i18n="ch3_country_title"></h4>
+  <p data-i18n="ch3_country_p"></p>
+  <h4 data-i18n="ch3_gps_title"></h4>
+  <p data-i18n="ch3_gps_p"></p>
+  <h3 data-i18n="ch3_order_title"></h3>
+  <p data-i18n="ch3_order_p"></p>
+  <h3 data-i18n="ch3_card_title"></h3>
+  <ul data-i18n="ch3_card_list"></ul>
+  <h3 data-i18n="ch3_swipe_title"></h3>
+  <ul data-i18n="ch3_swipe_list"></ul>
+  <h3 data-i18n="ch3_compat_title"></h3>
+  <table>
+    <tr><th data-i18n="th_percent"></th><th data-i18n="th_meaning"></th></tr>
+    <tr><td>80–100%</td><td data-i18n="compat_1"></td></tr>
+    <tr><td>60–79%</td><td data-i18n="compat_2"></td></tr>
+    <tr><td>40–59%</td><td data-i18n="compat_3"></td></tr>
+    <tr><td data-i18n="compat_4l"></td><td data-i18n="compat_4"></td></tr>
+  </table>
+  <div class="tip" data-i18n="ch3_tip"></div>
+</div>
+
+<!-- CH4 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">4</div><h2 data-i18n="ch4_h2"></h2></div>
+  <h3><span class="badge adoption">🏠 <span data-i18n="type_adoption"></span></span></h3>
+  <p data-i18n="ch4_adopt_p"></p>
+  <ul data-i18n="ch4_adopt_list"></ul>
+  <h3><span class="badge sale">💰 <span data-i18n="type_sale"></span></span> <span class="badge gold">⭐ <span data-i18n="premium_label"></span></span></h3>
+  <p data-i18n="ch4_sale_p"></p>
+  <ul data-i18n="ch4_sale_list"></ul>
+  <div class="warning" data-i18n="ch4_sale_warn"></div>
+  <h3><span class="badge breeding">🌿 <span data-i18n="type_breeding"></span></span></h3>
+  <p data-i18n="ch4_breed_p"></p>
+  <ul data-i18n="ch4_breed_list"></ul>
+  <h3><span class="badge medical">💊 <span data-i18n="type_medical"></span></span></h3>
+  <p data-i18n="ch4_med_p"></p>
+  <ul data-i18n="ch4_med_list"></ul>
+  <div class="note" data-i18n="ch4_med_note"></div>
+</div>
+
+<!-- CH5 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">5</div><h2 data-i18n="ch5_h2"></h2></div>
+  <p data-i18n="ch5_p1"></p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sc"><strong data-i18n="ch5_s1t"></strong><span data-i18n="ch5_s1d"></span></div></div>
+    <div class="step"><div class="sn">2</div><div class="sc"><strong data-i18n="ch5_s2t"></strong><span data-i18n="ch5_s2d"></span></div></div>
+    <div class="step"><div class="sn">3</div><div class="sc"><strong data-i18n="ch5_s3t"></strong><span data-i18n="ch5_s3d"></span></div></div>
+    <div class="step"><div class="sn">4</div><div class="sc"><strong data-i18n="ch5_s4t"></strong><span data-i18n="ch5_s4d"></span></div></div>
+  </div>
+  <h3 data-i18n="ch5_photos_title"></h3>
+  <ul data-i18n="ch5_photos_list"></ul>
+  <div class="tip" data-i18n="ch5_tip"></div>
+  <div class="warning" data-i18n="ch5_warn"></div>
+</div>
+
+<!-- CH6 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">6</div><h2 data-i18n="ch6_h2"></h2></div>
+  <p data-i18n="ch6_p1"></p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sc"><strong data-i18n="ch6_s1t"></strong><span data-i18n="ch6_s1d"></span></div></div>
+    <div class="step"><div class="sn">2</div><div class="sc"><strong data-i18n="ch6_s2t"></strong><span data-i18n="ch6_s2d"></span></div></div>
+    <div class="step"><div class="sn">3</div><div class="sc"><strong data-i18n="ch6_s3t"></strong><span data-i18n="ch6_s3d"></span></div></div>
+  </div>
+  <h3 data-i18n="ch6_msg_title"></h3>
+  <ul data-i18n="ch6_msg_list"></ul>
+  <div class="note" data-i18n="ch6_note"></div>
+</div>
+
+<!-- CH7 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">7</div><h2 data-i18n="ch7_h2"></h2></div>
+  <p data-i18n="ch7_p1"></p>
+  <h3 data-i18n="ch7_lost_title"></h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sc"><strong data-i18n="ch7_ls1t"></strong></div></div>
+    <div class="step"><div class="sn">2</div><div class="sc"><strong data-i18n="ch7_ls2t"></strong><span data-i18n="ch7_ls2d"></span></div></div>
+    <div class="step"><div class="sn">3</div><div class="sc"><strong data-i18n="ch7_ls3t"></strong><span data-i18n="ch7_ls3d"></span></div></div>
+  </div>
+  <h3 data-i18n="ch7_found_title"></h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sc"><strong data-i18n="ch7_fs1t"></strong></div></div>
+    <div class="step"><div class="sn">2</div><div class="sc"><strong data-i18n="ch7_fs2t"></strong><span data-i18n="ch7_fs2d"></span></div></div>
+    <div class="step"><div class="sn">3</div><div class="sc"><strong data-i18n="ch7_fs3t"></strong><span data-i18n="ch7_fs3d"></span></div></div>
+  </div>
+  <div class="tip" data-i18n="ch7_tip"></div>
+</div>
+
+<!-- CH8 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">8</div><h2 data-i18n="ch8_h2"></h2></div>
+  <p data-i18n="ch8_p1"></p>
+  <div class="grid2">
+    <div class="card"><div class="ci">🏥</div><div class="ct" data-i18n="ch8_c1t"></div><div class="cd" data-i18n="ch8_c1d"></div></div>
+    <div class="card"><div class="ci">❤️‍🔥</div><div class="ct" data-i18n="ch8_c2t"></div><div class="cd" data-i18n="ch8_c2d"></div></div>
+  </div>
+  <div class="warning" data-i18n="ch8_warn"></div>
+</div>
+
+<!-- CH9 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">9</div><h2 data-i18n="ch9_h2"></h2></div>
+  <p data-i18n="ch9_p1"></p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sc"><strong data-i18n="ch9_s1t"></strong></div></div>
+    <div class="step"><div class="sn">2</div><div class="sc"><strong data-i18n="ch9_s2t"></strong><span data-i18n="ch9_s2d"></span></div></div>
+    <div class="step"><div class="sn">3</div><div class="sc"><strong data-i18n="ch9_s3t"></strong><span data-i18n="ch9_s3d"></span></div></div>
+    <div class="step"><div class="sn">4</div><div class="sc"><strong data-i18n="ch9_s4t"></strong><span data-i18n="ch9_s4d"></span></div></div>
+    <div class="step"><div class="sn">5</div><div class="sc"><strong data-i18n="ch9_s5t"></strong><span data-i18n="ch9_s5d"></span></div></div>
+  </div>
+  <div class="tip" data-i18n="ch9_tip"></div>
+</div>
+
+<!-- CH10 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">10</div><h2 data-i18n="ch10_h2"></h2></div>
+  <h3 data-i18n="ch10_edit_title"></h3>
+  <ul data-i18n="ch10_edit_list"></ul>
+  <h3 data-i18n="ch10_gps_title"></h3>
+  <ul data-i18n="ch10_gps_list"></ul>
+  <div class="note" data-i18n="ch10_note"></div>
+  <h3 data-i18n="ch10_lang_title"></h3>
+  <ul data-i18n="ch10_lang_list"></ul>
+  <h3 data-i18n="ch10_privacy_title"></h3>
+  <ul data-i18n="ch10_privacy_list"></ul>
+</div>
+
+<!-- CH11 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">11</div><h2 data-i18n="ch11_h2"></h2></div>
+  <p data-i18n="ch11_p1"></p>
+  <table>
+    <tr><th data-i18n="th_section"></th><th data-i18n="th_desc"></th></tr>
+    <tr><td>🏠 <strong data-i18n="ch11_r1n"></strong></td><td data-i18n="ch11_r1d"></td></tr>
+    <tr><td>🐾 <strong data-i18n="ch11_r2n"></strong></td><td data-i18n="ch11_r2d"></td></tr>
+    <tr><td>💊 <strong data-i18n="ch11_r3n"></strong></td><td data-i18n="ch11_r3d"></td></tr>
+    <tr><td>🔍 <strong data-i18n="ch11_r4n"></strong></td><td data-i18n="ch11_r4d"></td></tr>
+    <tr><td>🤝 <strong data-i18n="ch11_r5n"></strong></td><td data-i18n="ch11_r5d"></td></tr>
+    <tr><td>❤️ <strong data-i18n="ch11_r6n"></strong></td><td data-i18n="ch11_r6d"></td></tr>
+    <tr><td>⭐ <strong data-i18n="ch11_r7n"></strong></td><td data-i18n="ch11_r7d"></td></tr>
+  </table>
+  <h3 data-i18n="ch11_partner_title"></h3>
+  <p data-i18n="ch11_partner_p"></p>
+  <div class="grid2">
+    <div class="card"><div class="ci">🏪</div><div class="ct" data-i18n="ch11_shop_t"></div><div class="cd" data-i18n="ch11_shop_d"></div></div>
+    <div class="card"><div class="ci">🏥</div><div class="ct" data-i18n="ch11_vet_t"></div><div class="cd" data-i18n="ch11_vet_d"></div></div>
+  </div>
+  <div class="tip" data-i18n="ch11_tip"></div>
+</div>
+
+<!-- CH12 -->
+<div class="chapter">
+  <div class="ch-header"><div class="ch-num">12</div><h2 data-i18n="ch12_h2"></h2></div>
+  <div class="faq-item"><div class="faq-q" data-i18n="faq1q"></div><div class="faq-a" data-i18n="faq1a"></div></div>
+  <div class="faq-item"><div class="faq-q" data-i18n="faq2q"></div><div class="faq-a" data-i18n="faq2a"></div></div>
+  <div class="faq-item"><div class="faq-q" data-i18n="faq3q"></div><div class="faq-a" data-i18n="faq3a"></div></div>
+  <div class="faq-item"><div class="faq-q" data-i18n="faq4q"></div><div class="faq-a" data-i18n="faq4a"></div></div>
+  <div class="faq-item"><div class="faq-q" data-i18n="faq5q"></div><div class="faq-a" data-i18n="faq5a"></div></div>
+  <div class="faq-item"><div class="faq-q" data-i18n="faq6q"></div><div class="faq-a" data-i18n="faq6a"></div></div>
+  <div class="faq-item"><div class="faq-q" data-i18n="faq7q"></div><div class="faq-a" data-i18n="faq7a"></div></div>
+  <div class="faq-item"><div class="faq-q" data-i18n="faq8q"></div><div class="faq-a" data-i18n="faq8a"></div></div>
+  <div class="divider"></div>
+  <h3 data-i18n="ch12_contact_title"></h3>
+  <div class="grid2">
+    <div class="card"><div class="ci">📋</div><div class="ct" data-i18n="ch12_form_t"></div><div class="cd" data-i18n="ch12_form_d"></div></div>
+    <div class="card"><div class="ci">⭐</div><div class="ct" data-i18n="ch12_gold_t"></div><div class="cd" data-i18n="ch12_gold_d"></div></div>
+  </div>
+  <div class="footer">
+    <p style="font-size:32px;margin-bottom:8px">🐾❤️</p>
+    <p><strong style="color:#FF6B6B;font-size:16px">AnimalBond</strong></p>
+    <p data-i18n="footer_text"></p>
+    <p style="margin-top:6px">animalbond.com</p>
+  </div>
+</div>
+
+<script>
+window.MANUAL_TRANSLATIONS = {
+ro: {
+cover_tagline:"Conectăm animale cu familii iubitoare",
+cover_desc:"Ghid complet pentru adoptarea, predarea spre adopție și salvarea animalelor prin platforma AnimalBond.",
+cover_version:"Versiunea 1.0 · Mai 2026",
+cover_meta:"📱 iOS & Android · 🌐 animalbond.club<br>🇷🇴 România · 🇩🇪 Germania · 🇫🇷 Franța · 🇮🇹 Italia · 🇪🇸 Spania · 🇭🇺 Ungaria",
+toc_title:"Cuprins",toc_s1:"Introducere",toc_s2:"Funcționalități principale",toc_s3:"Secțiuni speciale",toc_s4:"Setări și platforme",
+ch1_h2:"Ce este AnimalBond?",ch2_h2:"Primii pași — Cont și profil",ch3_h2:"Feed-ul principal — Descoperă",ch4_h2:"Tipuri de anunțuri",ch5_h2:"Cum adaugi un anunț",ch6_h2:"Contacte și mesaje",ch7_h2:"Animale pierdute și găsite",ch8_h2:"Ajutor medical și donații",ch9_h2:"Povești de succes",ch10_h2:"Profil și setări",ch11_h2:"Platforma web",ch12_h2:"Întrebări frecvente",
+ch1_p1:"AnimalBond este o platformă digitală dedicată bunăstării animalelor, disponibilă ca aplicație mobilă și site web. Misiunea sa este să conecteze animalele care au nevoie de o casă cu persoanele care le pot oferi una.",
+ch1_feat_title:"Ce poți face cu AnimalBond",
+ch1_f1t:"Adoptă un animal",ch1_f1d:"Găsește câini, pisici, iepuri, păsări și alte animale disponibile pentru adopție în zona ta sau din toată Europa.",
+ch1_f2t:"Dă spre adopție",ch1_f2d:"Postează un anunț pentru un animal pe care nu îl mai poți păstra și găsește-i o familie responsabilă.",
+ch1_f3t:"Pierdute / Găsite",ch1_f3d:"Raportează un animal pierdut sau găsit și ajută la reunirea lui cu proprietarul.",
+ch1_f4t:"Ajutor medical",ch1_f4d:"Cere sau oferă sprijin pentru tratamentele medicale ale animalelor care au nevoie urgentă de ajutor.",
+ch1_f5t:"Reproducție",ch1_f5d:"Publică anunțuri pentru împerecherea animalelor de rasă, cu toate documentele și detaliile necesare.",
+ch1_f6t:"Povești de succes",ch1_f6d:"Împărtășește povestea adopției tale și inspiră alți oameni să facă același pas.",
+ch1_countries_title:"Unde funcționează AnimalBond",
+ch1_th1:"Țară",ch1_th2:"Limbă implicită",ch1_th3:"Monedă",
+lang_ro:"Română",lang_de:"Germană",lang_fr:"Franceză",lang_it:"Italiană",lang_es:"Spaniolă",lang_hu:"Maghiară",
+ch1_note:"Aplicația detectează automat limba dispozitivului tău. Poți schimba limba oricând din setările profilului.",
+ch2_dl_title:"Descărcarea aplicației",
+ch2_ios:"Caută <strong>AnimalBond</strong> în App Store și apasă Obține.",
+ch2_android:"Caută <strong>AnimalBond</strong> în Google Play și apasă Instalare.",
+ch2_create_title:"Crearea unui cont",
+ch2_s1t:"Deschide aplicația și apasă &bdquo;Creează cont&rdquo;",ch2_s1d:"",
+ch2_s2t:"Completează datele de bază",ch2_s2d:" — email, parolă (min. 6 caractere) și un nume de utilizator unic.",
+ch2_s3t:"Alege tipul de cont",ch2_s3d:" — Privat sau Adăpost (vezi tabelul de mai jos).",
+ch2_s4t:"Selectează limba și țara",ch2_s4d:" — aplicația sugerează automat limba dispozitivului tău.",
+ch2_s5t:"Confirmă emailul",ch2_s5d:" — apasă linkul primit și contul devine activ imediat.",
+ch2_types_title:"Tipuri de cont",
+th_type:"Tip",th_who:"Cine îl folosește",th_what:"Ce poate face",
+type_private:"Privat",type_shelter:"Adăpost",
+ch2_t1w:"Persoane fizice",ch2_t1c:"Adoptă, postează anunțuri, trimite mesaje",
+ch2_t2w:"Organizații, asociații",ch2_t2c:"Gestionează mai multe animale, profil organizație, vizibilitate sporită",
+ch2_tip:"Dacă ești un adăpost sau asociație, alege contul <strong>Adăpost</strong> pentru funcționalitățile dedicate.",
+ch2_profile_title:"Configurarea profilului",
+ch2_profile_list:"<li><strong>Fotografie profil</strong> — ajută proprietarii să te recunoască</li><li><strong>Descriere</strong> — prezintă-te pe scurt</li><li><strong>Tipul locuinței</strong> — casă cu curte, apartament etc.</li><li><strong>Experiență cu animale</strong> — niciuna, moderată, avansată</li><li><strong>Preferințe specie</strong> — câini, pisici, ambele, altele</li><li><strong>Raza de căutare</strong> — distanța maximă față de tine</li>",
+ch2_note:"Cu cât profilul este mai complet, cu atât sistemul de compatibilitate va găsi animale mai potrivite pentru tine.",
+ch3_p1:"Secțiunea <strong>Descoperă</strong> (❤️ din bara de jos) este inima aplicației. Aici vezi toate animalele disponibile, filtrate după preferințele tale. Anunțurile sunt afișate în ordine cronologică — cel mai vechi primul, pentru a oferi vizibilitate maximă animalelor care așteaptă cel mai mult.",
+ch3_filters_title:"Filtrele disponibile",
+ch3_species_title:"Specie",ch3_species_list:"<li>🐾 <strong>Toate</strong></li><li>🐶 <strong>Câini</strong></li><li>🐱 <strong>Pisici</strong></li><li>🐾 <strong>Altele</strong> — iepuri, păsări, rozătoare etc.</li>",
+ch3_type_title:"Tip anunț",ch3_type_list:"<li>📋 Toate tipurile</li><li>🏠 Adopție</li><li>💰 Vânzare</li><li>🌿 Reproducție</li><li>💊 Ajutor medical</li>",
+ch3_country_title:"Țară",ch3_country_p:"Selectează țara din dropdown. Implicit se afișează țara ta. Poți alege <strong>Toate țările</strong> pentru anunțuri din toată Europa.",
+ch3_gps_title:"Raza de căutare (GPS)",ch3_gps_p:"Dacă ai activat locația, vei vedea banner-ul cu raza curentă. Apasă <strong>Schimbă</strong> pentru a modifica din profil. Animalele fără locație GPS sunt mereu incluse.",
+ch3_order_title:"Ordinea anunțurilor",ch3_order_p:"Anunțurile sunt afișate <strong>cel mai vechi primul</strong> — animalele care așteaptă cel mai mult apar primele.",
+ch3_card_title:"Ce conține un card",
+ch3_card_list:"<li>📷 Fotografia principală</li><li>🏷️ Iconița tipului de anunț</li><li>💝 Scorul de compatibilitate (ex: <strong>70%</strong>)</li><li>❤️ Butonul de like</li><li>📍 Distanța față de tine</li><li>Numele, rasa și vârsta</li><li>💬 Butonul de contact</li>",
+ch3_swipe_title:"Modul Swipe",
+ch3_swipe_list:"<li>👉 <strong>Dreapta</strong> — Like</li><li>👈 <strong>Stânga</strong> — Dislike</li><li>⬅️ <strong>Înapoi</strong> — revii la grilă</li>",
+ch3_compat_title:"Scorul de compatibilitate",
+th_percent:"Procent",th_meaning:"Interpretare",
+compat_1:"Potrivire excelentă — toate preferințele se aliniază",compat_2:"Potrivire bună — majoritatea criteriilor se potrivesc",compat_3:"Potrivire moderată — unele diferențe de luat în calcul",compat_4l:"Sub 40%",compat_4:"Potrivire scăzută — mai puține criterii comune",
+ch3_tip:"Un profil complet duce la scoruri de compatibilitate mai precise.",
+ch4_h2:"Tipuri de anunțuri",
+type_adoption:"Adopție",type_sale:"Vânzare",type_breeding:"Reproducție",type_medical:"Ajutor medical",premium_label:"Premium",
+ch4_adopt_p:"Animale care au nevoie de o casă nouă, <strong>gratuit</strong>. Cel mai frecvent tip de anunț pe AnimalBond.",
+ch4_adopt_list:"<li>Potrivit pentru animale abandonate, din adăposturi sau personale</li><li>Nu implică nicio sumă de bani</li><li>Proprietarul poate cere un acord de adopție responsabilă</li>",
+ch4_sale_p:"Anunțurile de vânzare sunt o <strong>funcție premium</strong> destinată animalelor de rasă cu pedigree. Necesită un abonament activ.",
+ch4_sale_list:"<li>Specifică prețul, moneda și documentele disponibile</li><li>Recomandat: pedigree, carnet sănătate, vaccinări</li><li>AnimalBond nu procesează plățile — tranzacția se face direct</li>",
+ch4_sale_warn:"Vânzarea animalelor este reglementată legal. Verifică legislația din țara ta. Pentru activarea funcției de vânzare, contactează-ne prin formularul de pe site.",
+ch4_breed_p:"Conectează proprietarii de animale de rasă pentru împerechere responsabilă.",
+ch4_breed_list:"<li>Specifică rasa, vârsta, documentele și condițiile</li><li>Recomandat pentru rase cu pedigree verificat</li><li>Asigură-te că ambele animale sunt sănătoase și vaccinate</li>",
+ch4_med_p:"Destinat animalelor care au nevoie de tratament medical și pentru care se caută donații sau sprijin.",
+ch4_med_list:"<li>Descrie diagnosticul și tratamentul necesar</li><li>Atașează documente de la veterinar pentru credibilitate</li><li>Comunitatea poate contacta și oferi ajutor direct</li>",
+ch4_med_note:"Secțiunea <strong>Ajutor</strong> (💊) are o pagină dedicată animalelor cu nevoi medicale și campanii active.",
+ch5_p1:"Apasă butonul <strong>➕ Adaugă</strong> din bara de jos pentru a posta un anunț nou.",
+ch5_s1t:"Tipul anunțului",ch5_s1d:" — Adopție, Vânzare, Reproducție, Ajutor medical, Pierdut sau Găsit.",
+ch5_s2t:"Informații despre animal",ch5_s2d:" — nume, specie, rasă, vârstă, gen, descriere.",
+ch5_s3t:"Locație",ch5_s3d:" — introdu orașul sau activează GPS pentru localizare automată.",
+ch5_s4t:"Publică",ch5_s4d:" — verifică informațiile și apasă Publică. Anunțul apare imediat în feed.",
+ch5_photos_title:"Fotografii",
+ch5_photos_list:"<li>Adaugă între 1 și 5 fotografii</li><li>Fotografiază în lumină naturală</li><li>Prima fotografie va fi imaginea principală</li><li>Evită fotografii neclare sau în întuneric</li>",
+ch5_tip:"Anunțurile cu fotografii bune și descrieri detaliate primesc cu până la 3× mai mult interes.",
+ch5_warn:"Marchează anunțul ca <strong>Adoptat</strong> sau <strong>Rezolvat</strong> imediat ce animalul și-a găsit casa.",
+ch6_p1:"Apasă butonul <strong>💬 Contact</strong> de pe cardul animalului. Sistemul creează automat un match și ești direcționat la conversație.",
+ch6_s1t:"Apasă Contact",ch6_s1d:" — butonul apare pe card și în pagina de detalii a animalului.",
+ch6_s2t:"Se creează un match",ch6_s2d:" — o legătură directă între tine și proprietarul animalului.",
+ch6_s3t:"Conversație directă",ch6_s3d:" — schimbi mesaje, descrii situația ta și stabilești o întâlnire.",
+ch6_msg_title:"Secțiunea Mesaje",
+ch6_msg_list:"<li>Toate conversațiile tale active într-un singur loc</li><li>Fotografia și numele animalului vizibil pe fiecare conversație</li><li>Indicator mesaje necitite (punct roșu)</li>",
+ch6_note:"Nu partaja informații personale sensibile în chat. Stabilește detaliile în persoană.",
+ch7_p1:"Secțiunea Pierdute/Găsite este accesibilă prin bannerul albastru din feed sau de pe site la <em>animalbond.club/pierdute-gasite</em>.",
+ch7_lost_title:"Am pierdut un animal",
+ch7_ls1t:"Apasă ➕ Adaugă → Pierdut",ch7_ls2t:"Completează detaliile",ch7_ls2d:" — nume, specie, rasă, data și locul ultimei observări.",ch7_ls3t:"Publică și distribuie",ch7_ls3d:" — anunțul apare imediat. Distribuie și pe rețele sociale.",
+ch7_found_title:"Am găsit un animal",
+ch7_fs1t:"Selectează tipul Găsit",ch7_fs2t:"Descrie animalul și locul",ch7_fs2d:" — specia, culoarea, semne distinctive, locul exact.",ch7_fs3t:"Fotografiază animalul",ch7_fs3d:" — poza ajută proprietarul să recunoască animalul imediat.",
+ch7_tip:"Dacă animalul a revenit acasă sau a fost reunit cu proprietarul, marchează anunțul ca <strong>Rezolvat</strong>.",
+ch8_p1:"Secțiunea <strong>Ajutor</strong> (💊 din bara de jos) este dedicată animalelor cu probleme medicale care au nevoie de sprijinul comunității.",
+ch8_c1t:"Anunțuri medicale",ch8_c1d:"Un animal specific are nevoie de tratament. Comunitatea poate contacta proprietarul pentru a oferi ajutor direct.",
+ch8_c2t:"Campanii de donații",ch8_c2d:"Campanii organizate pentru colectarea de fonduri destinate tratamentelor medicale.",
+ch8_warn:"AnimalBond nu garantează autenticitatea anunțurilor medicale. Dacă donezi, fă-o direct proprietarului după ce te-ai asigurat că situația este reală.",
+ch9_p1:"Secțiunea <strong>Povești</strong> (⭐) este locul unde utilizatorii care au adoptat prin AnimalBond își împărtășesc experiența.",
+ch9_s1t:"Apasă ⭐ Povești → Adaugă povestea ta",ch9_s2t:"Scrie povestea",ch9_s2d:" — descrie cum l-ai cunoscut, primele zile și transformarea lui.",ch9_s3t:"Adaugă o fotografie",ch9_s3d:" — o poză cu tine și animalul tău face povestea mai autentică.",ch9_s4t:"Adaugă un videoclip (opțional)",ch9_s4d:" — link YouTube sau Vimeo. Apare cu buton de play pe card.",ch9_s5t:"Trimite spre aprobare",ch9_s5d:" — povestea va fi verificată și publicată în 24–48 de ore.",
+ch9_tip:"Poveștile autentice și detaliate sunt cele mai apreciate de comunitate.",
+ch10_edit_title:"Editarea profilului",
+ch10_edit_list:"<li><strong>Fotografie profil</strong></li><li><strong>Nume și username</strong></li><li><strong>Descriere</strong></li><li><strong>Tipul locuinței</strong></li><li><strong>Experiență cu animale</strong></li><li><strong>Animale preferate</strong></li>",
+ch10_gps_title:"Setări GPS și raza de căutare",
+ch10_gps_list:"<li><strong>Activare locație</strong> — permite calcularea distanțelor</li><li><strong>Raza de căutare</strong> — în km (25, 50, 100, 200 km sau Toate distanțele)</li>",
+ch10_note:"Distanța față de fiecare animal este afișată pe card. Ordinea rămâne întotdeauna cel mai vechi primul.",
+ch10_lang_title:"Limbă și țară",
+ch10_lang_list:"<li><strong>Limba interfeței</strong> — Română, Engleză, Germană, Franceză, Italiană, Spaniolă, Maghiară</li><li><strong>Țara</strong> — determină filtrul implicit de țară în feed</li>",
+ch10_privacy_title:"Securitate și confidențialitate",
+ch10_privacy_list:"<li><strong>Schimbare parolă</strong> — din setările contului</li><li><strong>GDPR</strong> — datele tale nu sunt vândute terților</li><li><strong>Ștergere cont</strong> — prin formularul de contact de pe site</li>",
+ch11_p1:"AnimalBond este disponibil și ca site web la <strong>animalbond.club</strong>. Poți vizualiza toate anunțurile fără cont.",
+th_section:"Secțiune",th_desc:"Descriere",
+ch11_r1n:"Acasă",ch11_r1d:"Prezentare generală, statistici, parteneri și povești recente",
+ch11_r2n:"Toate anunțurile",ch11_r2d:"Feed complet cu filtre pentru tip, specie, țară și locație",
+ch11_r3n:"Ajutor medical",ch11_r3d:"Animale cu nevoi medicale și campanii de donații",
+ch11_r4n:"Pierdute/Găsite",ch11_r4d:"Anunțuri de animale pierdute sau găsite",
+ch11_r5n:"Parteneri",ch11_r5d:"Clinici veterinare și magazine partenere",
+ch11_r6n:"Campanii",ch11_r6d:"Campanii active de strângere de fonduri",
+ch11_r7n:"Povești",ch11_r7d:"Povești de adopție de succes din comunitate",
+ch11_partner_title:"Parteneri — Magazine și Cabinete Veterinare",
+ch11_partner_p:"AnimalBond oferă vizibilitate sporită magazinelor de animale și cabinetelor veterinare prin listare pe platformă.",
+ch11_shop_t:"Magazine pet",ch11_shop_d:"Listare cu tarif. Contactează-ne pentru ofertă personalizată.",
+ch11_vet_t:"Cabinete veterinare",ch11_vet_d:"Listare cu tarif. Contactează-ne pentru ofertă personalizată.",
+ch11_tip:"Pe web poți vedea toate anunțurile fără cont. Contul este necesar pentru a posta, trimite mesaje sau adăuga povești.",
+ch12_contact_title:"Contact și suport",
+ch12_form_t:"Formular contact",ch12_form_d:"animalbond.club/contact — primit direct de echipa noastră.",
+ch12_gold_t:"Client Gold ⭐",ch12_gold_d:"Pachet premium cu beneficii suplimentare. Contactează-ne pentru detalii.",
+faq1q:"Este AnimalBond gratuit?",faq1a:"Da, descărcarea și utilizarea de bază sunt complet gratuite. Adopția, Pierdut/Găsit, Ajutor medical și mesageria nu costă nimic. Funcțiile premium (Vânzare, listare parteneri) necesită abonament.",
+faq2q:"Pot folosi AnimalBond fără cont?",faq2a:"Pe site poți vizualiza toate anunțurile fără cont. Pentru a posta, trimite mesaje sau adăuga povești ai nevoie de un cont.",
+faq3q:"Cât durează până apare anunțul meu?",faq3a:"Anunțurile obișnuite apar imediat. Poveștile necesită aprobare în 24–48 de ore.",
+faq4q:"Cum funcționează raza de căutare?",faq4a:"Raza filtrează animalele după distanță față de locația ta. Animalele fără GPS sunt mereu incluse. Ordinea rămâne cel mai vechi primul.",
+faq5q:"Anunțul meu a expirat. Ce fac?",faq5a:"Mergi la Profil → Anunțurile mele și reînnoiește anunțul dacă animalul este încă disponibil.",
+faq6a:"Marchează anunțul ca &bdquo;Adoptat&rdquo; din secțiunea Anunțurile mele. Astfel dispare din feed.",
+faq7q:"Cum raportez un anunț suspect?",faq7a:"Pe fiecare card există butonul 🚩 Raportează. Apasă-l și descrie problema. Echipa verifică toate raportările.",
+faq8q:"Cum șterg contul?",faq8a:"Folosește formularul de contact de pe animalbond.club. Vom procesa cererea în 72 de ore conform GDPR.",
+footer_text:"Manual de Utilizare · Versiunea 1.0 · Mai 2026"
+},
+en: {
+cover_tagline:"Connecting animals with loving families",
+cover_desc:"Complete guide for adopting, rehoming and saving animals through the AnimalBond platform.",
+cover_version:"Version 1.0 · May 2026",
+cover_meta:"📱 iOS & Android · 🌐 animalbond.club<br>🇷🇴 Romania · 🇩🇪 Germany · 🇫🇷 France · 🇮🇹 Italy · 🇪🇸 Spain · 🇭🇺 Hungary",
+toc_title:"Contents",toc_s1:"Introduction",toc_s2:"Main features",toc_s3:"Special sections",toc_s4:"Settings & platforms",
+ch1_h2:"What is AnimalBond?",ch2_h2:"Getting started — Account & profile",ch3_h2:"Main feed — Discover animals",ch4_h2:"Types of listings",ch5_h2:"How to add a listing",ch6_h2:"Contacts and messages",ch7_h2:"Lost and found animals",ch8_h2:"Medical help and donations",ch9_h2:"Success stories",ch10_h2:"Profile and settings",ch11_h2:"Web platform",ch12_h2:"Frequently asked questions",
+ch1_p1:"AnimalBond is a digital platform dedicated to animal welfare, available as a mobile app and website. Its mission is to connect animals in need of a home with people who can offer one.",
+ch1_feat_title:"What you can do with AnimalBond",
+ch1_f1t:"Adopt an animal",ch1_f1d:"Find dogs, cats, rabbits, birds and other animals available for adoption in your area or across Europe.",
+ch1_f2t:"Rehome an animal",ch1_f2d:"Post a listing for an animal you can no longer keep and find it a responsible family.",
+ch1_f3t:"Lost & Found",ch1_f3d:"Report a lost or found animal and help reunite it with its owner.",
+ch1_f4t:"Medical help",ch1_f4d:"Request or offer support for animals that urgently need medical treatment.",
+ch1_f5t:"Breeding",ch1_f5d:"Post listings for responsible breeding of pedigree animals, with all required documentation.",
+ch1_f6t:"Success stories",ch1_f6d:"Share your adoption story and inspire others to take the same step.",
+ch1_countries_title:"Where AnimalBond is available",
+ch1_th1:"Country",ch1_th2:"Default language",ch1_th3:"Currency",
+lang_ro:"Romanian",lang_de:"German",lang_fr:"French",lang_it:"Italian",lang_es:"Spanish",lang_hu:"Hungarian",
+ch1_note:"The app automatically detects your device language. You can change it anytime in profile settings.",
+ch2_dl_title:"Download the app",
+ch2_ios:"Search for <strong>AnimalBond</strong> on the App Store and tap Get.",
+ch2_android:"Search for <strong>AnimalBond</strong> on Google Play and tap Install.",
+ch2_create_title:"Creating an account",
+ch2_s1t:"Open the app and tap \"Create account\"",ch2_s1d:"",
+ch2_s2t:"Fill in your details",ch2_s2d:" — email, password (min. 6 characters) and a unique username.",
+ch2_s3t:"Choose your account type",ch2_s3d:" — Private or Shelter (see table below).",
+ch2_s4t:"Select language and country",ch2_s4d:" — the app suggests your device language automatically.",
+ch2_s5t:"Confirm your email",ch2_s5d:" — tap the link received and your account becomes active immediately.",
+ch2_types_title:"Account types",
+th_type:"Type",th_who:"Who uses it",th_what:"What they can do",
+type_private:"Private",type_shelter:"Shelter",
+ch2_t1w:"Individuals",ch2_t1c:"Adopt, post listings, send messages",
+ch2_t2w:"Organisations, associations",ch2_t2c:"Manage multiple animals, organisation profile, increased visibility",
+ch2_tip:"If you are a shelter or animal protection association, choose the <strong>Shelter</strong> account for dedicated features.",
+ch2_profile_title:"Setting up your profile",
+ch2_profile_list:"<li><strong>Profile photo</strong> — helps owners recognise you</li><li><strong>Description</strong> — introduce yourself briefly</li><li><strong>Housing type</strong> — house with garden, apartment, etc.</li><li><strong>Experience with animals</strong> — none, moderate, advanced</li><li><strong>Species preferences</strong> — dogs, cats, both, others</li><li><strong>Search radius</strong> — maximum distance from you</li>",
+ch2_note:"The more complete your profile, the more accurately the compatibility system will find suitable animals for you.",
+ch3_p1:"The <strong>Discover</strong> section (❤️ in the bottom bar) is the heart of the app. Listings are shown in chronological order — oldest first — to give maximum visibility to animals that have been waiting longest.",
+ch3_filters_title:"Available filters",
+ch3_species_title:"Species",ch3_species_list:"<li>🐾 <strong>All</strong></li><li>🐶 <strong>Dogs</strong></li><li>🐱 <strong>Cats</strong></li><li>🐾 <strong>Others</strong> — rabbits, birds, rodents, etc.</li>",
+ch3_type_title:"Listing type",ch3_type_list:"<li>📋 All types</li><li>🏠 Adoption</li><li>💰 Sale</li><li>🌿 Breeding</li><li>💊 Medical help</li>",
+ch3_country_title:"Country",ch3_country_p:"Select a country from the dropdown. Your country is shown by default. Choose <strong>All countries</strong> to browse Europe-wide.",
+ch3_gps_title:"Search radius (GPS)",ch3_gps_p:"If location is enabled, you will see a banner with your current radius. Tap <strong>Change</strong> to update it from your profile. Animals without GPS are always included.",
+ch3_order_title:"Listing order",ch3_order_p:"Listings are shown <strong>oldest first</strong> — animals that have been waiting longest appear at the top.",
+ch3_card_title:"What a card shows",
+ch3_card_list:"<li>📷 Main photo</li><li>🏷️ Listing type icon</li><li>💝 Compatibility score (e.g. <strong>70%</strong>)</li><li>❤️ Like button</li><li>📍 Distance from you</li><li>Name, breed and age</li><li>💬 Contact button</li>",
+ch3_swipe_title:"Swipe mode",
+ch3_swipe_list:"<li>👉 <strong>Right</strong> — Like</li><li>👈 <strong>Left</strong> — Dislike</li><li>⬅️ <strong>Back</strong> — return to grid</li>",
+ch3_compat_title:"Compatibility score",
+th_percent:"Score",th_meaning:"Meaning",
+compat_1:"Excellent match — all preferences align",compat_2:"Good match — most criteria match",compat_3:"Moderate match — some differences to consider",compat_4l:"Below 40%",compat_4:"Low match — fewer criteria in common",
+ch3_tip:"A complete profile leads to more accurate compatibility scores.",
+ch4_h2:"Types of listings",
+type_adoption:"Adoption",type_sale:"Sale",type_breeding:"Breeding",type_medical:"Medical help",premium_label:"Premium",
+ch4_adopt_p:"Animals that need a new home, <strong>free of charge</strong>. The most common listing type on AnimalBond.",
+ch4_adopt_list:"<li>Suitable for abandoned animals, shelter animals or personal pets</li><li>No money involved</li><li>Owner may request a responsible adoption agreement</li>",
+ch4_sale_p:"Sale listings are a <strong>premium feature</strong> for pedigree animals. An active subscription is required.",
+ch4_sale_list:"<li>Specify price, currency and available documents</li><li>Recommended: pedigree, health record, vaccinations</li><li>AnimalBond does not process payments — transactions are made directly</li>",
+ch4_sale_warn:"Selling animals is legally regulated. Check the laws in your country. To activate the sale feature, contact us through the form on our website.",
+ch4_breed_p:"Connects owners of pedigree animals for responsible breeding.",
+ch4_breed_list:"<li>Specify breed, age, documents and conditions</li><li>Recommended for verified pedigree breeds</li><li>Ensure both animals are healthy and vaccinated</li>",
+ch4_med_p:"For animals needing medical treatment, seeking donations or community support.",
+ch4_med_list:"<li>Describe the diagnosis and required treatment</li><li>Attach vet documents for credibility</li><li>The community can contact and offer direct help</li>",
+ch4_med_note:"The <strong>Help</strong> section (💊) has a dedicated page for animals with medical needs and active campaigns.",
+ch5_p1:"Tap the <strong>➕ Add</strong> button in the bottom bar to post a new listing.",
+ch5_s1t:"Listing type",ch5_s1d:" — Adoption, Sale, Breeding, Medical help, Lost or Found.",
+ch5_s2t:"Animal information",ch5_s2d:" — name, species, breed, age, gender, description.",
+ch5_s3t:"Location",ch5_s3d:" — enter your city or enable GPS for automatic location.",
+ch5_s4t:"Publish",ch5_s4d:" — review the information and tap Publish. The listing appears immediately.",
+ch5_photos_title:"Photos",
+ch5_photos_list:"<li>Add between 1 and 5 photos</li><li>Photograph in natural light</li><li>The first photo will be the main thumbnail</li><li>Avoid blurry or dark photos</li>",
+ch5_tip:"Listings with good photos and detailed descriptions receive up to 3× more interest.",
+ch5_warn:"Mark the listing as <strong>Adopted</strong> or <strong>Resolved</strong> as soon as the animal finds its home.",
+ch6_p1:"Tap the <strong>💬 Contact</strong> button on the animal's card. A match is created automatically and you are taken to the conversation.",
+ch6_s1t:"Tap Contact",ch6_s1d:" — the button appears on the card and in the animal's detail page.",
+ch6_s2t:"A match is created",ch6_s2d:" — a direct link between you and the animal's owner.",
+ch6_s3t:"Direct conversation",ch6_s3d:" — exchange messages, describe your situation and arrange a meeting.",
+ch6_msg_title:"Messages section",
+ch6_msg_list:"<li>All your active conversations in one place</li><li>Animal photo and name visible on each conversation</li><li>Unread message indicator (red dot)</li>",
+ch6_note:"Do not share sensitive personal information in chat. Arrange details in person.",
+ch7_p1:"The Lost & Found section is accessible via the blue banner in the feed or on the website at <em>animalbond.club/pierdute-gasite</em>.",
+ch7_lost_title:"I lost an animal",
+ch7_ls1t:"Tap ➕ Add → Lost",ch7_ls2t:"Fill in the details",ch7_ls2d:" — name, species, breed, date and location last seen.",ch7_ls3t:"Publish and share",ch7_ls3d:" — the listing appears immediately. Share on social media too.",
+ch7_found_title:"I found an animal",
+ch7_fs1t:"Select type Found",ch7_fs2t:"Describe the animal and location",ch7_fs2d:" — species, colour, distinctive marks, exact location.",ch7_fs3t:"Photograph the animal",ch7_fs3d:" — the photo helps the owner identify it immediately.",
+ch7_tip:"If the animal has returned home or been reunited with its owner, mark the listing as <strong>Resolved</strong>.",
+ch8_p1:"The <strong>Help</strong> section (💊 in the bottom bar) is dedicated to animals with medical issues that need community support.",
+ch8_c1t:"Medical listings",ch8_c1d:"A specific animal needs treatment. The community can contact the owner to offer direct help.",
+ch8_c2t:"Donation campaigns",ch8_c2d:"Organised campaigns to raise funds for medical treatments.",
+ch8_warn:"AnimalBond does not verify the authenticity of medical listings. If you donate, do so directly to the owner after confirming the situation is genuine.",
+ch9_p1:"The <strong>Stories</strong> section (⭐) is where users who adopted through AnimalBond share their experience.",
+ch9_s1t:"Tap ⭐ Stories → Add your story",ch9_s2t:"Write your story",ch9_s2d:" — describe how you met, the first days and the transformation.",ch9_s3t:"Add a photo",ch9_s3d:" — a photo of you and your animal makes the story more authentic.",ch9_s4t:"Add a video (optional)",ch9_s4d:" — YouTube or Vimeo link. Appears with a play button on the card.",ch9_s5t:"Submit for approval",ch9_s5d:" — your story will be reviewed and published within 24–48 hours.",
+ch9_tip:"Authentic and detailed stories are the most appreciated by the community.",
+ch10_edit_title:"Editing your profile",
+ch10_edit_list:"<li><strong>Profile photo</strong></li><li><strong>Name and username</strong></li><li><strong>Description</strong></li><li><strong>Housing type</strong></li><li><strong>Experience with animals</strong></li><li><strong>Preferred species</strong></li>",
+ch10_gps_title:"GPS and search radius settings",
+ch10_gps_list:"<li><strong>Enable location</strong> — allows distance calculations</li><li><strong>Search radius</strong> — in km (25, 50, 100, 200 km or All distances)</li>",
+ch10_note:"The distance to each animal is shown on its card. The order is always oldest first.",
+ch10_lang_title:"Language and country",
+ch10_lang_list:"<li><strong>Interface language</strong> — Romanian, English, German, French, Italian, Spanish, Hungarian</li><li><strong>Country</strong> — determines the default country filter in the feed</li>",
+ch10_privacy_title:"Security and privacy",
+ch10_privacy_list:"<li><strong>Change password</strong> — from account settings</li><li><strong>GDPR</strong> — your data is never sold to third parties</li><li><strong>Delete account</strong> — via the contact form on the website</li>",
+ch11_p1:"AnimalBond is also available as a website at <strong>animalbond.club</strong>. You can browse all listings without an account.",
+th_section:"Section",th_desc:"Description",
+ch11_r1n:"Home",ch11_r1d:"Overview, statistics, partners and recent stories",
+ch11_r2n:"All listings",ch11_r2d:"Full feed with filters for type, species, country and location",
+ch11_r3n:"Medical help",ch11_r3d:"Animals with medical needs and donation campaigns",
+ch11_r4n:"Lost & Found",ch11_r4d:"Lost or found animal listings",
+ch11_r5n:"Partners",ch11_r5d:"Veterinary clinics and partner shops",
+ch11_r6n:"Campaigns",ch11_r6d:"Active fundraising campaigns",
+ch11_r7n:"Stories",ch11_r7d:"Successful adoption stories from the community",
+ch11_partner_title:"Partners — Pet Shops & Veterinary Clinics",
+ch11_partner_p:"AnimalBond offers increased visibility for pet shops and veterinary clinics through platform listing.",
+ch11_shop_t:"Pet shops",ch11_shop_d:"Listed with a fee. Contact us for a personalised quote.",
+ch11_vet_t:"Veterinary clinics",ch11_vet_d:"Listed with a fee. Contact us for a personalised quote.",
+ch11_tip:"You can browse all listings on the web without an account. An account is only needed to post, message or add stories.",
+ch12_contact_title:"Contact and support",
+ch12_form_t:"Contact form",ch12_form_d:"animalbond.club/contact — received directly by our team.",
+ch12_gold_t:"Gold Client ⭐",ch12_gold_d:"Premium package with additional benefits. Contact us for details.",
+faq1q:"Is AnimalBond free?",faq1a:"Yes, downloading and basic use are completely free. Adoption, Lost & Found, Medical help and messaging are all free. Premium features (Sale, partner listing) require a subscription.",
+faq2q:"Can I use AnimalBond without an account?",faq2a:"On the website you can view all listings without an account. To post, send messages or add stories you need an account.",
+faq3q:"How long until my listing appears?",faq3a:"Regular listings appear immediately. Stories require approval within 24–48 hours.",
+faq4q:"How does the search radius work?",faq4a:"The radius filters animals by distance from your location. Animals without GPS are always included. The order remains oldest first.",
+faq5q:"My listing has expired. What do I do?",faq5a:"Go to Profile → My listings and renew the listing if the animal is still available.",
+faq6q:"I adopted the animal. What do I do with the listing?",faq6a:"Mark the listing as \"Adopted\" in My listings. It will be removed from the feed.",
+faq7q:"How do I report a suspicious listing?",faq7a:"Each card has a 🚩 Report button. Tap it and describe the issue. Our team reviews all reports.",
+faq8q:"How do I delete my account?",faq8a:"Use the contact form at animalbond.club. We will process the request within 72 hours in accordance with GDPR.",
+footer_text:"User Manual · Version 1.0 · May 2026"
+},
+de: {
+cover_tagline:"Wir verbinden Tiere mit liebevollen Familien",
+cover_desc:"Vollständiger Leitfaden zur Adoption, Weitervermittlung und Rettung von Tieren über die AnimalBond-Plattform.",
+cover_version:"Version 1.0 · Mai 2026",
+cover_meta:"📱 iOS & Android · 🌐 animalbond.club<br>🇷🇴 Rumänien · 🇩🇪 Deutschland · 🇫🇷 Frankreich · 🇮🇹 Italien · 🇪🇸 Spanien · 🇭🇺 Ungarn",
+toc_title:"Inhaltsverzeichnis",toc_s1:"Einführung",toc_s2:"Hauptfunktionen",toc_s3:"Besondere Bereiche",toc_s4:"Einstellungen & Plattformen",
+ch1_h2:"Was ist AnimalBond?",ch2_h2:"Erste Schritte — Konto & Profil",ch3_h2:"Hauptfeed — Tiere entdecken",ch4_h2:"Arten von Anzeigen",ch5_h2:"Anzeige aufgeben",ch6_h2:"Kontakte und Nachrichten",ch7_h2:"Vermisste und gefundene Tiere",ch8_h2:"Medizinische Hilfe und Spenden",ch9_h2:"Erfolgsgeschichten",ch10_h2:"Profil und Einstellungen",ch11_h2:"Webplattform",ch12_h2:"Häufige Fragen",
+ch1_p1:"AnimalBond ist eine digitale Plattform für Tierschutz, verfügbar als mobile App und Website. Die Mission: Tiere, die ein Zuhause brauchen, mit Menschen zu verbinden, die ihnen eines geben können.",
+ch1_feat_title:"Was du mit AnimalBond tun kannst",
+ch1_f1t:"Tier adoptieren",ch1_f1d:"Finde Hunde, Katzen, Kaninchen, Vögel und andere Tiere in deiner Nähe oder ganz Europa.",
+ch1_f2t:"Tier abgeben",ch1_f2d:"Inseriere ein Tier, das du nicht mehr halten kannst, und finde ihm eine verantwortungsvolle Familie.",
+ch1_f3t:"Vermisst / Gefunden",ch1_f3d:"Melde ein vermisstes oder gefundenes Tier und hilf bei der Wiederzusammenführung.",
+ch1_f4t:"Medizinische Hilfe",ch1_f4d:"Suche oder biete Unterstützung für Tiere, die dringend medizinische Hilfe benötigen.",
+ch1_f5t:"Zucht",ch1_f5d:"Inseriere Zuchttiere mit allen erforderlichen Dokumenten und Details.",
+ch1_f6t:"Erfolgsgeschichten",ch1_f6d:"Teile deine Adoptionsgeschichte und inspiriere andere.",
+ch1_countries_title:"Wo AnimalBond verfügbar ist",
+ch1_th1:"Land",ch1_th2:"Standardsprache",ch1_th3:"Währung",
+lang_ro:"Rumänisch",lang_de:"Deutsch",lang_fr:"Französisch",lang_it:"Italienisch",lang_es:"Spanisch",lang_hu:"Ungarisch",
+ch1_note:"Die App erkennt automatisch die Sprache deines Geräts. Du kannst sie jederzeit in den Profileinstellungen ändern.",
+ch2_dl_title:"App herunterladen",
+ch2_ios:"Suche nach <strong>AnimalBond</strong> im App Store und tippe auf Laden.",
+ch2_android:"Suche nach <strong>AnimalBond</strong> in Google Play und tippe auf Installieren.",
+ch2_create_title:"Konto erstellen",
+ch2_s1t:"App öffnen und &bdquo;Konto erstellen&rdquo; antippen",ch2_s1d:"",
+ch2_s2t:"Daten ausfüllen",ch2_s2d:" — E-Mail, Passwort (mind. 6 Zeichen) und ein eindeutiger Benutzername.",
+ch2_s3t:"Kontotyp wählen",ch2_s3d:" — Privat oder Tierheim.",
+ch2_s4t:"Sprache und Land wählen",ch2_s4d:" — die App schlägt automatisch die Gerätesprache vor.",
+ch2_s5t:"E-Mail bestätigen",ch2_s5d:" — Link antippen, das Konto wird sofort aktiv.",
+ch2_types_title:"Kontotypen",
+th_type:"Typ",th_who:"Wer nutzt es",th_what:"Was möglich ist",
+type_private:"Privat",type_shelter:"Tierheim",
+ch2_t1w:"Privatpersonen",ch2_t1c:"Adoptieren, Anzeigen aufgeben, Nachrichten senden",
+ch2_t2w:"Organisationen, Vereine",ch2_t2c:"Mehrere Tiere verwalten, Organisationsprofil, erhöhte Sichtbarkeit",
+ch2_tip:"Wenn du ein Tierheim oder eine Tierschutzorganisation bist, wähle das <strong>Tierheim</strong>-Konto für dedizierte Funktionen.",
+ch2_profile_title:"Profil einrichten",
+ch2_profile_list:"<li><strong>Profilfoto</strong></li><li><strong>Name und Benutzername</strong></li><li><strong>Beschreibung</strong></li><li><strong>Wohnungstyp</strong> — Haus mit Garten, Wohnung usw.</li><li><strong>Erfahrung mit Tieren</strong> — keine, moderat, fortgeschritten</li><li><strong>Bevorzugte Tierart</strong></li><li><strong>Suchradius</strong></li>",
+ch2_note:"Je vollständiger das Profil, desto genauer findet das Kompatibilitätssystem passende Tiere.",
+ch3_p1:"Der Bereich <strong>Entdecken</strong> (❤️ in der unteren Leiste) ist das Herzstück der App. Anzeigen werden chronologisch angezeigt — älteste zuerst — damit Tiere, die am längsten warten, die meiste Sichtbarkeit erhalten.",
+ch3_filters_title:"Verfügbare Filter",
+ch3_species_title:"Tierart",ch3_species_list:"<li>🐾 <strong>Alle</strong></li><li>🐶 <strong>Hunde</strong></li><li>🐱 <strong>Katzen</strong></li><li>🐾 <strong>Andere</strong> — Kaninchen, Vögel, Nagetiere usw.</li>",
+ch3_type_title:"Anzeigentyp",ch3_type_list:"<li>📋 Alle Typen</li><li>🏠 Adoption</li><li>💰 Verkauf</li><li>🌿 Zucht</li><li>💊 Medizinische Hilfe</li>",
+ch3_country_title:"Land",ch3_country_p:"Land aus der Dropdown-Liste wählen. Standardmäßig wird dein Land angezeigt.",
+ch3_gps_title:"Suchradius (GPS)",ch3_gps_p:"Bei aktiviertem Standort siehst du ein Banner mit dem aktuellen Radius. Tippe auf <strong>Ändern</strong>, um ihn im Profil anzupassen. Tiere ohne GPS-Standort werden immer angezeigt.",
+ch3_order_title:"Reihenfolge der Anzeigen",ch3_order_p:"Anzeigen werden <strong>älteste zuerst</strong> angezeigt — Tiere, die am längsten warten, erscheinen oben.",
+ch3_card_title:"Was eine Karte zeigt",
+ch3_card_list:"<li>📷 Hauptfoto</li><li>🏷️ Anzeigentyp-Symbol</li><li>💝 Kompatibilitätswert (z.B. <strong>70%</strong>)</li><li>❤️ Like-Schaltfläche</li><li>📍 Entfernung von dir</li><li>Name, Rasse und Alter</li><li>💬 Kontakt-Schaltfläche</li>",
+ch3_swipe_title:"Swipe-Modus",
+ch3_swipe_list:"<li>👉 <strong>Rechts</strong> — Gefällt mir</li><li>👈 <strong>Links</strong> — Gefällt mir nicht</li><li>⬅️ <strong>Zurück</strong> — zur Übersicht</li>",
+ch3_compat_title:"Kompatibilitätswert",
+th_percent:"Wert",th_meaning:"Bedeutung",
+compat_1:"Ausgezeichnet — alle Präferenzen stimmen überein",compat_2:"Gut — die meisten Kriterien passen",compat_3:"Moderat — einige Unterschiede zu bedenken",compat_4l:"Unter 40%",compat_4:"Gering — wenige gemeinsame Kriterien",
+ch3_tip:"Ein vollständiges Profil führt zu genaueren Kompatibilitätswerten.",
+ch4_h2:"Arten von Anzeigen",
+type_adoption:"Adoption",type_sale:"Verkauf",type_breeding:"Zucht",type_medical:"Medizinische Hilfe",premium_label:"Premium",
+ch4_adopt_p:"Tiere, die ein neues Zuhause brauchen, <strong>kostenlos</strong>. Der häufigste Anzeigentyp auf AnimalBond.",
+ch4_adopt_list:"<li>Geeignet für ausgesetzte Tiere, Tierheimtiere oder Haustiere</li><li>Kein Geld involviert</li><li>Eigentümer kann einen verantwortungsvollen Adoptionsvertrag verlangen</li>",
+ch4_sale_p:"Verkaufsanzeigen sind eine <strong>Premium-Funktion</strong> für Rassehunde mit Pedigree. Ein aktives Abonnement ist erforderlich.",
+ch4_sale_list:"<li>Preis, Währung und verfügbare Dokumente angeben</li><li>Empfohlen: Pedigree, Gesundheitspass, Impfungen</li><li>AnimalBond wickelt keine Zahlungen ab</li>",
+ch4_sale_warn:"Der Verkauf von Tieren ist gesetzlich geregelt. Bitte prüfe die Gesetze in deinem Land. Zum Aktivieren der Verkaufsfunktion kontaktiere uns über das Formular auf unserer Website.",
+ch4_breed_p:"Verbindet Besitzer von Rassehunden für verantwortungsvolle Zucht.",
+ch4_breed_list:"<li>Rasse, Alter, Dokumente und Bedingungen angeben</li><li>Empfohlen für verifizierte Rassehunde mit Pedigree</li><li>Beide Tiere müssen gesund und geimpft sein</li>",
+ch4_med_p:"Für Tiere, die medizinische Behandlung benötigen und Spenden oder Gemeinschaftsunterstützung suchen.",
+ch4_med_list:"<li>Diagnose und erforderliche Behandlung beschreiben</li><li>Tierarztdokumente für Glaubwürdigkeit anhängen</li><li>Die Community kann direkt Hilfe anbieten</li>",
+ch4_med_note:"Der Bereich <strong>Hilfe</strong> (💊) hat eine eigene Seite für Tiere mit medizinischen Bedürfnissen.",
+ch5_p1:"Tippe auf die Schaltfläche <strong>➕ Hinzufügen</strong> in der unteren Leiste, um eine neue Anzeige aufzugeben.",
+ch5_s1t:"Anzeigentyp",ch5_s1d:" — Adoption, Verkauf, Zucht, Medizinische Hilfe, Vermisst oder Gefunden.",
+ch5_s2t:"Angaben zum Tier",ch5_s2d:" — Name, Tierart, Rasse, Alter, Geschlecht, Beschreibung.",
+ch5_s3t:"Standort",ch5_s3d:" — Stadt eingeben oder GPS für automatischen Standort aktivieren.",
+ch5_s4t:"Veröffentlichen",ch5_s4d:" — Angaben prüfen und auf Veröffentlichen tippen. Die Anzeige erscheint sofort.",
+ch5_photos_title:"Fotos",
+ch5_photos_list:"<li>1 bis 5 Fotos hinzufügen</li><li>Bei natürlichem Licht fotografieren</li><li>Das erste Foto wird das Hauptbild</li><li>Unscharfe oder dunkle Fotos vermeiden</li>",
+ch5_tip:"Anzeigen mit guten Fotos und detaillierten Beschreibungen erhalten bis zu 3× mehr Interesse.",
+ch5_warn:"Markiere die Anzeige als <strong>Adoptiert</strong> oder <strong>Gelöst</strong>, sobald das Tier ein Zuhause gefunden hat.",
+ch6_p1:"Tippe auf die Schaltfläche <strong>💬 Kontakt</strong> auf der Tierkarte. Ein Match wird automatisch erstellt und du wirst zum Gespräch weitergeleitet.",
+ch6_s1t:"Kontakt antippen",ch6_s1d:" — die Schaltfläche erscheint auf der Karte und auf der Detailseite.",
+ch6_s2t:"Ein Match wird erstellt",ch6_s2d:" — eine direkte Verbindung zwischen dir und dem Tierbesitzer.",
+ch6_s3t:"Direktes Gespräch",ch6_s3d:" — Nachrichten austauschen, Situation beschreiben, Treffen vereinbaren.",
+ch6_msg_title:"Nachrichten-Bereich",
+ch6_msg_list:"<li>Alle aktiven Gespräche an einem Ort</li><li>Tierfoto und -name bei jedem Gespräch sichtbar</li><li>Anzeige ungelesener Nachrichten (roter Punkt)</li>",
+ch6_note:"Teile keine sensiblen persönlichen Daten im Chat. Kläre Details persönlich.",
+ch7_p1:"Der Bereich Vermisst/Gefunden ist über das blaue Banner im Feed oder auf der Website unter <em>animalbond.club/pierdute-gasite</em> zugänglich.",
+ch7_lost_title:"Ich habe ein Tier verloren",
+ch7_ls1t:"➕ Hinzufügen → Vermisst antippen",ch7_ls2t:"Details ausfüllen",ch7_ls2d:" — Name, Tierart, Rasse, Datum und letzter bekannter Aufenthaltsort.",ch7_ls3t:"Veröffentlichen und teilen",ch7_ls3d:" — die Anzeige erscheint sofort. Auch in sozialen Medien teilen.",
+ch7_found_title:"Ich habe ein Tier gefunden",
+ch7_fs1t:"Typ Gefunden auswählen",ch7_fs2t:"Tier und Fundort beschreiben",ch7_fs2d:" — Tierart, Farbe, besondere Merkmale, genaue Fundstelle.",ch7_fs3t:"Tier fotografieren",ch7_fs3d:" — das Foto hilft dem Besitzer beim sofortigen Erkennen.",
+ch7_tip:"Wenn das Tier nach Hause zurückgekehrt ist, markiere die Anzeige als <strong>Gelöst</strong>.",
+ch8_p1:"Der Bereich <strong>Hilfe</strong> (💊) ist für Tiere mit medizinischen Problemen gedacht, die Gemeinschaftsunterstützung benötigen.",
+ch8_c1t:"Medizinische Anzeigen",ch8_c1d:"Ein bestimmtes Tier braucht Behandlung. Die Community kann dem Besitzer direkt helfen.",
+ch8_c2t:"Spendenkampagnen",ch8_c2d:"Organisierte Kampagnen zur Mittelbeschaffung für medizinische Behandlungen.",
+ch8_warn:"AnimalBond überprüft die Echtheit medizinischer Anzeigen nicht. Spende erst nach Überprüfung der Situation direkt an den Besitzer.",
+ch9_p1:"Der Bereich <strong>Geschichten</strong> (⭐) ist für Nutzer, die durch AnimalBond adoptiert haben und ihre Erfahrungen teilen möchten.",
+ch9_s1t:"⭐ Geschichten → Meine Geschichte hinzufügen antippen",ch9_s2t:"Geschichte schreiben",ch9_s2d:" — erstes Kennenlernen, die ersten Tage und die Veränderung beschreiben.",ch9_s3t:"Foto hinzufügen",ch9_s3d:" — ein Foto von dir und deinem Tier macht die Geschichte authentischer.",ch9_s4t:"Video hinzufügen (optional)",ch9_s4d:" — YouTube- oder Vimeo-Link. Erscheint mit Play-Schaltfläche auf der Karte.",ch9_s5t:"Zur Genehmigung einreichen",ch9_s5d:" — die Geschichte wird geprüft und innerhalb von 24–48 Stunden veröffentlicht.",
+ch9_tip:"Authentische und detaillierte Geschichten werden von der Community am meisten geschätzt.",
+ch10_edit_title:"Profil bearbeiten",
+ch10_edit_list:"<li><strong>Profilfoto</strong></li><li><strong>Name und Benutzername</strong></li><li><strong>Beschreibung</strong></li><li><strong>Wohnungstyp</strong></li><li><strong>Erfahrung mit Tieren</strong></li><li><strong>Bevorzugte Tierart</strong></li>",
+ch10_gps_title:"GPS und Suchradius",
+ch10_gps_list:"<li><strong>Standort aktivieren</strong> — ermöglicht Entfernungsberechnungen</li><li><strong>Suchradius</strong> — in km (25, 50, 100, 200 km oder Alle Entfernungen)</li>",
+ch10_note:"Die Entfernung zu jedem Tier wird auf der Karte angezeigt. Die Reihenfolge bleibt immer älteste zuerst.",
+ch10_lang_title:"Sprache und Land",
+ch10_lang_list:"<li><strong>Oberflächensprache</strong> — Rumänisch, Englisch, Deutsch, Französisch, Italienisch, Spanisch, Ungarisch</li><li><strong>Land</strong> — bestimmt den Standard-Länderfilter im Feed</li>",
+ch10_privacy_title:"Sicherheit und Datenschutz",
+ch10_privacy_list:"<li><strong>Passwort ändern</strong> — in den Kontoeinstellungen</li><li><strong>DSGVO</strong> — deine Daten werden nicht an Dritte verkauft</li><li><strong>Konto löschen</strong> — über das Kontaktformular auf der Website</li>",
+ch11_p1:"AnimalBond ist auch als Website unter <strong>animalbond.club</strong> verfügbar. Du kannst alle Anzeigen ohne Konto ansehen.",
+th_section:"Bereich",th_desc:"Beschreibung",
+ch11_r1n:"Startseite",ch11_r1d:"Übersicht, Statistiken, Partner und aktuelle Geschichten",
+ch11_r2n:"Alle Anzeigen",ch11_r2d:"Vollständiger Feed mit Filtern für Typ, Tierart, Land und Standort",
+ch11_r3n:"Medizinische Hilfe",ch11_r3d:"Tiere mit medizinischen Bedürfnissen und Spendenkampagnen",
+ch11_r4n:"Vermisst/Gefunden",ch11_r4d:"Anzeigen für vermisste oder gefundene Tiere",
+ch11_r5n:"Partner",ch11_r5d:"Tierarztpraxen und Partnershops",
+ch11_r6n:"Kampagnen",ch11_r6d:"Aktive Spendenaktionen",
+ch11_r7n:"Geschichten",ch11_r7d:"Erfolgreiche Adoptionsgeschichten aus der Community",
+ch11_partner_title:"Partner — Zoohandlungen & Tierarztpraxen",
+ch11_partner_p:"AnimalBond bietet erhöhte Sichtbarkeit für Zoohandlungen und Tierarztpraxen durch Plattformlisting.",
+ch11_shop_t:"Zoohandlungen",ch11_shop_d:"Listing gegen Gebühr. Kontaktiere uns für ein individuelles Angebot.",
+ch11_vet_t:"Tierarztpraxen",ch11_vet_d:"Listing gegen Gebühr. Kontaktiere uns für ein individuelles Angebot.",
+ch11_tip:"Du kannst alle Anzeigen im Web ohne Konto ansehen. Ein Konto ist nur zum Inserieren, Schreiben oder Hinzufügen von Geschichten erforderlich.",
+ch12_contact_title:"Kontakt und Support",
+ch12_form_t:"Kontaktformular",ch12_form_d:"animalbond.club/contact — direkt von unserem Team empfangen.",
+ch12_gold_t:"Gold-Kunde ⭐",ch12_gold_d:"Premium-Paket mit zusätzlichen Vorteilen. Kontaktiere uns für Details.",
+faq1q:"Ist AnimalBond kostenlos?",faq1a:"Ja, Download und Basisnutzung sind völlig kostenlos. Adoption, Vermisst/Gefunden, Medizinische Hilfe und Nachrichten sind kostenlos. Premium-Funktionen (Verkauf, Partner-Listing) erfordern ein Abonnement.",
+faq2q:"Kann ich AnimalBond ohne Konto nutzen?",faq2a:"Auf der Website kannst du alle Anzeigen ohne Konto ansehen. Zum Inserieren, Schreiben oder Hinzufügen von Geschichten benötigst du ein Konto.",
+faq3q:"Wie lange dauert es, bis meine Anzeige erscheint?",faq3a:"Reguläre Anzeigen erscheinen sofort. Geschichten benötigen eine Genehmigung innerhalb von 24–48 Stunden.",
+faq4q:"Wie funktioniert der Suchradius?",faq4a:"Der Radius filtert Tiere nach Entfernung von deinem Standort. Tiere ohne GPS werden immer angezeigt. Die Reihenfolge bleibt älteste zuerst.",
+faq5q:"Meine Anzeige ist abgelaufen. Was tun?",faq5a:"Gehe zu Profil → Meine Anzeigen und erneuere die Anzeige, wenn das Tier noch verfügbar ist.",
+faq6a:"Markiere die Anzeige als &bdquo;Adoptiert&rdquo; in Meine Anzeigen. Sie wird aus dem Feed entfernt.",
+faq7q:"Wie melde ich eine verdächtige Anzeige?",faq7a:"Jede Karte hat eine 🚩 Melden-Schaltfläche. Antippen und Problem beschreiben. Unser Team prüft alle Meldungen.",
+faq8q:"Wie lösche ich mein Konto?",faq8a:"Nutze das Kontaktformular auf animalbond.club. Wir bearbeiten die Anfrage innerhalb von 72 Stunden gemäß DSGVO.",
+footer_text:"Benutzerhandbuch · Version 1.0 · Mai 2026"
+},
+fr: {
+cover_tagline:"Nous connectons les animaux avec des familles aimantes",
+cover_desc:"Guide complet pour adopter, céder et sauver des animaux via la plateforme AnimalBond.",
+cover_version:"Version 1.0 · Mai 2026",
+cover_meta:"📱 iOS & Android · 🌐 animalbond.club<br>🇷🇴 Roumanie · 🇩🇪 Allemagne · 🇫🇷 France · 🇮🇹 Italie · 🇪🇸 Espagne · 🇭🇺 Hongrie",
+toc_title:"Sommaire",toc_s1:"Introduction",toc_s2:"Fonctionnalités principales",toc_s3:"Sections spéciales",toc_s4:"Paramètres et plateformes",
+ch1_h2:"Qu'est-ce qu'AnimalBond ?",ch2_h2:"Premiers pas — Compte et profil",ch3_h2:"Fil principal — Découvrir des animaux",ch4_h2:"Types d'annonces",ch5_h2:"Comment publier une annonce",ch6_h2:"Contacts et messages",ch7_h2:"Animaux perdus et trouvés",ch8_h2:"Aide médicale et dons",ch9_h2:"Histoires de succès",ch10_h2:"Profil et paramètres",ch11_h2:"Plateforme web",ch12_h2:"Questions fréquentes",
+ch1_p1:"AnimalBond est une plateforme numérique dédiée au bien-être animal, disponible en tant qu'application mobile et site web. Sa mission : connecter les animaux ayant besoin d'un foyer avec des personnes pouvant leur en offrir un.",
+ch1_feat_title:"Ce que tu peux faire avec AnimalBond",
+ch1_f1t:"Adopter un animal",ch1_f1d:"Trouve des chiens, chats, lapins, oiseaux et autres animaux disponibles à l'adoption près de chez toi ou dans toute l'Europe.",
+ch1_f2t:"Céder un animal",ch1_f2d:"Publie une annonce pour un animal que tu ne peux plus garder et trouve-lui une famille responsable.",
+ch1_f3t:"Perdus / Trouvés",ch1_f3d:"Signale un animal perdu ou trouvé et aide à le réunir avec son propriétaire.",
+ch1_f4t:"Aide médicale",ch1_f4d:"Demande ou offre du soutien pour des animaux ayant besoin de soins médicaux urgents.",
+ch1_f5t:"Élevage",ch1_f5d:"Publie des annonces pour la reproduction responsable d'animaux de race, avec tous les documents requis.",
+ch1_f6t:"Histoires de succès",ch1_f6d:"Partage ton histoire d'adoption et inspire d'autres personnes à franchir le pas.",
+ch1_countries_title:"Où AnimalBond est disponible",
+ch1_th1:"Pays",ch1_th2:"Langue par défaut",ch1_th3:"Devise",
+lang_ro:"Roumain",lang_de:"Allemand",lang_fr:"Français",lang_it:"Italien",lang_es:"Espagnol",lang_hu:"Hongrois",
+ch1_note:"L'application détecte automatiquement la langue de ton appareil. Tu peux la modifier à tout moment dans les paramètres du profil.",
+ch2_dl_title:"Télécharger l'application",
+ch2_ios:"Recherche <strong>AnimalBond</strong> sur l'App Store et appuie sur Obtenir.",
+ch2_android:"Recherche <strong>AnimalBond</strong> sur Google Play et appuie sur Installer.",
+ch2_create_title:"Créer un compte",
+ch2_s1t:"Ouvrir l'application et appuyer sur « Créer un compte »",ch2_s1d:"",
+ch2_s2t:"Remplir tes informations",ch2_s2d:" — e-mail, mot de passe (min. 6 caractères) et un nom d'utilisateur unique.",
+ch2_s3t:"Choisir le type de compte",ch2_s3d:" — Privé ou Refuge.",
+ch2_s4t:"Sélectionner la langue et le pays",ch2_s4d:" — l'application suggère automatiquement la langue de ton appareil.",
+ch2_s5t:"Confirmer l'e-mail",ch2_s5d:" — appuyer sur le lien reçu, le compte devient actif immédiatement.",
+ch2_types_title:"Types de comptes",
+th_type:"Type",th_who:"Qui l'utilise",th_what:"Ce qu'il peut faire",
+type_private:"Privé",type_shelter:"Refuge",
+ch2_t1w:"Particuliers",ch2_t1c:"Adopter, publier des annonces, envoyer des messages",
+ch2_t2w:"Organisations, associations",ch2_t2c:"Gérer plusieurs animaux, profil d'organisation, visibilité accrue",
+ch2_tip:"Si tu es un refuge ou une association de protection animale, choisis le compte <strong>Refuge</strong> pour accéder aux fonctionnalités dédiées.",
+ch2_profile_title:"Configurer ton profil",
+ch2_profile_list:"<li><strong>Photo de profil</strong></li><li><strong>Nom et pseudonyme</strong></li><li><strong>Description</strong></li><li><strong>Type de logement</strong> — maison avec jardin, appartement, etc.</li><li><strong>Expérience avec les animaux</strong> — aucune, modérée, avancée</li><li><strong>Espèces préférées</strong></li><li><strong>Rayon de recherche</strong></li>",
+ch2_note:"Plus ton profil est complet, plus le système de compatibilité trouvera des animaux adaptés à ta situation.",
+ch3_p1:"La section <strong>Découvrir</strong> (❤️ dans la barre du bas) est le cœur de l'application. Les annonces sont affichées par ordre chronologique — les plus anciennes en premier — pour donner un maximum de visibilité aux animaux qui attendent depuis le plus longtemps.",
+ch3_filters_title:"Filtres disponibles",
+ch3_species_title:"Espèce",ch3_species_list:"<li>🐾 <strong>Toutes</strong></li><li>🐶 <strong>Chiens</strong></li><li>🐱 <strong>Chats</strong></li><li>🐾 <strong>Autres</strong> — lapins, oiseaux, rongeurs, etc.</li>",
+ch3_type_title:"Type d'annonce",ch3_type_list:"<li>📋 Tous les types</li><li>🏠 Adoption</li><li>💰 Vente</li><li>🌿 Élevage</li><li>💊 Aide médicale</li>",
+ch3_country_title:"Pays",ch3_country_p:"Sélectionne un pays dans la liste déroulante. Ton pays est affiché par défaut.",
+ch3_gps_title:"Rayon de recherche (GPS)",ch3_gps_p:"Si la localisation est activée, tu verras une bannière avec le rayon actuel. Appuie sur <strong>Modifier</strong> pour le changer depuis ton profil.",
+ch3_order_title:"Ordre des annonces",ch3_order_p:"Les annonces sont affichées <strong>les plus anciennes en premier</strong> — les animaux qui attendent depuis le plus longtemps apparaissent en tête.",
+ch3_card_title:"Contenu d'une carte",
+ch3_card_list:"<li>📷 Photo principale</li><li>🏷️ Icône du type d'annonce</li><li>💝 Score de compatibilité (ex : <strong>70%</strong>)</li><li>❤️ Bouton J'aime</li><li>📍 Distance depuis chez toi</li><li>Nom, race et âge</li><li>💬 Bouton Contact</li>",
+ch3_swipe_title:"Mode Swipe",
+ch3_swipe_list:"<li>👉 <strong>Droite</strong> — J'aime</li><li>👈 <strong>Gauche</strong> — Je n'aime pas</li><li>⬅️ <strong>Retour</strong> — revenir à la grille</li>",
+ch3_compat_title:"Score de compatibilité",
+th_percent:"Score",th_meaning:"Signification",
+compat_1:"Excellent — toutes les préférences sont alignées",compat_2:"Bon — la plupart des critères correspondent",compat_3:"Modéré — quelques différences à considérer",compat_4l:"Moins de 40%",compat_4:"Faible — peu de critères en commun",
+ch3_tip:"Un profil complet mène à des scores de compatibilité plus précis.",
+ch4_h2:"Types d'annonces",
+type_adoption:"Adoption",type_sale:"Vente",type_breeding:"Élevage",type_medical:"Aide médicale",premium_label:"Premium",
+ch4_adopt_p:"Animaux ayant besoin d'un nouveau foyer, <strong>gratuitement</strong>. Le type d'annonce le plus courant sur AnimalBond.",
+ch4_adopt_list:"<li>Convient aux animaux abandonnés, de refuge ou personnels</li><li>Aucune somme d'argent impliquée</li><li>Le propriétaire peut demander un accord d'adoption responsable</li>",
+ch4_sale_p:"Les annonces de vente sont une <strong>fonctionnalité premium</strong> destinée aux animaux de race avec pedigree. Un abonnement actif est requis.",
+ch4_sale_list:"<li>Indiquer le prix, la devise et les documents disponibles</li><li>Recommandé : pedigree, carnet de santé, vaccinations</li><li>AnimalBond ne traite pas les paiements</li>",
+ch4_sale_warn:"La vente d'animaux est réglementée par la loi. Vérifie la législation de ton pays. Pour activer la fonctionnalité de vente, contacte-nous via le formulaire sur notre site.",
+ch4_breed_p:"Connecte les propriétaires d'animaux de race pour un élevage responsable.",
+ch4_breed_list:"<li>Indiquer la race, l'âge, les documents et les conditions</li><li>Recommandé pour les races avec pedigree vérifié</li><li>Les deux animaux doivent être sains et vaccinés</li>",
+ch4_med_p:"Pour les animaux nécessitant un traitement médical et cherchant des dons ou un soutien communautaire.",
+ch4_med_list:"<li>Décrire le diagnostic et le traitement nécessaire</li><li>Joindre des documents vétérinaires pour la crédibilité</li><li>La communauté peut contacter et offrir une aide directe</li>",
+ch4_med_note:"La section <strong>Aide</strong> (💊) dispose d'une page dédiée aux animaux ayant des besoins médicaux.",
+ch5_p1:"Appuie sur le bouton <strong>➕ Ajouter</strong> dans la barre du bas pour publier une nouvelle annonce.",
+ch5_s1t:"Type d'annonce",ch5_s1d:" — Adoption, Vente, Élevage, Aide médicale, Perdu ou Trouvé.",
+ch5_s2t:"Informations sur l'animal",ch5_s2d:" — nom, espèce, race, âge, sexe, description.",
+ch5_s3t:"Localisation",ch5_s3d:" — saisir ta ville ou activer le GPS pour la localisation automatique.",
+ch5_s4t:"Publier",ch5_s4d:" — vérifier les informations et appuyer sur Publier. L'annonce apparaît immédiatement.",
+ch5_photos_title:"Photos",
+ch5_photos_list:"<li>Ajouter entre 1 et 5 photos</li><li>Photographier en lumière naturelle</li><li>La première photo sera l'image principale</li><li>Éviter les photos floues ou sombres</li>",
+ch5_tip:"Les annonces avec de bonnes photos et des descriptions détaillées reçoivent jusqu'à 3× plus d'intérêt.",
+ch5_warn:"Marque l'annonce comme <strong>Adopté</strong> ou <strong>Résolu</strong> dès que l'animal a trouvé un foyer.",
+ch6_p1:"Appuie sur le bouton <strong>💬 Contact</strong> sur la carte de l'animal. Un match est créé automatiquement et tu es dirigé vers la conversation.",
+ch6_s1t:"Appuyer sur Contact",ch6_s1d:" — le bouton apparaît sur la carte et sur la page de détail.",
+ch6_s2t:"Un match est créé",ch6_s2d:" — un lien direct entre toi et le propriétaire de l'animal.",
+ch6_s3t:"Conversation directe",ch6_s3d:" — échanger des messages, décrire ta situation et fixer un rendez-vous.",
+ch6_msg_title:"Section Messages",
+ch6_msg_list:"<li>Toutes tes conversations actives en un seul endroit</li><li>Photo et nom de l'animal visibles sur chaque conversation</li><li>Indicateur de messages non lus (point rouge)</li>",
+ch6_note:"Ne partage pas d'informations personnelles sensibles dans le chat. Règle les détails en personne.",
+ch7_p1:"La section Perdus/Trouvés est accessible via la bannière bleue dans le fil ou sur le site à <em>animalbond.club/pierdute-gasite</em>.",
+ch7_lost_title:"J'ai perdu un animal",
+ch7_ls1t:"Appuyer sur ➕ Ajouter → Perdu",ch7_ls2t:"Remplir les détails",ch7_ls2d:" — nom, espèce, race, date et dernier endroit où l'animal a été vu.",ch7_ls3t:"Publier et partager",ch7_ls3d:" — l'annonce apparaît immédiatement. Partager aussi sur les réseaux sociaux.",
+ch7_found_title:"J'ai trouvé un animal",
+ch7_fs1t:"Sélectionner le type Trouvé",ch7_fs2t:"Décrire l'animal et l'endroit",ch7_fs2d:" — espèce, couleur, signes distinctifs, lieu exact.",ch7_fs3t:"Photographier l'animal",ch7_fs3d:" — la photo aide le propriétaire à identifier l'animal immédiatement.",
+ch7_tip:"Si l'animal est rentré chez lui, marque l'annonce comme <strong>Résolu</strong>.",
+ch8_p1:"La section <strong>Aide</strong> (💊) est dédiée aux animaux ayant des problèmes médicaux nécessitant le soutien de la communauté.",
+ch8_c1t:"Annonces médicales",ch8_c1d:"Un animal spécifique a besoin d'un traitement. La communauté peut contacter le propriétaire pour aider directement.",
+ch8_c2t:"Campagnes de dons",ch8_c2d:"Campagnes organisées pour collecter des fonds destinés aux traitements médicaux.",
+ch8_warn:"AnimalBond ne garantit pas l'authenticité des annonces médicales. Si tu fais un don, fais-le directement au propriétaire après avoir vérifié la situation.",
+ch9_p1:"La section <strong>Histoires</strong> (⭐) est l'endroit où les utilisateurs ayant adopté via AnimalBond partagent leur expérience.",
+ch9_s1t:"Appuyer sur ⭐ Histoires → Ajouter mon histoire",ch9_s2t:"Écrire l'histoire",ch9_s2d:" — décrire la première rencontre, les premiers jours et la transformation.",ch9_s3t:"Ajouter une photo",ch9_s3d:" — une photo de toi et de ton animal rend l'histoire plus authentique.",ch9_s4t:"Ajouter une vidéo (optionnel)",ch9_s4d:" — lien YouTube ou Vimeo. Apparaît avec un bouton lecture sur la carte.",ch9_s5t:"Soumettre pour approbation",ch9_s5d:" — l'histoire sera vérifiée et publiée sous 24–48 heures.",
+ch9_tip:"Les histoires authentiques et détaillées sont les plus appréciées par la communauté.",
+ch10_edit_title:"Modifier le profil",
+ch10_edit_list:"<li><strong>Photo de profil</strong></li><li><strong>Nom et pseudonyme</strong></li><li><strong>Description</strong></li><li><strong>Type de logement</strong></li><li><strong>Expérience avec les animaux</strong></li><li><strong>Espèces préférées</strong></li>",
+ch10_gps_title:"GPS et rayon de recherche",
+ch10_gps_list:"<li><strong>Activer la localisation</strong> — permet le calcul des distances</li><li><strong>Rayon de recherche</strong> — en km (25, 50, 100, 200 km ou Toutes distances)</li>",
+ch10_note:"La distance de chaque animal est affichée sur sa carte. L'ordre reste toujours les plus anciennes en premier.",
+ch10_lang_title:"Langue et pays",
+ch10_lang_list:"<li><strong>Langue de l'interface</strong> — Roumain, Anglais, Allemand, Français, Italien, Espagnol, Hongrois</li><li><strong>Pays</strong> — détermine le filtre pays par défaut dans le fil</li>",
+ch10_privacy_title:"Sécurité et confidentialité",
+ch10_privacy_list:"<li><strong>Changer le mot de passe</strong> — dans les paramètres du compte</li><li><strong>RGPD</strong> — tes données ne sont jamais vendues à des tiers</li><li><strong>Supprimer le compte</strong> — via le formulaire de contact sur le site</li>",
+ch11_p1:"AnimalBond est également disponible en tant que site web sur <strong>animalbond.club</strong>. Tu peux consulter toutes les annonces sans compte.",
+th_section:"Section",th_desc:"Description",
+ch11_r1n:"Accueil",ch11_r1d:"Vue d'ensemble, statistiques, partenaires et histoires récentes",
+ch11_r2n:"Toutes les annonces",ch11_r2d:"Fil complet avec filtres pour le type, l'espèce, le pays et la localisation",
+ch11_r3n:"Aide médicale",ch11_r3d:"Animaux ayant des besoins médicaux et campagnes de dons",
+ch11_r4n:"Perdus/Trouvés",ch11_r4d:"Annonces d'animaux perdus ou trouvés",
+ch11_r5n:"Partenaires",ch11_r5d:"Cliniques vétérinaires et boutiques partenaires",
+ch11_r6n:"Campagnes",ch11_r6d:"Campagnes de collecte de fonds actives",
+ch11_r7n:"Histoires",ch11_r7d:"Histoires d'adoption réussies de la communauté",
+ch11_partner_title:"Partenaires — Animaleries & Cabinets vétérinaires",
+ch11_partner_p:"AnimalBond offre une visibilité accrue aux animaleries et cabinets vétérinaires via un listing sur la plateforme.",
+ch11_shop_t:"Animaleries",ch11_shop_d:"Listing payant. Contacte-nous pour un devis personnalisé.",
+ch11_vet_t:"Cabinets vétérinaires",ch11_vet_d:"Listing payant. Contacte-nous pour un devis personnalisé.",
+ch11_tip:"Tu peux voir toutes les annonces sur le web sans compte. Un compte est nécessaire uniquement pour publier, envoyer des messages ou ajouter des histoires.",
+ch12_contact_title:"Contact et support",
+ch12_form_t:"Formulaire de contact",ch12_form_d:"animalbond.club/contact — reçu directement par notre équipe.",
+ch12_gold_t:"Client Gold ⭐",ch12_gold_d:"Forfait premium avec des avantages supplémentaires. Contacte-nous pour plus de détails.",
+faq1q:"AnimalBond est-il gratuit ?",faq1a:"Oui, le téléchargement et l'utilisation de base sont entièrement gratuits. L'adoption, Perdus/Trouvés, l'aide médicale et la messagerie sont gratuits. Les fonctionnalités premium (Vente, listing partenaires) nécessitent un abonnement.",
+faq2q:"Puis-je utiliser AnimalBond sans compte ?",faq2a:"Sur le site, tu peux voir toutes les annonces sans compte. Pour publier, envoyer des messages ou ajouter des histoires, tu as besoin d'un compte.",
+faq3q:"Combien de temps avant que mon annonce apparaisse ?",faq3a:"Les annonces ordinaires apparaissent immédiatement. Les histoires nécessitent une approbation sous 24–48 heures.",
+faq4q:"Comment fonctionne le rayon de recherche ?",faq4a:"Le rayon filtre les animaux selon la distance depuis ta localisation. Les animaux sans GPS sont toujours inclus. L'ordre reste les plus anciennes en premier.",
+faq5q:"Mon annonce a expiré. Que faire ?",faq5a:"Va dans Profil → Mes annonces et renouvelle l'annonce si l'animal est toujours disponible.",
+faq6q:"J'ai adopté l'animal. Que faire de l'annonce ?",faq6a:"Marque l'annonce comme « Adopté » dans Mes annonces. Elle sera retirée du fil.",
+faq7q:"Comment signaler une annonce suspecte ?",faq7a:"Chaque carte a un bouton 🚩 Signaler. Appuie dessus et décris le problème. Notre équipe examine tous les signalements.",
+faq8q:"Comment supprimer mon compte ?",faq8a:"Utilise le formulaire de contact sur animalbond.club. Nous traiterons la demande sous 72 heures conformément au RGPD.",
+footer_text:"Manuel d'utilisation · Version 1.0 · Mai 2026"
+},
+it: {
+cover_tagline:"Connettiamo gli animali con famiglie amorevoli",
+cover_desc:"Guida completa per adottare, cedere e salvare animali tramite la piattaforma AnimalBond.",
+cover_version:"Versione 1.0 · Maggio 2026",
+cover_meta:"📱 iOS & Android · 🌐 animalbond.club<br>🇷🇴 Romania · 🇩🇪 Germania · 🇫🇷 Francia · 🇮🇹 Italia · 🇪🇸 Spagna · 🇭🇺 Ungheria",
+toc_title:"Sommario",toc_s1:"Introduzione",toc_s2:"Funzionalità principali",toc_s3:"Sezioni speciali",toc_s4:"Impostazioni e piattaforme",
+ch1_h2:"Cos'è AnimalBond?",ch2_h2:"Primi passi — Account e profilo",ch3_h2:"Feed principale — Scopri animali",ch4_h2:"Tipi di annunci",ch5_h2:"Come pubblicare un annuncio",ch6_h2:"Contatti e messaggi",ch7_h2:"Animali smarriti e trovati",ch8_h2:"Aiuto medico e donazioni",ch9_h2:"Storie di successo",ch10_h2:"Profilo e impostazioni",ch11_h2:"Piattaforma web",ch12_h2:"Domande frequenti",
+ch1_p1:"AnimalBond è una piattaforma digitale dedicata al benessere degli animali, disponibile come app mobile e sito web. La sua missione: connettere gli animali che hanno bisogno di una casa con persone che possono offrirgliela.",
+ch1_feat_title:"Cosa puoi fare con AnimalBond",
+ch1_f1t:"Adottare un animale",ch1_f1d:"Trova cani, gatti, conigli, uccelli e altri animali disponibili per l'adozione nella tua zona o in tutta Europa.",
+ch1_f2t:"Cedere un animale",ch1_f2d:"Pubblica un annuncio per un animale che non puoi più tenere e trovale una famiglia responsabile.",
+ch1_f3t:"Smarriti / Trovati",ch1_f3d:"Segnala un animale smarrito o trovato e aiuta a riunirlo con il suo proprietario.",
+ch1_f4t:"Aiuto medico",ch1_f4d:"Chiedi o offri supporto per animali che hanno urgente bisogno di cure mediche.",
+ch1_f5t:"Riproduzione",ch1_f5d:"Pubblica annunci per la riproduzione responsabile di animali di razza, con tutta la documentazione necessaria.",
+ch1_f6t:"Storie di successo",ch1_f6d:"Condividi la tua storia di adozione e ispira altre persone a fare lo stesso passo.",
+ch1_countries_title:"Dove è disponibile AnimalBond",
+ch1_th1:"Paese",ch1_th2:"Lingua predefinita",ch1_th3:"Valuta",
+lang_ro:"Rumeno",lang_de:"Tedesco",lang_fr:"Francese",lang_it:"Italiano",lang_es:"Spagnolo",lang_hu:"Ungherese",
+ch1_note:"L'app rileva automaticamente la lingua del tuo dispositivo. Puoi cambiarla in qualsiasi momento nelle impostazioni del profilo.",
+ch2_dl_title:"Scarica l'app",
+ch2_ios:"Cerca <strong>AnimalBond</strong> sull'App Store e tocca Ottieni.",
+ch2_android:"Cerca <strong>AnimalBond</strong> su Google Play e tocca Installa.",
+ch2_create_title:"Creare un account",
+ch2_s1t:"Apri l'app e tocca \"Crea account\"",ch2_s1d:"",
+ch2_s2t:"Compila i dati",ch2_s2d:" — email, password (min. 6 caratteri) e un nome utente unico.",
+ch2_s3t:"Scegli il tipo di account",ch2_s3d:" — Privato o Rifugio.",
+ch2_s4t:"Seleziona lingua e paese",ch2_s4d:" — l'app suggerisce automaticamente la lingua del dispositivo.",
+ch2_s5t:"Conferma l'email",ch2_s5d:" — tocca il link ricevuto e l'account diventa attivo immediatamente.",
+ch2_types_title:"Tipi di account",
+th_type:"Tipo",th_who:"Chi lo usa",th_what:"Cosa può fare",
+type_private:"Privato",type_shelter:"Rifugio",
+ch2_t1w:"Persone fisiche",ch2_t1c:"Adottare, pubblicare annunci, inviare messaggi",
+ch2_t2w:"Organizzazioni, associazioni",ch2_t2c:"Gestire più animali, profilo organizzazione, visibilità aumentata",
+ch2_tip:"Se sei un rifugio o un'associazione di protezione animale, scegli l'account <strong>Rifugio</strong> per le funzionalità dedicate.",
+ch2_profile_title:"Configurare il profilo",
+ch2_profile_list:"<li><strong>Foto profilo</strong></li><li><strong>Nome e username</strong></li><li><strong>Descrizione</strong></li><li><strong>Tipo di alloggio</strong></li><li><strong>Esperienza con gli animali</strong></li><li><strong>Specie preferite</strong></li><li><strong>Raggio di ricerca</strong></li>",
+ch2_note:"Più il profilo è completo, più accuratamente il sistema di compatibilità troverà animali adatti a te.",
+ch3_p1:"La sezione <strong>Scopri</strong> (❤️ nella barra in basso) è il cuore dell'app. Gli annunci sono visualizzati in ordine cronologico — i più vecchi prima — per dare massima visibilità agli animali che aspettano da più tempo.",
+ch3_filters_title:"Filtri disponibili",
+ch3_species_title:"Specie",ch3_species_list:"<li>🐾 <strong>Tutti</strong></li><li>🐶 <strong>Cani</strong></li><li>🐱 <strong>Gatti</strong></li><li>🐾 <strong>Altri</strong> — conigli, uccelli, roditori, ecc.</li>",
+ch3_type_title:"Tipo di annuncio",ch3_type_list:"<li>📋 Tutti i tipi</li><li>🏠 Adozione</li><li>💰 Vendita</li><li>🌿 Riproduzione</li><li>💊 Aiuto medico</li>",
+ch3_country_title:"Paese",ch3_country_p:"Seleziona un paese dal menu a tendina. Il tuo paese è mostrato per impostazione predefinita.",
+ch3_gps_title:"Raggio di ricerca (GPS)",ch3_gps_p:"Se la posizione è attiva, vedrai un banner con il raggio attuale. Tocca <strong>Modifica</strong> per cambiarlo dal profilo.",
+ch3_order_title:"Ordine degli annunci",ch3_order_p:"Gli annunci sono mostrati <strong>dal più vecchio al più recente</strong> — gli animali che aspettano da più tempo appaiono per primi.",
+ch3_card_title:"Cosa contiene una scheda",
+ch3_card_list:"<li>📷 Foto principale</li><li>🏷️ Icona tipo annuncio</li><li>💝 Punteggio di compatibilità (es. <strong>70%</strong>)</li><li>❤️ Pulsante Mi piace</li><li>📍 Distanza da te</li><li>Nome, razza ed età</li><li>💬 Pulsante Contatta</li>",
+ch3_swipe_title:"Modalità Swipe",
+ch3_swipe_list:"<li>👉 <strong>Destra</strong> — Mi piace</li><li>👈 <strong>Sinistra</strong> — Non mi piace</li><li>⬅️ <strong>Indietro</strong> — torna alla griglia</li>",
+ch3_compat_title:"Punteggio di compatibilità",
+th_percent:"Punteggio",th_meaning:"Significato",
+compat_1:"Ottima — tutte le preferenze sono allineate",compat_2:"Buona — la maggior parte dei criteri corrisponde",compat_3:"Moderata — alcune differenze da considerare",compat_4l:"Sotto 40%",compat_4:"Bassa — pochi criteri in comune",
+ch3_tip:"Un profilo completo porta a punteggi di compatibilità più precisi.",
+ch4_h2:"Tipi di annunci",
+type_adoption:"Adozione",type_sale:"Vendita",type_breeding:"Riproduzione",type_medical:"Aiuto medico",premium_label:"Premium",
+ch4_adopt_p:"Animali che hanno bisogno di una nuova casa, <strong>gratuitamente</strong>. Il tipo di annuncio più comune su AnimalBond.",
+ch4_adopt_list:"<li>Adatto ad animali abbandonati, di rifugio o personali</li><li>Nessuna somma di denaro coinvolta</li><li>Il proprietario può richiedere un accordo di adozione responsabile</li>",
+ch4_sale_p:"Gli annunci di vendita sono una <strong>funzione premium</strong> per animali di razza con pedigree. È richiesto un abbonamento attivo.",
+ch4_sale_list:"<li>Specificare prezzo, valuta e documenti disponibili</li><li>Consigliato: pedigree, libretto sanitario, vaccinazioni</li><li>AnimalBond non gestisce i pagamenti</li>",
+ch4_sale_warn:"La vendita di animali è regolamentata dalla legge. Verifica la legislazione del tuo paese. Per attivare la funzione di vendita, contattaci tramite il modulo sul nostro sito.",
+ch4_breed_p:"Connette i proprietari di animali di razza per una riproduzione responsabile.",
+ch4_breed_list:"<li>Specificare razza, età, documenti e condizioni</li><li>Consigliato per razze con pedigree verificato</li><li>Entrambi gli animali devono essere sani e vaccinati</li>",
+ch4_med_p:"Per animali che necessitano di cure mediche e cercano donazioni o supporto dalla comunità.",
+ch4_med_list:"<li>Descrivere la diagnosi e il trattamento necessario</li><li>Allegare documenti veterinari per credibilità</li><li>La community può contattare e offrire aiuto diretto</li>",
+ch4_med_note:"La sezione <strong>Aiuto</strong> (💊) ha una pagina dedicata agli animali con esigenze mediche.",
+ch5_p1:"Tocca il pulsante <strong>➕ Aggiungi</strong> nella barra in basso per pubblicare un nuovo annuncio.",
+ch5_s1t:"Tipo di annuncio",ch5_s1d:" — Adozione, Vendita, Riproduzione, Aiuto medico, Smarrito o Trovato.",
+ch5_s2t:"Informazioni sull'animale",ch5_s2d:" — nome, specie, razza, età, sesso, descrizione.",
+ch5_s3t:"Posizione",ch5_s3d:" — inserisci la tua città o attiva il GPS per la localizzazione automatica.",
+ch5_s4t:"Pubblica",ch5_s4d:" — verifica le informazioni e tocca Pubblica. L'annuncio appare immediatamente.",
+ch5_photos_title:"Foto",
+ch5_photos_list:"<li>Aggiungere da 1 a 5 foto</li><li>Fotografare in luce naturale</li><li>La prima foto sarà l'immagine principale</li><li>Evitare foto sfocate o scure</li>",
+ch5_tip:"Gli annunci con buone foto e descrizioni dettagliate ricevono fino a 3× più interesse.",
+ch5_warn:"Contrassegna l'annuncio come <strong>Adottato</strong> o <strong>Risolto</strong> non appena l'animale trova casa.",
+ch6_p1:"Tocca il pulsante <strong>💬 Contatta</strong> sulla scheda dell'animale. Viene creato automaticamente un match e sei indirizzato alla conversazione.",
+ch6_s1t:"Tocca Contatta",ch6_s1d:" — il pulsante appare sulla scheda e nella pagina di dettaglio.",
+ch6_s2t:"Viene creato un match",ch6_s2d:" — un collegamento diretto tra te e il proprietario dell'animale.",
+ch6_s3t:"Conversazione diretta",ch6_s3d:" — scambiare messaggi, descrivere la tua situazione e organizzare un incontro.",
+ch6_msg_title:"Sezione Messaggi",
+ch6_msg_list:"<li>Tutte le conversazioni attive in un unico posto</li><li>Foto e nome dell'animale visibili su ogni conversazione</li><li>Indicatore messaggi non letti (punto rosso)</li>",
+ch6_note:"Non condividere informazioni personali sensibili in chat. Definisci i dettagli di persona.",
+ch7_p1:"La sezione Smarriti/Trovati è accessibile tramite il banner blu nel feed o sul sito a <em>animalbond.club/pierdute-gasite</em>.",
+ch7_lost_title:"Ho perso un animale",
+ch7_ls1t:"Tocca ➕ Aggiungi → Smarrito",ch7_ls2t:"Compila i dettagli",ch7_ls2d:" — nome, specie, razza, data e ultimo luogo dove è stato visto.",ch7_ls3t:"Pubblica e condividi",ch7_ls3d:" — l'annuncio appare immediatamente. Condividi anche sui social media.",
+ch7_found_title:"Ho trovato un animale",
+ch7_fs1t:"Seleziona il tipo Trovato",ch7_fs2t:"Descrivi l'animale e il luogo",ch7_fs2d:" — specie, colore, segni distintivi, luogo esatto.",ch7_fs3t:"Fotografa l'animale",ch7_fs3d:" — la foto aiuta il proprietario a identificarlo immediatamente.",
+ch7_tip:"Se l'animale è tornato a casa, contrassegna l'annuncio come <strong>Risolto</strong>.",
+ch8_p1:"La sezione <strong>Aiuto</strong> (💊) è dedicata agli animali con problemi medici che hanno bisogno del supporto della comunità.",
+ch8_c1t:"Annunci medici",ch8_c1d:"Un animale specifico ha bisogno di cure. La community può contattare il proprietario per offrire aiuto diretto.",
+ch8_c2t:"Campagne di donazioni",ch8_c2d:"Campagne organizzate per raccogliere fondi destinati a trattamenti medici.",
+ch8_warn:"AnimalBond non verifica l'autenticità degli annunci medici. Se fai una donazione, falla direttamente al proprietario dopo aver verificato la situazione.",
+ch9_p1:"La sezione <strong>Storie</strong> (⭐) è il luogo dove gli utenti che hanno adottato tramite AnimalBond condividono la loro esperienza.",
+ch9_s1t:"Tocca ⭐ Storie → Aggiungi la tua storia",ch9_s2t:"Scrivi la storia",ch9_s2d:" — descrivi il primo incontro, i primi giorni e la trasformazione.",ch9_s3t:"Aggiungi una foto",ch9_s3d:" — una foto di te e del tuo animale rende la storia più autentica.",ch9_s4t:"Aggiungi un video (opzionale)",ch9_s4d:" — link YouTube o Vimeo. Appare con un pulsante play sulla scheda.",ch9_s5t:"Invia per approvazione",ch9_s5d:" — la storia verrà verificata e pubblicata entro 24–48 ore.",
+ch9_tip:"Le storie autentiche e dettagliate sono le più apprezzate dalla community.",
+ch10_edit_title:"Modifica profilo",
+ch10_edit_list:"<li><strong>Foto profilo</strong></li><li><strong>Nome e username</strong></li><li><strong>Descrizione</strong></li><li><strong>Tipo di alloggio</strong></li><li><strong>Esperienza con gli animali</strong></li><li><strong>Specie preferite</strong></li>",
+ch10_gps_title:"GPS e raggio di ricerca",
+ch10_gps_list:"<li><strong>Attiva posizione</strong> — consente il calcolo delle distanze</li><li><strong>Raggio di ricerca</strong> — in km (25, 50, 100, 200 km o Tutte le distanze)</li>",
+ch10_note:"La distanza di ogni animale è mostrata sulla sua scheda. L'ordine rimane sempre i più vecchi prima.",
+ch10_lang_title:"Lingua e paese",
+ch10_lang_list:"<li><strong>Lingua interfaccia</strong> — Rumeno, Inglese, Tedesco, Francese, Italiano, Spagnolo, Ungherese</li><li><strong>Paese</strong> — determina il filtro paese predefinito nel feed</li>",
+ch10_privacy_title:"Sicurezza e privacy",
+ch10_privacy_list:"<li><strong>Cambia password</strong> — dalle impostazioni account</li><li><strong>GDPR</strong> — i tuoi dati non vengono mai venduti a terzi</li><li><strong>Elimina account</strong> — tramite il modulo contatti sul sito</li>",
+ch11_p1:"AnimalBond è disponibile anche come sito web su <strong>animalbond.club</strong>. Puoi sfogliare tutti gli annunci senza account.",
+th_section:"Sezione",th_desc:"Descrizione",
+ch11_r1n:"Home",ch11_r1d:"Panoramica, statistiche, partner e storie recenti",
+ch11_r2n:"Tutti gli annunci",ch11_r2d:"Feed completo con filtri per tipo, specie, paese e posizione",
+ch11_r3n:"Aiuto medico",ch11_r3d:"Animali con esigenze mediche e campagne di donazioni",
+ch11_r4n:"Smarriti/Trovati",ch11_r4d:"Annunci di animali smarriti o trovati",
+ch11_r5n:"Partner",ch11_r5d:"Cliniche veterinarie e negozi partner",
+ch11_r6n:"Campagne",ch11_r6d:"Campagne di raccolta fondi attive",
+ch11_r7n:"Storie",ch11_r7d:"Storie di adozione di successo dalla community",
+ch11_partner_title:"Partner — Negozi per animali & Veterinari",
+ch11_partner_p:"AnimalBond offre visibilità aumentata ai negozi per animali e ai veterinari tramite listing sulla piattaforma.",
+ch11_shop_t:"Negozi per animali",ch11_shop_d:"Listing a pagamento. Contattaci per un preventivo personalizzato.",
+ch11_vet_t:"Cliniche veterinarie",ch11_vet_d:"Listing a pagamento. Contattaci per un preventivo personalizzato.",
+ch11_tip:"Puoi vedere tutti gli annunci sul web senza account. Un account è necessario solo per pubblicare, inviare messaggi o aggiungere storie.",
+ch12_contact_title:"Contatti e supporto",
+ch12_form_t:"Modulo contatti",ch12_form_d:"animalbond.club/contact — ricevuto direttamente dal nostro team.",
+ch12_gold_t:"Cliente Gold ⭐",ch12_gold_d:"Pacchetto premium con vantaggi aggiuntivi. Contattaci per i dettagli.",
+faq1q:"AnimalBond è gratuito?",faq1a:"Sì, il download e l'uso di base sono completamente gratuiti. Adozione, Smarriti/Trovati, Aiuto medico e messaggistica sono gratuiti. Le funzionalità premium (Vendita, listing partner) richiedono un abbonamento.",
+faq2q:"Posso usare AnimalBond senza account?",faq2a:"Sul sito puoi vedere tutti gli annunci senza account. Per pubblicare, inviare messaggi o aggiungere storie hai bisogno di un account.",
+faq3q:"Quanto tempo passa prima che il mio annuncio appaia?",faq3a:"Gli annunci ordinari appaiono immediatamente. Le storie richiedono approvazione entro 24–48 ore.",
+faq4q:"Come funziona il raggio di ricerca?",faq4a:"Il raggio filtra gli animali in base alla distanza dalla tua posizione. Gli animali senza GPS sono sempre inclusi. L'ordine rimane i più vecchi prima.",
+faq5q:"Il mio annuncio è scaduto. Cosa faccio?",faq5a:"Vai a Profilo → I miei annunci e rinnova l'annuncio se l'animale è ancora disponibile.",
+faq6q:"Ho adottato l'animale. Cosa faccio con l'annuncio?",faq6a:"Contrassegna l'annuncio come \"Adottato\" in I miei annunci. Verrà rimosso dal feed.",
+faq7q:"Come segnalo un annuncio sospetto?",faq7a:"Ogni scheda ha un pulsante 🚩 Segnala. Toccalo e descrivi il problema. Il nostro team esamina tutte le segnalazioni.",
+faq8q:"Come elimino il mio account?",faq8a:"Usa il modulo contatti su animalbond.club. Elaboreremo la richiesta entro 72 ore in conformità con il GDPR.",
+footer_text:"Manuale d'uso · Versione 1.0 · Maggio 2026"
+},
+es: {
+cover_tagline:"Conectamos animales con familias amorosas",
+cover_desc:"Guía completa para adoptar, ceder y salvar animales a través de la plataforma AnimalBond.",
+cover_version:"Versión 1.0 · Mayo 2026",
+cover_meta:"📱 iOS & Android · 🌐 animalbond.club<br>🇷🇴 Rumanía · 🇩🇪 Alemania · 🇫🇷 Francia · 🇮🇹 Italia · 🇪🇸 España · 🇭🇺 Hungría",
+toc_title:"Índice",toc_s1:"Introducción",toc_s2:"Funciones principales",toc_s3:"Secciones especiales",toc_s4:"Ajustes y plataformas",
+ch1_h2:"¿Qué es AnimalBond?",ch2_h2:"Primeros pasos — Cuenta y perfil",ch3_h2:"Feed principal — Descubre animales",ch4_h2:"Tipos de anuncios",ch5_h2:"Cómo publicar un anuncio",ch6_h2:"Contactos y mensajes",ch7_h2:"Animales perdidos y encontrados",ch8_h2:"Ayuda médica y donaciones",ch9_h2:"Historias de éxito",ch10_h2:"Perfil y ajustes",ch11_h2:"Plataforma web",ch12_h2:"Preguntas frecuentes",
+ch1_p1:"AnimalBond es una plataforma digital dedicada al bienestar animal, disponible como aplicación móvil y sitio web. Su misión: conectar animales que necesitan un hogar con personas que pueden ofrecérselo.",
+ch1_feat_title:"Qué puedes hacer con AnimalBond",
+ch1_f1t:"Adoptar un animal",ch1_f1d:"Encuentra perros, gatos, conejos, aves y otros animales disponibles para adopción en tu zona o en toda Europa.",
+ch1_f2t:"Ceder un animal",ch1_f2d:"Publica un anuncio para un animal que ya no puedes tener y encuéntrale una familia responsable.",
+ch1_f3t:"Perdidos / Encontrados",ch1_f3d:"Reporta un animal perdido o encontrado y ayuda a reunirlo con su dueño.",
+ch1_f4t:"Ayuda médica",ch1_f4d:"Solicita u ofrece apoyo para animales que necesitan urgentemente atención médica.",
+ch1_f5t:"Cría",ch1_f5d:"Publica anuncios para la cría responsable de animales de raza, con toda la documentación necesaria.",
+ch1_f6t:"Historias de éxito",ch1_f6d:"Comparte tu historia de adopción e inspira a otros a dar el mismo paso.",
+ch1_countries_title:"Dónde está disponible AnimalBond",
+ch1_th1:"País",ch1_th2:"Idioma predeterminado",ch1_th3:"Moneda",
+lang_ro:"Rumano",lang_de:"Alemán",lang_fr:"Francés",lang_it:"Italiano",lang_es:"Español",lang_hu:"Húngaro",
+ch1_note:"La app detecta automáticamente el idioma de tu dispositivo. Puedes cambiarlo en cualquier momento en los ajustes del perfil.",
+ch2_dl_title:"Descargar la app",
+ch2_ios:"Busca <strong>AnimalBond</strong> en el App Store y pulsa Obtener.",
+ch2_android:"Busca <strong>AnimalBond</strong> en Google Play y pulsa Instalar.",
+ch2_create_title:"Crear una cuenta",
+ch2_s1t:"Abre la app y pulsa \"Crear cuenta\"",ch2_s1d:"",
+ch2_s2t:"Rellena tus datos",ch2_s2d:" — correo electrónico, contraseña (mín. 6 caracteres) y un nombre de usuario único.",
+ch2_s3t:"Elige el tipo de cuenta",ch2_s3d:" — Privado o Refugio.",
+ch2_s4t:"Selecciona idioma y país",ch2_s4d:" — la app sugiere automáticamente el idioma de tu dispositivo.",
+ch2_s5t:"Confirma el correo",ch2_s5d:" — pulsa el enlace recibido y la cuenta queda activa de inmediato.",
+ch2_types_title:"Tipos de cuenta",
+th_type:"Tipo",th_who:"Quién lo usa",th_what:"Qué puede hacer",
+type_private:"Privado",type_shelter:"Refugio",
+ch2_t1w:"Personas físicas",ch2_t1c:"Adoptar, publicar anuncios, enviar mensajes",
+ch2_t2w:"Organizaciones, asociaciones",ch2_t2c:"Gestionar varios animales, perfil de organización, mayor visibilidad",
+ch2_tip:"Si eres un refugio o asociación de protección animal, elige la cuenta <strong>Refugio</strong> para acceder a las funcionalidades dedicadas.",
+ch2_profile_title:"Configurar el perfil",
+ch2_profile_list:"<li><strong>Foto de perfil</strong></li><li><strong>Nombre y nombre de usuario</strong></li><li><strong>Descripción</strong></li><li><strong>Tipo de vivienda</strong></li><li><strong>Experiencia con animales</strong></li><li><strong>Especies preferidas</strong></li><li><strong>Radio de búsqueda</strong></li>",
+ch2_note:"Cuanto más completo esté el perfil, con mayor precisión el sistema de compatibilidad encontrará animales adecuados para ti.",
+ch3_p1:"La sección <strong>Descubrir</strong> (❤️ en la barra inferior) es el corazón de la app. Los anuncios se muestran en orden cronológico — los más antiguos primero — para dar máxima visibilidad a los animales que llevan más tiempo esperando.",
+ch3_filters_title:"Filtros disponibles",
+ch3_species_title:"Especie",ch3_species_list:"<li>🐾 <strong>Todos</strong></li><li>🐶 <strong>Perros</strong></li><li>🐱 <strong>Gatos</strong></li><li>🐾 <strong>Otros</strong> — conejos, aves, roedores, etc.</li>",
+ch3_type_title:"Tipo de anuncio",ch3_type_list:"<li>📋 Todos los tipos</li><li>🏠 Adopción</li><li>💰 Venta</li><li>🌿 Cría</li><li>💊 Ayuda médica</li>",
+ch3_country_title:"País",ch3_country_p:"Selecciona un país en el menú desplegable. Tu país aparece por defecto.",
+ch3_gps_title:"Radio de búsqueda (GPS)",ch3_gps_p:"Si la ubicación está activada, verás un banner con el radio actual. Pulsa <strong>Cambiar</strong> para modificarlo desde tu perfil.",
+ch3_order_title:"Orden de los anuncios",ch3_order_p:"Los anuncios se muestran <strong>del más antiguo al más reciente</strong> — los animales que llevan más tiempo esperando aparecen primero.",
+ch3_card_title:"Qué contiene una tarjeta",
+ch3_card_list:"<li>📷 Foto principal</li><li>🏷️ Icono del tipo de anuncio</li><li>💝 Puntuación de compatibilidad (ej. <strong>70%</strong>)</li><li>❤️ Botón Me gusta</li><li>📍 Distancia desde ti</li><li>Nombre, raza y edad</li><li>💬 Botón Contactar</li>",
+ch3_swipe_title:"Modo Swipe",
+ch3_swipe_list:"<li>👉 <strong>Derecha</strong> — Me gusta</li><li>👈 <strong>Izquierda</strong> — No me gusta</li><li>⬅️ <strong>Atrás</strong> — volver a la cuadrícula</li>",
+ch3_compat_title:"Puntuación de compatibilidad",
+th_percent:"Puntuación",th_meaning:"Significado",
+compat_1:"Excelente — todas las preferencias están alineadas",compat_2:"Buena — la mayoría de los criterios coinciden",compat_3:"Moderada — algunas diferencias a considerar",compat_4l:"Menos del 40%",compat_4:"Baja — pocos criterios en común",
+ch3_tip:"Un perfil completo lleva a puntuaciones de compatibilidad más precisas.",
+ch4_h2:"Tipos de anuncios",
+type_adoption:"Adopción",type_sale:"Venta",type_breeding:"Cría",type_medical:"Ayuda médica",premium_label:"Premium",
+ch4_adopt_p:"Animales que necesitan un nuevo hogar, <strong>de forma gratuita</strong>. El tipo de anuncio más frecuente en AnimalBond.",
+ch4_adopt_list:"<li>Adecuado para animales abandonados, de refugio o personales</li><li>No implica ningún pago</li><li>El propietario puede solicitar un acuerdo de adopción responsable</li>",
+ch4_sale_p:"Los anuncios de venta son una <strong>función premium</strong> para animales de raza con pedigree. Se requiere una suscripción activa.",
+ch4_sale_list:"<li>Especificar precio, moneda y documentos disponibles</li><li>Recomendado: pedigree, cartilla sanitaria, vacunas</li><li>AnimalBond no gestiona los pagos</li>",
+ch4_sale_warn:"La venta de animales está regulada por ley. Consulta la legislación de tu país. Para activar la función de venta, contáctanos a través del formulario de nuestro sitio web.",
+ch4_breed_p:"Conecta a propietarios de animales de raza para una cría responsable.",
+ch4_breed_list:"<li>Especificar raza, edad, documentos y condiciones</li><li>Recomendado para razas con pedigree verificado</li><li>Ambos animales deben estar sanos y vacunados</li>",
+ch4_med_p:"Para animales que necesitan tratamiento médico y buscan donaciones o apoyo de la comunidad.",
+ch4_med_list:"<li>Describir el diagnóstico y el tratamiento necesario</li><li>Adjuntar documentos veterinarios para mayor credibilidad</li><li>La comunidad puede contactar y ofrecer ayuda directa</li>",
+ch4_med_note:"La sección <strong>Ayuda</strong> (💊) tiene una página dedicada a animales con necesidades médicas.",
+ch5_p1:"Pulsa el botón <strong>➕ Añadir</strong> en la barra inferior para publicar un nuevo anuncio.",
+ch5_s1t:"Tipo de anuncio",ch5_s1d:" — Adopción, Venta, Cría, Ayuda médica, Perdido o Encontrado.",
+ch5_s2t:"Información del animal",ch5_s2d:" — nombre, especie, raza, edad, sexo, descripción.",
+ch5_s3t:"Ubicación",ch5_s3d:" — introduce tu ciudad o activa el GPS para la ubicación automática.",
+ch5_s4t:"Publicar",ch5_s4d:" — revisa la información y pulsa Publicar. El anuncio aparece de inmediato.",
+ch5_photos_title:"Fotos",
+ch5_photos_list:"<li>Añadir entre 1 y 5 fotos</li><li>Fotografiar con luz natural</li><li>La primera foto será la imagen principal</li><li>Evitar fotos borrosas u oscuras</li>",
+ch5_tip:"Los anuncios con buenas fotos y descripciones detalladas reciben hasta 3× más interés.",
+ch5_warn:"Marca el anuncio como <strong>Adoptado</strong> o <strong>Resuelto</strong> en cuanto el animal encuentre un hogar.",
+ch6_p1:"Pulsa el botón <strong>💬 Contactar</strong> en la tarjeta del animal. Se crea automáticamente un match y te dirige a la conversación.",
+ch6_s1t:"Pulsa Contactar",ch6_s1d:" — el botón aparece en la tarjeta y en la página de detalles.",
+ch6_s2t:"Se crea un match",ch6_s2d:" — una conexión directa entre tú y el propietario del animal.",
+ch6_s3t:"Conversación directa",ch6_s3d:" — intercambiar mensajes, describir tu situación y concertar una cita.",
+ch6_msg_title:"Sección Mensajes",
+ch6_msg_list:"<li>Todas tus conversaciones activas en un solo lugar</li><li>Foto y nombre del animal visible en cada conversación</li><li>Indicador de mensajes no leídos (punto rojo)</li>",
+ch6_note:"No compartas información personal sensible en el chat. Organiza los detalles en persona.",
+ch7_p1:"La sección Perdidos/Encontrados es accesible a través del banner azul en el feed o en el sitio web en <em>animalbond.club/pierdute-gasite</em>.",
+ch7_lost_title:"He perdido un animal",
+ch7_ls1t:"Pulsa ➕ Añadir → Perdido",ch7_ls2t:"Rellena los detalles",ch7_ls2d:" — nombre, especie, raza, fecha y último lugar donde se vio.",ch7_ls3t:"Publica y comparte",ch7_ls3d:" — el anuncio aparece de inmediato. Comparte también en redes sociales.",
+ch7_found_title:"He encontrado un animal",
+ch7_fs1t:"Selecciona el tipo Encontrado",ch7_fs2t:"Describe el animal y el lugar",ch7_fs2d:" — especie, color, señas distintivas, lugar exacto.",ch7_fs3t:"Fotografía el animal",ch7_fs3d:" — la foto ayuda al propietario a identificarlo de inmediato.",
+ch7_tip:"Si el animal ha regresado a casa, marca el anuncio como <strong>Resuelto</strong>.",
+ch8_p1:"La sección <strong>Ayuda</strong> (💊) está dedicada a animales con problemas médicos que necesitan el apoyo de la comunidad.",
+ch8_c1t:"Anuncios médicos",ch8_c1d:"Un animal específico necesita tratamiento. La comunidad puede contactar al propietario para ofrecer ayuda directa.",
+ch8_c2t:"Campañas de donaciones",ch8_c2d:"Campañas organizadas para recaudar fondos destinados a tratamientos médicos.",
+ch8_warn:"AnimalBond no garantiza la autenticidad de los anuncios médicos. Si donas, hazlo directamente al propietario tras verificar la situación.",
+ch9_p1:"La sección <strong>Historias</strong> (⭐) es donde los usuarios que adoptaron a través de AnimalBond comparten su experiencia.",
+ch9_s1t:"Pulsa ⭐ Historias → Añadir mi historia",ch9_s2t:"Escribe la historia",ch9_s2d:" — describe el primer encuentro, los primeros días y la transformación.",ch9_s3t:"Añade una foto",ch9_s3d:" — una foto tuya con tu animal hace la historia más auténtica.",ch9_s4t:"Añade un vídeo (opcional)",ch9_s4d:" — enlace de YouTube o Vimeo. Aparece con un botón de reproducción en la tarjeta.",ch9_s5t:"Enviar para aprobación",ch9_s5d:" — la historia será revisada y publicada en 24–48 horas.",
+ch9_tip:"Las historias auténticas y detalladas son las más apreciadas por la comunidad.",
+ch10_edit_title:"Editar perfil",
+ch10_edit_list:"<li><strong>Foto de perfil</strong></li><li><strong>Nombre y nombre de usuario</strong></li><li><strong>Descripción</strong></li><li><strong>Tipo de vivienda</strong></li><li><strong>Experiencia con animales</strong></li><li><strong>Especies preferidas</strong></li>",
+ch10_gps_title:"GPS y radio de búsqueda",
+ch10_gps_list:"<li><strong>Activar ubicación</strong> — permite el cálculo de distancias</li><li><strong>Radio de búsqueda</strong> — en km (25, 50, 100, 200 km o Todas las distancias)</li>",
+ch10_note:"La distancia a cada animal se muestra en su tarjeta. El orden siempre es los más antiguos primero.",
+ch10_lang_title:"Idioma y país",
+ch10_lang_list:"<li><strong>Idioma de la interfaz</strong> — Rumano, Inglés, Alemán, Francés, Italiano, Español, Húngaro</li><li><strong>País</strong> — determina el filtro de país predeterminado en el feed</li>",
+ch10_privacy_title:"Seguridad y privacidad",
+ch10_privacy_list:"<li><strong>Cambiar contraseña</strong> — desde los ajustes de cuenta</li><li><strong>RGPD</strong> — tus datos nunca se venden a terceros</li><li><strong>Eliminar cuenta</strong> — a través del formulario de contacto en el sitio web</li>",
+ch11_p1:"AnimalBond también está disponible como sitio web en <strong>animalbond.club</strong>. Puedes ver todos los anuncios sin cuenta.",
+th_section:"Sección",th_desc:"Descripción",
+ch11_r1n:"Inicio",ch11_r1d:"Visión general, estadísticas, socios e historias recientes",
+ch11_r2n:"Todos los anuncios",ch11_r2d:"Feed completo con filtros por tipo, especie, país y ubicación",
+ch11_r3n:"Ayuda médica",ch11_r3d:"Animales con necesidades médicas y campañas de donaciones",
+ch11_r4n:"Perdidos/Encontrados",ch11_r4d:"Anuncios de animales perdidos o encontrados",
+ch11_r5n:"Socios",ch11_r5d:"Clínicas veterinarias y tiendas asociadas",
+ch11_r6n:"Campañas",ch11_r6d:"Campañas de recaudación de fondos activas",
+ch11_r7n:"Historias",ch11_r7d:"Historias de adopción exitosas de la comunidad",
+ch11_partner_title:"Socios — Tiendas de animales y Veterinarios",
+ch11_partner_p:"AnimalBond ofrece mayor visibilidad a las tiendas de animales y clínicas veterinarias mediante un listing en la plataforma.",
+ch11_shop_t:"Tiendas de animales",ch11_shop_d:"Listing de pago. Contáctanos para un presupuesto personalizado.",
+ch11_vet_t:"Clínicas veterinarias",ch11_vet_d:"Listing de pago. Contáctanos para un presupuesto personalizado.",
+ch11_tip:"Puedes ver todos los anuncios en la web sin cuenta. Solo necesitas cuenta para publicar, enviar mensajes o añadir historias.",
+ch12_contact_title:"Contacto y soporte",
+ch12_form_t:"Formulario de contacto",ch12_form_d:"animalbond.club/contact — recibido directamente por nuestro equipo.",
+ch12_gold_t:"Cliente Gold ⭐",ch12_gold_d:"Paquete premium con beneficios adicionales. Contáctanos para más detalles.",
+faq1q:"¿Es AnimalBond gratuito?",faq1a:"Sí, la descarga y el uso básico son completamente gratuitos. La adopción, Perdidos/Encontrados, la ayuda médica y la mensajería son gratuitas. Las funciones premium (Venta, listing de socios) requieren suscripción.",
+faq2q:"¿Puedo usar AnimalBond sin cuenta?",faq2a:"En el sitio web puedes ver todos los anuncios sin cuenta. Para publicar, enviar mensajes o añadir historias necesitas una cuenta.",
+faq3q:"¿Cuánto tarda en aparecer mi anuncio?",faq3a:"Los anuncios ordinarios aparecen de inmediato. Las historias requieren aprobación en 24–48 horas.",
+faq4q:"¿Cómo funciona el radio de búsqueda?",faq4a:"El radio filtra los animales según la distancia desde tu ubicación. Los animales sin GPS siempre están incluidos. El orden siempre es los más antiguos primero.",
+faq5q:"Mi anuncio ha caducado. ¿Qué hago?",faq5a:"Ve a Perfil → Mis anuncios y renueva el anuncio si el animal sigue disponible.",
+faq6q:"He adoptado el animal. ¿Qué hago con el anuncio?",faq6a:"Marca el anuncio como \"Adoptado\" en Mis anuncios. Se retirará del feed.",
+faq7q:"¿Cómo denuncio un anuncio sospechoso?",faq7a:"Cada tarjeta tiene un botón 🚩 Denunciar. Púlsalo y describe el problema. Nuestro equipo revisa todos los informes.",
+faq8q:"¿Cómo elimino mi cuenta?",faq8a:"Usa el formulario de contacto en animalbond.club. Procesaremos la solicitud en 72 horas de acuerdo con el RGPD.",
+footer_text:"Manual de uso · Versión 1.0 · Mayo 2026"
+},
+hu: {
+cover_tagline:"Összekapcsoljuk az állatokat szerető családokkal",
+cover_desc:"Teljes útmutató az AnimalBond platformon keresztüli örökbefogadáshoz, továbbadáshoz és állatok megmentéséhez.",
+cover_version:"1.0 verzió · 2026. május",
+cover_meta:"📱 iOS & Android · 🌐 animalbond.club<br>🇷🇴 Románia · 🇩🇪 Németország · 🇫🇷 Franciaország · 🇮🇹 Olaszország · 🇪🇸 Spanyolország · 🇭🇺 Magyarország",
+toc_title:"Tartalomjegyzék",toc_s1:"Bevezetés",toc_s2:"Főbb funkciók",toc_s3:"Különleges szakaszok",toc_s4:"Beállítások és platformok",
+ch1_h2:"Mi az AnimalBond?",ch2_h2:"Első lépések — Fiók és profil",ch3_h2:"Főoldal — Állatok felfedezése",ch4_h2:"Hirdetéstípusok",ch5_h2:"Hogyan adj fel hirdetést",ch6_h2:"Kapcsolatok és üzenetek",ch7_h2:"Elveszett és megtalált állatok",ch8_h2:"Egészségügyi segítség és adományok",ch9_h2:"Sikertörténetek",ch10_h2:"Profil és beállítások",ch11_h2:"Webes platform",ch12_h2:"Gyakran ismételt kérdések",
+ch1_p1:"Az AnimalBond egy állatvédelemnek szentelt digitális platform, amely mobilalkalmazásként és weboldalaként is elérhető. Küldetése: összekapcsolni az otthonra szoruló állatokat azokkal, akik tudnak nekik otthont adni.",
+ch1_feat_title:"Mit tehetsz az AnimalBonddal",
+ch1_f1t:"Állat örökbefogadása",ch1_f1d:"Találj kutyákat, macskákat, nyulakat, madarakat és más állatokat, amelyek örökbefogadásra várnak a közeledben vagy egész Európában.",
+ch1_f2t:"Állat leadása",ch1_f2d:"Tegyél közzé hirdetést egy olyan állatról, amelyet már nem tudsz tartani, és találj neki felelős gazdát.",
+ch1_f3t:"Elveszett / Megtalált",ch1_f3d:"Jelents elveszett vagy megtalált állatot, és segítsd a gazdájával való újraegyesítését.",
+ch1_f4t:"Egészségügyi segítség",ch1_f4d:"Kérj vagy nyújts támogatást sürgős orvosi ellátásra szoruló állatoknak.",
+ch1_f5t:"Tenyésztés",ch1_f5d:"Tegyél közzé hirdetéseket fajtiszta állatok felelős párosításáról, minden szükséges dokumentummal.",
+ch1_f6t:"Sikertörténetek",ch1_f6d:"Oszd meg örökbefogadási történetedet, és inspirálj másokat ugyanerre a lépésre.",
+ch1_countries_title:"Hol érhető el az AnimalBond",
+ch1_th1:"Ország",ch1_th2:"Alapértelmezett nyelv",ch1_th3:"Pénznem",
+lang_ro:"Román",lang_de:"Német",lang_fr:"Francia",lang_it:"Olasz",lang_es:"Spanyol",lang_hu:"Magyar",
+ch1_note:"Az alkalmazás automatikusan felismeri az eszközöd nyelvét. Bármikor megváltoztathatod a profilbeállításokban.",
+ch2_dl_title:"Az alkalmazás letöltése",
+ch2_ios:"Keresd az <strong>AnimalBond</strong> alkalmazást az App Store-ban, és koppints a Letöltés gombra.",
+ch2_android:"Keresd az <strong>AnimalBond</strong> alkalmazást a Google Play-en, és koppints a Telepítés gombra.",
+ch2_create_title:"Fiók létrehozása",
+ch2_s1t:"Nyisd meg az alkalmazást, és koppints a &bdquo;Fiók létrehozása&rdquo; gombra",ch2_s1d:"",
+ch2_s2t:"Töltsd ki az adatokat",ch2_s2d:" — e-mail cím, jelszó (min. 6 karakter) és egyedi felhasználónév.",
+ch2_s3t:"Válaszd ki a fiók típusát",ch2_s3d:" — Magánszemély vagy Menedékhely.",
+ch2_s4t:"Válassz nyelvet és országot",ch2_s4d:" — az alkalmazás automatikusan javasolja az eszközöd nyelvét.",
+ch2_s5t:"Erősítsd meg az e-mailt",ch2_s5d:" — koppints a kapott linkre, és a fiókod azonnal aktívvá válik.",
+ch2_types_title:"Fióktípusok",
+th_type:"Típus",th_who:"Ki használja",th_what:"Mit tehet",
+type_private:"Magánszemély",type_shelter:"Menedékhely",
+ch2_t1w:"Magánszemélyek",ch2_t1c:"Örökbefogadás, hirdetések feladása, üzenetküldés",
+ch2_t2w:"Szervezetek, egyesületek",ch2_t2c:"Több állat kezelése, szervezeti profil, nagyobb láthatóság",
+ch2_tip:"Ha menedékhelyet vagy állatvédő egyesületet képviselsz, válaszd a <strong>Menedékhely</strong> fiókot a dedikált funkciókhoz.",
+ch2_profile_title:"Profil beállítása",
+ch2_profile_list:"<li><strong>Profilkép</strong></li><li><strong>Név és felhasználónév</strong></li><li><strong>Leírás</strong></li><li><strong>Lakástípus</strong></li><li><strong>Tapasztalat állatokkal</strong></li><li><strong>Kedvenc fajok</strong></li><li><strong>Keresési sugár</strong></li>",
+ch2_note:"Minél teljesebb a profilod, annál pontosabban találja meg a kompatibilitási rendszer a számodra megfelelő állatokat.",
+ch3_p1:"A <strong>Felfedezés</strong> szakasz (❤️ az alsó sávban) az alkalmazás szíve. A hirdetések időrendi sorrendben jelennek meg — a legrégebbiek először — hogy a legtovább váró állatok a legnagyobb láthatóságot kapják.",
+ch3_filters_title:"Elérhető szűrők",
+ch3_species_title:"Faj",ch3_species_list:"<li>🐾 <strong>Összes</strong></li><li>🐶 <strong>Kutyák</strong></li><li>🐱 <strong>Macskák</strong></li><li>🐾 <strong>Egyéb</strong> — nyulak, madarak, rágcsálók stb.</li>",
+ch3_type_title:"Hirdetéstípus",ch3_type_list:"<li>📋 Minden típus</li><li>🏠 Örökbefogadás</li><li>💰 Eladás</li><li>🌿 Tenyésztés</li><li>💊 Egészségügyi segítség</li>",
+ch3_country_title:"Ország",ch3_country_p:"Válassz országot a legördülő menüből. Alapértelmezés szerint a saját országod jelenik meg.",
+ch3_gps_title:"Keresési sugár (GPS)",ch3_gps_p:"Ha a helymeghatározás aktív, egy banner mutatja az aktuális sugarat. Koppints a <strong>Módosítás</strong> gombra a profilban való módosításhoz.",
+ch3_order_title:"Hirdetések sorrendje",ch3_order_p:"A hirdetések <strong>a legrégebbiek először</strong> sorrendben jelennek meg — a legtovább váró állatok kerülnek előre.",
+ch3_card_title:"Mit tartalmaz egy kártya",
+ch3_card_list:"<li>📷 Főkép</li><li>🏷️ Hirdetéstípus ikon</li><li>💝 Kompatibilitási pontszám (pl. <strong>70%</strong>)</li><li>❤️ Kedvelés gomb</li><li>📍 Távolság tőled</li><li>Név, fajta és kor</li><li>💬 Kapcsolatfelvétel gomb</li>",
+ch3_swipe_title:"Swipe mód",
+ch3_swipe_list:"<li>👉 <strong>Jobbra</strong> — Tetszik</li><li>👈 <strong>Balra</strong> — Nem tetszik</li><li>⬅️ <strong>Vissza</strong> — visszatérés a rácshoz</li>",
+ch3_compat_title:"Kompatibilitási pontszám",
+th_percent:"Pontszám",th_meaning:"Jelentés",
+compat_1:"Kiváló — minden preferencia egyezik",compat_2:"Jó — a legtöbb kritérium megfelel",compat_3:"Mérsékelt — néhány eltérés figyelembe veendő",compat_4l:"40% alatt",compat_4:"Alacsony — kevés közös kritérium",
+ch3_tip:"A teljes profil pontosabb kompatibilitási pontszámokhoz vezet.",
+ch4_h2:"Hirdetéstípusok",
+type_adoption:"Örökbefogadás",type_sale:"Eladás",type_breeding:"Tenyésztés",type_medical:"Egészségügyi segítség",premium_label:"Prémium",
+ch4_adopt_p:"Új otthonra szoruló állatok, <strong>ingyenesen</strong>. Az AnimalBond leggyakoribb hirdetéstípusa.",
+ch4_adopt_list:"<li>Megfelelő elhagyott, menedékhelyi vagy személyes állatok esetén</li><li>Nem jár pénzügyi tranzakcióval</li><li>A tulajdonos felelős örökbefogadási megállapodást kérhet</li>",
+ch4_sale_p:"Az eladási hirdetések <strong>prémium funkció</strong>, fajtiszta, törzslap-igazolt állatok számára. Aktív előfizetés szükséges.",
+ch4_sale_list:"<li>Ár, pénznem és rendelkezésre álló dokumentumok megadása</li><li>Ajánlott: törzslap, egészségügyi kiskönyv, oltások</li><li>Az AnimalBond nem kezeli a fizetéseket</li>",
+ch4_sale_warn:"Az állatok eladása törvényileg szabályozott. Kérjük, tájékozódj az adott ország jogszabályairól. Az eladási funkció aktiválásához vedd fel velünk a kapcsolatot a weboldalon található űrlapon keresztül.",
+ch4_breed_p:"Összekapcsolja a fajtiszta állatok tulajdonosait felelős tenyésztés céljából.",
+ch4_breed_list:"<li>Fajta, kor, dokumentumok és feltételek megadása</li><li>Ajánlott ellenőrzött törzslappal rendelkező fajtákhoz</li><li>Mindkét állatnak egészségesnek és oltottnak kell lennie</li>",
+ch4_med_p:"Orvosi kezelésre szoruló állatoknak, akik adományokat vagy közösségi támogatást keresnek.",
+ch4_med_list:"<li>A diagnózis és a szükséges kezelés leírása</li><li>Állatorvosi dokumentumok csatolása a hitelesség érdekében</li><li>A közösség kapcsolatba léphet és közvetlen segítséget nyújthat</li>",
+ch4_med_note:"A <strong>Segítség</strong> szakasz (💊) külön oldalt kínál az egészségügyi szükségletekkel rendelkező állatoknak.",
+ch5_p1:"Koppints a <strong>➕ Hozzáadás</strong> gombra az alsó sávban egy új hirdetés közzétételéhez.",
+ch5_s1t:"Hirdetés típusa",ch5_s1d:" — Örökbefogadás, Eladás, Tenyésztés, Egészségügyi segítség, Elveszett vagy Megtalált.",
+ch5_s2t:"Az állatról szóló információk",ch5_s2d:" — név, faj, fajta, kor, nem, leírás.",
+ch5_s3t:"Helyszín",ch5_s3d:" — add meg a városod, vagy aktiváld a GPS-t az automatikus helymeghatározáshoz.",
+ch5_s4t:"Közzététel",ch5_s4d:" — ellenőrizd az adatokat, és koppints a Közzétételre. A hirdetés azonnal megjelenik.",
+ch5_photos_title:"Fényképek",
+ch5_photos_list:"<li>1-5 fotó hozzáadása</li><li>Természetes fényben fényképezz</li><li>Az első fotó lesz a főkép</li><li>Kerüld az elmosódott vagy sötét fotókat</li>",
+ch5_tip:"A jó fotókkal és részletes leírásokkal ellátott hirdetések akár 3× több érdeklődést kapnak.",
+ch5_warn:"Jelöld a hirdetést <strong>Örökbefogadva</strong> vagy <strong>Megoldva</strong> jelöléssel, amint az állat otthonra talál.",
+ch6_p1:"Koppints a <strong>💬 Kapcsolatfelvétel</strong> gombra az állat kártyáján. A rendszer automatikusan létrehoz egy egyezést, és a beszélgetéshez irányít.",
+ch6_s1t:"Koppints a Kapcsolatfelvételre",ch6_s1d:" — a gomb a kártyán és a részletoldalon is megjelenik.",
+ch6_s2t:"Egyezés jön létre",ch6_s2d:" — közvetlen kapcsolat köztad és az állat tulajdonosa között.",
+ch6_s3t:"Közvetlen beszélgetés",ch6_s3d:" — üzenetek váltása, helyzeted leírása és találkozó megbeszélése.",
+ch6_msg_title:"Üzenetek szakasz",
+ch6_msg_list:"<li>Minden aktív beszélgetésed egy helyen</li><li>Az állat fotója és neve minden beszélgetésnél látható</li><li>Olvasatlan üzenetek jelzése (piros pont)</li>",
+ch6_note:"Ne ossz meg érzékeny személyes adatokat a chaten. A részleteket személyesen intézd.",
+ch7_p1:"Az Elveszett/Megtalált szakasz a feedben lévő kék banneren vagy a weboldalon érhető el.",
+ch7_lost_title:"Elveszett egy állatom",
+ch7_ls1t:"Koppints ➕ Hozzáadás → Elveszett",ch7_ls2t:"Töltsd ki a részleteket",ch7_ls2d:" — név, faj, fajta, dátum és az utoljára látott hely.",ch7_ls3t:"Tegyél közzé és ossz meg",ch7_ls3d:" — a hirdetés azonnal megjelenik. Oszd meg a közösségi médiában is.",
+ch7_found_title:"Találtam egy állatot",
+ch7_fs1t:"Válaszd a Megtalált típust",ch7_fs2t:"Írd le az állatot és a helyszínt",ch7_fs2d:" — faj, szín, megkülönböztető jegyek, pontos helyszín.",ch7_fs3t:"Fényképezd le az állatot",ch7_fs3d:" — a fotó segít a tulajdonosnak azonnal felismerni.",
+ch7_tip:"Ha az állat hazatért, jelöld a hirdetést <strong>Megoldva</strong> jelöléssel.",
+ch8_p1:"A <strong>Segítség</strong> szakasz (💊) az egészségügyi problémákkal küzdő, közösségi támogatásra szoruló állatoknak van szentelve.",
+ch8_c1t:"Egészségügyi hirdetések",ch8_c1d:"Egy konkrét állatnak kezelésre van szüksége. A közösség kapcsolatba léphet a tulajdonossal közvetlen segítség nyújtásához.",
+ch8_c2t:"Adománygyűjtő kampányok",ch8_c2d:"Szervezett kampányok az orvosi kezelések finanszírozásához szükséges alapok gyűjtésére.",
+ch8_warn:"Az AnimalBond nem garantálja az egészségügyi hirdetések hitelességét. Adományozás előtt győződj meg a helyzet valódiságáról, és közvetlenül a tulajdonosnak utalj.",
+ch9_p1:"A <strong>Történetek</strong> szakasz (⭐) az a hely, ahol az AnimalBondon keresztül örökbefogadó felhasználók megosztják tapasztalataikat.",
+ch9_s1t:"Koppints ⭐ Történetek → Saját történetem hozzáadása",ch9_s2t:"Írd meg a történetet",ch9_s2d:" — az első találkozás, az első napok és az átalakulás leírása.",ch9_s3t:"Adj hozzá fotót",ch9_s3d:" — egy rólad és állatodról készült kép hitelesebbé teszi a történetet.",ch9_s4t:"Adj hozzá videót (opcionális)",ch9_s4d:" — YouTube vagy Vimeo link. Lejátszás gombbal jelenik meg a kártyán.",ch9_s5t:"Küldés jóváhagyásra",ch9_s5d:" — a történetet ellenőrzik és 24–48 órán belül közzéteszik.",
+ch9_tip:"Az autentikus és részletes történetek a legkedveltebbek a közösségben.",
+ch10_edit_title:"Profil szerkesztése",
+ch10_edit_list:"<li><strong>Profilkép</strong></li><li><strong>Név és felhasználónév</strong></li><li><strong>Leírás</strong></li><li><strong>Lakástípus</strong></li><li><strong>Tapasztalat állatokkal</strong></li><li><strong>Kedvenc fajok</strong></li>",
+ch10_gps_title:"GPS és keresési sugár",
+ch10_gps_list:"<li><strong>Helymeghatározás aktiválása</strong> — lehetővé teszi a távolságszámítást</li><li><strong>Keresési sugár</strong> — km-ben (25, 50, 100, 200 km vagy Minden távolság)</li>",
+ch10_note:"Az egyes állatok távolsága a kártyájukon látható. A sorrend mindig a legrégebbiek először.",
+ch10_lang_title:"Nyelv és ország",
+ch10_lang_list:"<li><strong>Felület nyelve</strong> — Román, Angol, Német, Francia, Olasz, Spanyol, Magyar</li><li><strong>Ország</strong> — meghatározza az alapértelmezett országszűrőt a feedben</li>",
+ch10_privacy_title:"Biztonság és adatvédelem",
+ch10_privacy_list:"<li><strong>Jelszó módosítása</strong> — a fiókbeállításokban</li><li><strong>GDPR</strong> — adataidat soha nem adjuk el harmadik félnek</li><li><strong>Fiók törlése</strong> — a weboldalon lévő kapcsolatfelvételi űrlapon keresztül</li>",
+ch11_p1:"Az AnimalBond weboldalaként is elérhető az <strong>animalbond.club</strong> címen. Fiók nélkül is böngészheted az összes hirdetést.",
+th_section:"Szakasz",th_desc:"Leírás",
+ch11_r1n:"Főoldal",ch11_r1d:"Áttekintés, statisztikák, partnerek és legújabb történetek",
+ch11_r2n:"Összes hirdetés",ch11_r2d:"Teljes feed típus, faj, ország és helyszín szerinti szűrőkkel",
+ch11_r3n:"Egészségügyi segítség",ch11_r3d:"Egészségügyi szükségletekkel rendelkező állatok és adománygyűjtő kampányok",
+ch11_r4n:"Elveszett/Megtalált",ch11_r4d:"Elveszett vagy megtalált állatok hirdetései",
+ch11_r5n:"Partnerek",ch11_r5d:"Állatorvosi rendelők és partnerüzletek",
+ch11_r6n:"Kampányok",ch11_r6d:"Aktív adománygyűjtő kampányok",
+ch11_r7n:"Történetek",ch11_r7d:"Sikeres örökbefogadási történetek a közösségből",
+ch11_partner_title:"Partnerek — Állatkereskedések és Állatorvosi rendelők",
+ch11_partner_p:"Az AnimalBond fokozott láthatóságot biztosít az állatkereskedések és állatorvosi rendelők számára a platformon való listázáson keresztül.",
+ch11_shop_t:"Állatkereskedések",ch11_shop_d:"Díjas listázás. Vedd fel velünk a kapcsolatot személyre szabott ajánlatért.",
+ch11_vet_t:"Állatorvosi rendelők",ch11_vet_d:"Díjas listázás. Vedd fel velünk a kapcsolatot személyre szabott ajánlatért.",
+ch11_tip:"A weben fiók nélkül is megtekintheted az összes hirdetést. Fiók csak hirdetés feladásához, üzenetküldéshez vagy történetek hozzáadásához szükséges.",
+ch12_contact_title:"Kapcsolat és támogatás",
+ch12_form_t:"Kapcsolatfelvételi űrlap",ch12_form_d:"animalbond.club/contact — közvetlenül a csapatunk kapja meg.",
+ch12_gold_t:"Gold ügyfél ⭐",ch12_gold_d:"Prémium csomag további előnyökkel. Vedd fel velünk a kapcsolatot a részletekért.",
+faq1q:"Ingyenes az AnimalBond?",faq1a:"Igen, a letöltés és az alaphasználat teljesen ingyenes. Az örökbefogadás, Elveszett/Megtalált, egészségügyi segítség és az üzenetküldés ingyenes. A prémium funkciók (Eladás, partner listázás) előfizetést igényelnek.",
+faq2q:"Használhatom az AnimalBondot fiók nélkül?",faq2a:"A weboldalon fiók nélkül is megtekintheted az összes hirdetést. Hirdetés feladásához, üzenetküldéshez vagy történetek hozzáadásához fiókra van szükség.",
+faq3q:"Mennyi idő alatt jelenik meg a hirdetésem?",faq3a:"A szokásos hirdetések azonnal megjelennek. A történetek 24–48 órán belüli jóváhagyást igényelnek.",
+faq4q:"Hogyan működik a keresési sugár?",faq4a:"A sugár az állatokat a helyszíntől való távolság alapján szűri. A GPS nélküli állatok mindig szerepelnek. A sorrend mindig a legrégebbiek először.",
+faq5q:"Lejárt a hirdetésem. Mit tegyek?",faq5a:"Menj a Profil → Saját hirdetések oldalra, és újítsd meg, ha az állat még elérhető.",
+faq6q:"Örökbefogadtam az állatot. Mit tegyek a hirdetéssel?",faq6a:"Jelöld a hirdetést „Örökbefogadva\" jelöléssel a Saját hirdetések oldalon. Eltávolítják a feedből.",
+faq7q:"Hogyan jelentsek be egy gyanús hirdetést?",faq7a:"Minden kártyán van egy 🚩 Bejelentés gomb. Koppints rá, és írd le a problémát. Csapatunk minden bejelentést megvizsgál.",
+faq8q:"Hogyan törölhetem a fiókomat?",faq8a:"Használd a kapcsolatfelvételi űrlapot az animalbond.club oldalon. 72 órán belül feldolgozzuk a kérelmet a GDPR-nak megfelelően.",
+footer_text:"Felhasználói kézikönyv · 1.0 verzió · 2026. május"
+}
+};
+
+</script>
+<script>
+let currentLang = 'ro';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[onclick="setLang('${lang}')"]`).classList.add('active');
+  const t = window.MANUAL_TRANSLATIONS[lang] || window.MANUAL_TRANSLATIONS['ro'];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang;
+}
+document.addEventListener('DOMContentLoaded', () => setLang('ro'));
+</script>
+
+<script>
+// Ascultă mesaje de la pagina părinte (animalbond.club/manual) pentru sync limbă
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'setLang' && typeof setLang === 'function') {
+    setLang(e.data.lang);
+  }
+});
+</script></body>
+</html>
