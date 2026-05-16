@@ -101,36 +101,45 @@ export default function TestimonialeClient() {
               onClick={() => setSelected(item)}
               className="bg-white rounded-card shadow-card border border-border-light overflow-hidden hover:shadow-card-hover transition-all cursor-pointer group"
             >
-              {item.photo_url ? (
-                <div className="relative aspect-[4/3] overflow-hidden bg-pink-50">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item.photo_url}
-                    alt={item.animal_name || 'Adoptie'}
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      const el = e.currentTarget
-                      el.style.display = 'none'
-                      const parent = el.parentElement
-                      if (parent) {
-                        parent.className = 'aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center text-6xl'
-                        parent.innerHTML = '🐾'
-                      }
-                    }}
-                  />
-                  {item.video_url && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                      <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
-                        <span className="text-2xl ml-1">▶️</span>
+              {(() => {
+                const imgSrc = item.photo_url || item.video_thumbnail_url
+                return imgSrc ? (
+                  <div className="relative aspect-[4/3] overflow-hidden bg-pink-50">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={imgSrc}
+                      alt={item.animal_name || 'Adoptie'}
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        const el = e.currentTarget
+                        el.style.display = 'none'
+                        const parent = el.parentElement
+                        if (parent) {
+                          parent.className = 'aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center text-6xl'
+                          parent.innerHTML = '🐾'
+                        }
+                      }}
+                    />
+                    {item.video_url && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                        <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                          <span className="text-2xl ml-1">▶️</span>
+                        </div>
                       </div>
+                    )}
+                  </div>
+                ) : item.video_url ? (
+                  <div className="aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center">
+                    <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                      <span className="text-2xl ml-1">▶️</span>
                     </div>
-                  )}
-                </div>
-              ) : (
-                <div className="aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center text-6xl">
-                  🐾
-                </div>
-              )}
+                  </div>
+                ) : (
+                  <div className="aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center text-6xl">
+                    🐾
+                  </div>
+                )
+              })()}
 
               <div className="p-4">
                 {item.animal_name && (
@@ -159,11 +168,11 @@ export default function TestimonialeClient() {
             className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {selected.photo_url && (
+            {(selected.photo_url || selected.video_thumbnail_url) && (
               <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-pink-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={selected.photo_url}
+                  src={selected.photo_url || selected.video_thumbnail_url || ''}
                   alt={selected.animal_name || 'Adoptie'}
                   className="object-cover w-full h-full"
                   onError={(e) => {
