@@ -23,8 +23,8 @@ export default function ManualPage() {
     return () => iframe.removeEventListener('load', send)
   }, [lang])
 
-  const handlePrint = () => {
-    iframeRef.current?.contentWindow?.postMessage({ type: 'print' }, '*')
+  const handleDownload = () => {
+    iframeRef.current?.contentWindow?.postMessage({ type: 'download' }, '*')
   }
 
   return (
@@ -39,9 +39,9 @@ export default function ManualPage() {
               <p className="text-xs text-gray-400">Versiunea 1.0 · 2026</p>
             </div>
           </div>
-          {/* Download PDF — printează conținutul în limba curentă */}
+          {/* Download PDF */}
           <button
-            onClick={handlePrint}
+            onClick={handleDownload}
             className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors"
           >
             <span>⬇️</span>
@@ -57,7 +57,7 @@ export default function ManualPage() {
         className="w-full border-0"
         style={{ height: 'calc(100vh - 57px)' }}
         title="Manual AnimalBond"
-        sandbox="allow-scripts allow-same-origin allow-modals"
+        sandbox="allow-scripts allow-same-origin allow-modals allow-downloads"
       />
     </div>
   )

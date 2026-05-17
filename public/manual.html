@@ -1281,11 +1281,43 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-// Ascultă mesaje de la pagina părinte (animalbond.club/manual) pentru sync limbă și print
+// Ascultă mesaje de la pagina părinte (animalbond.club/manual) pentru sync limbă și download
 window.addEventListener('message', function(e) {
   if (!e.data) return;
   if (e.data.type === 'setLang' && typeof setLang === 'function') {
     setLang(e.data.lang);
+  }
+  if (e.data.type === 'download') {
+    var langBar = document.querySelector('.lang-bar');
+    var btn = document.getElementById('download-btn-inner');
+
+    // Ascunde bara de limbă și butonul din PDF
+    if (langBar) langBar.style.display = 'none';
+    if (btn) btn.style.display = 'none';
+
+    var doDownload = function() {
+      var opt = {
+        margin: [15, 15, 15, 15],
+        filename: 'Manual-AnimalBond.pdf',
+        image: { type: 'jpeg', quality: 0.95 },
+        html2canvas: { scale: 1.5, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      // eslint-disable-next-line no-undef
+      html2pdf().set(opt).from(document.body).save().then(function() {
+        if (langBar) langBar.style.display = '';
+        if (btn) btn.style.display = '';
+      });
+    };
+
+    if (typeof html2pdf !== 'undefined') {
+      doDownload();
+    } else {
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      script.onload = doDownload;
+      document.head.appendChild(script);
+    }
   }
   if (e.data.type === 'print') {
     window.print();
