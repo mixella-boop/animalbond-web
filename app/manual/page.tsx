@@ -57,7 +57,7 @@ export default function ManualPage() {
         className="w-full border-0"
         style={{ height: 'calc(100vh - 57px)' }}
         title="Manual AnimalBond"
-        sandbox="allow-scripts allow-same-origin"
+        sandbox="allow-scripts allow-same-origin allow-modals"
       />
     </div>
   )
