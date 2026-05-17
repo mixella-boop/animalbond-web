@@ -56,9 +56,10 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline'",
+              "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data:",
+              "connect-src 'self' https://cdnjs.cloudflare.com",
               "frame-ancestors 'self'",
             ].join('; '),
           },
