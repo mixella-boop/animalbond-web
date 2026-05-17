@@ -1,21 +1,31 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useLanguage } from '@/context/LanguageContext'
 
-export default function ManualPage() {
+// Componentă separată care folosește useSearchParams (necesită Suspense)
+function ManualContent() {
   const { lang } = useLanguage()
+  const searchParams = useSearchParams()
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  // Reținem limba inițială — o folosim în src (evită reload la fiecare schimbare)
-  const initialLang = useRef(lang)
 
-  // Când se schimbă limba în navbar → postMessage către iframe (fără reload)
+  // URL lang override — trimis de aplicația mobilă (?lang=fr etc.)
+  const urlLang = searchParams.get('lang') ?? null
+  const initialLang = useRef(urlLang || lang)
+
+  // La prima montare folosim URL lang (sau context); ulterior urmărim contextul
+  const isFirstEffect = useRef(true)
+
   useEffect(() => {
     const iframe = iframeRef.current
     if (!iframe) return
 
+    const effectiveLang = isFirstEffect.current ? initialLang.current : lang
+    isFirstEffect.current = false
+
     const send = () => {
-      iframe.contentWindow?.postMessage({ type: 'setLang', lang }, '*')
+      iframe.contentWindow?.postMessage({ type: 'setLang', lang: effectiveLang }, '*')
     }
 
     send()
@@ -60,5 +70,13 @@ export default function ManualPage() {
         sandbox="allow-scripts allow-same-origin allow-modals allow-downloads"
       />
     </div>
+  )
+}
+
+export default function ManualPage() {
+  return (
+    <Suspense>
+      <ManualContent />
+    </Suspense>
   )
 }
