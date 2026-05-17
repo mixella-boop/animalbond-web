@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
 import { createClient } from '@/lib/supabase-client'
 
-export default function PartnerSuccessPage() {
+function PartnerSuccessContent() {
   const searchParams = useSearchParams()
   const { t } = useLanguage()
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading')
@@ -126,5 +126,20 @@ export default function PartnerSuccessPage() {
         </Link>
       </div>
     </div>
+  )
+}
+
+export default function PartnerSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600">Se încarcă...</p>
+        </div>
+      </div>
+    }>
+      <PartnerSuccessContent />
+    </Suspense>
   )
 }
