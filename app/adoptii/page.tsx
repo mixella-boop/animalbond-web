@@ -8,15 +8,19 @@ import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
 import { COUNTRIES } from '@/lib/countries'
-import { LANG_TO_COUNTRIES, COUNTRY_TO_LANG, type Lang } from '@/lib/i18n'
+import { LANG_TO_COUNTRIES, LANG_TO_COUNTRY, COUNTRY_TO_LANG, type Lang } from '@/lib/i18n'
 
 // If the selected country belongs to the current language group (e.g. US for EN,
 // PT for PT, AT for DE), expand the filter to all countries in that group.
 // This way EN users selecting US also see GB/AU/CA etc.
 function expandCountries(country: string, lang: string): string[] {
   if (!country) return []
+  // Extinde doar dacă țara e cea default a limbii (setată automat din navbar).
+  // Dacă userul a ales manual o altă țară → arată strict acea țară.
+  const langDefault = LANG_TO_COUNTRY[lang as Lang]
+  if (langDefault !== country) return [country]
   const langCountries = LANG_TO_COUNTRIES[lang as Lang]
-  if (langCountries && langCountries.includes(country) && langCountries.length > 1) {
+  if (langCountries && langCountries.length > 1) {
     return langCountries
   }
   return [country]
