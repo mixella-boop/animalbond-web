@@ -5,7 +5,7 @@ import { PRIVACY_CONTENT, TABLE_ROWS_DATA, type Lang } from './content'
 
 export default function PrivacyContent() {
   const { lang } = useLanguage()
-  const content = PRIVACY_CONTENT[(lang as Lang)] ?? PRIVACY_CONTENT.ro
+  const content = PRIVACY_CONTENT[(lang as Lang)] ?? PRIVACY_CONTENT.en
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">

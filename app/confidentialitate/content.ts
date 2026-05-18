@@ -1,4 +1,4 @@
-export type Lang = 'ro' | 'en' | 'de' | 'fr' | 'it' | 'es' | 'hu'
+export type Lang = 'ro' | 'en' | 'de' | 'fr' | 'it' | 'es' | 'hu' | 'pt' | 'nl' | 'ru'
 
 export interface PrivacySubsection {
   title: string
@@ -703,6 +703,294 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
         title: '11. Kapcsolat',
         paragraphs: ['Személyes adataid kezelésével kapcsolatos bármely kérdés esetén:'],
         contactBox: { operator: 'Üzemeltető: Elena Lenghel', platform: 'Platform: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+      },
+    ],
+  },
+
+  pt: {
+    pageTitle: 'Política de Privacidade',
+    lastUpdate: 'Última atualização: 15 de maio de 2026',
+    sections: [
+      {
+        title: '1. Quem somos',
+        paragraphs: [
+          "AnimalBond é uma plataforma digital de adoção e cuidado de animais, acessível em animalbond.club e através da app móvel AnimalBond. A responsável pelo tratamento de dados pessoais é Elena Lenghel, pessoa singular, contactável em: contact@animalbond.club.",
+          'Esta política aplica-se a todos os utilizadores da plataforma AnimalBond (site e app móvel) e descreve como recolhemos, utilizamos e protegemos os teus dados pessoais, em conformidade com o Regulamento (UE) 2016/679 (RGPD).',
+        ],
+      },
+      {
+        title: '2. Que dados recolhemos e porquê',
+        subsections: [
+          { title: '2.1 Dados de conta', text: 'No registo recolhemos: endereço de e-mail, nome/nome de utilizador e palavra-passe (armazenada exclusivamente de forma encriptada e irreversível). Opcionalmente, podes adicionar um número de telefone. Base legal: execução do contrato (art. 6.º(1)(b) RGPD).' },
+          { title: '2.2 Dados de perfil', text: 'Podes completar o perfil com: país de residência, idioma preferido, foto de perfil e papel escolhido (adotante, cedente, abrigo, parceiro). Estes dados são necessários para o serviço de matching e filtragem de anúncios. Base legal: execução do contrato.' },
+          { title: '2.3 Anúncios e fotografias', text: 'Quando publicas um anúncio de adoção, venda ou perdido/encontrado, recolhemos: fotografias do animal, descrição, localização (distrito/cidade) e coordenadas GPS aproximadas. As coordenadas exatas não são exibidas publicamente — a plataforma utiliza uma localização aproximada (~2 km de raio) para proteger a tua morada real. Base legal: execução do contrato.' },
+          { title: '2.4 Mensagens e comunicação', text: "As mensagens enviadas entre utilizadores através do sistema de chat da plataforma são armazenadas para permitir a continuação da conversa e para a segurança dos utilizadores (deteção de abusos). Base legal: execução do contrato e interesse legítimo (art. 6.º(1)(f) RGPD)." },
+          { title: '2.5 Dados de utilização', text: 'Recolhemos informações sobre as tuas interações com a plataforma: preferências (gostos/não gostos), denúncias submetidas, testemunhos publicados. Estes dados são usados para melhorar o algoritmo de matching e o serviço. Base legal: interesse legítimo.' },
+          { title: '2.6 Dados técnicos', text: 'Pela simples utilização da plataforma, os nossos servidores processam automaticamente: endereço IP, tipo de dispositivo, browser, data e hora de acesso. Estes dados são necessários para a segurança e funcionamento técnico do serviço. Base legal: interesse legítimo.' },
+          { title: '2.7 Dados de pagamento', text: 'Se fizeres uma doação através da plataforma, o pagamento é processado exclusivamente pela Stripe, Inc. O AnimalBond nunca armazena os dados do teu cartão bancário. Recebemos apenas a confirmação de pagamento e o montante. Base legal: execução do contrato.' },
+        ],
+      },
+      {
+        title: '3. Como utilizamos os teus dados',
+        items: [
+          'Fornecimento e melhoria dos serviços da plataforma AnimalBond',
+          'Autenticação e segurança da tua conta',
+          'Exibição de anúncios e cálculo de pontuações de compatibilidade (matching)',
+          'Envio de notificações relevantes sobre a tua atividade (e-mail)',
+          'Prevenção de fraudes, abusos e atividades ilegais',
+          'Cumprimento das obrigações legais aplicáveis',
+        ],
+        afterItems: 'Não utilizamos os teus dados para publicidade comportamental e nunca os vendemos a terceiros.',
+      },
+      {
+        title: '4. Com quem partilhamos os dados',
+        paragraphs: ['Os teus dados são acedidos apenas pelo operador da plataforma e pelos fornecedores de serviços técnicos necessários para o funcionamento do AnimalBond:'],
+        tableHeaders: ['Fornecedor', 'Finalidade', 'Localização'],
+        tableNote: 'Todos os fornecedores acima estão certificados ou em conformidade com os requisitos do RGPD para transferências de dados fora da UE (Cláusulas Contratuais Padrão ou mecanismos equivalentes).',
+        tableAfter: 'Os dados podem ser divulgados às autoridades públicas apenas quando exigido por lei.',
+      },
+      {
+        title: '5. Por quanto tempo guardamos os dados',
+        items: [
+          'Dados de conta: durante toda a vida da conta + 30 dias após eliminação',
+          'Anúncios: até expiração ou eliminação pelo utilizador',
+          'Mensagens: 12 meses a partir da data de envio',
+          'Dados técnicos (registos): máximo 90 dias',
+          'Dados de pagamento: conforme exigido pela lei fiscal (5 anos)',
+        ],
+      },
+      {
+        title: '6. Os teus direitos (RGPD)',
+        paragraphs: ['Como titular dos dados, tens os seguintes direitos:'],
+        items: [
+          'Direito de acesso — podes solicitar uma cópia dos teus dados',
+          'Direito de retificação — podes corrigir dados incorretos diretamente no perfil',
+          'Direito ao apagamento — podes eliminar a tua conta e os dados associados',
+          'Direito à portabilidade — podes solicitar os teus dados em formato estruturado',
+          'Direito à limitação do tratamento — nos casos previstos pelo RGPD',
+          'Direito de oposição — ao tratamento baseado em interesse legítimo',
+          'Direito de retirar o consentimento — a qualquer momento, sem consequências negativas',
+        ],
+        afterItems: 'Para exercer qualquer direito, contacta-nos em contact@animalbond.club. Respondemos no prazo de 30 dias. Tens também o direito de apresentar uma reclamação à autoridade nacional de proteção de dados.',
+      },
+      {
+        title: '7. Cookies e armazenamento local',
+        paragraphs: ['O site AnimalBond utiliza um número mínimo de cookies estritamente necessários:'],
+        items: [
+          'preferred_country — guarda o país selecionado (30 dias, armazenado localmente)',
+          'ab_lang — guarda o idioma preferido (armazenamento local no browser)',
+          'Sessão de autenticação — necessária para manter o estado de sessão',
+        ],
+        afterItems: 'Não utilizamos cookies de rastreamento, publicidade ou análise de terceiros.',
+      },
+      {
+        title: '8. Menores',
+        paragraphs: ['A plataforma AnimalBond destina-se a pessoas com pelo menos 16 anos. Não recolhemos intencionalmente dados de menores com idade inferior. Se és pai/mãe ou tutor e acreditas que um menor criou uma conta, contacta-nos em contact@animalbond.club e eliminaremos imediatamente os dados relevantes.'],
+      },
+      {
+        title: '9. Segurança dos dados',
+        paragraphs: ['Tomamos medidas técnicas e organizativas adequadas para proteger os teus dados: ligações encriptadas (HTTPS/TLS), palavras-passe armazenadas exclusivamente em formato hash (bcrypt), acesso restrito à base de dados, localizações GPS aproximadas (não exatas) para anúncios públicos, e limitação de taxa em mensagens para prevenir abusos.'],
+      },
+      {
+        title: '10. Alterações à política',
+        paragraphs: ['Podemos atualizar esta política periodicamente. As alterações significativas serão comunicadas por e-mail ou através de um aviso visível na app. A data da última atualização é apresentada no topo desta página. A utilização continuada da plataforma após uma alteração constitui a aceitação da nova política.'],
+      },
+      {
+        title: '11. Contacto',
+        paragraphs: ['Para qualquer questão relacionada com o tratamento dos teus dados pessoais:'],
+        contactBox: { operator: 'Operadora: Elena Lenghel', platform: 'Plataforma: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+      },
+    ],
+  },
+
+  nl: {
+    pageTitle: 'Privacybeleid',
+    lastUpdate: 'Laatste update: 15 mei 2026',
+    sections: [
+      {
+        title: '1. Wie zijn wij',
+        paragraphs: [
+          'AnimalBond is een digitaal platform voor dieradoptie en -verzorging, toegankelijk via animalbond.club en de AnimalBond mobiele app. De verwerkingsverantwoordelijke voor persoonsgegevens is Elena Lenghel, een particulier, bereikbaar via: contact@animalbond.club.',
+          'Dit beleid is van toepassing op alle gebruikers van het AnimalBond-platform (website en mobiele app) en beschrijft hoe wij uw persoonsgegevens verzamelen, gebruiken en beschermen, in overeenstemming met Verordening (EU) 2016/679 (AVG).',
+        ],
+      },
+      {
+        title: '2. Welke gegevens wij verzamelen en waarom',
+        subsections: [
+          { title: '2.1 Accountgegevens', text: 'Bij registratie verzamelen wij: e-mailadres, naam/gebruikersnaam en wachtwoord (uitsluitend opgeslagen in versleutelde, onomkeerbare vorm). Optioneel kunt u een telefoonnummer toevoegen. Rechtsgrondslag: uitvoering van overeenkomst (Art. 6(1)(b) AVG).' },
+          { title: '2.2 Profielgegevens', text: 'U kunt uw profiel aanvullen met: land van verblijf, voorkeurstaal, profielfoto en gekozen rol (adoptant, afstander, opvangcentrum, partner). Deze gegevens zijn noodzakelijk voor de matchingdienst en advertentiefilters. Rechtsgrondslag: uitvoering van overeenkomst.' },
+          { title: '2.3 Advertenties en foto\'s', text: 'Wanneer u een adoptie-, verkoop- of verloren/gevonden-advertentie plaatst, verzamelen wij: dierenfoto\'s, beschrijving, locatie (provincie/stad) en benaderde GPS-coördinaten. Exacte coördinaten worden niet openbaar weergegeven — het platform gebruikt een benaderde locatie (~2 km straal) om uw werkelijke adres te beschermen. Rechtsgrondslag: uitvoering van overeenkomst.' },
+          { title: '2.4 Berichten en communicatie', text: 'Berichten verzonden tussen gebruikers via het chatsysteem van het platform worden opgeslagen om voortzetting van gesprekken mogelijk te maken en voor gebruikersveiligheid (misbruikdetectie). Rechtsgrondslag: uitvoering van overeenkomst en gerechtvaardigd belang (Art. 6(1)(f) AVG).' },
+          { title: '2.5 Gebruiksgegevens', text: 'Wij verzamelen informatie over uw interacties met het platform: voorkeuren (likes/dislikes), ingediende meldingen, gepubliceerde getuigenissen. Deze gegevens worden gebruikt om het matchingalgoritme en de dienst te verbeteren. Rechtsgrondslag: gerechtvaardigd belang.' },
+          { title: '2.6 Technische gegevens', text: 'Door simpelweg het platform te gebruiken, verwerken onze servers automatisch: IP-adres, apparaattype, browser, datum en tijdstip van toegang. Deze gegevens zijn noodzakelijk voor de beveiliging en technische werking van de dienst. Rechtsgrondslag: gerechtvaardigd belang.' },
+          { title: '2.7 Betalingsgegevens', text: 'Als u een donatie via het platform doet, wordt de betaling uitsluitend verwerkt door Stripe, Inc. AnimalBond slaat nooit uw bankkaartgegevens op. Wij ontvangen alleen betalingsbevestiging en bedrag. Rechtsgrondslag: uitvoering van overeenkomst.' },
+        ],
+      },
+      {
+        title: '3. Hoe wij uw gegevens gebruiken',
+        items: [
+          'Het leveren en verbeteren van AnimalBond-platformdiensten',
+          'Het authenticeren en beveiligen van uw account',
+          'Het weergeven van advertenties en berekenen van compatibiliteitsscores (matching)',
+          'Het sturen van relevante meldingen over uw activiteit (e-mail)',
+          'Het voorkomen van fraude, misbruik en illegale activiteiten',
+          'Het naleven van toepasselijke wettelijke verplichtingen',
+        ],
+        afterItems: 'Wij gebruiken uw gegevens niet voor gedragsgerichte reclame en verkopen ze nooit aan derden.',
+      },
+      {
+        title: '4. Met wie wij gegevens delen',
+        paragraphs: ['Uw gegevens worden alleen benaderd door de platformbeheerder en de technische dienstverleners die noodzakelijk zijn voor de werking van AnimalBond:'],
+        tableHeaders: ['Aanbieder', 'Doel', 'Locatie'],
+        tableNote: 'Alle bovenstaande aanbieders zijn gecertificeerd of voldoen aan de AVG-vereisten voor gegevensoverdracht buiten de EU (Standaardcontractbepalingen of gelijkwaardige mechanismen).',
+        tableAfter: 'Gegevens kunnen alleen aan overheidsinstanties worden bekendgemaakt wanneer dit wettelijk verplicht is.',
+      },
+      {
+        title: '5. Hoe lang wij gegevens bewaren',
+        items: [
+          'Accountgegevens: gedurende de levensduur van het account + 30 dagen na verwijdering',
+          'Advertenties: tot vervaldatum of verwijdering door de gebruiker',
+          'Berichten: 12 maanden vanaf de verzenddatum',
+          'Technische gegevens (logboeken): maximaal 90 dagen',
+          'Betalingsgegevens: conform belastingwettelijke vereisten (5 jaar)',
+        ],
+      },
+      {
+        title: '6. Uw rechten (AVG)',
+        paragraphs: ['Als betrokkene heeft u de volgende rechten:'],
+        items: [
+          'Recht op inzage — u kunt een kopie van uw gegevens opvragen',
+          'Recht op rectificatie — u kunt onjuiste gegevens rechtstreeks vanuit uw profiel corrigeren',
+          'Recht op gegevenswissing — u kunt uw account en bijbehorende gegevens verwijderen',
+          'Recht op gegevensoverdraagbaarheid — u kunt uw gegevens in gestructureerd formaat opvragen',
+          'Recht op beperking van de verwerking — in de gevallen voorzien door de AVG',
+          'Recht van bezwaar — tegen verwerking op basis van gerechtvaardigd belang',
+          'Recht om toestemming in te trekken — op elk moment, zonder negatieve gevolgen',
+        ],
+        afterItems: 'Om een recht uit te oefenen, neem contact met ons op via contact@animalbond.club. Wij reageren binnen 30 dagen. U heeft ook het recht om een klacht in te dienen bij de nationale gegevensbeschermingsautoriteit.',
+      },
+      {
+        title: '7. Cookies en lokale opslag',
+        paragraphs: ['De AnimalBond-website gebruikt een minimaal aantal strikt noodzakelijke cookies:'],
+        items: [
+          'preferred_country — slaat het geselecteerde land op (30 dagen, lokaal opgeslagen)',
+          'ab_lang — slaat de voorkeurstaal op (lokale browseropslag)',
+          'Authenticatiesessie — noodzakelijk voor het behouden van de inlogstatus',
+        ],
+        afterItems: 'Wij gebruiken geen tracking-, reclame- of analytische cookies van derden.',
+      },
+      {
+        title: '8. Minderjarigen',
+        paragraphs: ['Het AnimalBond-platform is bedoeld voor personen van minimaal 16 jaar. Wij verzamelen niet bewust gegevens van minderjarigen onder deze leeftijd. Als u een ouder of voogd bent en denkt dat een minderjarige een account heeft aangemaakt, neem dan contact met ons op via contact@animalbond.club en wij verwijderen de betreffende gegevens onmiddellijk.'],
+      },
+      {
+        title: '9. Gegevensbeveiliging',
+        paragraphs: ['Wij nemen passende technische en organisatorische maatregelen om uw gegevens te beschermen: versleutelde verbindingen (HTTPS/TLS), wachtwoorden uitsluitend opgeslagen als hash (bcrypt), beperkte databasetoegang, benaderde GPS-locaties (niet exact) voor openbare advertenties, en rate limiting op berichten ter voorkoming van misbruik.'],
+      },
+      {
+        title: '10. Beleidswijzigingen',
+        paragraphs: ['Wij kunnen dit beleid periodiek bijwerken. Significante wijzigingen worden gecommuniceerd via e-mail of een zichtbare melding in de app. De datum van de laatste update staat bovenaan deze pagina. Voortgezet gebruik van het platform na een wijziging geldt als aanvaarding van het nieuwe beleid.'],
+      },
+      {
+        title: '11. Contact',
+        paragraphs: ['Voor vragen over de verwerking van uw persoonsgegevens:'],
+        contactBox: { operator: 'Beheerder: Elena Lenghel', platform: 'Platform: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+      },
+    ],
+  },
+
+  ru: {
+    pageTitle: 'Политика конфиденциальности',
+    lastUpdate: 'Последнее обновление: 15 мая 2026 г.',
+    sections: [
+      {
+        title: '1. Кто мы',
+        paragraphs: [
+          'AnimalBond — цифровая платформа для усыновления и ухода за животными, доступная на animalbond.club и через мобильное приложение AnimalBond. Оператором персональных данных является Елена Ленгел, физическое лицо, контактный адрес: contact@animalbond.club.',
+          'Данная политика распространяется на всех пользователей платформы AnimalBond (сайт и мобильное приложение) и описывает, как мы собираем, используем и защищаем ваши персональные данные в соответствии с Регламентом (ЕС) 2016/679 (GDPR).',
+        ],
+      },
+      {
+        title: '2. Какие данные мы собираем и зачем',
+        subsections: [
+          { title: '2.1 Данные аккаунта', text: 'При регистрации мы собираем: адрес электронной почты, имя/имя пользователя и пароль (хранится исключительно в зашифрованном, необратимом виде). Опционально вы можете добавить номер телефона. Правовое основание: исполнение договора (ст. 6(1)(б) GDPR).' },
+          { title: '2.2 Данные профиля', text: 'Вы можете дополнить профиль: страной проживания, предпочтительным языком, фото профиля и выбранной ролью (усыновитель, хозяин, приют, партнёр). Эти данные необходимы для сервиса подбора и фильтрации объявлений. Правовое основание: исполнение договора.' },
+          { title: '2.3 Объявления и фотографии', text: 'При публикации объявления об усыновлении, продаже или потерянном/найденном животном мы собираем: фотографии животного, описание, местоположение (район/город) и приблизительные GPS-координаты. Точные координаты не отображаются публично — платформа использует приблизительное местоположение (~2 км радиуса) для защиты вашего реального адреса. Правовое основание: исполнение договора.' },
+          { title: '2.4 Сообщения и коммуникация', text: 'Сообщения, отправляемые между пользователями через систему чата платформы, хранятся для обеспечения продолжения разговора и безопасности пользователей (обнаружение злоупотреблений). Правовое основание: исполнение договора и законный интерес (ст. 6(1)(ж) GDPR).' },
+          { title: '2.5 Данные об использовании', text: 'Мы собираем информацию о ваших взаимодействиях с платформой: предпочтения (лайки/дизлайки), поданные жалобы, опубликованные отзывы. Эти данные используются для улучшения алгоритма подбора и сервиса. Правовое основание: законный интерес.' },
+          { title: '2.6 Технические данные', text: 'При простом использовании платформы наши серверы автоматически обрабатывают: IP-адрес, тип устройства, браузер, дату и время доступа. Эти данные необходимы для безопасности и технического функционирования сервиса. Правовое основание: законный интерес.' },
+          { title: '2.7 Платёжные данные', text: 'Если вы делаете пожертвование через платформу, платёж обрабатывается исключительно Stripe, Inc. AnimalBond никогда не хранит данные вашей банковской карты. Мы получаем только подтверждение платежа и сумму. Правовое основание: исполнение договора.' },
+        ],
+      },
+      {
+        title: '3. Как мы используем ваши данные',
+        items: [
+          'Предоставление и улучшение услуг платформы AnimalBond',
+          'Аутентификация и защита вашего аккаунта',
+          'Отображение объявлений и расчёт оценок совместимости (подбор)',
+          'Отправка релевантных уведомлений о вашей активности (e-mail)',
+          'Предотвращение мошенничества, злоупотреблений и незаконной деятельности',
+          'Соблюдение применимых законодательных обязательств',
+        ],
+        afterItems: 'Мы не используем ваши данные для поведенческой рекламы и никогда не продаём их третьим лицам.',
+      },
+      {
+        title: '4. С кем мы делимся данными',
+        paragraphs: ['Ваши данные доступны только оператору платформы и поставщикам технических услуг, необходимых для работы AnimalBond:'],
+        tableHeaders: ['Поставщик', 'Цель', 'Местоположение'],
+        tableNote: 'Все вышеперечисленные поставщики сертифицированы или соответствуют требованиям GDPR для передачи данных за пределы ЕС (стандартные договорные условия или эквивалентные механизмы).',
+        tableAfter: 'Данные могут быть раскрыты государственным органам только в случаях, предусмотренных законом.',
+      },
+      {
+        title: '5. Как долго мы храним данные',
+        items: [
+          'Данные аккаунта: в течение всего срока существования аккаунта + 30 дней после удаления',
+          'Объявления: до истечения срока или удаления пользователем',
+          'Сообщения: 12 месяцев с даты отправки',
+          'Технические данные (журналы): максимум 90 дней',
+          'Платёжные данные: в соответствии с требованиями налогового законодательства (5 лет)',
+        ],
+      },
+      {
+        title: '6. Ваши права (GDPR)',
+        paragraphs: ['Как субъект данных, вы имеете следующие права:'],
+        items: [
+          'Право на доступ — вы можете запросить копию ваших данных',
+          'Право на исправление — вы можете исправить неверные данные непосредственно из профиля',
+          'Право на удаление — вы можете удалить аккаунт и связанные данные',
+          'Право на переносимость данных — вы можете запросить данные в структурированном формате',
+          'Право на ограничение обработки — в случаях, предусмотренных GDPR',
+          'Право на возражение — против обработки на основе законного интереса',
+          'Право отозвать согласие — в любое время, без негативных последствий',
+        ],
+        afterItems: 'Для осуществления любого права обратитесь к нам по адресу contact@animalbond.club. Мы отвечаем в течение 30 дней. Вы также имеете право подать жалобу в национальный орган по защите данных.',
+      },
+      {
+        title: '7. Файлы cookie и локальное хранилище',
+        paragraphs: ['Сайт AnimalBond использует минимальное количество строго необходимых файлов cookie:'],
+        items: [
+          'preferred_country — сохраняет выбранную страну (30 дней, хранится локально)',
+          'ab_lang — сохраняет предпочтительный язык (локальное хранилище браузера)',
+          'Сессия аутентификации — необходима для поддержания состояния входа',
+        ],
+        afterItems: 'Мы не используем файлы cookie для отслеживания, рекламы или аналитики от третьих сторон.',
+      },
+      {
+        title: '8. Несовершеннолетние',
+        paragraphs: ['Платформа AnimalBond предназначена для лиц не моложе 16 лет. Мы намеренно не собираем данные несовершеннолетних младше этого возраста. Если вы являетесь родителем или опекуном и считаете, что несовершеннолетний создал аккаунт, свяжитесь с нами по адресу contact@animalbond.club, и мы немедленно удалим соответствующие данные.'],
+      },
+      {
+        title: '9. Безопасность данных',
+        paragraphs: ['Мы принимаем надлежащие технические и организационные меры для защиты ваших данных: зашифрованные соединения (HTTPS/TLS), пароли хранятся исключительно в хешированном виде (bcrypt), ограниченный доступ к базе данных, приблизительные GPS-координаты (не точные) для публичных объявлений, и ограничение частоты запросов в сообщениях для предотвращения злоупотреблений.'],
+      },
+      {
+        title: '10. Изменения политики',
+        paragraphs: ['Мы можем периодически обновлять данную политику. О существенных изменениях будет сообщаться по электронной почте или через видимое уведомление в приложении. Дата последнего обновления указана в верхней части этой страницы. Продолжение использования платформы после изменения означает принятие новой политики.'],
+      },
+      {
+        title: '11. Контакт',
+        paragraphs: ['По любым вопросам, связанным с обработкой ваших персональных данных:'],
+        contactBox: { operator: 'Оператор: Елена Ленгел', platform: 'Платформа: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
       },
     ],
   },

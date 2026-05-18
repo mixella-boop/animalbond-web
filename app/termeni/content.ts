@@ -1,4 +1,4 @@
-export type Lang = 'ro' | 'en' | 'de' | 'fr' | 'it' | 'es' | 'hu'
+export type Lang = 'ro' | 'en' | 'de' | 'fr' | 'it' | 'es' | 'hu' | 'pt' | 'nl' | 'ru'
 
 export interface TermsSection {
   title: string
@@ -570,6 +570,246 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     contactBox: {
       operator: 'Üzemeltető: Elena Lenghel',
       platform: 'Platform: AnimalBond — animalbond.club',
+      email: 'E-mail: contact@animalbond.club',
+    },
+  },
+
+  pt: {
+    pageTitle: 'Termos e Condições',
+    version: 'Versão 1.0 · 11 de abril de 2026',
+    sections: [
+      {
+        title: '1. Quem somos',
+        text: "AnimalBond é uma plataforma digital que liga pessoas que querem adotar, acolher temporariamente, dar para adoção ou ajudar animais em necessidade. Somos uma plataforma intermediária — não possuímos, vendemos nem garantimos nenhum animal listado. A operadora da plataforma é Elena Lenghel, pessoa singular, contactável em: contact@animalbond.club.",
+      },
+      {
+        title: '2. Elegibilidade',
+        text: 'Deves ter pelo menos 16 anos para utilizar a plataforma. O serviço não está disponível em países sob sanções internacionais (Irão, Coreia do Norte, Rússia, Bielorrússia, Síria, Cuba).',
+      },
+      {
+        title: '3. Tipos de conta',
+        items: [
+          'Utilizador — adota, dá para adoção, doa. Gratuito.',
+          'Abrigo / Associação — verificado manualmente. Gratuito.',
+          'Parceiro (empresa) — veterinários, lojas de animais, etc. Subscrição mensal.',
+        ],
+        text: 'Podes ter apenas um tipo de conta. A adoção está disponível para todos.',
+      },
+      {
+        title: '4. Anúncios — as tuas responsabilidades',
+        items: [
+          'És o proprietário legal do animal',
+          'O animal NÃO é uma espécie protegida / CITES',
+          'As fotos e descrições são reais e atuais',
+          'Marcas o anúncio como "Adotado" quando o animal encontra um lar',
+          'Os anúncios expiram automaticamente após 90 dias',
+        ],
+      },
+      {
+        title: '5. Casos médicos e doações',
+        text: 'Podes publicar o teu IBAN para doações diretas. O AnimalBond NÃO processa, detém ou transfere dinheiro. Não somos responsáveis pela utilização incorreta de fundos.',
+      },
+      {
+        title: '6. Condutas proibidas',
+        items: [
+          'Espécies protegidas, tráfico de animais, práticas cruéis',
+          'Assédio, ameaças, mensagens comerciais não solicitadas',
+          'Fraude ou qualquer atividade ilegal',
+          'Contas falsas ou personificação de terceiros',
+        ],
+      },
+      {
+        title: '7. Denúncias',
+        text: 'Usa o botão "Denunciar" na app ou no site para sinalizar conteúdo inadequado. Agimos de acordo com a Lei dos Serviços Digitais (DSA — UE).',
+      },
+      {
+        title: '8. Eliminação de conta',
+        text: 'Podes eliminar a tua conta a qualquer momento nas Definições. A eliminação é permanente — perfil, anúncios, mensagens, fotos.',
+      },
+      {
+        title: '9. Responsabilidade',
+        text: 'O serviço é fornecido "tal como está", sem garantias. Não somos responsáveis pelo comportamento dos utilizadores nem pelo estado dos animais. A plataforma é intermediária — qualquer transação ou acordo entre utilizadores é da sua exclusiva responsabilidade.',
+      },
+      {
+        title: '10. Propriedade intelectual',
+        text: 'Todos os elementos de design, o logótipo e o nome "AnimalBond" são propriedade da operadora. As fotos e descrições dos anúncios pertencem aos utilizadores que as publicaram.',
+      },
+      {
+        title: '11. Alterações aos termos',
+        text: 'Reservamo-nos o direito de atualizar estes termos. As alterações significativas serão comunicadas por email ou através de um aviso na app. A utilização continuada da plataforma após uma alteração constitui a aceitação dos novos termos.',
+      },
+      {
+        title: '12. Lei aplicável',
+        text: 'A lei romena e, quando aplicável, a da União Europeia. Os tribunais competentes são os de Bucareste, Roménia.',
+      },
+      {
+        title: '13. Contacto',
+        text: '',
+      },
+    ],
+    contactBox: {
+      operator: 'Operadora: Elena Lenghel',
+      platform: 'Plataforma: AnimalBond — animalbond.club',
+      email: 'E-mail: contact@animalbond.club',
+    },
+  },
+
+  nl: {
+    pageTitle: 'Algemene Voorwaarden',
+    version: 'Versie 1.0 · 11 april 2026',
+    sections: [
+      {
+        title: '1. Wie zijn wij',
+        text: 'AnimalBond is een digitaal platform dat mensen verbindt die dieren willen adopteren, tijdelijk opvangen, afstaan of helpen. Wij zijn een intermediair platform — wij bezitten, verkopen of garanderen geen enkel geplaatst dier. De platformbeheerder is Elena Lenghel, een particulier, bereikbaar via: contact@animalbond.club.',
+      },
+      {
+        title: '2. Geschiktheid',
+        text: 'Je moet minimaal 16 jaar oud zijn om het platform te gebruiken. De dienst is niet beschikbaar in landen onder internationale sancties (Iran, Noord-Korea, Rusland, Belarus, Syrië, Cuba).',
+      },
+      {
+        title: '3. Accounttypen',
+        items: [
+          'Gebruiker — adopteer, sta af, doneer. Gratis.',
+          'Opvangcentrum / Vereniging — handmatig geverifieerd. Gratis.',
+          'Partner (bedrijf) — dierenartsen, dierenwinkels, enz. Maandelijks abonnement.',
+        ],
+        text: 'Je kunt slechts één accounttype hebben. Adoptie is voor iedereen beschikbaar.',
+      },
+      {
+        title: '4. Advertenties — jouw verantwoordelijkheden',
+        items: [
+          'Je bent de wettelijke eigenaar van het dier',
+          'Het dier is GEEN beschermde / CITES-soort',
+          "Foto's en beschrijvingen zijn echt en actueel",
+          'Je markeert de advertentie als "Geadopteerd" wanneer het dier een thuis vindt',
+          'Advertenties verlopen automatisch na 90 dagen',
+        ],
+      },
+      {
+        title: '5. Medische gevallen en donaties',
+        text: 'Je kunt je IBAN publiceren voor directe donaties. AnimalBond verwerkt, bewaart of transfereert GEEN geld. Wij zijn niet verantwoordelijk voor onjuist gebruik van fondsen.',
+      },
+      {
+        title: '6. Verboden gedrag',
+        items: [
+          'Beschermde soorten, dierenhandel, wrede praktijken',
+          'Intimidatie, bedreigingen, ongewenste commerciële berichten',
+          'Fraude of enige illegale activiteit',
+          'Nep-accounts of het nadoen van anderen',
+        ],
+      },
+      {
+        title: '7. Melden',
+        text: 'Gebruik de knop "Melden" in de app of op de website om ongepaste inhoud te markeren. Wij handelen in overeenstemming met de Digital Services Act (DSA — EU).',
+      },
+      {
+        title: '8. Account verwijderen',
+        text: 'Je kunt je account op elk moment verwijderen via Instellingen. Verwijdering is permanent — profiel, advertenties, berichten, foto\'s.',
+      },
+      {
+        title: '9. Aansprakelijkheid',
+        text: 'De dienst wordt geleverd "zoals hij is", zonder garanties. Wij zijn niet aansprakelijk voor het gedrag van gebruikers of de staat van dieren. Het platform is een intermediair — elke transactie of overeenkomst tussen gebruikers is hun eigen verantwoordelijkheid.',
+      },
+      {
+        title: '10. Intellectueel eigendom',
+        text: 'Alle ontwerpelementen, het logo en de naam "AnimalBond" zijn eigendom van de beheerder. Foto\'s en advertentiebeschrijvingen behoren toe aan de gebruikers die ze hebben geplaatst.',
+      },
+      {
+        title: '11. Wijzigingen in de voorwaarden',
+        text: 'Wij behouden ons het recht voor deze voorwaarden bij te werken. Significante wijzigingen worden gecommuniceerd via e-mail of een melding in de app. Voortgezet gebruik van het platform na een wijziging geldt als aanvaarding van de nieuwe voorwaarden.',
+      },
+      {
+        title: '12. Toepasselijk recht',
+        text: 'Het Roemeense recht en, waar van toepassing, dat van de Europese Unie. Bevoegde rechtbanken zijn die in Boekarest, Roemenië.',
+      },
+      {
+        title: '13. Contact',
+        text: '',
+      },
+    ],
+    contactBox: {
+      operator: 'Beheerder: Elena Lenghel',
+      platform: 'Platform: AnimalBond — animalbond.club',
+      email: 'E-mail: contact@animalbond.club',
+    },
+  },
+
+  ru: {
+    pageTitle: 'Условия использования',
+    version: 'Версия 1.0 · 11 апреля 2026 г.',
+    sections: [
+      {
+        title: '1. Кто мы',
+        text: 'AnimalBond — цифровая платформа, связывающая людей, которые хотят усыновить, временно приютить, отдать или помочь животным в нужде. Мы являемся посреднической платформой — мы не владеем, не продаём и не гарантируем ни одно из размещённых животных. Оператором платформы является Елена Ленгел, физическое лицо, контактный адрес: contact@animalbond.club.',
+      },
+      {
+        title: '2. Требования к пользователям',
+        text: 'Для использования платформы вам должно быть не менее 16 лет. Сервис недоступен в странах, находящихся под международными санкциями (Иран, Северная Корея, Россия, Беларусь, Сирия, Куба).',
+      },
+      {
+        title: '3. Типы аккаунтов',
+        items: [
+          'Пользователь — усыновляет, отдаёт, жертвует. Бесплатно.',
+          'Приют / Ассоциация — проверяется вручную. Бесплатно.',
+          'Партнёр (компания) — ветеринары, зоомагазины и т.д. Ежемесячная подписка.',
+        ],
+        text: 'У вас может быть только один тип аккаунта. Усыновление доступно всем.',
+      },
+      {
+        title: '4. Объявления — ваши обязанности',
+        items: [
+          'Вы являетесь законным владельцем животного',
+          'Животное НЕ является охраняемым видом / CITES',
+          'Фотографии и описания реальны и актуальны',
+          'Вы помечаете объявление как «Усыновлено», когда животное находит дом',
+          'Объявления автоматически истекают через 90 дней',
+        ],
+      },
+      {
+        title: '5. Медицинские случаи и пожертвования',
+        text: 'Вы можете публиковать свой IBAN для прямых пожертвований. AnimalBond НЕ обрабатывает, не хранит и не переводит деньги. Мы не несём ответственности за неправомерное использование средств.',
+      },
+      {
+        title: '6. Запрещённые действия',
+        items: [
+          'Охраняемые виды, торговля животными, жестокие практики',
+          'Домогательства, угрозы, незапрошенные коммерческие сообщения',
+          'Мошенничество или любая незаконная деятельность',
+          'Фиктивные аккаунты или выдача себя за других лиц',
+        ],
+      },
+      {
+        title: '7. Жалобы',
+        text: 'Используйте кнопку «Пожаловаться» в приложении или на сайте для отметки ненадлежащего контента. Мы действуем в соответствии с Законом о цифровых услугах (DSA — ЕС).',
+      },
+      {
+        title: '8. Удаление аккаунта',
+        text: 'Вы можете удалить свой аккаунт в любое время в Настройках. Удаление необратимо — профиль, объявления, сообщения, фотографии.',
+      },
+      {
+        title: '9. Ответственность',
+        text: 'Сервис предоставляется «как есть», без каких-либо гарантий. Мы не несём ответственности за действия пользователей или состояние животных. Платформа является посредником — любая сделка или соглашение между пользователями является их исключительной ответственностью.',
+      },
+      {
+        title: '10. Интеллектуальная собственность',
+        text: 'Все элементы дизайна, логотип и название «AnimalBond» являются собственностью оператора. Фотографии и описания объявлений принадлежат пользователям, которые их разместили.',
+      },
+      {
+        title: '11. Изменения условий',
+        text: 'Мы оставляем за собой право обновлять настоящие условия. О значительных изменениях будет сообщаться по электронной почте или через уведомление в приложении. Продолжение использования платформы после изменения означает принятие новых условий.',
+      },
+      {
+        title: '12. Применимое право',
+        text: 'Законодательство Румынии и, где применимо, Европейского Союза. Компетентными судами являются суды Бухареста, Румыния.',
+      },
+      {
+        title: '13. Контакт',
+        text: '',
+      },
+    ],
+    contactBox: {
+      operator: 'Оператор: Елена Ленгел',
+      platform: 'Платформа: AnimalBond — animalbond.club',
       email: 'E-mail: contact@animalbond.club',
     },
   },

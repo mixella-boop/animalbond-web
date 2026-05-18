@@ -5,7 +5,7 @@ import { TERMS_CONTENT, type Lang } from './content'
 
 export default function TermeniContent() {
   const { lang } = useLanguage()
-  const content = TERMS_CONTENT[(lang as Lang)] ?? TERMS_CONTENT.ro
+  const content = TERMS_CONTENT[(lang as Lang)] ?? TERMS_CONTENT.en
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
