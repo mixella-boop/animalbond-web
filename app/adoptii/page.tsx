@@ -8,6 +8,19 @@ import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
 import { COUNTRIES } from '@/lib/countries'
+import { LANG_TO_COUNTRIES, LANG_TO_COUNTRY, type Lang } from '@/lib/i18n'
+
+// Returns expanded country list: if country is the primary country for this lang,
+// returns all countries sharing that language. Otherwise returns just [country].
+function expandCountries(country: string, lang: string): string[] {
+  if (!country) return []
+  const langCountries = LANG_TO_COUNTRIES[lang as Lang]
+  const langPrimary = LANG_TO_COUNTRY[lang as Lang]
+  if (langCountries && country === langPrimary && langCountries.length > 1) {
+    return langCountries
+  }
+  return [country]
+}
 
 const SPECIES_KEYS = [
   { value: '', key: 'filter_all_species' as const },
@@ -57,7 +70,7 @@ function getMainPhoto(animal: Animal): string | null {
 const PAGE_SIZE = 12
 
 export default function FeedPage() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const { country, setCountry: setGlobalCountry } = useCountry()
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
@@ -129,8 +142,9 @@ export default function FeedPage() {
         .limit(2)
 
       if (country) {
-        countQ = countQ.eq('country', country)
-        photoQ = photoQ.eq('country', country)
+        const countries = expandCountries(country, lang)
+        countQ = countQ.in('country', countries)
+        photoQ = photoQ.in('country', countries)
       }
 
       const [countRes, photoRes] = await Promise.all([countQ, photoQ])
@@ -143,7 +157,7 @@ export default function FeedPage() {
       setLfBanner(count > 0 ? { count, photos } : null)
     }
     fetchBanner()
-  }, [country])
+  }, [country, lang])
 
   const fetchAnimals = useCallback(
     async (
@@ -151,6 +165,7 @@ export default function FeedPage() {
       typeF: string,
       speciesFilter: string,
       countryFilter: string,
+      langFilter: string,
       locationFilter: string,
       replace: boolean
     ) => {
@@ -178,7 +193,8 @@ export default function FeedPage() {
       }
 
       if (countryFilter) {
-        query = query.eq('country', countryFilter)
+        const countries = expandCountries(countryFilter, langFilter)
+        query = query.in('country', countries)
       }
 
       if (locationFilter) {
@@ -207,14 +223,14 @@ export default function FeedPage() {
   useEffect(() => {
     setLoading(true)
     setPage(0)
-    fetchAnimals(0, typeFilter, species, country, locationSearch, true).finally(() => setLoading(false))
-  }, [typeFilter, species, country, locationSearch, fetchAnimals])
+    fetchAnimals(0, typeFilter, species, country, lang, locationSearch, true).finally(() => setLoading(false))
+  }, [typeFilter, species, country, lang, locationSearch, fetchAnimals])
 
   const handleLoadMore = async () => {
     setLoadingMore(true)
     const nextPage = page + 1
     setPage(nextPage)
-    await fetchAnimals(nextPage, typeFilter, species, country, locationSearch, false)
+    await fetchAnimals(nextPage, typeFilter, species, country, lang, locationSearch, false)
     setLoadingMore(false)
   }
 

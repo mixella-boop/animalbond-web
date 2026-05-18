@@ -41,6 +41,20 @@ export const LANG_TO_COUNTRY: Record<Lang, string> = {
   ru: 'RU',
 }
 
+// Language → all countries that share this language (for multi-country filtering)
+export const LANG_TO_COUNTRIES: Record<Lang, string[]> = {
+  ro: ['RO', 'MD'],
+  en: ['GB', 'US', 'CA', 'AU', 'NZ', 'IE', 'ZA', 'SG', 'IN', 'PH'],
+  de: ['DE', 'AT', 'CH', 'LU'],
+  fr: ['FR', 'BE', 'LU', 'CH', 'MA'],
+  it: ['IT'],
+  es: ['ES', 'MX', 'AR', 'CO', 'CL'],
+  hu: ['HU'],
+  pt: ['PT', 'BR'],
+  nl: ['NL', 'BE'],
+  ru: ['RU', 'BY', 'KZ', 'UA'],
+}
+
 export const translations = {
   ro: {
     nav_adoptii: 'Adopții',
