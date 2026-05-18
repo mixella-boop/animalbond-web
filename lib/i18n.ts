@@ -1,21 +1,22 @@
 export type Lang = 'ro' | 'en' | 'de' | 'fr' | 'it' | 'es' | 'hu' | 'pt' | 'nl' | 'ru'
 
 export const LANG_OPTIONS: { code: Lang; flag: string; label: string }[] = [
-  { code: 'ro', flag: '🇷🇴', label: 'RO' },
-  { code: 'en', flag: '🇬🇧', label: 'EN' },
-  { code: 'de', flag: '🇩🇪', label: 'DE' },
-  { code: 'fr', flag: '🇫🇷', label: 'FR' },
+  { code: 'ro', flag: '🇷🇴🇲🇩', label: 'RO' },
+  { code: 'en', flag: '🇬🇧🇺🇸🇨🇦🇦🇺', label: 'EN' },
+  { code: 'de', flag: '🇩🇪🇦🇹🇨🇭', label: 'DE' },
+  { code: 'fr', flag: '🇫🇷🇧🇪🇨🇭', label: 'FR' },
   { code: 'it', flag: '🇮🇹', label: 'IT' },
-  { code: 'es', flag: '🇪🇸', label: 'ES' },
+  { code: 'es', flag: '🇪🇸🇲🇽🇦🇷', label: 'ES' },
   { code: 'hu', flag: '🇭🇺', label: 'HU' },
-  { code: 'pt', flag: '🇵🇹', label: 'PT' },
-  { code: 'nl', flag: '🇳🇱', label: 'NL' },
-  { code: 'ru', flag: '🇷🇺', label: 'RU' },
+  { code: 'pt', flag: '🇵🇹🇧🇷', label: 'PT' },
+  { code: 'nl', flag: '🇳🇱🇧🇪', label: 'NL' },
+  { code: 'ru', flag: '🇷🇺🇺🇦🇧🇾', label: 'RU' },
 ]
 
 // Country code → language auto-switch
 export const COUNTRY_TO_LANG: Record<string, Lang> = {
   RO: 'ro', MD: 'ro',
+  GB: 'en', US: 'en', CA: 'en', AU: 'en', NZ: 'en', IE: 'en', ZA: 'en', SG: 'en',
   DE: 'de', AT: 'de', CH: 'de', LU: 'de',
   FR: 'fr', BE: 'fr', MC: 'fr',
   IT: 'it', SM: 'it', VA: 'it',
@@ -23,7 +24,7 @@ export const COUNTRY_TO_LANG: Record<string, Lang> = {
   HU: 'hu',
   PT: 'pt', BR: 'pt',
   NL: 'nl',
-  RU: 'ru', BY: 'ru', KZ: 'ru',
+  RU: 'ru', BY: 'ru', KZ: 'ru', UA: 'ru',
 }
 
 // Language → default country (used when user switches language from navbar)

@@ -8,7 +8,7 @@ import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
 import { COUNTRIES } from '@/lib/countries'
-import { LANG_TO_COUNTRIES, type Lang } from '@/lib/i18n'
+import { LANG_TO_COUNTRIES, COUNTRY_TO_LANG, type Lang } from '@/lib/i18n'
 
 // If the selected country belongs to the current language group (e.g. US for EN,
 // PT for PT, AT for DE), expand the filter to all countries in that group.
@@ -91,8 +91,10 @@ export default function FeedPage() {
   const countryInputRef = useRef<HTMLInputElement>(null)
 
   const filteredCountries = COUNTRIES.filter(c =>
-    c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
-    c.code.toLowerCase().includes(countrySearch.toLowerCase())
+    COUNTRY_TO_LANG[c.code] !== undefined && (
+      c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+      c.code.toLowerCase().includes(countrySearch.toLowerCase())
+    )
   )
 
   const selectedCountryObj = COUNTRIES.find(c => c.code === country)
