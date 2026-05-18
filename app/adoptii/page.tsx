@@ -8,15 +8,15 @@ import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
 import { COUNTRIES } from '@/lib/countries'
-import { LANG_TO_COUNTRIES, LANG_TO_COUNTRY, type Lang } from '@/lib/i18n'
+import { LANG_TO_COUNTRIES, type Lang } from '@/lib/i18n'
 
-// Returns expanded country list: if country is the primary country for this lang,
-// returns all countries sharing that language. Otherwise returns just [country].
+// If the selected country belongs to the current language group (e.g. US for EN,
+// PT for PT, AT for DE), expand the filter to all countries in that group.
+// This way EN users selecting US also see GB/AU/CA etc.
 function expandCountries(country: string, lang: string): string[] {
   if (!country) return []
   const langCountries = LANG_TO_COUNTRIES[lang as Lang]
-  const langPrimary = LANG_TO_COUNTRY[lang as Lang]
-  if (langCountries && country === langPrimary && langCountries.length > 1) {
+  if (langCountries && langCountries.includes(country) && langCountries.length > 1) {
     return langCountries
   }
   return [country]
