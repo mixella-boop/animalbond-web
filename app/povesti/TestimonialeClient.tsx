@@ -11,6 +11,18 @@ function formatDate(dateStr: string, locale: string): string {
   return new Date(dateStr).toLocaleDateString(locale, { year: 'numeric', month: 'long' })
 }
 
+/** Extrage thumbnail YouTube din URL (hqdefault.jpg) */
+function getYouTubeThumbnail(videoUrl: string | null | undefined): string | null {
+  if (!videoUrl) return null
+  const match = videoUrl.match(/(?:youtube\.com\/watch\?(?:.*&)?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
+  if (match) return `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg`
+  return null
+}
+
+function getCardImage(item: Testimonial): string | null {
+  return item.photo_url || item.video_thumbnail_url || getYouTubeThumbnail(item.video_url) || null
+}
+
 export default function TestimonialeClient() {
   const { t, lang } = useLanguage()
   const { country } = useCountry()
@@ -102,7 +114,7 @@ export default function TestimonialeClient() {
               className="bg-white rounded-card shadow-card border border-border-light overflow-hidden hover:shadow-card-hover transition-all cursor-pointer group"
             >
               {(() => {
-                const imgSrc = item.photo_url || item.video_thumbnail_url
+                const imgSrc = getCardImage(item)
                 return imgSrc ? (
                   <div className="relative aspect-[4/3] overflow-hidden bg-pink-50">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -168,11 +180,11 @@ export default function TestimonialeClient() {
             className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {(selected.photo_url || selected.video_thumbnail_url) && (
+            {getCardImage(selected) && (
               <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-pink-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={selected.photo_url || selected.video_thumbnail_url || ''}
+                  src={getCardImage(selected) || ''}
                   alt={selected.animal_name || 'Adoptie'}
                   className="object-cover w-full h-full"
                   onError={(e) => {

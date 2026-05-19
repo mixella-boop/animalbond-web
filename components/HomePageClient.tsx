@@ -205,14 +205,25 @@ export default function HomePageClient({ partners, testimonials, lostFoundBanner
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {testimonials.map((item) => (
                 <Link href="/povesti" key={item.id} className="group block bg-white rounded-card shadow-card border border-border-light overflow-hidden hover:shadow-card-hover transition-all">
-                  {item.photo_url ? (
-                    <div className="aspect-[4/3] overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={item.photo_url} alt={item.animal_name || ''} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
-                    </div>
-                  ) : (
-                    <div className="aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center text-5xl">🐾</div>
-                  )}
+                  {(() => {
+                    const ytMatch = item.video_url?.match(/(?:youtube\.com\/watch\?(?:.*&)?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
+                    const imgSrc = item.photo_url || item.video_thumbnail_url || (ytMatch ? `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg` : null)
+                    return imgSrc ? (
+                      <div className="aspect-[4/3] overflow-hidden relative">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={imgSrc} alt={item.animal_name || ''} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
+                        {item.video_url && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                            <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
+                              <span className="text-lg ml-0.5">▶️</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="aspect-[4/3] bg-gradient-to-br from-pink-50 to-red-50 flex items-center justify-center text-5xl">🐾</div>
+                    )
+                  })()}
                   <div className="p-4">
                     {item.animal_name && <p className="text-primary font-semibold text-sm mb-1">🐾 {item.animal_name}</p>}
                     <p className="text-text-main text-sm leading-relaxed line-clamp-3">{item.text}</p>
