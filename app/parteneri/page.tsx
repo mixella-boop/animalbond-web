@@ -334,7 +334,7 @@ export default function ParteneriPage() {
 
               {selectedPartner.url && (
                 <a
-                  href={selectedPartner.url}
+                  href={selectedPartner.url.startsWith('http://') || selectedPartner.url.startsWith('https://') ? selectedPartner.url : `https://${selectedPartner.url}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block text-center bg-primary text-white px-6 py-3 rounded-full font-bold hover:bg-primary-dark transition-colors mb-3"
