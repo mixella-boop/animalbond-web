@@ -289,65 +289,97 @@ export default function ParteneriPage() {
             </div>
 
             <div className="p-6">
-              <div className="flex items-start justify-between gap-3 mb-1">
-                <h2 className="text-2xl font-bold text-text-main">{selectedPartner.name}</h2>
+              {/* Header: Nume + Close */}
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold text-text-main leading-tight">{selectedPartner.name}</h2>
+                </div>
                 <button
                   onClick={() => setSelectedPartner(null)}
                   className="shrink-0 text-text-muted hover:text-text-main text-2xl leading-none mt-0.5"
                 >×</button>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryColor[selectedPartner.category] || 'bg-gray-100 text-gray-700'}`}>
+              {/* Meta info: Categorie + Locație */}
+              <div className="flex flex-wrap items-center gap-2 mb-5 pb-5 border-b border-border-light">
+                <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${categoryColor[selectedPartner.category] || 'bg-gray-100 text-gray-700'}`}>
                   {categoryLabel[selectedPartner.category] || selectedPartner.category}
                 </span>
                 {selectedPartner.city && (
-                  <span className="text-text-muted text-xs">📍 {selectedPartner.city}</span>
+                  <span className="text-text-muted text-xs flex items-center gap-1">
+                    <span>📍</span> {selectedPartner.city}
+                  </span>
                 )}
                 {selectedPartner.country && (
-                  <span className="text-text-muted text-xs">
-                    {COUNTRIES.find(c => c.code === selectedPartner.country)?.flag || selectedPartner.country}
+                  <span className="text-text-muted text-xs flex items-center gap-1">
+                    <span>{COUNTRIES.find(c => c.code === selectedPartner.country)?.flag || '🌍'}</span>
+                    {COUNTRIES.find(c => c.code === selectedPartner.country)?.name || selectedPartner.country}
                   </span>
                 )}
               </div>
 
+              {/* About section */}
               {selectedPartner.description && (
-                <p className="text-text-main text-sm leading-relaxed mb-4">
-                  {selectedPartner.description}
-                </p>
-              )}
-
-              {(selectedPartner.phone || selectedPartner.email) && (
-                <div className="bg-blue-50 rounded-xl p-4 mb-4 flex flex-col gap-2">
-                  {selectedPartner.phone && (
-                    <a href={`tel:${selectedPartner.phone}`} className="text-sm text-blue-700 hover:underline">
-                      📞 {selectedPartner.phone}
-                    </a>
-                  )}
-                  {selectedPartner.email && (
-                    <a href={`mailto:${selectedPartner.email}`} className="text-sm text-blue-700 hover:underline">
-                      📧 {selectedPartner.email}
-                    </a>
-                  )}
+                <div className="mb-6">
+                  <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-2">
+                    {t('partners_about') || 'Despre'}
+                  </h3>
+                  <p className="text-text-main text-sm leading-relaxed text-justify">
+                    {selectedPartner.description}
+                  </p>
                 </div>
               )}
 
-              {selectedPartner.url && (
-                <a
-                  href={selectedPartner.url.startsWith('http://') || selectedPartner.url.startsWith('https://') ? selectedPartner.url : `https://${selectedPartner.url}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-center bg-primary text-white px-6 py-3 rounded-full font-bold hover:bg-primary-dark transition-colors mb-3"
-                >
-                  {t('partners_visit_site')}
-                </a>
+              {/* Contact section */}
+              {(selectedPartner.phone || selectedPartner.email) && (
+                <div className="mb-6">
+                  <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-3">
+                    {t('partners_contact_info') || 'Contact'}
+                  </h3>
+                  <div className="space-y-2">
+                    {selectedPartner.phone && (
+                      <a
+                        href={`tel:${selectedPartner.phone}`}
+                        className="flex items-center gap-3 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-blue-700 text-sm hover:text-blue-800 font-medium"
+                      >
+                        <span className="text-lg">📞</span>
+                        <span className="break-all">{selectedPartner.phone}</span>
+                      </a>
+                    )}
+                    {selectedPartner.email && (
+                      <a
+                        href={`mailto:${selectedPartner.email}`}
+                        className="flex items-center gap-3 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-blue-700 text-sm hover:text-blue-800 font-medium"
+                      >
+                        <span className="text-lg">📧</span>
+                        <span className="break-all">{selectedPartner.email}</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
               )}
 
+              {/* Website section */}
+              {selectedPartner.url && (
+                <div className="mb-6">
+                  <a
+                    href={selectedPartner.url.startsWith('http://') || selectedPartner.url.startsWith('https://') ? selectedPartner.url : `https://${selectedPartner.url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary-dark text-white px-6 py-3.5 rounded-xl font-bold transition-all hover:shadow-lg active:scale-95"
+                  >
+                    <span>🌐</span>
+                    {t('partners_visit_site') || 'Vizitează website'}
+                  </a>
+                </div>
+              )}
+
+              {/* Close button */}
               <button
                 onClick={() => setSelectedPartner(null)}
-                className="w-full text-text-muted text-sm hover:text-primary transition-colors py-2"
+                className="w-full text-text-muted text-sm hover:text-primary transition-colors py-2.5 font-medium"
               >
-                {t('campanii_close')}
+                {t('campanii_close')} ✕
               </button>
             </div>
           </div>
