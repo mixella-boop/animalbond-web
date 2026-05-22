@@ -93,8 +93,8 @@ export default function PrivacyContent() {
                 <p>{section.contactBox.platform}</p>
                 <p>
                   {section.contactBox.emailLabel}:{' '}
-                  <a href="mailto:contact@animalbond.club" className="text-primary hover:underline">
-                    contact@animalbond.club
+                  <a href="/contact" className="text-primary hover:underline">
+                    animalbond.club/contact
                   </a>
                 </p>
               </div>

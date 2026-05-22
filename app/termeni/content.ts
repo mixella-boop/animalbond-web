@@ -20,7 +20,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Cine suntem',
-        text: 'AnimalBond este o platformă digitală care conectează persoanele care doresc să adopte, să găzduiască temporar, să dea spre adopție sau să ajute animale aflate în nevoie. Suntem o platformă intermediară — nu deținem, nu vindem și nu garantăm niciun animal listat. Operatorul platformei este Elena Lenghel, persoană fizică, cu adresa de contact: contact@animalbond.club.',
+        text: 'AnimalBond este o platformă digitală care conectează persoanele care doresc să adopte, să găzduiască temporar, să dea spre adopție sau să ajute animale aflate în nevoie. Suntem o platformă intermediară — nu deținem, nu vindem și nu garantăm niciun animal listat. Operatorul platformei este AnimalBond, contact: animalbond.club/contact.',
       },
       {
         title: '2. Eligibilitate',
@@ -88,9 +88,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Operator: Elena Lenghel',
+      operator: 'Operator: AnimalBond',
       platform: 'Platformă: AnimalBond — animalbond.club',
-      email: 'E-mail: contact@animalbond.club',
+      email: 'Formular de contact',
     },
   },
 
@@ -100,7 +100,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Who We Are',
-        text: 'AnimalBond is a digital platform connecting people who want to adopt, foster, rehome or help animals in need. We are an intermediary platform — we do not own, sell or guarantee any listed animal. The platform operator is Elena Lenghel, an individual, reachable at: contact@animalbond.club.',
+        text: 'AnimalBond is a digital platform connecting people who want to adopt, foster, rehome or help animals in need. We are an intermediary platform — we do not own, sell or guarantee any listed animal. The platform operator is AnimalBond, reachable via: animalbond.club/contact.',
       },
       {
         title: '2. Eligibility',
@@ -168,9 +168,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Operator: Elena Lenghel',
+      operator: 'Operator: AnimalBond',
       platform: 'Platform: AnimalBond — animalbond.club',
-      email: 'E-mail: contact@animalbond.club',
+      email: 'Contact form',
     },
   },
 
@@ -180,7 +180,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Wer wir sind',
-        text: 'AnimalBond ist eine digitale Plattform, die Personen verbindet, die Tiere adoptieren, vorübergehend aufnehmen, abgeben oder unterstützen möchten. Wir sind eine Vermittlungsplattform — wir besitzen, verkaufen oder garantieren keine gelisteten Tiere. Betreiberin der Plattform ist Elena Lenghel, eine Privatperson, erreichbar unter: contact@animalbond.club.',
+        text: 'AnimalBond ist eine digitale Plattform, die Personen verbindet, die Tiere adoptieren, vorübergehend aufnehmen, abgeben oder unterstützen möchten. Wir sind eine Vermittlungsplattform — wir besitzen, verkaufen oder garantieren keine gelisteten Tiere. Betreiber der Plattform ist AnimalBond, erreichbar über: animalbond.club/contact.',
       },
       {
         title: '2. Nutzungsberechtigung',
@@ -232,7 +232,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
       {
         title: '10. Geistiges Eigentum',
-        text: 'Alle Designelemente, das Logo und der Name „AnimalBond" sind Eigentum der Betreiberin. Fotos und Anzeigenbeschreibungen gehören den Nutzern, die sie veröffentlicht haben.',
+        text: 'Alle Designelemente, das Logo und der Name „AnimalBond" sind Eigentum des Betreibers. Fotos und Anzeigenbeschreibungen gehören den Nutzern, die sie veröffentlicht haben.',
       },
       {
         title: '11. Änderungen der Bedingungen',
@@ -248,9 +248,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Betreiberin: Elena Lenghel',
+      operator: 'Betreiber: AnimalBond',
       platform: 'Plattform: AnimalBond — animalbond.club',
-      email: 'E-Mail: contact@animalbond.club',
+      email: 'Kontaktformular',
     },
   },
 
@@ -260,7 +260,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Qui sommes-nous',
-        text: "AnimalBond est une plateforme numérique mettant en relation des personnes souhaitant adopter, accueillir temporairement, donner à l'adoption ou aider des animaux dans le besoin. Nous sommes une plateforme intermédiaire — nous ne possédons, ne vendons et ne garantissons aucun animal listé. L'opératrice de la plateforme est Elena Lenghel, une personne physique, joignable à : contact@animalbond.club.",
+        text: "AnimalBond est une plateforme numérique mettant en relation des personnes souhaitant adopter, accueillir temporairement, donner à l'adoption ou aider des animaux dans le besoin. Nous sommes une plateforme intermédiaire — nous ne possédons, ne vendons et ne garantissons aucun animal listé. L'opérateur de la plateforme est AnimalBond, joignable via : animalbond.club/contact.",
       },
       {
         title: '2. Éligibilité',
@@ -312,7 +312,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
       {
         title: '10. Propriété intellectuelle',
-        text: "Tous les éléments de design, le logo et le nom « AnimalBond » sont la propriété de l'opératrice. Les photos et descriptions des annonces appartiennent aux utilisateurs qui les ont publiées.",
+        text: "Tous les éléments de design, le logo et le nom « AnimalBond » sont la propriété de l'opérateur. Les photos et descriptions des annonces appartiennent aux utilisateurs qui les ont publiées.",
       },
       {
         title: '11. Modifications des conditions',
@@ -328,9 +328,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Opératrice : Elena Lenghel',
+      operator: 'Opérateur : AnimalBond',
       platform: 'Plateforme : AnimalBond — animalbond.club',
-      email: 'E-mail : contact@animalbond.club',
+      email: 'Formulaire de contact',
     },
   },
 
@@ -340,7 +340,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Chi siamo',
-        text: "AnimalBond è una piattaforma digitale che mette in contatto persone che desiderano adottare, ospitare temporaneamente, cedere o aiutare animali bisognosi. Siamo una piattaforma intermediaria — non possediamo, non vendiamo e non garantiamo nessun animale elencato. L'operatrice della piattaforma è Elena Lenghel, persona fisica, raggiungibile a: contact@animalbond.club.",
+        text: "AnimalBond è una piattaforma digitale che mette in contatto persone che desiderano adottare, ospitare temporaneamente, cedere o aiutare animali bisognosi. Siamo una piattaforma intermediaria — non possediamo, non vendiamo e non garantiamo nessun animale elencato. L'operatore della piattaforma è AnimalBond, raggiungibile a: animalbond.club/contact.",
       },
       {
         title: '2. Idoneità',
@@ -392,7 +392,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
       {
         title: '10. Proprietà intellettuale',
-        text: 'Tutti gli elementi di design, il logo e il nome "AnimalBond" sono di proprietà dell\'operatrice. Le foto e le descrizioni degli annunci appartengono agli utenti che le hanno pubblicate.',
+        text: 'Tutti gli elementi di design, il logo e il nome "AnimalBond" sono di proprietà dell\'operatore. Le foto e le descrizioni degli annunci appartengono agli utenti che le hanno pubblicate.',
       },
       {
         title: '11. Modifiche ai termini',
@@ -408,9 +408,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Operatrice: Elena Lenghel',
+      operator: 'Operatore: AnimalBond',
       platform: 'Piattaforma: AnimalBond — animalbond.club',
-      email: 'E-mail: contact@animalbond.club',
+      email: 'Modulo di contatto',
     },
   },
 
@@ -420,7 +420,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Quiénes somos',
-        text: 'AnimalBond es una plataforma digital que conecta a personas que desean adoptar, acoger temporalmente, dar en adopción o ayudar a animales necesitados. Somos una plataforma intermediaria — no poseemos, vendemos ni garantizamos ningún animal listado. La operadora de la plataforma es Elena Lenghel, persona física, contactable en: contact@animalbond.club.',
+        text: 'AnimalBond es una plataforma digital que conecta a personas que desean adoptar, acoger temporalmente, dar en adopción o ayudar a animales necesitados. Somos una plataforma intermediaria — no poseemos, vendemos ni garantizamos ningún animal listado. El operador de la plataforma es AnimalBond, contactable en: animalbond.club/contact.',
       },
       {
         title: '2. Elegibilidad',
@@ -472,7 +472,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
       {
         title: '10. Propiedad intelectual',
-        text: 'Todos los elementos de diseño, el logotipo y el nombre "AnimalBond" son propiedad de la operadora. Las fotos y descripciones de los anuncios pertenecen a los usuarios que las publicaron.',
+        text: 'Todos los elementos de diseño, el logotipo y el nombre "AnimalBond" son propiedad del operador. Las fotos y descripciones de los anuncios pertenecen a los usuarios que las publicaron.',
       },
       {
         title: '11. Cambios en los términos',
@@ -488,9 +488,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Operadora: Elena Lenghel',
+      operator: 'Operador: AnimalBond',
       platform: 'Plataforma: AnimalBond — animalbond.club',
-      email: 'Correo: contact@animalbond.club',
+      email: 'Formulario de contacto',
     },
   },
 
@@ -500,7 +500,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Kik vagyunk',
-        text: 'Az AnimalBond egy digitális platform, amely összeköti azokat a személyeket, akik örökbefogadni, átmeneti otthont adni, leadni vagy segíteni szeretnének rászoruló állatoknak. Közvetítő platform vagyunk — nem rendelkezünk, nem adunk el és nem garantálunk egyetlen hirdetett állatot sem. A platform üzemeltetője Elena Lenghel, magánszemély, elérhetősége: contact@animalbond.club.',
+        text: 'Az AnimalBond egy digitális platform, amely összeköti azokat a személyeket, akik örökbefogadni, átmeneti otthont adni, leadni vagy segíteni szeretnének rászoruló állatoknak. Közvetítő platform vagyunk — nem rendelkezünk, nem adunk el és nem garantálunk egyetlen hirdetett állatot sem. A platform üzemeltetője AnimalBond, elérhetőség: animalbond.club/contact.',
       },
       {
         title: '2. Jogosultság',
@@ -568,9 +568,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Üzemeltető: Elena Lenghel',
+      operator: 'Üzemeltető: AnimalBond',
       platform: 'Platform: AnimalBond — animalbond.club',
-      email: 'E-mail: contact@animalbond.club',
+      email: 'Kapcsolatfelvételi űrlap',
     },
   },
 
@@ -580,7 +580,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Quem somos',
-        text: "AnimalBond é uma plataforma digital que liga pessoas que querem adotar, acolher temporariamente, dar para adoção ou ajudar animais em necessidade. Somos uma plataforma intermediária — não possuímos, vendemos nem garantimos nenhum animal listado. A operadora da plataforma é Elena Lenghel, pessoa singular, contactável em: contact@animalbond.club.",
+        text: "AnimalBond é uma plataforma digital que liga pessoas que querem adotar, acolher temporariamente, dar para adoção ou ajudar animais em necessidade. Somos uma plataforma intermediária — não possuímos, vendemos nem garantimos nenhum animal listado. O operador da plataforma é AnimalBond, contactável em: animalbond.club/contact.",
       },
       {
         title: '2. Elegibilidade',
@@ -632,7 +632,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
       {
         title: '10. Propriedade intelectual',
-        text: 'Todos os elementos de design, o logótipo e o nome "AnimalBond" são propriedade da operadora. As fotos e descrições dos anúncios pertencem aos utilizadores que as publicaram.',
+        text: 'Todos os elementos de design, o logótipo e o nome "AnimalBond" são propriedade do operador. As fotos e descrições dos anúncios pertencem aos utilizadores que as publicaram.',
       },
       {
         title: '11. Alterações aos termos',
@@ -648,9 +648,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Operadora: Elena Lenghel',
+      operator: 'Operador: AnimalBond',
       platform: 'Plataforma: AnimalBond — animalbond.club',
-      email: 'E-mail: contact@animalbond.club',
+      email: 'Formulário de contacto',
     },
   },
 
@@ -660,7 +660,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Wie zijn wij',
-        text: 'AnimalBond is een digitaal platform dat mensen verbindt die dieren willen adopteren, tijdelijk opvangen, afstaan of helpen. Wij zijn een intermediair platform — wij bezitten, verkopen of garanderen geen enkel geplaatst dier. De platformbeheerder is Elena Lenghel, een particulier, bereikbaar via: contact@animalbond.club.',
+        text: 'AnimalBond is een digitaal platform dat mensen verbindt die dieren willen adopteren, tijdelijk opvangen, afstaan of helpen. Wij zijn een intermediair platform — wij bezitten, verkopen of garanderen geen enkel geplaatst dier. De platformbeheerder is AnimalBond, bereikbaar via: animalbond.club/contact.',
       },
       {
         title: '2. Geschiktheid',
@@ -728,9 +728,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Beheerder: Elena Lenghel',
+      operator: 'Beheerder: AnimalBond',
       platform: 'Platform: AnimalBond — animalbond.club',
-      email: 'E-mail: contact@animalbond.club',
+      email: 'Contactformulier',
     },
   },
 
@@ -740,7 +740,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
     sections: [
       {
         title: '1. Кто мы',
-        text: 'AnimalBond — цифровая платформа, связывающая людей, которые хотят усыновить, временно приютить, отдать или помочь животным в нужде. Мы являемся посреднической платформой — мы не владеем, не продаём и не гарантируем ни одно из размещённых животных. Оператором платформы является Елена Ленгел, физическое лицо, контактный адрес: contact@animalbond.club.',
+        text: 'AnimalBond — цифровая платформа, связывающая людей, которые хотят усыновить, временно приютить, отдать или помочь животным в нужде. Мы являемся посреднической платформой — мы не владеем, не продаём и не гарантируем ни одно из размещённых животных. Оператором платформы является AnimalBond, контактная форма: animalbond.club/contact.',
       },
       {
         title: '2. Требования к пользователям',
@@ -808,9 +808,9 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       },
     ],
     contactBox: {
-      operator: 'Оператор: Елена Ленгел',
+      operator: 'Оператор: AnimalBond',
       platform: 'Платформа: AnimalBond — animalbond.club',
-      email: 'E-mail: contact@animalbond.club',
+      email: 'Контактная форма',
     },
   },
 }

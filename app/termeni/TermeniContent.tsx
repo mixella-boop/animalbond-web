@@ -45,9 +45,9 @@ export default function TermeniContent() {
                 <p><strong>{content.contactBox.operator}</strong></p>
                 <p>{content.contactBox.platform}</p>
                 <p>
-                  {content.contactBox.email.split(':')[0]}:{' '}
-                  <a href="mailto:contact@animalbond.club" className="text-primary hover:underline">
-                    contact@animalbond.club
+                  {content.contactBox.email}:{' '}
+                  <a href="/contact" className="text-primary hover:underline">
+                    animalbond.club/contact
                   </a>
                 </p>
               </div>

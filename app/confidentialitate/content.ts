@@ -42,7 +42,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Cine suntem',
         paragraphs: [
-          'AnimalBond este o platformă digitală de adopție și îngrijire a animalelor, accesibilă la animalbond.club și prin aplicația mobilă AnimalBond. Operatorul de date cu caracter personal este Elena Lenghel, persoană fizică, cu adresa de contact: contact@animalbond.club.',
+          'AnimalBond este o platformă digitală de adopție și îngrijire a animalelor, accesibilă la animalbond.club și prin aplicația mobilă AnimalBond. Operatorul de date cu caracter personal este AnimalBond (contact: animalbond.club/contact).',
           'Această politică se aplică tuturor utilizatorilor platformei AnimalBond (site web și aplicație mobilă) și descrie cum colectăm, utilizăm și protejăm datele tale cu caracter personal, în conformitate cu Regulamentul (UE) 2016/679 (GDPR).',
         ],
       },
@@ -99,7 +99,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           'Dreptul de opoziție — față de prelucrările bazate pe interes legitim',
           'Dreptul de a retrage consimțământul — oricând, fără consecințe negative',
         ],
-        afterItems: 'Pentru exercitarea oricărui drept, contactează-ne la contact@animalbond.club. Răspundem în maximum 30 de zile. Ai și dreptul de a depune o plângere la ANSPDCP (Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal), www.dataprotection.ro.',
+        afterItems: 'Pentru exercitarea oricărui drept, contactează-ne prin formularul de contact de pe animalbond.club/contact. Răspundem în maximum 30 de zile. Ai și dreptul de a depune o plângere la ANSPDCP (Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal), www.dataprotection.ro.',
       },
       {
         title: '7. Cookie-uri și stocare locală',
@@ -113,7 +113,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Minori',
-        paragraphs: ['Platforma AnimalBond este destinată persoanelor cu vârsta de minimum 16 ani. Nu colectăm în mod intenționat date de la minori sub această vârstă. Dacă ești părinte sau tutore și crezi că un minor și-a creat un cont, te rugăm să ne contactezi la contact@animalbond.club și vom șterge imediat datele respective.'],
+        paragraphs: ['Platforma AnimalBond este destinată persoanelor cu vârsta de minimum 16 ani. Nu colectăm în mod intenționat date de la minori sub această vârstă. Dacă ești părinte sau tutore și crezi că un minor și-a creat un cont, te rugăm să ne contactezi prin formularul de pe animalbond.club/contact și vom șterge imediat datele respective.'],
       },
       {
         title: '9. Securitatea datelor',
@@ -126,7 +126,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Contact',
         paragraphs: ['Pentru orice întrebare legată de prelucrarea datelor tale cu caracter personal:'],
-        contactBox: { operator: 'Operator: Elena Lenghel', platform: 'Platformă: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+        contactBox: { operator: 'Operator: AnimalBond', platform: 'Platformă: AnimalBond — animalbond.club', emailLabel: 'Formular de contact' },
       },
     ],
   },
@@ -138,7 +138,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Who We Are',
         paragraphs: [
-          'AnimalBond is a digital platform for animal adoption and care, accessible at animalbond.club and through the AnimalBond mobile app. The personal data controller is Elena Lenghel, an individual, reachable at: contact@animalbond.club.',
+          'AnimalBond is a digital platform for animal adoption and care, accessible at animalbond.club and through the AnimalBond mobile app. The personal data controller is AnimalBond (contact: animalbond.club/contact).',
           'This policy applies to all users of the AnimalBond platform (website and mobile app) and describes how we collect, use and protect your personal data, in accordance with Regulation (EU) 2016/679 (GDPR).',
         ],
       },
@@ -195,7 +195,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           'Right to object — to processing based on legitimate interest',
           'Right to withdraw consent — at any time, without negative consequences',
         ],
-        afterItems: 'To exercise any right, contact us at contact@animalbond.club. We respond within 30 days. You also have the right to lodge a complaint with your national data protection authority.',
+        afterItems: 'To exercise any right, contact us via animalbond.club/contact. We respond within 30 days. You also have the right to lodge a complaint with your national data protection authority.',
       },
       {
         title: '7. Cookies and Local Storage',
@@ -209,7 +209,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Minors',
-        paragraphs: ['The AnimalBond platform is intended for persons aged at least 16. We do not intentionally collect data from minors under this age. If you are a parent or guardian and believe a minor has created an account, please contact us at contact@animalbond.club and we will immediately delete the relevant data.'],
+        paragraphs: ['The AnimalBond platform is intended for persons aged at least 16. We do not intentionally collect data from minors under this age. If you are a parent or guardian and believe a minor has created an account, please contact us via animalbond.club/contact and we will immediately delete the relevant data.'],
       },
       {
         title: '9. Data Security',
@@ -222,7 +222,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Contact',
         paragraphs: ['For any questions about the processing of your personal data:'],
-        contactBox: { operator: 'Operator: Elena Lenghel', platform: 'Platform: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+        contactBox: { operator: 'Operator: AnimalBond', platform: 'Platform: AnimalBond — animalbond.club', emailLabel: 'Contact form' },
       },
     ],
   },
@@ -234,7 +234,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Wer wir sind',
         paragraphs: [
-          'AnimalBond ist eine digitale Plattform für Tieradoption und -pflege, zugänglich unter animalbond.club und über die AnimalBond-App. Die verantwortliche Stelle für personenbezogene Daten ist Elena Lenghel, eine Privatperson, erreichbar unter: contact@animalbond.club.',
+          'AnimalBond ist eine digitale Plattform für Tieradoption und -pflege, zugänglich unter animalbond.club und über die AnimalBond-App. Die verantwortliche Stelle für personenbezogene Daten ist AnimalBond (Kontakt: animalbond.club/contact).',
           'Diese Richtlinie gilt für alle Nutzer der AnimalBond-Plattform (Website und App) und beschreibt, wie wir deine personenbezogenen Daten gemäß der Verordnung (EU) 2016/679 (DSGVO) erheben, verwenden und schützen.',
         ],
       },
@@ -291,7 +291,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           'Widerspruchsrecht — gegen Verarbeitungen auf Basis berechtigter Interessen',
           'Recht auf Widerruf der Einwilligung — jederzeit, ohne negative Konsequenzen',
         ],
-        afterItems: 'Zur Ausübung eines Rechts kontaktiere uns unter contact@animalbond.club. Wir antworten innerhalb von 30 Tagen. Du hast auch das Recht, eine Beschwerde bei der zuständigen Datenschutzbehörde einzureichen.',
+        afterItems: 'Zur Ausübung eines Rechts kontaktiere uns über das Kontaktformular: animalbond.club/contact. Wir antworten innerhalb von 30 Tagen. Du hast auch das Recht, eine Beschwerde bei der zuständigen Datenschutzbehörde einzureichen.',
       },
       {
         title: '7. Cookies und lokale Speicherung',
@@ -305,7 +305,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Minderjährige',
-        paragraphs: ['Die AnimalBond-Plattform richtet sich an Personen ab 16 Jahren. Wir erheben nicht absichtlich Daten von Minderjährigen unter diesem Alter. Wenn du Elternteil oder Vormund bist und glaubst, dass ein Minderjähriger ein Konto erstellt hat, kontaktiere uns bitte unter contact@animalbond.club, und wir löschen die Daten sofort.'],
+        paragraphs: ['Die AnimalBond-Plattform richtet sich an Personen ab 16 Jahren. Wir erheben nicht absichtlich Daten von Minderjährigen unter diesem Alter. Wenn du Elternteil oder Vormund bist und glaubst, dass ein Minderjähriger ein Konto erstellt hat, kontaktiere uns bitte über: animalbond.club/contact, und wir löschen die Daten sofort.'],
       },
       {
         title: '9. Datensicherheit',
@@ -318,7 +318,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Kontakt',
         paragraphs: ['Für alle Fragen zur Verarbeitung deiner personenbezogenen Daten:'],
-        contactBox: { operator: 'Betreiberin: Elena Lenghel', platform: 'Plattform: AnimalBond — animalbond.club', emailLabel: 'E-Mail' },
+        contactBox: { operator: 'Betreiber: AnimalBond', platform: 'Plattform: AnimalBond — animalbond.club', emailLabel: 'Kontaktformular' },
       },
     ],
   },
@@ -330,7 +330,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Qui nous sommes',
         paragraphs: [
-          "AnimalBond est une plateforme numérique d'adoption et de soins pour animaux, accessible sur animalbond.club et via l'application mobile AnimalBond. Le responsable du traitement des données personnelles est Elena Lenghel, une personne physique, joignable à : contact@animalbond.club.",
+          "AnimalBond est une plateforme numérique d'adoption et de soins pour animaux, accessible sur animalbond.club et via l'application mobile AnimalBond. Le responsable du traitement des données personnelles est AnimalBond (contact : animalbond.club/contact).",
           "Cette politique s'applique à tous les utilisateurs de la plateforme AnimalBond (site web et application mobile) et décrit comment nous collectons, utilisons et protégeons vos données personnelles, conformément au Règlement (UE) 2016/679 (RGPD).",
         ],
       },
@@ -387,7 +387,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           "Droit d'opposition — aux traitements fondés sur l'intérêt légitime",
           "Droit de retirer votre consentement — à tout moment, sans conséquences négatives",
         ],
-        afterItems: "Pour exercer l'un de ces droits, contactez-nous à contact@animalbond.club. Nous répondons dans un délai de 30 jours. Vous avez également le droit de déposer une plainte auprès de l'autorité de protection des données de votre pays.",
+        afterItems: "Pour exercer l'un de ces droits, contactez-nous via animalbond.club/contact. Nous répondons dans un délai de 30 jours. Vous avez également le droit de déposer une plainte auprès de l'autorité de protection des données de votre pays.",
       },
       {
         title: '7. Cookies et stockage local',
@@ -401,7 +401,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Mineurs',
-        paragraphs: ["La plateforme AnimalBond est destinée aux personnes âgées d'au moins 16 ans. Nous ne collectons pas intentionnellement de données auprès de mineurs de moins de cet âge. Si vous êtes parent ou tuteur et pensez qu'un mineur a créé un compte, veuillez nous contacter à contact@animalbond.club et nous supprimerons immédiatement les données concernées."],
+        paragraphs: ["La plateforme AnimalBond est destinée aux personnes âgées d'au moins 16 ans. Nous ne collectons pas intentionnellement de données auprès de mineurs de moins de cet âge. Si vous êtes parent ou tuteur et pensez qu'un mineur a créé un compte, veuillez nous contacter via animalbond.club/contact et nous supprimerons immédiatement les données concernées."],
       },
       {
         title: '9. Sécurité des données',
@@ -414,7 +414,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Contact',
         paragraphs: ["Pour toute question concernant le traitement de vos données personnelles :"],
-        contactBox: { operator: 'Opératrice : Elena Lenghel', platform: 'Plateforme : AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+        contactBox: { operator: 'Opérateur : AnimalBond', platform: 'Plateforme : AnimalBond — animalbond.club', emailLabel: 'Formulaire de contact' },
       },
     ],
   },
@@ -426,7 +426,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Chi siamo',
         paragraphs: [
-          "AnimalBond è una piattaforma digitale per l'adozione e la cura degli animali, accessibile su animalbond.club e tramite l'app mobile AnimalBond. Il titolare del trattamento dei dati personali è Elena Lenghel, persona fisica, raggiungibile a: contact@animalbond.club.",
+          "AnimalBond è una piattaforma digitale per l'adozione e la cura degli animali, accessibile su animalbond.club e tramite l'app mobile AnimalBond. Il titolare del trattamento dei dati personali è AnimalBond (contatto: animalbond.club/contact).",
           "Questa informativa si applica a tutti gli utenti della piattaforma AnimalBond (sito web e app mobile) e descrive come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali, in conformità con il Regolamento (UE) 2016/679 (GDPR).",
         ],
       },
@@ -483,7 +483,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           "Diritto di opposizione — ai trattamenti basati su interesse legittimo",
           "Diritto di revocare il consenso — in qualsiasi momento, senza conseguenze negative",
         ],
-        afterItems: "Per esercitare qualsiasi diritto, contattaci a contact@animalbond.club. Rispondiamo entro 30 giorni. Hai anche il diritto di presentare un reclamo all'autorità di protezione dei dati del tuo paese.",
+        afterItems: "Per esercitare qualsiasi diritto, contattaci tramite: animalbond.club/contact. Rispondiamo entro 30 giorni. Hai anche il diritto di presentare un reclamo all'autorità di protezione dei dati del tuo paese.",
       },
       {
         title: '7. Cookie e archiviazione locale',
@@ -497,7 +497,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Minori',
-        paragraphs: ["La piattaforma AnimalBond è destinata a persone di almeno 16 anni. Non raccogliamo intenzionalmente dati da minori di questa età. Se sei genitore o tutore e ritieni che un minore abbia creato un account, ti preghiamo di contattarci a contact@animalbond.club e cancelleremo immediatamente i dati in questione."],
+        paragraphs: ["La piattaforma AnimalBond è destinata a persone di almeno 16 anni. Non raccogliamo intenzionalmente dati da minori di questa età. Se sei genitore o tutore e ritieni che un minore abbia creato un account, ti preghiamo di contattarci tramite: animalbond.club/contact e cancelleremo immediatamente i dati in questione."],
       },
       {
         title: '9. Sicurezza dei dati',
@@ -510,7 +510,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Contatto',
         paragraphs: ["Per qualsiasi domanda relativa al trattamento dei tuoi dati personali:"],
-        contactBox: { operator: 'Titolare: Elena Lenghel', platform: 'Piattaforma: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+        contactBox: { operator: 'Titolare: AnimalBond', platform: 'Piattaforma: AnimalBond — animalbond.club', emailLabel: 'Modulo di contatto' },
       },
     ],
   },
@@ -522,7 +522,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Quiénes somos',
         paragraphs: [
-          'AnimalBond es una plataforma digital de adopción y cuidado de animales, accesible en animalbond.club y a través de la app móvil AnimalBond. El responsable del tratamiento de datos personales es Elena Lenghel, persona física, contactable en: contact@animalbond.club.',
+          'AnimalBond es una plataforma digital de adopción y cuidado de animales, accesible en animalbond.club y a través de la app móvil AnimalBond. El responsable del tratamiento de datos personales es AnimalBond (contacto: animalbond.club/contact).',
           'Esta política se aplica a todos los usuarios de la plataforma AnimalBond (sitio web y app móvil) y describe cómo recopilamos, usamos y protegemos tus datos personales, de acuerdo con el Reglamento (UE) 2016/679 (RGPD).',
         ],
       },
@@ -579,7 +579,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           'Derecho de oposición — al tratamiento basado en interés legítimo',
           'Derecho a retirar el consentimiento — en cualquier momento, sin consecuencias negativas',
         ],
-        afterItems: 'Para ejercer cualquier derecho, contáctanos en contact@animalbond.club. Respondemos en un máximo de 30 días. También tienes derecho a presentar una reclamación ante la autoridad de protección de datos de tu país.',
+        afterItems: 'Para ejercer cualquier derecho, contáctanos en: animalbond.club/contact. Respondemos en un máximo de 30 días. También tienes derecho a presentar una reclamación ante la autoridad de protección de datos de tu país.',
       },
       {
         title: '7. Cookies y almacenamiento local',
@@ -593,7 +593,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Menores',
-        paragraphs: ['La plataforma AnimalBond está destinada a personas de al menos 16 años. No recopilamos intencionalmente datos de menores de esa edad. Si eres padre, madre o tutor y crees que un menor ha creado una cuenta, contáctanos en contact@animalbond.club y eliminaremos inmediatamente los datos correspondientes.'],
+        paragraphs: ['La plataforma AnimalBond está destinada a personas de al menos 16 años. No recopilamos intencionalmente datos de menores de esa edad. Si eres padre, madre o tutor y crees que un menor ha creado una cuenta, contáctanos en: animalbond.club/contact y eliminaremos inmediatamente los datos correspondientes.'],
       },
       {
         title: '9. Seguridad de los datos',
@@ -606,7 +606,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Contacto',
         paragraphs: ['Para cualquier pregunta sobre el tratamiento de tus datos personales:'],
-        contactBox: { operator: 'Responsable: Elena Lenghel', platform: 'Plataforma: AnimalBond — animalbond.club', emailLabel: 'Correo' },
+        contactBox: { operator: 'Responsable: AnimalBond', platform: 'Plataforma: AnimalBond — animalbond.club', emailLabel: 'Formulario de contacto' },
       },
     ],
   },
@@ -618,7 +618,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Kik vagyunk',
         paragraphs: [
-          'Az AnimalBond egy digitális platform az állatok örökbefogadásához és gondozásához, elérhető az animalbond.club oldalon és az AnimalBond mobilalkalmazáson keresztül. A személyes adatok kezelője Elena Lenghel, magánszemély, elérhetősége: contact@animalbond.club.',
+          'Az AnimalBond egy digitális platform az állatok örökbefogadásához és gondozásához, elérhető az animalbond.club oldalon és az AnimalBond mobilalkalmazáson keresztül. A személyes adatok kezelője AnimalBond (kapcsolat: animalbond.club/contact).',
           'Ez az irányelv az AnimalBond platform összes felhasználójára vonatkozik (weboldal és mobilalkalmazás), és leírja, hogyan gyűjtjük, használjuk és védjük személyes adataidat az (EU) 2016/679 rendeletnek (GDPR) megfelelően.',
         ],
       },
@@ -675,7 +675,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           'Tiltakozáshoz való jog — a jogos érdeken alapuló adatkezeléssel szemben',
           'A hozzájárulás visszavonásának joga — bármikor, negatív következmények nélkül',
         ],
-        afterItems: 'Bármely jog gyakorlásához lépj kapcsolatba velünk a contact@animalbond.club címen. 30 napon belül válaszolunk. Jogod van panaszt benyújtani az illetékes adatvédelmi hatósághoz is.',
+        afterItems: 'Bármely jog gyakorlásához lépj kapcsolatba velünk az animalbond.club/contact oldalon. 30 napon belül válaszolunk. Jogod van panaszt benyújtani az illetékes adatvédelmi hatósághoz is.',
       },
       {
         title: '7. Sütik és helyi tárolás',
@@ -689,7 +689,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Kiskorúak',
-        paragraphs: ['Az AnimalBond platform legalább 16 éves személyeknek szól. Nem gyűjtünk szándékosan adatokat e koron aluli kiskorúaktól. Ha szülő vagy gyám vagy, és úgy gondolod, hogy egy kiskorú fiókot hozott létre, kérjük, lépj kapcsolatba velünk a contact@animalbond.club címen, és azonnal töröljük az érintett adatokat.'],
+        paragraphs: ['Az AnimalBond platform legalább 16 éves személyeknek szól. Nem gyűjtünk szándékosan adatokat e koron aluli kiskorúaktól. Ha szülő vagy gyám vagy, és úgy gondolod, hogy egy kiskorú fiókot hozott létre, kérjük, lépj kapcsolatba velünk az animalbond.club/contact oldalon, és azonnal töröljük az érintett adatokat.'],
       },
       {
         title: '9. Adatbiztonság',
@@ -702,7 +702,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Kapcsolat',
         paragraphs: ['Személyes adataid kezelésével kapcsolatos bármely kérdés esetén:'],
-        contactBox: { operator: 'Üzemeltető: Elena Lenghel', platform: 'Platform: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+        contactBox: { operator: 'Üzemeltető: AnimalBond', platform: 'Platform: AnimalBond — animalbond.club', emailLabel: 'Kapcsolatfelvételi űrlap' },
       },
     ],
   },
@@ -714,7 +714,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Quem somos',
         paragraphs: [
-          "AnimalBond é uma plataforma digital de adoção e cuidado de animais, acessível em animalbond.club e através da app móvel AnimalBond. A responsável pelo tratamento de dados pessoais é Elena Lenghel, pessoa singular, contactável em: contact@animalbond.club.",
+          "AnimalBond é uma plataforma digital de adoção e cuidado de animais, acessível em animalbond.club e através da app móvel AnimalBond. O responsável pelo tratamento de dados pessoais é AnimalBond (contacto: animalbond.club/contact).",
           'Esta política aplica-se a todos os utilizadores da plataforma AnimalBond (site e app móvel) e descreve como recolhemos, utilizamos e protegemos os teus dados pessoais, em conformidade com o Regulamento (UE) 2016/679 (RGPD).',
         ],
       },
@@ -771,7 +771,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           'Direito de oposição — ao tratamento baseado em interesse legítimo',
           'Direito de retirar o consentimento — a qualquer momento, sem consequências negativas',
         ],
-        afterItems: 'Para exercer qualquer direito, contacta-nos em contact@animalbond.club. Respondemos no prazo de 30 dias. Tens também o direito de apresentar uma reclamação à autoridade nacional de proteção de dados.',
+        afterItems: 'Para exercer qualquer direito, contacta-nos em: animalbond.club/contact. Respondemos no prazo de 30 dias. Tens também o direito de apresentar uma reclamação à autoridade nacional de proteção de dados.',
       },
       {
         title: '7. Cookies e armazenamento local',
@@ -785,7 +785,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Menores',
-        paragraphs: ['A plataforma AnimalBond destina-se a pessoas com pelo menos 16 anos. Não recolhemos intencionalmente dados de menores com idade inferior. Se és pai/mãe ou tutor e acreditas que um menor criou uma conta, contacta-nos em contact@animalbond.club e eliminaremos imediatamente os dados relevantes.'],
+        paragraphs: ['A plataforma AnimalBond destina-se a pessoas com pelo menos 16 anos. Não recolhemos intencionalmente dados de menores com idade inferior. Se és pai/mãe ou tutor e acreditas que um menor criou uma conta, contacta-nos em: animalbond.club/contact e eliminaremos imediatamente os dados relevantes.'],
       },
       {
         title: '9. Segurança dos dados',
@@ -798,7 +798,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Contacto',
         paragraphs: ['Para qualquer questão relacionada com o tratamento dos teus dados pessoais:'],
-        contactBox: { operator: 'Operadora: Elena Lenghel', platform: 'Plataforma: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+        contactBox: { operator: 'Operador: AnimalBond', platform: 'Plataforma: AnimalBond — animalbond.club', emailLabel: 'Formulário de contacto' },
       },
     ],
   },
@@ -810,7 +810,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Wie zijn wij',
         paragraphs: [
-          'AnimalBond is een digitaal platform voor dieradoptie en -verzorging, toegankelijk via animalbond.club en de AnimalBond mobiele app. De verwerkingsverantwoordelijke voor persoonsgegevens is Elena Lenghel, een particulier, bereikbaar via: contact@animalbond.club.',
+          'AnimalBond is een digitaal platform voor dieradoptie en -verzorging, toegankelijk via animalbond.club en de AnimalBond mobiele app. De verwerkingsverantwoordelijke voor persoonsgegevens is AnimalBond (contact: animalbond.club/contact).',
           'Dit beleid is van toepassing op alle gebruikers van het AnimalBond-platform (website en mobiele app) en beschrijft hoe wij uw persoonsgegevens verzamelen, gebruiken en beschermen, in overeenstemming met Verordening (EU) 2016/679 (AVG).',
         ],
       },
@@ -867,7 +867,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           'Recht van bezwaar — tegen verwerking op basis van gerechtvaardigd belang',
           'Recht om toestemming in te trekken — op elk moment, zonder negatieve gevolgen',
         ],
-        afterItems: 'Om een recht uit te oefenen, neem contact met ons op via contact@animalbond.club. Wij reageren binnen 30 dagen. U heeft ook het recht om een klacht in te dienen bij de nationale gegevensbeschermingsautoriteit.',
+        afterItems: 'Om een recht uit te oefenen, neem contact met ons op via: animalbond.club/contact. Wij reageren binnen 30 dagen. U heeft ook het recht om een klacht in te dienen bij de nationale gegevensbeschermingsautoriteit.',
       },
       {
         title: '7. Cookies en lokale opslag',
@@ -881,7 +881,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Minderjarigen',
-        paragraphs: ['Het AnimalBond-platform is bedoeld voor personen van minimaal 16 jaar. Wij verzamelen niet bewust gegevens van minderjarigen onder deze leeftijd. Als u een ouder of voogd bent en denkt dat een minderjarige een account heeft aangemaakt, neem dan contact met ons op via contact@animalbond.club en wij verwijderen de betreffende gegevens onmiddellijk.'],
+        paragraphs: ['Het AnimalBond-platform is bedoeld voor personen van minimaal 16 jaar. Wij verzamelen niet bewust gegevens van minderjarigen onder deze leeftijd. Als u een ouder of voogd bent en denkt dat een minderjarige een account heeft aangemaakt, neem dan contact met ons op via: animalbond.club/contact en wij verwijderen de betreffende gegevens onmiddellijk.'],
       },
       {
         title: '9. Gegevensbeveiliging',
@@ -894,7 +894,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Contact',
         paragraphs: ['Voor vragen over de verwerking van uw persoonsgegevens:'],
-        contactBox: { operator: 'Beheerder: Elena Lenghel', platform: 'Platform: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+        contactBox: { operator: 'Beheerder: AnimalBond', platform: 'Platform: AnimalBond — animalbond.club', emailLabel: 'Contactformulier' },
       },
     ],
   },
@@ -906,7 +906,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '1. Кто мы',
         paragraphs: [
-          'AnimalBond — цифровая платформа для усыновления и ухода за животными, доступная на animalbond.club и через мобильное приложение AnimalBond. Оператором персональных данных является Елена Ленгел, физическое лицо, контактный адрес: contact@animalbond.club.',
+          'AnimalBond — цифровая платформа для усыновления и ухода за животными, доступная на animalbond.club и через мобильное приложение AnimalBond. Оператором персональных данных является AnimalBond (контактная форма: animalbond.club/contact).',
           'Данная политика распространяется на всех пользователей платформы AnimalBond (сайт и мобильное приложение) и описывает, как мы собираем, используем и защищаем ваши персональные данные в соответствии с Регламентом (ЕС) 2016/679 (GDPR).',
         ],
       },
@@ -963,7 +963,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
           'Право на возражение — против обработки на основе законного интереса',
           'Право отозвать согласие — в любое время, без негативных последствий',
         ],
-        afterItems: 'Для осуществления любого права обратитесь к нам по адресу contact@animalbond.club. Мы отвечаем в течение 30 дней. Вы также имеете право подать жалобу в национальный орган по защите данных.',
+        afterItems: 'Для осуществления любого права воспользуйтесь контактной формой: animalbond.club/contact. Мы отвечаем в течение 30 дней. Вы также имеете право подать жалобу в национальный орган по защите данных.',
       },
       {
         title: '7. Файлы cookie и локальное хранилище',
@@ -977,7 +977,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       },
       {
         title: '8. Несовершеннолетние',
-        paragraphs: ['Платформа AnimalBond предназначена для лиц не моложе 16 лет. Мы намеренно не собираем данные несовершеннолетних младше этого возраста. Если вы являетесь родителем или опекуном и считаете, что несовершеннолетний создал аккаунт, свяжитесь с нами по адресу contact@animalbond.club, и мы немедленно удалим соответствующие данные.'],
+        paragraphs: ['Платформа AnimalBond предназначена для лиц не моложе 16 лет. Мы намеренно не собираем данные несовершеннолетних младше этого возраста. Если вы являетесь родителем или опекуном и считаете, что несовершеннолетний создал аккаунт, воспользуйтесь формой на animalbond.club/contact, и мы немедленно удалим соответствующие данные.'],
       },
       {
         title: '9. Безопасность данных',
@@ -990,7 +990,7 @@ export const PRIVACY_CONTENT: Record<Lang, PrivacyContent> = {
       {
         title: '11. Контакт',
         paragraphs: ['По любым вопросам, связанным с обработкой ваших персональных данных:'],
-        contactBox: { operator: 'Оператор: Елена Ленгел', platform: 'Платформа: AnimalBond — animalbond.club', emailLabel: 'E-mail' },
+        contactBox: { operator: 'Оператор: AnimalBond', platform: 'Платформа: AnimalBond — animalbond.club', emailLabel: 'Контактная форма' },
       },
     ],
   },
