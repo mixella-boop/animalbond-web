@@ -62,7 +62,7 @@ export const translations = {
     nav_medical: '💊 Ajutor medical',
     nav_campanii: 'Campanii',
     nav_parteneri: 'Parteneri',
-    nav_povesti: 'Povești',
+    nav_povesti: 'Testimoniale',
     nav_despre: 'Despre',
     nav_download: 'Descarcă app',
 
@@ -99,7 +99,7 @@ export const translations = {
     cta_partner_btn: 'Înscrie-te ca partener →',
     cta_partner_see: 'Vezi partenerii actuali',
 
-    section_stories_title: 'Povești de adopție',
+    section_stories_title: 'Testimoniale',
     section_stories_subtitle: 'Oameni care au găsit un prieten prin AnimalBond',
     section_stories_see_all: 'Toate poveștile →',
 
@@ -309,7 +309,7 @@ export const translations = {
     partners_cta_btn: 'Înscrie-te ca partener →',
 
     // Stories page
-    stories_title: 'Povești de adopție',
+    stories_title: 'Testimoniale',
     stories_subtitle: 'Oameni care au găsit un prieten prin AnimalBond. Fiecare poveste contează.',
     stories_empty: 'Nu există povești aprobate momentan.',
     stories_close: 'Închide',
@@ -481,7 +481,7 @@ export const translations = {
     nav_medical: '💊 Medical Help',
     nav_campanii: 'Campaigns',
     nav_parteneri: 'Partners',
-    nav_povesti: 'Stories',
+    nav_povesti: 'Testimonials',
     nav_despre: 'About',
     nav_download: 'Download app',
 
@@ -518,7 +518,7 @@ export const translations = {
     cta_partner_btn: 'Join as a partner →',
     cta_partner_see: 'See current partners',
 
-    section_stories_title: 'Adoption Stories',
+    section_stories_title: 'Testimonials',
     section_stories_subtitle: 'People who found a friend through AnimalBond',
     section_stories_see_all: 'All stories →',
 
@@ -723,7 +723,7 @@ export const translations = {
     partners_cta_sub: 'Become an AnimalBond partner and reach thousands of pet owners in your area. Visibility for your vet clinic or pet store.',
     partners_cta_btn: 'Join as a partner →',
 
-    stories_title: 'Adoption Stories',
+    stories_title: 'Testimonials',
     stories_subtitle: 'People who found a friend through AnimalBond. Every story matters.',
     stories_empty: 'No approved stories at the moment.',
     stories_close: 'Close',
@@ -890,7 +890,7 @@ export const translations = {
     nav_medical: '💊 Medizinische Hilfe',
     nav_campanii: 'Kampagnen',
     nav_parteneri: 'Partner',
-    nav_povesti: 'Geschichten',
+    nav_povesti: 'Testimonials',
     nav_despre: 'Über uns',
     nav_download: 'App herunterladen',
 
@@ -927,7 +927,7 @@ export const translations = {
     cta_partner_btn: 'Als Partner registrieren →',
     cta_partner_see: 'Aktuelle Partner ansehen',
 
-    section_stories_title: 'Adoptionsgeschichten',
+    section_stories_title: 'Testimonials',
     section_stories_subtitle: 'Menschen, die durch AnimalBond einen Freund gefunden haben',
     section_stories_see_all: 'Alle Geschichten →',
 
@@ -1132,7 +1132,7 @@ export const translations = {
     partners_cta_sub: 'Werde AnimalBond-Partner und erreiche tausende Tierbesitzer in deiner Region. Sichtbarkeit für deine Tierklinik oder dein Zoofachgeschäft.',
     partners_cta_btn: 'Als Partner registrieren →',
 
-    stories_title: 'Adoptionsgeschichten',
+    stories_title: 'Testimonials',
     stories_subtitle: 'Menschen, die durch AnimalBond einen Freund gefunden haben. Jede Geschichte zählt.',
     stories_empty: 'Momentan keine genehmigten Geschichten.',
     stories_close: 'Schließen',
@@ -1299,7 +1299,7 @@ export const translations = {
     nav_medical: '💊 Aide médicale',
     nav_campanii: 'Campagnes',
     nav_parteneri: 'Partenaires',
-    nav_povesti: 'Histoires',
+    nav_povesti: 'Témoignages',
     nav_despre: 'À propos',
     nav_download: "Télécharger l'app",
 
@@ -1336,7 +1336,7 @@ export const translations = {
     cta_partner_btn: 'Rejoindre en tant que partenaire →',
     cta_partner_see: 'Voir les partenaires actuels',
 
-    section_stories_title: "Histoires d'adoption",
+    section_stories_title: "Témoignages",
     section_stories_subtitle: "Des personnes qui ont trouvé un ami grâce à AnimalBond",
     section_stories_see_all: 'Toutes les histoires →',
 
@@ -1541,7 +1541,7 @@ export const translations = {
     partners_cta_sub: "Devenez partenaire AnimalBond et atteignez des milliers de propriétaires d'animaux dans votre région.",
     partners_cta_btn: 'Rejoindre en tant que partenaire →',
 
-    stories_title: "Histoires d'adoption",
+    stories_title: "Témoignages",
     stories_subtitle: "Des personnes qui ont trouvé un ami grâce à AnimalBond. Chaque histoire compte.",
     stories_empty: "Aucune histoire approuvée pour le moment.",
     stories_close: 'Fermer',
@@ -1708,7 +1708,7 @@ export const translations = {
     nav_medical: '💊 Aiuto medico',
     nav_campanii: 'Campagne',
     nav_parteneri: 'Partner',
-    nav_povesti: 'Storie',
+    nav_povesti: 'Testimonianze',
     nav_despre: 'Chi siamo',
     nav_download: 'Scarica app',
 
@@ -1745,7 +1745,7 @@ export const translations = {
     cta_partner_btn: 'Iscriviti come partner →',
     cta_partner_see: 'Vedi i partner attuali',
 
-    section_stories_title: 'Storie di adozione',
+    section_stories_title: 'Testimonianze',
     section_stories_subtitle: 'Persone che hanno trovato un amico attraverso AnimalBond',
     section_stories_see_all: 'Tutte le storie →',
 
@@ -1950,7 +1950,7 @@ export const translations = {
     partners_cta_sub: 'Diventa partner AnimalBond e raggiungi migliaia di proprietari di animali nella tua zona.',
     partners_cta_btn: 'Iscriviti come partner →',
 
-    stories_title: 'Storie di adozione',
+    stories_title: 'Testimonianze',
     stories_subtitle: 'Persone che hanno trovato un amico attraverso AnimalBond. Ogni storia conta.',
     stories_empty: 'Nessuna storia approvata al momento.',
     stories_close: 'Chiudi',
@@ -2117,7 +2117,7 @@ export const translations = {
     nav_medical: '💊 Ayuda médica',
     nav_campanii: 'Campañas',
     nav_parteneri: 'Socios',
-    nav_povesti: 'Historias',
+    nav_povesti: 'Testimonios',
     nav_despre: 'Acerca de',
     nav_download: 'Descargar app',
 
@@ -2154,7 +2154,7 @@ export const translations = {
     cta_partner_btn: 'Únete como socio →',
     cta_partner_see: 'Ver socios actuales',
 
-    section_stories_title: 'Historias de adopción',
+    section_stories_title: 'Testimonios',
     section_stories_subtitle: 'Personas que encontraron un amigo a través de AnimalBond',
     section_stories_see_all: 'Todas las historias →',
 
@@ -2360,7 +2360,7 @@ export const translations = {
     partners_cta_sub: 'Conviértete en socio de AnimalBond y llega a miles de dueños de mascotas en tu zona.',
     partners_cta_btn: 'Únete como socio →',
 
-    stories_title: 'Historias de adopción',
+    stories_title: 'Testimonios',
     stories_subtitle: 'Personas que encontraron un amigo a través de AnimalBond. Cada historia importa.',
     stories_empty: 'No hay historias aprobadas por el momento.',
     stories_close: 'Cerrar',
@@ -2527,7 +2527,7 @@ export const translations = {
     nav_medical: '💊 Orvosi segítség',
     nav_campanii: 'Kampányok',
     nav_parteneri: 'Partnerek',
-    nav_povesti: 'Történetek',
+    nav_povesti: 'Vélemények',
     nav_despre: 'Rólunk',
     nav_download: 'App letöltése',
 
@@ -2564,7 +2564,7 @@ export const translations = {
     cta_partner_btn: 'Regisztrálj partnerként →',
     cta_partner_see: 'Jelenlegi partnerek megtekintése',
 
-    section_stories_title: 'Örökbefogadási történetek',
+    section_stories_title: 'Vélemények',
     section_stories_subtitle: 'Emberek, akik barátot találtak az AnimalBond segítségével',
     section_stories_see_all: 'Összes történet →',
 
@@ -2770,7 +2770,7 @@ export const translations = {
     partners_cta_sub: 'Legyél AnimalBond partner és érd el a régiódban élő ezer állattulajdonost.',
     partners_cta_btn: 'Regisztrálj partnerként →',
 
-    stories_title: 'Örökbefogadási történetek',
+    stories_title: 'Vélemények',
     stories_subtitle: 'Emberek, akik barátot találtak az AnimalBond segítségével. Minden történet számít.',
     stories_empty: 'Jelenleg nincsenek jóváhagyott történetek.',
     stories_close: 'Bezárás',
@@ -2936,7 +2936,7 @@ export const translations = {
     nav_medical: '💊 Ajuda médica',
     nav_campanii: 'Campanhas',
     nav_parteneri: 'Parceiros',
-    nav_povesti: 'Histórias',
+    nav_povesti: 'Testemunhos',
     nav_despre: 'Sobre',
     nav_download: 'Descarregar app',
 
@@ -2973,7 +2973,7 @@ export const translations = {
     cta_partner_btn: 'Juntar como parceiro →',
     cta_partner_see: 'Ver parceiros atuais',
 
-    section_stories_title: 'Histórias de adoção',
+    section_stories_title: 'Testemunhos',
     section_stories_subtitle: 'Pessoas que encontraram um amigo através do AnimalBond',
     section_stories_see_all: 'Todas as histórias →',
 
@@ -3178,7 +3178,7 @@ export const translations = {
     partners_cta_sub: 'Torna-te parceiro AnimalBond e chega a milhares de donos de animais na tua área. Visibilidade para a tua clínica veterinária ou loja de animais.',
     partners_cta_btn: 'Juntar como parceiro →',
 
-    stories_title: 'Histórias de adoção',
+    stories_title: 'Testemunhos',
     stories_subtitle: 'Pessoas que encontraram um amigo através do AnimalBond. Cada história importa.',
     stories_empty: 'Nenhuma história aprovada de momento.',
     stories_close: 'Fechar',
@@ -3340,7 +3340,7 @@ export const translations = {
     nav_medical: '💊 Medische hulp',
     nav_campanii: 'Campagnes',
     nav_parteneri: 'Partners',
-    nav_povesti: "Verhalen",
+    nav_povesti: "Getuigenissen",
     nav_despre: 'Over ons',
     nav_download: 'App downloaden',
 
@@ -3377,7 +3377,7 @@ export const translations = {
     cta_partner_btn: 'Word partner →',
     cta_partner_see: 'Huidige partners bekijken',
 
-    section_stories_title: 'Adoptieverhalen',
+    section_stories_title: 'Getuigenissen',
     section_stories_subtitle: 'Mensen die via AnimalBond een vriend vonden',
     section_stories_see_all: 'Alle verhalen →',
 
@@ -3582,7 +3582,7 @@ export const translations = {
     partners_cta_sub: 'Word AnimalBond-partner en bereik duizenden diereneigenaren in jouw regio. Zichtbaarheid voor jouw dierenkliniek of dierenwinkel.',
     partners_cta_btn: 'Word partner →',
 
-    stories_title: 'Adoptieverhalen',
+    stories_title: 'Getuigenissen',
     stories_subtitle: 'Mensen die via AnimalBond een vriend vonden. Elk verhaal telt.',
     stories_empty: 'Momenteel geen goedgekeurde verhalen.',
     stories_close: 'Sluiten',
@@ -3744,7 +3744,7 @@ export const translations = {
     nav_medical: '💊 Медицинская помощь',
     nav_campanii: 'Кампании',
     nav_parteneri: 'Партнёры',
-    nav_povesti: 'Истории',
+    nav_povesti: 'Отзывы',
     nav_despre: 'О нас',
     nav_download: 'Скачать приложение',
 
@@ -3781,7 +3781,7 @@ export const translations = {
     cta_partner_btn: 'Стать партнёром →',
     cta_partner_see: 'Посмотреть текущих партнёров',
 
-    section_stories_title: 'Истории усыновления',
+    section_stories_title: 'Отзывы',
     section_stories_subtitle: 'Люди, которые нашли друга через AnimalBond',
     section_stories_see_all: 'Все истории →',
 
@@ -3986,7 +3986,7 @@ export const translations = {
     partners_cta_sub: 'Станьте партнёром AnimalBond и охватите тысячи владельцев животных в вашем регионе. Видимость для вашей ветеринарной клиники или зоомагазина.',
     partners_cta_btn: 'Стать партнёром →',
 
-    stories_title: 'Истории усыновления',
+    stories_title: 'Отзывы',
     stories_subtitle: 'Люди, которые нашли друга через AnimalBond. Каждая история важна.',
     stories_empty: 'В данный момент нет одобренных историй.',
     stories_close: 'Закрыть',
