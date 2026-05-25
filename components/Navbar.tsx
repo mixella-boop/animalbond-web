@@ -79,9 +79,7 @@ export default function Navbar() {
             <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium text-sm whitespace-nowrap">
               {t('nav_despre')}
             </Link>
-            <Link href="/pricing" className="text-text-main hover:text-primary transition-colors font-medium text-sm whitespace-nowrap">
-              💳 {t('nav_pricing')}
-            </Link>
+            {/* pricing hidden — reactivate when partners are monetized */}
 
             {/* Language selector — pulsating */}
             <div className="relative">

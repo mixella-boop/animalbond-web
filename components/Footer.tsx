@@ -50,11 +50,7 @@ export default function Footer() {
                   {t('footer_nav_manual')}
                 </Link>
               </li>
-              <li>
-                <Link href="/pricing" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  {t('footer_nav_pricing')}
-                </Link>
-              </li>
+              {/* pricing hidden */}
             </ul>
           </div>
 
