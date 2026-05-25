@@ -3,9 +3,11 @@
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { useLanguage } from '@/context/LanguageContext'
 
 function SuccessContent() {
   const params  = useSearchParams()
+  const { t }   = useLanguage()
   const plan    = params.get('plan') ?? ''
 
   const isSale    = plan === 'sale_listing'
@@ -17,35 +19,29 @@ function SuccessContent() {
 
       <h1 className="text-3xl font-bold text-text-main mb-4">
         {isSale
-          ? 'Plată confirmată! Anunțul tău este activ.'
+          ? t('paysuccess_sale_title')
           : isPartner
-          ? 'Bun venit ca partener AnimalBond!'
-          : 'Plată confirmată!'}
+          ? t('paysuccess_partner_title')
+          : t('paysuccess_generic')}
       </h1>
 
       <p className="text-text-muted text-lg mb-6 leading-relaxed">
         {isSale
-          ? 'Anunțul tău de vânzare a fost activat și va fi vizibil timp de 30 de zile. Vei primi confirmarea și pe email.'
+          ? t('paysuccess_sale_body')
           : isPartner
-          ? 'Listing-ul tău este acum activ pe AnimalBond. Echipa noastră te va contacta în scurt timp pentru detalii suplimentare.'
-          : 'Tranzacția a fost procesată cu succes.'}
+          ? t('paysuccess_partner_body')
+          : t('paysuccess_generic_body')}
       </p>
 
       {isSale && (
         <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-8 text-sm text-green-700">
-          <strong>Activ 30 zile</strong> — anunțul expiră automat după această perioadă.
-          Poți reposta oricând cu o nouă plată de 4,99 €.
+          {t('paysuccess_sale_note')}
         </div>
       )}
 
       {isPartner && (
         <div className="bg-violet-50 border border-violet-200 rounded-xl p-4 mb-8 text-sm text-violet-700">
-          Abonamentul se reînnoiește automat lunar. Poți anula oricând fără penalități
-          contactând echipa la{' '}
-          <a href="mailto:contact@animalbond.club" className="underline">
-            contact@animalbond.club
-          </a>
-          .
+          {t('paysuccess_partner_note')}
         </div>
       )}
 
@@ -54,13 +50,13 @@ function SuccessContent() {
           href="/"
           className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors"
         >
-          Înapoi la pagina principală
+          {t('partner_success_back')}
         </Link>
         <Link
           href="/animale"
           className="border-2 border-primary text-primary px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-colors"
         >
-          Explorează animale
+          {t('paysuccess_explore')}
         </Link>
       </div>
     </div>
@@ -68,8 +64,9 @@ function SuccessContent() {
 }
 
 export default function PaymentSuccessPage() {
+  const { t } = useLanguage()
   return (
-    <Suspense fallback={<div className="py-20 text-center text-text-muted">Se încarcă...</div>}>
+    <Suspense fallback={<div className="py-20 text-center text-text-muted">{t('loading')}</div>}>
       <SuccessContent />
     </Suspense>
   )

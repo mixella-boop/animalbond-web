@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function ResetPasswordPage() {
+  const { t } = useLanguage()
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
   const [loading, setLoading] = useState(false)
@@ -31,11 +33,11 @@ export default function ResetPasswordPage() {
 
   const handleReset = async () => {
     if (password.length < 8) {
-      setError('Parola trebuie să aibă cel puțin 8 caractere.')
+      setError(t('reset_err_min'))
       return
     }
     if (password !== confirm) {
-      setError('Cele două parole nu coincid.')
+      setError(t('reset_err_match'))
       return
     }
     setLoading(true)
@@ -43,7 +45,7 @@ export default function ResetPasswordPage() {
     const { error: updateError } = await supabase.auth.updateUser({ password })
     setLoading(false)
     if (updateError) {
-      setError('Eroare la salvarea parolei. Linkul poate fi expirat — solicită unul nou.')
+      setError(t('reset_err_link'))
       return
     }
     setDone(true)
@@ -54,15 +56,13 @@ export default function ResetPasswordPage() {
       <div className="min-h-screen bg-[#FFF9F9] flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">
           <div className="text-6xl mb-4">✅</div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-3">Parolă actualizată!</h1>
-          <p className="text-gray-500 mb-6">
-            Parola ta a fost salvată. Deschide aplicația AnimalBond și autentifică-te cu noua parolă.
-          </p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-3">{t('reset_done_title')}</h1>
+          <p className="text-gray-500 mb-6">{t('reset_done_body')}</p>
           <a
             href="/"
             className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-primary-dark transition-colors"
           >
-            Înapoi la AnimalBond
+            {t('reset_back')}
           </a>
         </div>
       </div>
@@ -74,15 +74,13 @@ export default function ResetPasswordPage() {
       <div className="min-h-screen bg-[#FFF9F9] flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">
           <div className="text-6xl mb-4">⏰</div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-3">Link expirat</h1>
-          <p className="text-gray-500 mb-6">
-            Linkul de resetare a expirat sau nu este valid. Solicită unul nou din aplicație.
-          </p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-3">{t('reset_expired_title')}</h1>
+          <p className="text-gray-500 mb-6">{t('reset_expired_body')}</p>
           <a
             href="/"
             className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-primary-dark transition-colors"
           >
-            Înapoi la AnimalBond
+            {t('reset_back')}
           </a>
         </div>
       </div>
@@ -94,7 +92,7 @@ export default function ResetPasswordPage() {
       <div className="min-h-screen bg-[#FFF9F9] flex items-center justify-center">
         <div className="text-center">
           <div className="text-5xl mb-4">🔐</div>
-          <p className="text-gray-500">Se verifică linkul...</p>
+          <p className="text-gray-500">{t('reset_checking')}</p>
         </div>
       </div>
     )
@@ -105,22 +103,20 @@ export default function ResetPasswordPage() {
       <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full">
         <div className="text-center mb-6">
           <div className="text-5xl mb-3">🔐</div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Parolă nouă</h1>
-          <p className="text-gray-500 text-sm">
-            Introdu noua parolă pentru contul tău AnimalBond.
-          </p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('reset_title')}</h1>
+          <p className="text-gray-500 text-sm">{t('reset_subtitle')}</p>
         </div>
 
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Parolă nouă
+              {t('reset_label_new')}
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Minim 8 caractere"
+              placeholder={t('reset_ph_new')}
               className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
               autoFocus
             />
@@ -128,13 +124,13 @@ export default function ResetPasswordPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirmă parola
+              {t('reset_label_confirm')}
             </label>
             <input
               type="password"
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
-              placeholder="Repetă parola"
+              placeholder={t('reset_ph_confirm')}
               className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
               onKeyDown={(e) => e.key === 'Enter' && handleReset()}
             />
@@ -151,7 +147,7 @@ export default function ResetPasswordPage() {
             disabled={loading}
             className="w-full bg-primary text-white py-3 rounded-xl font-bold hover:bg-primary-dark transition-colors disabled:opacity-60"
           >
-            {loading ? 'Se salvează...' : 'Salvează parola'}
+            {loading ? t('reset_saving') : t('reset_save_btn')}
           </button>
         </div>
       </div>

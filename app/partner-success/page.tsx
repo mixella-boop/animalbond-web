@@ -62,7 +62,7 @@ function PartnerSuccessContent() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-gray-600">Se verifică plata...</p>
+          <p className="text-gray-600">{t('partnerpay_verifying')}</p>
         </div>
       </div>
     )
@@ -74,17 +74,16 @@ function PartnerSuccessContent() {
         <div className="text-center max-w-md">
           <div className="text-6xl mb-4">❌</div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            {t('partner_payment_failed_title') || 'Plata nu a putut fi procesată'}
+            {t('partner_payment_failed_title')}
           </h1>
           <p className="text-gray-600 mb-6">
-            {t('partner_payment_failed_desc') ||
-              'A apărut o problemă la procesarea plății. Contactați suportul.'}
+            {t('partner_payment_failed_desc')}
           </p>
           <Link
             href="/"
             className="inline-block bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors"
           >
-            ← Înapoi la pagina principală
+            ← {t('partner_success_back')}
           </Link>
         </div>
       </div>
@@ -96,7 +95,7 @@ function PartnerSuccessContent() {
       <div className="text-center max-w-md">
         <div className="text-6xl mb-4">✅</div>
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          {t('partner_payment_success_title') || 'Plată confirmată!'}
+          {t('partner_payment_success_title')}
         </h1>
         {partnerName && (
           <p className="text-lg text-primary font-semibold mb-4">
@@ -104,17 +103,16 @@ function PartnerSuccessContent() {
           </p>
         )}
         <p className="text-gray-600 mb-6">
-          {t('partner_payment_success_desc') ||
-            'Mulțumim! Parteneriatul tău este acum activ. Vei apărea în aplicație și pe site.'}
+          {t('partner_payment_success_desc')}
         </p>
 
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 text-sm text-green-700">
-          <p className="font-semibold mb-2">🐾 Ce se întâmplă acum?</p>
+          <p className="font-semibold mb-2">{t('partnerpay_what_now')}</p>
           <ul className="text-left space-y-1">
-            <li>✓ Profil activ în app și pe site</li>
-            <li>✓ Primești cereri de la clienți</li>
-            <li>✓ Vizibilitate premium</li>
-            <li>✓ Suport din echipa AnimalBond</li>
+            <li>{t('partnerpay_li_profile')}</li>
+            <li>{t('partnerpay_li_requests')}</li>
+            <li>{t('partnerpay_li_premium')}</li>
+            <li>{t('partnerpay_li_support')}</li>
           </ul>
         </div>
 
@@ -122,7 +120,7 @@ function PartnerSuccessContent() {
           href="/"
           className="inline-block bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors"
         >
-          ← Înapoi la pagina principală
+          ← {t('partner_success_back')}
         </Link>
       </div>
     </div>
@@ -130,12 +128,13 @@ function PartnerSuccessContent() {
 }
 
 export default function PartnerSuccessPage() {
+  const { t } = useLanguage()
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-gray-600">Se încarcă...</p>
+          <p className="text-gray-600">{t('loading')}</p>
         </div>
       </div>
     }>
