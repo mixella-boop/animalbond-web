@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { translations, type Lang, type TranslationKey, COUNTRY_TO_LANG } from '@/lib/i18n'
 
-const ALL_LANGS: Lang[] = ['ro', 'en', 'de', 'fr', 'it', 'es', 'hu']
+const ALL_LANGS: Lang[] = ['ro', 'en', 'de', 'fr', 'it', 'es', 'hu', 'pt', 'nl', 'ru']
 
 type LanguageContextType = {
   lang: Lang
@@ -23,8 +23,22 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>('ro')
 
   useEffect(() => {
+    // 1. Preferința salvată de user → prioritate maximă
     const saved = localStorage.getItem('ab_lang') as Lang | null
-    if (saved && ALL_LANGS.includes(saved)) setLangState(saved)
+    if (saved && ALL_LANGS.includes(saved)) {
+      setLangState(saved)
+      return
+    }
+    // 2. Nicio preferință salvată → detectare din IP (Vercel x-vercel-ip-country)
+    fetch('/api/detect-country')
+      .then(r => r.json())
+      .then(({ country }: { country: string }) => {
+        if (country && COUNTRY_TO_LANG[country]) {
+          setLangState(COUNTRY_TO_LANG[country])
+          // Nu salvăm în localStorage — dacă userul schimbă manual, se salvează atunci
+        }
+      })
+      .catch(() => {}) // fallback la 'ro' (default din useState)
   }, [])
 
   const setLang = (newLang: Lang) => {
