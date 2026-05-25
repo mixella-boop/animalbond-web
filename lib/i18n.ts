@@ -474,6 +474,17 @@ export const translations = {
     partner_payment_success_desc: 'Parteneriatul tău AnimalBond este acum activ. Bine ai venit în familia noastră de parteneri!',
     partner_payment_failed_title: 'Plată eșuată',
     partner_payment_failed_desc: 'Nu am putut procesa plata. Te rugăm să încerci din nou sau să contactezi suportul.',
+
+    conv_loading: 'Se deschide aplicația...',
+    conv_mobile_title: 'Deschide conversația în app',
+    conv_mobile_body: 'Apasă butonul de mai jos pentru a deschide conversația direct în AnimalBond.',
+    conv_no_app: 'Nu ai aplicația? Descarc-o gratis:',
+    conv_open_btn: '💬 Deschide în AnimalBond',
+    conv_play_btn: '📥 Descarcă din Google Play',
+    conv_desktop_title: 'Chat disponibil doar în aplicație',
+    conv_desktop_body: 'Conversațiile AnimalBond sunt disponibile doar în aplicația mobilă.',
+    conv_desktop_body2: 'Deschide acest link pe telefonul tău sau descarcă aplicația:',
+    conv_ios_soon: 'Versiunea iOS va fi disponibilă în curând 🍎',
   },
 
   en: {
@@ -883,6 +894,17 @@ export const translations = {
     partner_payment_success_desc: 'Your AnimalBond partnership is now active. Welcome to our partner family!',
     partner_payment_failed_title: 'Payment Failed',
     partner_payment_failed_desc: 'We could not process your payment. Please try again or contact support.',
+
+    conv_loading: 'Opening the app...',
+    conv_mobile_title: 'Open the conversation in the app',
+    conv_mobile_body: 'Tap the button below to open the conversation directly in AnimalBond.',
+    conv_no_app: "Don't have the app? Download it for free:",
+    conv_open_btn: '💬 Open in AnimalBond',
+    conv_play_btn: '📥 Download from Google Play',
+    conv_desktop_title: 'Chat available only in the app',
+    conv_desktop_body: 'AnimalBond conversations are available only in the mobile app.',
+    conv_desktop_body2: 'Open this link on your phone or download the app:',
+    conv_ios_soon: 'iOS version coming soon 🍎',
   },
 
   de: {
@@ -1292,6 +1314,17 @@ export const translations = {
     partner_payment_success_desc: 'Ihre AnimalBond-Partnerschaft ist jetzt aktiv. Willkommen in unserer Partnerfamilie!',
     partner_payment_failed_title: 'Zahlung fehlgeschlagen',
     partner_payment_failed_desc: 'Wir konnten Ihre Zahlung nicht verarbeiten. Bitte versuchen Sie es erneut oder kontaktieren Sie den Support.',
+
+    conv_loading: 'App wird geöffnet...',
+    conv_mobile_title: 'Gespräch in der App öffnen',
+    conv_mobile_body: 'Tippe auf die Schaltfläche unten, um das Gespräch direkt in AnimalBond zu öffnen.',
+    conv_no_app: 'App nicht installiert? Kostenlos herunterladen:',
+    conv_open_btn: '💬 In AnimalBond öffnen',
+    conv_play_btn: '📥 Aus Google Play herunterladen',
+    conv_desktop_title: 'Chat nur in der App verfügbar',
+    conv_desktop_body: 'AnimalBond-Gespräche sind nur in der mobilen App verfügbar.',
+    conv_desktop_body2: 'Öffne diesen Link auf deinem Handy oder lade die App herunter:',
+    conv_ios_soon: 'iOS-Version kommt bald 🍎',
   },
 
   fr: {
@@ -1701,6 +1734,17 @@ export const translations = {
     partner_payment_success_desc: "Votre partenariat AnimalBond est maintenant actif. Bienvenue dans notre famille de partenaires !",
     partner_payment_failed_title: "Paiement échoué",
     partner_payment_failed_desc: "Nous n'avons pas pu traiter votre paiement. Veuillez réessayer ou contacter le support.",
+
+    conv_loading: "Ouverture de l'application...",
+    conv_mobile_title: 'Ouvrir la conversation dans l\'app',
+    conv_mobile_body: "Appuyez sur le bouton ci-dessous pour ouvrir la conversation directement dans AnimalBond.",
+    conv_no_app: "Vous n'avez pas l'application ? Téléchargez-la gratuitement :",
+    conv_open_btn: '💬 Ouvrir dans AnimalBond',
+    conv_play_btn: '📥 Télécharger sur Google Play',
+    conv_desktop_title: 'Chat disponible uniquement dans l\'app',
+    conv_desktop_body: "Les conversations AnimalBond sont disponibles uniquement dans l'application mobile.",
+    conv_desktop_body2: 'Ouvrez ce lien sur votre téléphone ou téléchargez l\'application :',
+    conv_ios_soon: 'Version iOS bientôt disponible 🍎',
   },
 
   it: {
@@ -2110,6 +2154,17 @@ export const translations = {
     partner_payment_success_desc: 'La tua partnership AnimalBond è ora attiva. Benvenuto nella nostra famiglia di partner!',
     partner_payment_failed_title: 'Pagamento fallito',
     partner_payment_failed_desc: 'Non siamo riusciti a elaborare il pagamento. Riprova o contatta il supporto.',
+
+    conv_loading: "Apertura dell'app in corso...",
+    conv_mobile_title: "Apri la conversazione nell'app",
+    conv_mobile_body: "Tocca il pulsante qui sotto per aprire la conversazione direttamente in AnimalBond.",
+    conv_no_app: "Non hai l'app? Scaricala gratis:",
+    conv_open_btn: '💬 Apri in AnimalBond',
+    conv_play_btn: '📥 Scarica da Google Play',
+    conv_desktop_title: 'Chat disponibile solo nell\'app',
+    conv_desktop_body: "Le conversazioni AnimalBond sono disponibili solo nell'app mobile.",
+    conv_desktop_body2: "Apri questo link sul tuo telefono o scarica l'app:",
+    conv_ios_soon: 'Versione iOS disponibile presto 🍎',
   },
 
   es: {
@@ -2520,6 +2575,17 @@ export const translations = {
     partner_payment_success_desc: 'Tu asociación AnimalBond ahora está activa. ¡Bienvenido a nuestra familia de socios!',
     partner_payment_failed_title: 'Pago fallido',
     partner_payment_failed_desc: 'No pudimos procesar tu pago. Por favor intenta de nuevo o contacta al soporte.',
+
+    conv_loading: 'Abriendo la aplicación...',
+    conv_mobile_title: 'Abrir la conversación en la app',
+    conv_mobile_body: 'Toca el botón de abajo para abrir la conversación directamente en AnimalBond.',
+    conv_no_app: '¿No tienes la app? Descárgala gratis:',
+    conv_open_btn: '💬 Abrir en AnimalBond',
+    conv_play_btn: '📥 Descargar de Google Play',
+    conv_desktop_title: 'Chat disponible solo en la app',
+    conv_desktop_body: 'Las conversaciones de AnimalBond están disponibles solo en la app móvil.',
+    conv_desktop_body2: 'Abre este enlace en tu teléfono o descarga la app:',
+    conv_ios_soon: 'Versión iOS próximamente 🍎',
   },
 
   hu: {
@@ -2930,6 +2996,17 @@ export const translations = {
     partner_payment_success_desc: 'Az AnimalBond partnersége mostantól aktív. Üdvözöljük a partner családunkban!',
     partner_payment_failed_title: 'Fizetés sikertelen',
     partner_payment_failed_desc: 'Nem tudtuk feldolgozni a fizetését. Kérjük, próbálja újra, vagy vegye fel a kapcsolatot az ügyfélszolgálattal.',
+
+    conv_loading: 'Az alkalmazás megnyitása...',
+    conv_mobile_title: 'Nyisd meg a beszélgetést az appban',
+    conv_mobile_body: 'Koppints az alábbi gombra a beszélgetés közvetlen megnyitásához az AnimalBondban.',
+    conv_no_app: 'Nincs az appod? Töltsd le ingyen:',
+    conv_open_btn: '💬 Megnyitás AnimalBondban',
+    conv_play_btn: '📥 Letöltés Google Playről',
+    conv_desktop_title: 'A chat csak az appban érhető el',
+    conv_desktop_body: 'Az AnimalBond-beszélgetések csak a mobilalkalmazásban érhetők el.',
+    conv_desktop_body2: 'Nyisd meg ezt a linket a telefonodon, vagy töltsd le az appot:',
+    conv_ios_soon: 'Az iOS verzió hamarosan elérhető 🍎',
   },
   pt: {
     nav_adoptii: 'Adoções',
@@ -3333,6 +3410,17 @@ export const translations = {
     partner_payment_success_desc: 'A tua parceria AnimalBond está agora ativa. Bem-vindo à nossa família de parceiros!',
     partner_payment_failed_title: 'Pagamento falhado',
     partner_payment_failed_desc: 'Não conseguimos processar o teu pagamento. Por favor tenta novamente ou contacta o suporte.',
+
+    conv_loading: 'A abrir a aplicação...',
+    conv_mobile_title: 'Abrir a conversa na app',
+    conv_mobile_body: 'Toca no botão abaixo para abrir a conversa diretamente no AnimalBond.',
+    conv_no_app: 'Não tens a app? Descarrega grátis:',
+    conv_open_btn: '💬 Abrir no AnimalBond',
+    conv_play_btn: '📥 Descarregar do Google Play',
+    conv_desktop_title: 'Chat disponível apenas na app',
+    conv_desktop_body: 'As conversas do AnimalBond estão disponíveis apenas na aplicação móvel.',
+    conv_desktop_body2: 'Abre este link no teu telemóvel ou descarrega a app:',
+    conv_ios_soon: 'Versão iOS disponível em breve 🍎',
   },
 
   nl: {
@@ -3737,6 +3825,17 @@ export const translations = {
     partner_payment_success_desc: 'Jouw AnimalBond-partnerschap is nu actief. Welkom in onze partnerfamilie!',
     partner_payment_failed_title: 'Betaling mislukt',
     partner_payment_failed_desc: 'We konden jouw betaling niet verwerken. Probeer het opnieuw of neem contact op met de ondersteuning.',
+
+    conv_loading: 'App wordt geopend...',
+    conv_mobile_title: 'Open het gesprek in de app',
+    conv_mobile_body: 'Tik op de knop hieronder om het gesprek direct in AnimalBond te openen.',
+    conv_no_app: 'App niet geïnstalleerd? Download gratis:',
+    conv_open_btn: '💬 Openen in AnimalBond',
+    conv_play_btn: '📥 Downloaden uit Google Play',
+    conv_desktop_title: 'Chat alleen beschikbaar in de app',
+    conv_desktop_body: 'AnimalBond-gesprekken zijn alleen beschikbaar in de mobiele app.',
+    conv_desktop_body2: 'Open deze link op je telefoon of download de app:',
+    conv_ios_soon: 'iOS-versie komt binnenkort 🍎',
   },
 
   ru: {
@@ -4141,6 +4240,17 @@ export const translations = {
     partner_payment_success_desc: 'Ваше партнёрство AnimalBond теперь активно. Добро пожаловать в нашу партнёрскую семью!',
     partner_payment_failed_title: 'Ошибка оплаты',
     partner_payment_failed_desc: 'Мы не смогли обработать вашу оплату. Пожалуйста, попробуйте ещё раз или свяжитесь со службой поддержки.',
+
+    conv_loading: 'Открытие приложения...',
+    conv_mobile_title: 'Открыть разговор в приложении',
+    conv_mobile_body: 'Нажмите кнопку ниже, чтобы открыть разговор прямо в AnimalBond.',
+    conv_no_app: 'Нет приложения? Скачайте бесплатно:',
+    conv_open_btn: '💬 Открыть в AnimalBond',
+    conv_play_btn: '📥 Скачать из Google Play',
+    conv_desktop_title: 'Чат доступен только в приложении',
+    conv_desktop_body: 'Разговоры AnimalBond доступны только в мобильном приложении.',
+    conv_desktop_body2: 'Откройте эту ссылку на телефоне или скачайте приложение:',
+    conv_ios_soon: 'Версия для iOS скоро появится 🍎',
   },
 
 } satisfies Record<Lang, Record<string, string>>

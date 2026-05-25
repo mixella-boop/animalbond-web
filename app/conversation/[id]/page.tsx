@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useLanguage } from '@/context/LanguageContext';
 
 const APP_SCHEME = 'animalbond';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=animalbond.club';
@@ -9,6 +10,7 @@ const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=animalbond
 export default function ConversationRedirectPage() {
   const params = useParams();
   const id = params?.id as string;
+  const { t } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
   const [attempted, setAttempted] = useState(false);
 
@@ -45,7 +47,7 @@ export default function ConversationRedirectPage() {
 
       {!attempted && isMobile && (
         <p style={{ color: '#888', fontSize: 16, marginTop: 16 }}>
-          Se deschide aplicația...
+          {t('conv_loading')}
         </p>
       )}
 
@@ -53,12 +55,12 @@ export default function ConversationRedirectPage() {
         <div style={{ maxWidth: 480, marginTop: 16 }}>
           <div style={{ fontSize: 36, marginBottom: 8 }}>💬</div>
           <h2 style={{ color: '#333', fontSize: 22, margin: '0 0 12px' }}>
-            Deschide conversația în app
+            {t('conv_mobile_title')}
           </h2>
           <p style={{ color: '#555', fontSize: 15, lineHeight: 1.6, marginBottom: 24 }}>
-            Apasă butonul de mai jos pentru a deschide conversația direct în AnimalBond.
+            {t('conv_mobile_body')}
             <br /><br />
-            <strong>Nu ai aplicația?</strong> Descarc-o gratis:
+            <strong>{t('conv_no_app')}</strong>
           </p>
           <a
             href={`${APP_SCHEME}://conversation/${id}`}
@@ -74,7 +76,7 @@ export default function ConversationRedirectPage() {
               marginBottom: 16,
             }}
           >
-            💬 Deschide în AnimalBond
+            {t('conv_open_btn')}
           </a>
           <br />
           <a
@@ -91,7 +93,7 @@ export default function ConversationRedirectPage() {
               border: '2px solid #FF6B6B',
             }}
           >
-            📥 Descarcă din Google Play
+            {t('conv_play_btn')}
           </a>
         </div>
       )}
@@ -100,12 +102,12 @@ export default function ConversationRedirectPage() {
         <div style={{ maxWidth: 480, marginTop: 16 }}>
           <div style={{ fontSize: 36, marginBottom: 8 }}>📱</div>
           <h2 style={{ color: '#333', fontSize: 22, margin: '0 0 12px' }}>
-            Chat disponibil doar în aplicație
+            {t('conv_desktop_title')}
           </h2>
           <p style={{ color: '#555', fontSize: 15, lineHeight: 1.6, marginBottom: 24 }}>
-            Conversațiile AnimalBond sunt disponibile doar în aplicația mobilă.
+            {t('conv_desktop_body')}
             <br /><br />
-            Deschide acest link pe telefonul tău sau descarcă aplicația:
+            {t('conv_desktop_body2')}
           </p>
           <a
             href={PLAY_STORE_URL}
@@ -122,10 +124,10 @@ export default function ConversationRedirectPage() {
               fontSize: 16,
             }}
           >
-            📥 Descarcă din Google Play
+            {t('conv_play_btn')}
           </a>
           <p style={{ color: '#aaa', fontSize: 13, marginTop: 32 }}>
-            Versiunea iOS va fi disponibilă în curând 🍎
+            {t('conv_ios_soon')}
           </p>
         </div>
       )}
