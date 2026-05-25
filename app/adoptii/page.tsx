@@ -180,7 +180,7 @@ export default function FeedPage() {
           animal_photos (id, animal_id, url, is_primary, order_index)
         `)
         .eq('status', 'available')
-        .not('type', 'in', '("lost","found")')
+        .in('type', ['adoption', 'medical'])
         .or(`expires_at.is.null,expires_at.gt.${now}`)
         .order('created_at', { ascending: true })
         .range(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE - 1)
