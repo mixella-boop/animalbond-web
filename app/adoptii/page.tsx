@@ -45,17 +45,13 @@ const SPECIES_ALIASES: Record<string, string[]> = {
 const TYPE_COLORS: Record<string, { bg: string; border: string; accent: string }> = {
   '':         { bg: '#F3F4F6', border: '#9CA3AF', accent: '#6B7280' },
   adoption:   { bg: '#FFE4E4', border: '#FF6B6B', accent: '#FF6B6B' },
-  sale:       { bg: '#FEF3C7', border: '#F59E0B', accent: '#D97706' },
   medical:    { bg: '#EEF2FF', border: '#6366F1', accent: '#6366F1' },
-  breeding:   { bg: '#D1FAE5', border: '#10B981', accent: '#059669' },
 }
 
 const TYPE_FILTER_KEYS = [
   { value: '', key: 'type_all' as const },
   { value: 'adoption', key: 'type_adoption' as const },
   { value: 'medical', key: 'type_medical' as const },
-  { value: 'sale', key: 'type_sale' as const },
-  { value: 'breeding', key: 'type_breeding' as const },
 ]
 
 const COUNTRY_OPTIONS = [

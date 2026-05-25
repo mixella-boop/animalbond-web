@@ -36,27 +36,21 @@ const SPECIES_KEY_MAP: Record<string, string> = {
 
 const TYPE_COLOR: Record<string, string> = {
   adoption: '#FF6B6B',
-  sale:     '#F59E0B',
   medical:  '#6366F1',
-  breeding: '#10B981',
   lost:     '#E53935',
   found:    '#00838F',
 }
 
 const TYPE_BG: Record<string, string> = {
   adoption: 'from-pink-50 to-red-50',
-  sale:     'from-yellow-50 to-amber-50',
   medical:  'from-indigo-50 to-purple-50',
-  breeding: 'from-emerald-50 to-green-50',
   lost:     'from-red-50 to-orange-50',
   found:    'from-teal-50 to-cyan-50',
 }
 
 const TYPE_BORDER: Record<string, string> = {
   adoption: 'border-primary/20',
-  sale:     'border-amber-200',
   medical:  'border-indigo-200',
-  breeding: 'border-emerald-200',
   lost:     'border-red-200',
   found:    'border-teal-200',
 }
@@ -134,17 +128,13 @@ export default function AnimalDetailClient({ animal }: Props) {
 
   // CTA keys based on type
   const ctaTitleKey: Parameters<typeof t>[0] =
-    animalType === 'sale'     ? 'animal_cta_title_sale' :
     animalType === 'medical'  ? 'animal_cta_title_medical' :
-    animalType === 'breeding' ? 'animal_cta_title_breeding' :
     animalType === 'lost'     ? 'animal_cta_title_lost' :
     animalType === 'found'    ? 'animal_cta_title_found' :
     'animal_cta_title'
 
   const ctaDescKey: Parameters<typeof t>[0] =
-    animalType === 'sale'     ? 'animal_cta_desc_sale' :
     animalType === 'medical'  ? 'animal_cta_desc_medical' :
-    animalType === 'breeding' ? 'animal_cta_desc_breeding' :
     animalType === 'lost'     ? 'animal_cta_desc_lost' :
     animalType === 'found'    ? 'animal_cta_desc_found' :
     'animal_cta_desc'
@@ -182,9 +172,7 @@ export default function AnimalDetailClient({ animal }: Props) {
             >
               {t(
                 animalType === 'adoption' ? 'type_adoption' :
-                animalType === 'sale'     ? 'type_sale' :
                 animalType === 'medical'  ? 'type_medical' :
-                animalType === 'breeding' ? 'type_breeding' :
                 animalType === 'lost'     ? 'type_lost' :
                 animalType === 'found'    ? 'type_found' : 'type_adoption'
               )}

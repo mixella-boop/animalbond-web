@@ -1,7 +1,11 @@
-// pricing/page.tsx — ascuns temporar; redirecționează la home
-// Reactivare când sunt clienți parteneri interesați.
-import { redirect } from 'next/navigation'
+// pricing/page.tsx — ascuns temporar până la activare de Mihaela
+// Reactivare: scoate metadata noindex + înlocuiește conținutul cu pagina reală
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  robots: 'noindex, nofollow',
+}
 
 export default function PricingPage() {
-  redirect('/')
+  return null
 }
