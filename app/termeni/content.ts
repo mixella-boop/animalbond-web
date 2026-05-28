@@ -52,6 +52,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Comportament interzis',
         items: [
+          'Vânzarea de animale este interzisă, inclusiv adopția condiționată de plată. AnimalBond este exclusiv pentru adopții gratuite, ajutor medical și animale pierdute/găsite.',
           'Specii protejate, trafic de animale, practici crude',
           'Hărțuire, amenințări, mesaje comerciale nesolicitate',
           'Fraudă sau orice activitate ilegală',
@@ -132,6 +133,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Prohibited Conduct',
         items: [
+          'The sale of animals is strictly prohibited, including adoption conditional on payment ("adoption fee"). AnimalBond is exclusively for free adoptions, medical aid and lost/found animals.',
           'Protected species, animal trafficking, cruel practices',
           'Harassment, threats, unsolicited commercial messages',
           'Fraud or any illegal activity',
@@ -212,6 +214,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Verbotenes Verhalten',
         items: [
+          'Der Verkauf von Tieren ist streng verboten, einschließlich adoptionsgebundener Zahlungen. AnimalBond ist ausschließlich für kostenlose Adoptionen, medizinische Hilfe sowie verlorene/gefundene Tiere.',
           'Geschützte Arten, Tierhandel, grausame Praktiken',
           'Belästigung, Drohungen, unerwünschte kommerzielle Nachrichten',
           'Betrug oder jede illegale Tätigkeit',
@@ -292,6 +295,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Comportement interdit',
         items: [
+          "La vente d'animaux est strictement interdite, y compris l'adoption conditionnée à un paiement. AnimalBond est exclusivement destiné aux adoptions gratuites, à l'aide médicale et aux animaux perdus/trouvés.",
           "Espèces protégées, trafic d'animaux, pratiques cruelles",
           'Harcèlement, menaces, messages commerciaux non sollicités',
           'Fraude ou toute activité illégale',
@@ -372,6 +376,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Comportamento vietato',
         items: [
+          "La vendita di animali è severamente vietata, compresa l'adozione condizionata a un pagamento. AnimalBond è esclusivamente per adozioni gratuite, assistenza medica e animali smarriti/trovati.",
           'Specie protette, traffico di animali, pratiche crudeli',
           'Molestie, minacce, messaggi commerciali non richiesti',
           'Frode o qualsiasi attività illegale',
@@ -452,6 +457,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Conducta prohibida',
         items: [
+          'La venta de animales está estrictamente prohibida, incluida la adopción condicionada a un pago. AnimalBond es exclusivamente para adopciones gratuitas, ayuda médica y animales perdidos/encontrados.',
           'Especies protegidas, tráfico de animales, prácticas crueles',
           'Acoso, amenazas, mensajes comerciales no solicitados',
           'Fraude o cualquier actividad ilegal',
@@ -532,6 +538,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Tiltott magatartás',
         items: [
+          'Az állatok eladása szigorúan tilos, beleértve a fizetéshez kötött örökbefogadást is. Az AnimalBond kizárólag ingyenes örökbefogadásra, orvosi segítségre és elveszett/talált állatokra szolgál.',
           'Védett fajok, állatkereskedelem, kegyetlen gyakorlatok',
           'Zaklatás, fenyegetések, kéretlen kereskedelmi üzenetek',
           'Csalás vagy bármilyen illegális tevékenység',
@@ -612,6 +619,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Condutas proibidas',
         items: [
+          'A venda de animais é estritamente proibida, incluindo a adoção condicionada a pagamento. O AnimalBond destina-se exclusivamente a adoções gratuitas, ajuda médica e animais perdidos/encontrados.',
           'Espécies protegidas, tráfico de animais, práticas cruéis',
           'Assédio, ameaças, mensagens comerciais não solicitadas',
           'Fraude ou qualquer atividade ilegal',
@@ -692,6 +700,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Verboden gedrag',
         items: [
+          'De verkoop van dieren is strikt verboden, inclusief adoptie afhankelijk van betaling. AnimalBond is uitsluitend bedoeld voor gratis adoptie, medische hulp en verloren/gevonden dieren.',
           'Beschermde soorten, dierenhandel, wrede praktijken',
           'Intimidatie, bedreigingen, ongewenste commerciële berichten',
           'Fraude of enige illegale activiteit',
@@ -772,6 +781,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
       {
         title: '6. Запрещённые действия',
         items: [
+          'Продажа животных строго запрещена, включая усыновление, обусловленное оплатой. AnimalBond предназначен исключительно для бесплатного усыновления, медицинской помощи и потерянных/найденных животных.',
           'Охраняемые виды, торговля животными, жестокие практики',
           'Домогательства, угрозы, незапрошенные коммерческие сообщения',
           'Мошенничество или любая незаконная деятельность',
