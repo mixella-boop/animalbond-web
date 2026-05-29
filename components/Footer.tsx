@@ -91,11 +91,14 @@ export default function Footer() {
             <a
               href="#"
               className="text-text-muted hover:text-primary transition-colors text-sm font-medium"
+              title="App Store — Coming soon"
             >
               App Store
             </a>
             <a
-              href="#"
+              href="https://play.google.com/store/apps/details?id=com.mixella1.animalbondfresh"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-text-muted hover:text-primary transition-colors text-sm font-medium"
             >
               Google Play

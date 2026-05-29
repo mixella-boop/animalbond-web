@@ -261,7 +261,7 @@ export default function FeedPage() {
         {/* Rând 0: Tip anunț */}
         <div>
           <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
-            Tip
+            {t('filter_type')}
           </label>
           <div className="flex flex-wrap gap-2">
             {TYPE_FILTER_KEYS.map((opt) => {
@@ -356,7 +356,7 @@ export default function FeedPage() {
                     🌍 {t('filter_all_countries')}
                   </button>
                   {filteredCountries.length === 0 ? (
-                    <p className="px-3 py-2 text-sm text-text-muted">Nicio țară găsită</p>
+                    <p className="px-3 py-2 text-sm text-text-muted">{t('filter_no_country')}</p>
                   ) : filteredCountries.map(c => (
                     <button
                       key={c.code}

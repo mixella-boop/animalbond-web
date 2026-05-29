@@ -257,7 +257,7 @@ export default function HomePageClient({ partners, testimonials, lostFoundBanner
                     <div className="text-base leading-tight">{t('download_appstore')}</div>
                   </span>
                 </a>
-                <a href="#" className="flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+                <a href="https://play.google.com/store/apps/details?id=com.mixella1.animalbondfresh" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
                   <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M3.18 23.76c.38.21.82.24 1.23.09l12.5-7.21-2.73-2.72-11 10.84zm16.26-9.38L16.76 12l2.68-2.38-11.44-6.6c-.48-.28-1.04-.27-1.5-.04L17.44 14.38zM2.08 1.76C2.03 1.97 2 2.2 2 2.45v19.1c0 .26.03.49.09.7l11.2-11.02-11.21-9.47zm12.01 11.5L12 12l-9.14 8.98L14.09 13.26z" />
                   </svg>
@@ -272,7 +272,7 @@ export default function HomePageClient({ partners, testimonials, lostFoundBanner
               <div className="bg-white border-2 border-border-light rounded-2xl p-4 shadow-card">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&color=333333&bgcolor=ffffff&data=https://animalbond2025.vercel.app"
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&color=333333&bgcolor=ffffff&data=https://animalbond.club"
                   alt="QR code"
                   width={160}
                   height={160}

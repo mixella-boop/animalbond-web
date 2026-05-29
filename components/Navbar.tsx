@@ -165,9 +165,7 @@ export default function Navbar() {
             <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_despre')}
             </Link>
-            <Link href="/pricing" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
-              💳 {t('nav_pricing')}
-            </Link>
+            {/* pricing hidden — reactivate when partners are monetized */}
             <button
               onClick={() => { setShowComingSoon(true); setMenuOpen(false) }}
               className="bg-primary text-white px-5 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors text-sm text-center"
