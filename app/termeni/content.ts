@@ -54,6 +54,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           'Vânzarea de animale este interzisă, inclusiv adopția condiționată de plată. AnimalBond este exclusiv pentru adopții gratuite, ajutor medical și animale pierdute/găsite.',
           'Specii protejate, trafic de animale, practici crude',
+          'Vânătoarea, capturarea sau comercializarea animalelor sălbatice prin platformă sunt interzise',
           'Hărțuire, amenințări, mesaje comerciale nesolicitate',
           'Fraudă sau orice activitate ilegală',
           'Conturi false sau impersonarea altor persoane',
@@ -135,6 +136,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           'The sale of animals is strictly prohibited, including adoption conditional on payment ("adoption fee"). AnimalBond is exclusively for free adoptions, medical aid and lost/found animals.',
           'Protected species, animal trafficking, cruel practices',
+          'Hunting, trapping or trading wild-caught animals through the platform is prohibited',
           'Harassment, threats, unsolicited commercial messages',
           'Fraud or any illegal activity',
           'Fake accounts or impersonating others',
@@ -216,6 +218,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           'Der Verkauf von Tieren ist streng verboten, einschließlich adoptionsgebundener Zahlungen. AnimalBond ist ausschließlich für kostenlose Adoptionen, medizinische Hilfe sowie verlorene/gefundene Tiere.',
           'Geschützte Arten, Tierhandel, grausame Praktiken',
+          'Jagd, Fallenstellen oder der Handel mit wildgefangenen Tieren über die Plattform sind verboten',
           'Belästigung, Drohungen, unerwünschte kommerzielle Nachrichten',
           'Betrug oder jede illegale Tätigkeit',
           'Fake-Accounts oder das Vortäuschen einer anderen Identität',
@@ -297,6 +300,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           "La vente d'animaux est strictement interdite, y compris l'adoption conditionnée à un paiement. AnimalBond est exclusivement destiné aux adoptions gratuites, à l'aide médicale et aux animaux perdus/trouvés.",
           "Espèces protégées, trafic d'animaux, pratiques cruelles",
+          "La chasse, le piégeage ou le commerce d'animaux sauvages capturés via la plateforme sont interdits",
           'Harcèlement, menaces, messages commerciaux non sollicités',
           'Fraude ou toute activité illégale',
           "Faux comptes ou usurpation d'identité",
@@ -378,6 +382,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           "La vendita di animali è severamente vietata, compresa l'adozione condizionata a un pagamento. AnimalBond è esclusivamente per adozioni gratuite, assistenza medica e animali smarriti/trovati.",
           'Specie protette, traffico di animali, pratiche crudeli',
+          "La caccia, l'uso di trappole o il commercio di animali selvatici catturati tramite la piattaforma sono vietati",
           'Molestie, minacce, messaggi commerciali non richiesti',
           'Frode o qualsiasi attività illegale',
           'Account falsi o impersonazione di altre persone',
@@ -459,6 +464,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           'La venta de animales está estrictamente prohibida, incluida la adopción condicionada a un pago. AnimalBond es exclusivamente para adopciones gratuitas, ayuda médica y animales perdidos/encontrados.',
           'Especies protegidas, tráfico de animales, prácticas crueles',
+          'La caza, el uso de trampas o el comercio de animales salvajes capturados a través de la plataforma están prohibidos',
           'Acoso, amenazas, mensajes comerciales no solicitados',
           'Fraude o cualquier actividad ilegal',
           'Cuentas falsas o suplantación de identidad',
@@ -540,6 +546,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           'Az állatok eladása szigorúan tilos, beleértve a fizetéshez kötött örökbefogadást is. Az AnimalBond kizárólag ingyenes örökbefogadásra, orvosi segítségre és elveszett/talált állatokra szolgál.',
           'Védett fajok, állatkereskedelem, kegyetlen gyakorlatok',
+          'Vadászat, csapdázás vagy vadon befogott állatok platformon keresztüli kereskedelme tilos',
           'Zaklatás, fenyegetések, kéretlen kereskedelmi üzenetek',
           'Csalás vagy bármilyen illegális tevékenység',
           'Hamis fiókok vagy más személyek megszemélyesítése',
@@ -621,6 +628,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           'A venda de animais é estritamente proibida, incluindo a adoção condicionada a pagamento. O AnimalBond destina-se exclusivamente a adoções gratuitas, ajuda médica e animais perdidos/encontrados.',
           'Espécies protegidas, tráfico de animais, práticas cruéis',
+          'A caça, o uso de armadilhas ou o comércio de animais selvagens capturados através da plataforma são proibidos',
           'Assédio, ameaças, mensagens comerciais não solicitadas',
           'Fraude ou qualquer atividade ilegal',
           'Contas falsas ou personificação de terceiros',
@@ -702,6 +710,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           'De verkoop van dieren is strikt verboden, inclusief adoptie afhankelijk van betaling. AnimalBond is uitsluitend bedoeld voor gratis adoptie, medische hulp en verloren/gevonden dieren.',
           'Beschermde soorten, dierenhandel, wrede praktijken',
+          'Jagen, vangen met vallen of handelen in in het wild gevangen dieren via het platform is verboden',
           'Intimidatie, bedreigingen, ongewenste commerciële berichten',
           'Fraude of enige illegale activiteit',
           'Nep-accounts of het nadoen van anderen',
@@ -783,6 +792,7 @@ export const TERMS_CONTENT: Record<Lang, TermsContent> = {
         items: [
           'Продажа животных строго запрещена, включая усыновление, обусловленное оплатой. AnimalBond предназначен исключительно для бесплатного усыновления, медицинской помощи и потерянных/найденных животных.',
           'Охраняемые виды, торговля животными, жестокие практики',
+          'Охота, расстановка ловушек или торговля пойманными дикими животными через платформу запрещены',
           'Домогательства, угрозы, незапрошенные коммерческие сообщения',
           'Мошенничество или любая незаконная деятельность',
           'Фиктивные аккаунты или выдача себя за других лиц',
