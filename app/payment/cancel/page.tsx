@@ -42,8 +42,8 @@ function CancelContent() {
 
       <p className="text-text-muted text-sm mt-8">
         {t('paycancel_help')}{' '}
-        <a href="mailto:contact@animalbond.club" className="text-primary hover:underline">
-          contact@animalbond.club
+        <a href="https://animalbond.club/contact" className="text-primary hover:underline">
+          animalbond.club/contact
         </a>
       </p>
     </div>

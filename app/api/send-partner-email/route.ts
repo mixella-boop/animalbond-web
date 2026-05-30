@@ -141,7 +141,7 @@ function getGoldApprovalEmail(
 <p>Cu plăcere,<br><strong>Echipa AnimalBond</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Dacă ai întrebări, contactează-ne la <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">Dacă ai întrebări, contactează-ne la <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
     en: {
@@ -165,7 +165,7 @@ function getGoldApprovalEmail(
 <p>Best regards,<br><strong>AnimalBond Team</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">If you have questions, contact us at <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">If you have questions, contact us at <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
     de: {
@@ -189,7 +189,7 @@ function getGoldApprovalEmail(
 <p>Mit freundlichen Grüßen,<br><strong>AnimalBond Team</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Bei Fragen kontaktieren Sie uns unter <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">Bei Fragen kontaktieren Sie uns unter <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
     fr: {
@@ -213,7 +213,7 @@ function getGoldApprovalEmail(
 <p>Cordialement,<br><strong>Équipe AnimalBond</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Si vous avez des questions, contactez-nous à <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">Si vous avez des questions, contactez-nous à <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
     it: {
@@ -237,7 +237,7 @@ function getGoldApprovalEmail(
 <p>Cordiali saluti,<br><strong>Team AnimalBond</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Per domande, contattaci a <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">Per domande, contattaci a <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
     es: {
@@ -261,7 +261,7 @@ function getGoldApprovalEmail(
 <p>Saludos cordiales,<br><strong>Equipo AnimalBond</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Si tienes preguntas, contáctanos en <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">Si tienes preguntas, contáctanos en <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
     hu: {
@@ -285,7 +285,7 @@ function getGoldApprovalEmail(
 <p>Üdvözlettel,<br><strong>AnimalBond Csapat</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Ha kérdéseid vannak, fordulj hozzánk a <a href="mailto:contact@animalbond.club">contact@animalbond.club</a> címen</p>
+<p style="font-size: 12px; color: #999;">Ha kérdéseid vannak, fordulj hozzánk a <a href="https://animalbond.club/contact">animalbond.club/contact</a> címen</p>
       `,
     },
     pt: {
@@ -309,7 +309,7 @@ function getGoldApprovalEmail(
 <p>Com os melhores cumprimentos,<br><strong>Equipa AnimalBond</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Se tiveres questões, contacta-nos em <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">Se tiveres questões, contacta-nos em <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
     nl: {
@@ -333,7 +333,7 @@ function getGoldApprovalEmail(
 <p>Met vriendelijke groet,<br><strong>AnimalBond-team</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Als je vragen hebt, neem contact met ons op via <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">Als je vragen hebt, neem contact met ons op via <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
     ru: {
@@ -357,7 +357,7 @@ function getGoldApprovalEmail(
 <p>С наилучшими пожеланиями,<br><strong>Команда AnimalBond</strong></p>
 
 <hr>
-<p style="font-size: 12px; color: #999;">Если у вас есть вопросы, напишите нам на <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+<p style="font-size: 12px; color: #999;">Если у вас есть вопросы, напишите нам на <a href="https://animalbond.club/contact">animalbond.club/contact</a></p>
       `,
     },
   }
