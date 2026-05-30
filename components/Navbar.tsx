@@ -87,7 +87,7 @@ export default function Navbar() {
                 value={lang}
                 onChange={(e) => handleLangChange(e.target.value as Lang)}
                 className="appearance-none pl-2 pr-7 py-1.5 rounded-full border-2 border-primary bg-primary text-white font-bold text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40 hover:bg-primary-dark transition-colors animate-pulse"
-                title="Schimbă limba / Change language"
+                title={t('navbar_change_lang')}
               >
                 {LANG_OPTIONS.map(l => (
                   <option key={l.code} value={l.code}>
@@ -113,7 +113,7 @@ export default function Navbar() {
                 value={lang}
                 onChange={(e) => handleLangChange(e.target.value as Lang)}
                 className="appearance-none pl-2 pr-6 py-1.5 rounded-full border-2 border-primary bg-primary text-white font-bold text-sm cursor-pointer focus:outline-none animate-pulse"
-                title="Schimbă limba"
+                title={t('navbar_change_lang')}
               >
                 {LANG_OPTIONS.map(l => (
                   <option key={l.code} value={l.code}>

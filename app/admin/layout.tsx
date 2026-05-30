@@ -28,15 +28,15 @@ export default function AdminLayout({
           return
         }
 
-        // Check if user is admin (check admin_users table or user metadata)
-        const { data: adminUser, error: adminError } = await supabase
-          .from('admin_users')
-          .select('id')
-          .eq('user_id', user.id)
+        // Sursa unică de admin = profiles.is_admin (aceeași folosită de RLS-ul partners)
+        const { data: profile, error: adminError } = await supabase
+          .from('profiles')
+          .select('is_admin')
+          .eq('id', user.id)
           .single()
 
-        if (adminError || !adminUser) {
-          // Not an admin, redirect to home
+        if (adminError || !profile?.is_admin) {
+          // Nu e admin → redirect acasă
           router.push('/')
           return
         }

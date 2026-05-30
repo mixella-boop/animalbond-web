@@ -69,10 +69,14 @@ export default function AdminPartnersPage() {
 
       if (updateError) throw updateError
 
-      // 2. Send confirmation email via Edge Function
+      // 2. Send confirmation email (API verifică tokenul admin)
+      const { data: { session } } = await supabase.auth.getSession()
       const response = await fetch('/api/send-partner-email', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session?.access_token ?? ''}`,
+        },
         body: JSON.stringify({
           partnerId,
           partnerEmail,

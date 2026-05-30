@@ -6,7 +6,7 @@ import { useLanguage } from '@/context/LanguageContext'
 
 // Componentă separată care folosește useSearchParams (necesită Suspense)
 function ManualContent() {
-  const { lang } = useLanguage()
+  const { lang, t } = useLanguage()
   const searchParams = useSearchParams()
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
@@ -45,7 +45,7 @@ function ManualContent() {
           <div className="flex items-center gap-3">
             <span className="text-2xl">📖</span>
             <div>
-              <h1 className="text-base font-bold text-gray-800 leading-tight">Manual AnimalBond</h1>
+              <h1 className="text-base font-bold text-gray-800 leading-tight">{t('manual_title')}</h1>
               <p className="text-xs text-gray-400">Versiunea 1.0 · 2026</p>
             </div>
           </div>
@@ -55,7 +55,7 @@ function ManualContent() {
             className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors"
           >
             <span>⬇️</span>
-            <span className="hidden sm:inline">Descarcă PDF</span>
+            <span className="hidden sm:inline">{t('manual_download_pdf')}</span>
           </button>
         </div>
       </div>

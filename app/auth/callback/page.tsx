@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase-client';
+import { useLanguage } from '@/context/LanguageContext';
 
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=animalbond.club';
 const DEEP_LINK_BASE = 'animalbond://auth/callback';
@@ -9,6 +10,7 @@ const DEEP_LINK_BASE = 'animalbond://auth/callback';
 type Status = 'processing' | 'success' | 'error';
 
 export default function AuthCallbackPage() {
+  const { t } = useLanguage();
   const [status, setStatus] = useState<Status>('processing');
   const [isMobile, setIsMobile] = useState(false);
 
@@ -84,7 +86,7 @@ export default function AuthCallbackPage() {
       {status === 'processing' && (
         <>
           <p style={{ color: '#888', fontSize: 16, marginTop: 16 }}>
-            Autentificare în curs... / Signing in...
+            {t('ac_signing_in')}
           </p>
           <div style={{
             marginTop: 16,
@@ -103,15 +105,15 @@ export default function AuthCallbackPage() {
         <div style={{ maxWidth: 480, marginTop: 16 }}>
           <div style={{ fontSize: 36, marginBottom: 8 }}>✅</div>
           <h2 style={{ color: '#333', fontSize: 22, margin: '0 0 12px' }}>
-            {isMobile ? 'Cont confirmat!' : 'Autentificare reușită!'}
+            {isMobile ? t('ac_account_confirmed') : t('ac_auth_success')}
           </h2>
 
           {isMobile ? (
             <>
               <p style={{ color: '#555', fontSize: 15, lineHeight: 1.6, marginBottom: 24 }}>
-                Deschide aplicația AnimalBond pe telefonul tău pentru a continua.
+                {t('ac_open_app_mobile')}
                 <br /><br />
-                <strong>Nu ai aplicația?</strong> Descarc-o gratis:
+                <strong>{t('ac_no_app')}</strong> {t('ac_download_free')}
               </p>
               <a
                 href={PLAY_STORE_URL}
@@ -126,15 +128,15 @@ export default function AuthCallbackPage() {
                   fontSize: 16,
                 }}
               >
-                📥 Descarcă din Google Play
+                📥 {t('ac_download_play')}
               </a>
             </>
           ) : (
             <>
               <p style={{ color: '#555', fontSize: 15, lineHeight: 1.6, marginBottom: 24 }}>
-                <strong>📱 AnimalBond este o aplicație mobilă.</strong>
+                <strong>📱 {t('ac_is_mobile_app')}</strong>
                 <br /><br />
-                Pentru a continua, deschide AnimalBond pe telefonul tău. Dacă nu ai aplicația, descarc-o gratis:
+                {t('ac_continue_desktop')}
               </p>
               <a
                 href={PLAY_STORE_URL}
@@ -151,10 +153,10 @@ export default function AuthCallbackPage() {
                   fontSize: 16,
                 }}
               >
-                📥 Descarcă din Google Play
+                📥 {t('ac_download_play')}
               </a>
               <p style={{ color: '#aaa', fontSize: 13, marginTop: 32 }}>
-                Versiunea iOS va fi disponibilă în curând 🍎
+                {t('ac_ios_soon')} 🍎
               </p>
             </>
           )}
@@ -165,10 +167,10 @@ export default function AuthCallbackPage() {
         <div style={{ maxWidth: 480, marginTop: 16 }}>
           <div style={{ fontSize: 36, marginBottom: 8 }}>⚠️</div>
           <h2 style={{ color: '#333', fontSize: 22, margin: '0 0 12px' }}>
-            Eroare la autentificare
+            {t('ac_error_title')}
           </h2>
           <p style={{ color: '#555', fontSize: 15, lineHeight: 1.6 }}>
-            Link-ul de confirmare nu mai este valabil sau a expirat. Te rugăm să încerci din nou din aplicație.
+            {t('ac_error_msg')}
           </p>
         </div>
       )}

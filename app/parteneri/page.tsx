@@ -174,7 +174,7 @@ export default function ParteneriPage() {
                   🌍 {t('filter_all_countries')}
                 </button>
                 {filteredCountries.length === 0 ? (
-                  <p className="px-3 py-2 text-sm text-text-muted">Nicio țară găsită</p>
+                  <p className="px-3 py-2 text-sm text-text-muted">{t('partner_no_country')}</p>
                 ) : filteredCountries.map(c => (
                   <button
                     key={c.code}

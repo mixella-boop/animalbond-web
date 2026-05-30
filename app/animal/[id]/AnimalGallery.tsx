@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { AnimalPhoto } from '@/lib/supabase'
+import { useLanguage } from '@/context/LanguageContext'
 
 type Props = {
   photos: AnimalPhoto[]
@@ -9,6 +10,7 @@ type Props = {
 }
 
 export default function AnimalGallery({ photos, animalName }: Props) {
+  const { t } = useLanguage()
   const [activeIdx, setActiveIdx] = useState(0)
 
   if (photos.length === 0) {
@@ -26,7 +28,7 @@ export default function AnimalGallery({ photos, animalName }: Props) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={photos[activeIdx].url}
-          alt={`${animalName} - poza ${activeIdx + 1}`}
+          alt={`${animalName} - ${t('gallery_photo')} ${activeIdx + 1}`}
           className="object-cover w-full h-full"
         />
         {photos.length > 1 && (
@@ -34,14 +36,14 @@ export default function AnimalGallery({ photos, animalName }: Props) {
             <button
               onClick={() => setActiveIdx((i) => (i > 0 ? i - 1 : photos.length - 1))}
               className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-main w-9 h-9 rounded-full shadow flex items-center justify-center transition-all"
-              aria-label="Poza anterioară"
+              aria-label={t('gallery_prev')}
             >
               ‹
             </button>
             <button
               onClick={() => setActiveIdx((i) => (i < photos.length - 1 ? i + 1 : 0))}
               className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-main w-9 h-9 rounded-full shadow flex items-center justify-center transition-all"
-              aria-label="Poza următoare"
+              aria-label={t('gallery_next')}
             >
               ›
             </button>
@@ -70,7 +72,7 @@ export default function AnimalGallery({ photos, animalName }: Props) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={photo.url}
-                alt={`${animalName} - miniatură ${idx + 1}`}
+                alt={`${animalName} - ${t('gallery_thumb')} ${idx + 1}`}
                 className="object-cover w-full h-full"
               />
             </button>

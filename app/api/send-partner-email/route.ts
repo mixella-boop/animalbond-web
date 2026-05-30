@@ -1,28 +1,56 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase-client'
+import { createClient } from '@supabase/supabase-js'
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
 export async function POST(req: NextRequest) {
   try {
-    const { partnerId, partnerEmail, type, locale = 'en' } = await req.json()
+    // ── Auth: doar adminii pot declanșa emailuri de partener ──
+    const authHeader = req.headers.get('authorization') || ''
+    const token = authHeader.replace(/^Bearer\s+/i, '').trim()
+    if (!token) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
 
-    if (!partnerEmail || !type) {
+    // Client care rulează CU sesiunea userului → auth.uid() funcționează în RLS
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      global: { headers: { Authorization: `Bearer ${token}` } },
+    })
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Sursa unică de admin = profiles.is_admin (aceeași folosită de RLS-ul partners)
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('is_admin')
+      .eq('id', user.id)
+      .single()
+    if (!profile?.is_admin) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
+    const { partnerId, type, locale = 'en' } = await req.json()
+
+    if (!partnerId || !type) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
       )
     }
 
-    // Get partner name from database
-    const supabase = createClient()
+    // Get partner name + email from database (NU din request — anti-spam/phishing)
     const { data: partner, error: dbError } = await supabase
       .from('partners')
       .select('company_name, email')
       .eq('id', partnerId)
       .single()
 
-    if (dbError || !partner) {
+    if (dbError || !partner || !partner.email) {
       console.error('Partner not found:', dbError)
       return NextResponse.json(
         { error: 'Partner not found' },
@@ -41,7 +69,7 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         from: 'AnimalBond <noreply@animalbond.club>',
-        to: partnerEmail,
+        to: partner.email,
         subject,
         html,
       }),
@@ -258,6 +286,78 @@ function getGoldApprovalEmail(
 
 <hr>
 <p style="font-size: 12px; color: #999;">Ha kérdéseid vannak, fordulj hozzánk a <a href="mailto:contact@animalbond.club">contact@animalbond.club</a> címen</p>
+      `,
+    },
+    pt: {
+      subject: '🎉 Foste aprovado como Parceiro Gold da AnimalBond!',
+      html: `
+<h2>Parabéns! 🎉</h2>
+<p>A equipa AnimalBond tem o prazer de anunciar que <strong>${companyName}</strong> foi aprovada como <strong>Parceiro Gold</strong>!</p>
+
+<h3>O que isto significa:</h3>
+<ul>
+  <li>✅ A tua parceria está <strong>ativa de imediato</strong></li>
+  <li>✅ Apareces na <strong>aplicação AnimalBond</strong> e no <strong>site</strong></li>
+  <li>✅ Obténs <strong>visibilidade premium</strong> perante milhares de donos de animais</li>
+  <li>✅ <strong>Sem pagamento</strong> - é uma honra ter-te como parceiro</li>
+</ul>
+
+<p>Os Parceiros Gold têm acesso a oportunidades exclusivas e a suporte prioritário da equipa AnimalBond.</p>
+
+<p>Obrigado por fazeres parte da nossa comunidade e por ajudares animais e famílias a encontrarem-se! 🐾</p>
+
+<p>Com os melhores cumprimentos,<br><strong>Equipa AnimalBond</strong></p>
+
+<hr>
+<p style="font-size: 12px; color: #999;">Se tiveres questões, contacta-nos em <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+      `,
+    },
+    nl: {
+      subject: '🎉 Je bent goedgekeurd als AnimalBond Gold-partner!',
+      html: `
+<h2>Gefeliciteerd! 🎉</h2>
+<p>Het AnimalBond-team is verheugd om aan te kondigen dat <strong>${companyName}</strong> is goedgekeurd als <strong>Gold-partner</strong>!</p>
+
+<h3>Wat dit betekent:</h3>
+<ul>
+  <li>✅ Je partnerschap is <strong>direct actief</strong></li>
+  <li>✅ Je verschijnt in de <strong>AnimalBond-app</strong> en op de <strong>website</strong></li>
+  <li>✅ Je krijgt <strong>premium zichtbaarheid</strong> bij duizenden dierenbezitters</li>
+  <li>✅ <strong>Geen betaling</strong> - we zijn vereerd je als partner te hebben</li>
+</ul>
+
+<p>Gold-partners krijgen toegang tot exclusieve kansen en prioritaire ondersteuning van het AnimalBond-team.</p>
+
+<p>Bedankt dat je deel uitmaakt van onze gemeenschap en dieren en gezinnen helpt elkaar te vinden! 🐾</p>
+
+<p>Met vriendelijke groet,<br><strong>AnimalBond-team</strong></p>
+
+<hr>
+<p style="font-size: 12px; color: #999;">Als je vragen hebt, neem contact met ons op via <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
+      `,
+    },
+    ru: {
+      subject: '🎉 Вы одобрены как Gold-партнёр AnimalBond!',
+      html: `
+<h2>Поздравляем! 🎉</h2>
+<p>Команда AnimalBond рада сообщить, что <strong>${companyName}</strong> одобрена как <strong>Gold-партнёр</strong>!</p>
+
+<h3>Что это значит:</h3>
+<ul>
+  <li>✅ Ваше партнёрство <strong>активно сразу</strong></li>
+  <li>✅ Вы появляетесь в <strong>приложении AnimalBond</strong> и на <strong>сайте</strong></li>
+  <li>✅ Вы получаете <strong>премиум-видимость</strong> для тысяч владельцев животных</li>
+  <li>✅ <strong>Без оплаты</strong> - для нас честь иметь вас в партнёрах</li>
+</ul>
+
+<p>Gold-партнёры получают доступ к эксклюзивным возможностям и приоритетной поддержке от команды AnimalBond.</p>
+
+<p>Спасибо, что вы часть нашего сообщества и помогаете животным и семьям найти друг друга! 🐾</p>
+
+<p>С наилучшими пожеланиями,<br><strong>Команда AnimalBond</strong></p>
+
+<hr>
+<p style="font-size: 12px; color: #999;">Если у вас есть вопросы, напишите нам на <a href="mailto:contact@animalbond.club">contact@animalbond.club</a></p>
       `,
     },
   }
