@@ -119,7 +119,11 @@ export default function ParteneriPage() {
     // 2) backup: GPS în rază de 40km
     const la = (p as any).lat, ln = (p as any).lng
     if (la != null && ln != null && distKm(cityObj.lat, cityObj.lng, la, ln) <= 40) return true
-    return false
+    // 3) oraș clar diferit (și nu "Altele") → ascunde
+    const pcn = pc ? norm(pc) : ''
+    if (pcn && pcn !== 'altele' && pcn !== 'other') return false
+    if (la != null && ln != null) return false // are GPS, dar departe
+    return true // fără oraș/GPS sau "Altele" → arătăm
   })
 
   return (

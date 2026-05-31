@@ -99,15 +99,20 @@ export default function PierduteGasitePage() {
   const selectedCountry = COUNTRIES.find(c => c.code === country)
   const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
   const cityObj = cityName ? cities.find((c) => c.name === cityName) : null
+  const otherCityNames = cityObj ? cities.filter((c) => c.name !== cityObj.name).map((c) => norm(c.name)) : []
   const filtered = animals.filter((a) => {
     if (typeFilter !== 'all' && a.type !== typeFilter) return false
     if (!cityObj) return true
-    // 1) numele orașului apare în text (locație / ultima locație)
+    const target = norm(cityObj.name)
     const loc = norm(`${a.location || ''} ${a.last_seen_location || ''}`)
-    if (loc.includes(norm(cityObj.name))) return true
-    // 2) backup: GPS în rază de 40km
+    // 1) potrivește orașul ales (text sau GPS în 40km) → arată
+    if (loc.includes(target)) return true
     if (a.lat != null && a.lng != null && distKm(cityObj.lat, cityObj.lng, a.lat, a.lng) <= 40) return true
-    return false
+    // 2) clar în ALT oraș cunoscut → ascunde
+    if (otherCityNames.some((cn) => cn.length >= 4 && loc.includes(cn))) return false
+    if (a.lat != null && a.lng != null) return false // are GPS, dar departe
+    // 3) locație neclară (fără oraș cunoscut în text, fără GPS) → ARĂTĂM (nu pierdem anunțuri)
+    return true
   })
 
   return (
