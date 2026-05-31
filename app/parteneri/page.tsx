@@ -110,11 +110,16 @@ export default function ParteneriPage() {
     fetchPartners()
   }, [category, country])
 
+  const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
   const cityObj = cityName ? cities.find((c) => c.name === cityName) : null
   const displayed = !cityObj ? partners : partners.filter((p) => {
+    // 1) orașul partenerului (coloana city) = orașul ales
+    const pc = (p as any).city as string | null
+    if (pc && norm(pc) === norm(cityObj.name)) return true
+    // 2) backup: GPS în rază de 40km
     const la = (p as any).lat, ln = (p as any).lng
-    if (la == null || ln == null) return true // fără GPS → mereu afișat
-    return distKm(cityObj.lat, cityObj.lng, la, ln) <= 40
+    if (la != null && ln != null && distKm(cityObj.lat, cityObj.lng, la, ln) <= 40) return true
+    return false
   })
 
   return (
