@@ -6,6 +6,15 @@ import { supabase } from '@/lib/supabase'
 import { COUNTRIES } from '@/lib/countries'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
+import { getCitiesForCountry } from '@/lib/citiesByCountry'
+
+function distKm(lat1: number, lng1: number, lat2: number, lng2: number) {
+  const R = 6371
+  const dLat = ((lat2 - lat1) * Math.PI) / 180
+  const dLng = ((lng2 - lng1) * Math.PI) / 180
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
 
 function ComingSoonModal({ onClose }: { onClose: () => void }) {
   const { t } = useLanguage()
@@ -35,6 +44,8 @@ type LostFoundAnimal = {
   expires_at: string | null
   created_at: string
   country: string | null
+  lat: number | null
+  lng: number | null
   animal_photos: { url: string; is_primary: boolean }[]
 }
 
@@ -55,6 +66,9 @@ export default function PierduteGasitePage() {
   const [animals, setAnimals] = useState<LostFoundAnimal[]>([])
   const [loading, setLoading] = useState(true)
   const [typeFilter, setTypeFilter] = useState<'all' | 'lost' | 'found'>('all')
+  const [cityName, setCityName] = useState('')
+  const cities = getCitiesForCountry(country || 'RO')
+  useEffect(() => { setCityName('') }, [country])
   const [showComingSoon, setShowComingSoon] = useState(false)
   const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({})
 
@@ -62,7 +76,7 @@ export default function PierduteGasitePage() {
     const now = new Date().toISOString()
     let query = supabase
       .from('animals')
-      .select('id, name, species, breed, type, location, last_seen_location, lost_found_date, description, status, expires_at, created_at, country, animal_photos (url, is_primary)')
+      .select('id, name, species, breed, type, location, last_seen_location, lost_found_date, description, status, expires_at, created_at, country, lat, lng, animal_photos (url, is_primary)')
       .in('type', ['lost', 'found'])
       .eq('status', 'available')
       .or(`expires_at.is.null,expires_at.gt.${now}`)
@@ -83,7 +97,15 @@ export default function PierduteGasitePage() {
   }, [country, fetchAnimals])
 
   const selectedCountry = COUNTRIES.find(c => c.code === country)
-  const filtered = typeFilter === 'all' ? animals : animals.filter(a => a.type === typeFilter)
+  const cityObj = cityName ? cities.find((c) => c.name === cityName) : null
+  const filtered = animals.filter((a) => {
+    if (typeFilter !== 'all' && a.type !== typeFilter) return false
+    if (cityObj) {
+      if (a.lat == null || a.lng == null) return true // fără GPS → mereu afișat
+      return distKm(cityObj.lat, cityObj.lng, a.lat, a.lng) <= 40
+    }
+    return true
+  })
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
@@ -132,6 +154,18 @@ export default function PierduteGasitePage() {
             </button>
           ))}
         </div>
+
+        {/* Filtru oraș */}
+        <select
+          value={cityName}
+          onChange={(e) => setCityName(e.target.value)}
+          className="border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
+        >
+          <option value="">{t('filter_all_cities')}</option>
+          {cities.map((c) => (
+            <option key={c.name} value={c.name}>{c.name}</option>
+          ))}
+        </select>
 
         {/* Filtru țară */}
         <div className="flex items-center gap-3 flex-1 sm:justify-end">

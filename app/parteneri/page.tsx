@@ -8,6 +8,15 @@ import type { Partner } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
 import { COUNTRIES } from '@/lib/countries'
+import { getCitiesForCountry } from '@/lib/citiesByCountry'
+
+function distKm(lat1: number, lng1: number, lat2: number, lng2: number) {
+  const R = 6371
+  const dLat = ((lat2 - lat1) * Math.PI) / 180
+  const dLng = ((lng2 - lng1) * Math.PI) / 180
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
 
 const categoryColor: Record<string, string> = {
   vet: 'bg-blue-100 text-blue-700',
@@ -24,6 +33,9 @@ export default function ParteneriPage() {
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('')
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null)
+  const [cityName, setCityName] = useState('')
+  const cities = getCitiesForCountry(country || 'RO')
+  useEffect(() => { setCityName('') }, [country])
 
   // Country search dropdown
   const [countrySearch, setCountrySearch] = useState('')
@@ -77,7 +89,7 @@ export default function ParteneriPage() {
 
       let query = supabase
         .from('partners')
-        .select('id, name, category, city, country, description, logo_url, url, phone, email, is_active')
+        .select('id, name, category, city, country, description, logo_url, url, phone, email, is_active, lat, lng')
         .eq('is_active', true)
         .order('name', { ascending: true })
 
@@ -90,13 +102,20 @@ export default function ParteneriPage() {
         console.error('Eroare parteneri:', error)
         setPartners([])
       } else {
-        setPartners((data as Partner[]) || [])
+        setPartners((data as unknown as Partner[]) || [])
       }
       setLoading(false)
     }
 
     fetchPartners()
   }, [category, country])
+
+  const cityObj = cityName ? cities.find((c) => c.name === cityName) : null
+  const displayed = !cityObj ? partners : partners.filter((p) => {
+    const la = (p as any).lat, ln = (p as any).lng
+    if (la == null || ln == null) return true // fără GPS → mereu afișat
+    return distKm(cityObj.lat, cityObj.lng, la, ln) <= 40
+  })
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
@@ -189,6 +208,20 @@ export default function ParteneriPage() {
             )}
           </div>
         </div>
+
+        {/* Oraș */}
+        <div className="w-full sm:w-56">
+          <select
+            value={cityName}
+            onChange={(e) => setCityName(e.target.value)}
+            className="w-full border-2 border-border-light rounded-lg px-3 py-2 text-sm bg-white text-text-main outline-none focus:border-primary transition-colors cursor-pointer"
+          >
+            <option value="">{t('filter_all_cities')}</option>
+            {cities.map((c) => (
+              <option key={c.name} value={c.name}>{c.name}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Lista parteneri */}
@@ -203,7 +236,7 @@ export default function ParteneriPage() {
             </div>
           ))}
         </div>
-      ) : partners.length === 0 ? (
+      ) : displayed.length === 0 ? (
         <div className="text-center py-16">
           <div className="text-5xl mb-4">🔍</div>
           <p className="text-text-muted text-lg">
@@ -221,11 +254,11 @@ export default function ParteneriPage() {
       ) : (
         <>
           <p className="text-text-muted text-sm mb-4 text-center">
-            {partners.length} {category ? t('partners_count_cat') : t('partners_count_active')}
+            {displayed.length} {category ? t('partners_count_cat') : t('partners_count_active')}
             {selectedCountryObj && ` · ${selectedCountryObj.flag} ${selectedCountryObj.name}`}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {partners.map((partner) => (
+            {displayed.map((partner) => (
               <button
                 key={partner.id}
                 onClick={() => setSelectedPartner(partner)}
