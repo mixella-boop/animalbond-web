@@ -9,6 +9,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
 import { COUNTRIES } from '@/lib/countries'
 import { LANG_TO_COUNTRIES, LANG_TO_COUNTRY, COUNTRY_TO_LANG, type Lang } from '@/lib/i18n'
+import { getCitiesForCountry } from '@/lib/citiesByCountry'
 
 // If the selected country belongs to the current language group (e.g. US for EN,
 // PT for PT, AT for DE), expand the filter to all countries in that group.
@@ -83,6 +84,9 @@ export default function FeedPage() {
   const [species, setSpecies] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
   const [locationInput, setLocationInput] = useState('')
+  const [cityName, setCityName] = useState('')
+  const cities = getCitiesForCountry(country || 'RO')
+  useEffect(() => { setCityName('') }, [country])
 
   // Country search dropdown
   const [countrySearch, setCountrySearch] = useState('')
@@ -238,6 +242,7 @@ export default function FeedPage() {
 
   const handleLocationSearch = (e: React.FormEvent) => {
     e.preventDefault()
+    setCityName('') // căutarea liberă resetează selecția de oraș
     setLocationSearch(locationInput)
   }
 
@@ -396,12 +401,29 @@ export default function FeedPage() {
             </form>
             {locationSearch && (
               <button
-                onClick={() => { setLocationSearch(''); setLocationInput('') }}
+                onClick={() => { setLocationSearch(''); setLocationInput(''); setCityName('') }}
                 className="text-xs text-text-muted hover:text-primary mt-1 transition-colors"
               >
                 {t('filter_clear_location')}
               </button>
             )}
+          </div>
+
+          {/* Dropdown oraș (marile orașe) */}
+          <div className="sm:w-56">
+            <label className="block text-xs font-semibold text-text-muted mb-1.5 uppercase tracking-wide">
+              {t('filter_location')}
+            </label>
+            <select
+              value={cityName}
+              onChange={(e) => { const v = e.target.value; setCityName(v); setLocationInput(v); setLocationSearch(v) }}
+              className="w-full border border-border-light rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 cursor-pointer"
+            >
+              <option value="">{t('filter_all_cities')}</option>
+              {cities.map((c) => (
+                <option key={c.name} value={c.name}>{c.name}</option>
+              ))}
+            </select>
           </div>
 
           {/* Reset toate filtrele */}
