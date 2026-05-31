@@ -105,12 +105,14 @@ export default function PierduteGasitePage() {
     if (!cityObj) return true
     const target = norm(cityObj.name)
     const loc = norm(`${a.location || ''} ${a.last_seen_location || ''}`)
-    // 1) potrivește orașul ales (text sau GPS în 40km) → arată
+    // TEXTUL PRIMEAZĂ față de GPS (poți fi în Canada și posta pt cineva din București)
+    // 1) textul = orașul ales → arată
     if (loc.includes(target)) return true
-    if (a.lat != null && a.lng != null && distKm(cityObj.lat, cityObj.lng, a.lat, a.lng) <= 40) return true
-    // 2) clar în ALT oraș cunoscut → ascunde
+    // 2) textul = ALT oraș cunoscut → ascunde (chiar dacă GPS-ul e în zona căutată)
     if (otherCityNames.some((cn) => cn.length >= 4 && loc.includes(cn))) return false
-    if (a.lat != null && a.lng != null) return false // are GPS, dar departe
+    // 3) fără oraș în text → folosim GPS (în 40km arată, departe ascunde)
+    if (a.lat != null && a.lng != null && distKm(cityObj.lat, cityObj.lng, a.lat, a.lng) <= 40) return true
+    if (a.lat != null && a.lng != null) return false
     // 3) locație neclară (fără oraș cunoscut în text, fără GPS) → ARĂTĂM (nu pierdem anunțuri)
     return true
   })

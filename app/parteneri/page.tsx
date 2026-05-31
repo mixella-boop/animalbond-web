@@ -113,17 +113,16 @@ export default function ParteneriPage() {
   const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
   const cityObj = cityName ? cities.find((c) => c.name === cityName) : null
   const displayed = !cityObj ? partners : partners.filter((p) => {
-    // 1) orașul partenerului (coloana city) = orașul ales
+    // ORAȘUL (coloana city) PRIMEAZĂ față de GPS
     const pc = (p as any).city as string | null
-    if (pc && norm(pc) === norm(cityObj.name)) return true
-    // 2) backup: GPS în rază de 40km
+    const pcn = pc ? norm(pc) : ''
+    if (pcn && pcn === norm(cityObj.name)) return true              // oraș = ales → arată
+    if (pcn && pcn !== 'altele' && pcn !== 'other') return false    // oraș = alt oraș → ascunde (text primează)
+    // fără oraș (sau "Altele") → folosim GPS
     const la = (p as any).lat, ln = (p as any).lng
     if (la != null && ln != null && distKm(cityObj.lat, cityObj.lng, la, ln) <= 40) return true
-    // 3) oraș clar diferit (și nu "Altele") → ascunde
-    const pcn = pc ? norm(pc) : ''
-    if (pcn && pcn !== 'altele' && pcn !== 'other') return false
-    if (la != null && ln != null) return false // are GPS, dar departe
-    return true // fără oraș/GPS sau "Altele" → arătăm
+    if (la != null && ln != null) return false
+    return true
   })
 
   return (
