@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabase'
 import type { Partner } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
-import { COUNTRIES } from '@/lib/countries'
+import { COUNTRIES, SUPPORTED_COUNTRIES } from '@/lib/countries'
 import { getCitiesForCountry } from '@/lib/citiesByCountry'
 
 function distKm(lat1: number, lng1: number, lat2: number, lng2: number) {
@@ -42,7 +42,7 @@ export default function ParteneriPage() {
   const [countryOpen, setCountryOpen] = useState(false)
   const countryRef = useRef<HTMLDivElement>(null)
   const countryInputRef = useRef<HTMLInputElement>(null)
-  const filteredCountries = COUNTRIES.filter(c =>
+  const filteredCountries = SUPPORTED_COUNTRIES.filter(c =>
     c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
     c.code.toLowerCase().includes(countrySearch.toLowerCase())
   )

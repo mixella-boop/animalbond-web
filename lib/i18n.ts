@@ -279,7 +279,7 @@ export const translations = {
     footer_legal_privacy: 'Politica de confidențialitate',
     footer_legal_child_safety: 'Siguranța copiilor',
     footer_legal_contact: 'Contact',
-    footer_copyright: '© 2025 AnimalBond. Toate drepturile rezervate.',
+    footer_copyright: '© {year} AnimalBond. Toate drepturile rezervate.',
     footer_available_on: 'Disponibil pe:',
 
     // Partners page
@@ -787,7 +787,7 @@ export const translations = {
     footer_legal_privacy: 'Privacy policy',
     footer_legal_child_safety: 'Child safety',
     footer_legal_contact: 'Contact',
-    footer_copyright: '© 2025 AnimalBond. All rights reserved.',
+    footer_copyright: '© {year} AnimalBond. All rights reserved.',
     footer_available_on: 'Available on:',
 
     partners_title: 'AnimalBond Partners 🤝',
@@ -1288,7 +1288,7 @@ export const translations = {
     footer_legal_privacy: 'Datenschutzrichtlinie',
     footer_legal_child_safety: 'Kindersicherheit',
     footer_legal_contact: 'Kontakt',
-    footer_copyright: '© 2025 AnimalBond. Alle Rechte vorbehalten.',
+    footer_copyright: '© {year} AnimalBond. Alle Rechte vorbehalten.',
     footer_available_on: 'Verfügbar auf:',
 
     partners_title: 'AnimalBond Partner 🤝',
@@ -1789,7 +1789,7 @@ export const translations = {
     footer_legal_privacy: 'Politique de confidentialité',
     footer_legal_child_safety: 'Sécurité des enfants',
     footer_legal_contact: 'Contact',
-    footer_copyright: '© 2025 AnimalBond. Tous droits réservés.',
+    footer_copyright: '© {year} AnimalBond. Tous droits réservés.',
     footer_available_on: 'Disponible sur:',
 
     partners_title: 'Partenaires AnimalBond 🤝',
@@ -2290,7 +2290,7 @@ export const translations = {
     footer_legal_privacy: 'Informativa sulla privacy',
     footer_legal_child_safety: 'Sicurezza dei bambini',
     footer_legal_contact: 'Contatto',
-    footer_copyright: '© 2025 AnimalBond. Tutti i diritti riservati.',
+    footer_copyright: '© {year} AnimalBond. Tutti i diritti riservati.',
     footer_available_on: 'Disponibile su:',
 
     partners_title: 'Partner AnimalBond 🤝',
@@ -2792,7 +2792,7 @@ export const translations = {
     footer_legal_privacy: 'Política de privacidad',
     footer_legal_child_safety: 'Seguridad infantil',
     footer_legal_contact: 'Contacto',
-    footer_copyright: '© 2025 AnimalBond. Todos los derechos reservados.',
+    footer_copyright: '© {year} AnimalBond. Todos los derechos reservados.',
     footer_available_on: 'Disponible en:',
 
     partners_title: 'Socios de AnimalBond 🤝',
@@ -3294,7 +3294,7 @@ export const translations = {
     footer_legal_privacy: 'Adatvédelmi irányelvek',
     footer_legal_child_safety: 'Gyermekbiztonság',
     footer_legal_contact: 'Kapcsolat',
-    footer_copyright: '© 2025 AnimalBond. Minden jog fenntartva.',
+    footer_copyright: '© {year} AnimalBond. Minden jog fenntartva.',
     footer_available_on: 'Elérhető:',
 
     partners_title: 'AnimalBond Partnerek 🤝',
@@ -3794,7 +3794,7 @@ export const translations = {
     footer_legal_privacy: 'Política de privacidade',
     footer_legal_child_safety: 'Segurança infantil',
     footer_legal_contact: 'Contacto',
-    footer_copyright: '© 2025 AnimalBond. Todos os direitos reservados.',
+    footer_copyright: '© {year} AnimalBond. Todos os direitos reservados.',
     footer_available_on: 'Disponível em:',
 
     partners_title: 'Parceiros AnimalBond 🤝',
@@ -4290,7 +4290,7 @@ export const translations = {
     footer_legal_privacy: 'Privacybeleid',
     footer_legal_child_safety: 'Kinderveiligheid',
     footer_legal_contact: 'Contact',
-    footer_copyright: '© 2025 AnimalBond. Alle rechten voorbehouden.',
+    footer_copyright: '© {year} AnimalBond. Alle rechten voorbehouden.',
     footer_available_on: 'Beschikbaar op:',
 
     partners_title: 'AnimalBond-partners 🤝',
@@ -4786,7 +4786,7 @@ export const translations = {
     footer_legal_privacy: 'Политика конфиденциальности',
     footer_legal_child_safety: 'Безопасность детей',
     footer_legal_contact: 'Контакт',
-    footer_copyright: '© 2025 AnimalBond. Все права защищены.',
+    footer_copyright: '© {year} AnimalBond. Все права защищены.',
     footer_available_on: 'Доступно в:',
 
     partners_title: 'Партнёры AnimalBond 🤝',

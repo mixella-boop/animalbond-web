@@ -23,6 +23,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>('ro')
 
   useEffect(() => {
+    // 0. Param ?lang= din URL → prioritate MAXIMĂ (ex: pagină deschisă din aplicație
+    //    cu limba aleasă de user; altfel browser-ul intern n-are localStorage și ar
+    //    cădea pe detectarea IP → limbă greșită). Salvăm și în localStorage ca să țină.
+    try {
+      const urlLang = new URLSearchParams(window.location.search).get('lang') as Lang | null
+      if (urlLang && ALL_LANGS.includes(urlLang)) {
+        setLangState(urlLang)
+        localStorage.setItem('ab_lang', urlLang)
+        return
+      }
+    } catch {}
     // 1. Preferința salvată de user → prioritate maximă
     const saved = localStorage.getItem('ab_lang') as Lang | null
     if (saved && ALL_LANGS.includes(saved)) {

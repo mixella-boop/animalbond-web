@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import { COUNTRIES } from '@/lib/countries'
+import { COUNTRIES, SUPPORTED_COUNTRIES } from '@/lib/countries'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
 import { getCitiesForCountry } from '@/lib/citiesByCountry'
@@ -185,7 +185,7 @@ export default function PierduteGasitePage() {
             className="border border-border-light rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 bg-white text-text-main"
           >
             <option value="">{t('filter_all_countries')}</option>
-            {COUNTRIES.map((c) => (
+            {SUPPORTED_COUNTRIES.map((c) => (
               <option key={c.code} value={c.code}>
                 {c.flag} {c.name}
               </option>

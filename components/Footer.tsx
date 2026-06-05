@@ -84,7 +84,7 @@ export default function Footer() {
 
         <div className="border-t border-border-light mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-text-muted text-sm">
-            {t('footer_copyright')}
+            {t('footer_copyright').replace('{year}', String(new Date().getFullYear()))}
           </p>
           <div className="flex items-center gap-4">
             <span className="text-text-muted text-sm">{t('footer_available_on')}</span>

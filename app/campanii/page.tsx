@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
-import { COUNTRIES } from '@/lib/countries'
+import { COUNTRIES, SUPPORTED_COUNTRIES } from '@/lib/countries'
 import { useLanguage } from '@/context/LanguageContext'
 import { useCountry } from '@/context/CountryContext'
 
@@ -50,7 +50,7 @@ export default function CampaniiPage() {
   const [countrySearch, setCountrySearch] = useState('')
   const [countryOpen, setCountryOpen] = useState(false)
   const countryRef = useRef<HTMLDivElement>(null)
-  const filteredCountries = COUNTRIES.filter(c =>
+  const filteredCountries = SUPPORTED_COUNTRIES.filter(c =>
     c.name.toLowerCase().includes(countrySearch.toLowerCase()) || c.code.toLowerCase().includes(countrySearch.toLowerCase())
   )
   const selectedCountryObj = COUNTRIES.find(c => c.code === country)

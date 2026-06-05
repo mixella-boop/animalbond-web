@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import { COUNTRIES } from '@/lib/countries'
+import { COUNTRIES, SUPPORTED_COUNTRIES } from '@/lib/countries'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
@@ -76,7 +76,7 @@ export default function HomeAnimalsSection() {
               className="border border-border-light rounded-full px-4 py-2 text-sm focus:outline-none focus:border-primary bg-white text-text-main"
             >
               <option value="">{t('filter_all_countries')}</option>
-              {COUNTRIES.map((c) => (
+              {SUPPORTED_COUNTRIES.map((c) => (
                 <option key={c.code} value={c.code}>
                   {c.flag} {c.name}
                 </option>

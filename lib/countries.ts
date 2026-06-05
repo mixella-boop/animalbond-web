@@ -1,3 +1,5 @@
+import { COUNTRY_TO_LANG } from './i18n'
+
 export type Country = { code: string; name: string; flag: string }
 
 export const COUNTRIES: Country[] = [
@@ -68,3 +70,10 @@ export const COUNTRIES: Country[] = [
   { code: 'PH', name: 'Filipine',              flag: '🇵🇭' },
   { code: 'VN', name: 'Vietnam',               flag: '🇻🇳' },
 ]
+
+// Doar țările cu limbă SUPORTATĂ (10 limbi app) — exclude India, Grecia etc.
+// Sursă UNICĂ pt toate ecranele (adopții, pierdute/găsite, medical, campanii) →
+// dropdown-urile de țară să fie IDENTICE peste tot.
+export const SUPPORTED_COUNTRIES: Country[] = COUNTRIES.filter(
+  c => COUNTRY_TO_LANG[c.code] !== undefined
+)
