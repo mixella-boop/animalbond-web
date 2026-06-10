@@ -39,7 +39,8 @@ export const LANG_TO_COUNTRY: Record<Lang, string> = {
   hu: 'HU',
   pt: 'PT',
   nl: 'NL',
-  ru: 'RU',
+  // ru → toate țările: Rusia nu e piață suportată; vorbitorii de rusă sunt diasporă UE
+  ru: '',
 }
 
 // Language → all countries that share this language (for multi-country filtering)
@@ -53,7 +54,8 @@ export const LANG_TO_COUNTRIES: Record<Lang, string[]> = {
   hu: ['HU'],
   pt: ['PT', 'BR'],
   nl: ['NL', 'BE'],
-  ru: ['RU', 'BY', 'KZ', 'UA'],
+  // gol: default-ul ru e '' (toate țările), deci expansiunea nu se aplică
+  ru: [],
 }
 
 export const translations = {

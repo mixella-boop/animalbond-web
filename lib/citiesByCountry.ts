@@ -255,24 +255,6 @@ export const CITIES_NL: City[] = [
   { name: 'Maastricht',     region: 'Limburg',          lat: 50.8514, lng:  5.6910 },
 ];
 
-// ─── Rusia ─────────────────────────────────────────────────────────────────
-export const CITIES_RU: City[] = [
-  { name: 'Москва',         region: 'Московская обл.',  lat: 55.7558, lng: 37.6173 },
-  { name: 'Санкт-Петербург',region: 'Ленинградская обл.',lat: 59.9343, lng: 30.3351 },
-  { name: 'Новосибирск',    region: 'Новосибирская обл.',lat: 54.9884, lng: 82.9384 },
-  { name: 'Екатеринбург',   region: 'Свердловская обл.',lat: 56.8389, lng: 60.6057 },
-  { name: 'Казань',         region: 'Татарстан',        lat: 55.8304, lng: 49.0661 },
-  { name: 'Нижний Новгород',region: 'Нижегородская обл.',lat: 56.2965, lng: 43.9361 },
-  { name: 'Челябинск',      region: 'Челябинская обл.', lat: 55.1644, lng: 61.4368 },
-  { name: 'Самара',         region: 'Самарская обл.',   lat: 53.1959, lng: 50.1002 },
-  { name: 'Омск',           region: 'Омская обл.',      lat: 54.9885, lng: 73.3242 },
-  { name: 'Ростов-на-Дону', region: 'Ростовская обл.',  lat: 47.2357, lng: 39.7015 },
-  { name: 'Уфа',            region: 'Башкортостан',     lat: 54.7388, lng: 55.9721 },
-  { name: 'Красноярск',     region: 'Красноярский кр.', lat: 56.0153, lng: 92.8932 },
-  { name: 'Пермь',          region: 'Пермский кр.',     lat: 58.0105, lng: 56.2502 },
-  { name: 'Воронеж',        region: 'Воронежская обл.', lat: 51.6755, lng: 39.2088 },
-];
-
 // ─── Regatul Unit ──────────────────────────────────────────────────────────
 export const CITIES_GB: City[] = [
   { name: 'London',        region: 'England',          lat: 51.5074, lng: -0.1278 },
@@ -472,8 +454,8 @@ export const CITIES_BY_COUNTRY: Record<string, City[]> = {
   // BR: CITIES_BR, // SCOS TEMPORAR (v15) — Google Play Brazil cere Merchant Verification (CNPJ/CPF). Re-adăugăm când facem setup.
   // NL — olandeză
   NL: CITIES_NL,
-  // RU — rusă
-  RU: CITIES_RU,
+  // RU SCOS (2026-06-10) — Rusia nu e piață suportată (sancțiuni + plăți suspendate);
+  // limba rusă rămâne pt diaspora UE.
 };
 
 // Țările cu suport complet (traduceri UI + orașe). Se extinde automat la fiecare sesiune de i18n.
