@@ -29,7 +29,8 @@ export default function AnimalGallery({ photos, animalName }: Props) {
         <img
           src={photos[activeIdx].url}
           alt={`${animalName} - ${t('gallery_photo')} ${activeIdx + 1}`}
-          className="object-cover w-full h-full"
+          className="object-contain w-full h-full"
+          style={{ backgroundColor: '#FBEFEE' }}
         />
         {photos.length > 1 && (
           <>

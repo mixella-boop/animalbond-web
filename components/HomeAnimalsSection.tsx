@@ -7,7 +7,7 @@ import { COUNTRIES, SUPPORTED_COUNTRIES } from '@/lib/countries'
 import AnimalCard from '@/components/AnimalCard'
 import type { Animal } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
-import { COUNTRY_TO_LANG } from '@/lib/i18n'
+import { COUNTRY_TO_LANG, LANG_TO_COUNTRY, type Lang } from '@/lib/i18n'
 
 function getMainPhoto(animal: Animal): string | null {
   if (!animal.animal_photos || animal.animal_photos.length === 0) return null
@@ -18,10 +18,18 @@ function getMainPhoto(animal: Animal): string | null {
 }
 
 export default function HomeAnimalsSection() {
-  const { t, setLang } = useLanguage()
+  const { t, setLang, lang } = useLanguage()
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
   const [country, setCountry] = useState('')
+  const [countryTouched, setCountryTouched] = useState(false)
+
+  // La prima vizită filtrul urmează limba detectată (IP/salvată), ca pe /adoptii.
+  // Limba se rezolvă async (LanguageContext) → sincronizăm până atinge userul filtrul.
+  useEffect(() => {
+    if (countryTouched) return
+    setCountry(LANG_TO_COUNTRY[lang as Lang] ?? '')
+  }, [lang, countryTouched])
 
   const fetchAnimals = useCallback(async (countryFilter: string) => {
     const now = new Date().toISOString()
@@ -70,6 +78,7 @@ export default function HomeAnimalsSection() {
             <select
               value={country}
               onChange={(e) => {
+                setCountryTouched(true)
                 setCountry(e.target.value)
                 if (e.target.value && COUNTRY_TO_LANG[e.target.value]) setLang(COUNTRY_TO_LANG[e.target.value])
               }}

@@ -121,7 +121,8 @@ export default function TestimonialeClient() {
                     <img
                       src={imgSrc}
                       alt={item.animal_name || 'Adoptie'}
-                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      style={{ backgroundColor: '#FBEFEE' }}
                       onError={(e) => {
                         const el = e.currentTarget
                         el.style.display = 'none'
@@ -186,7 +187,8 @@ export default function TestimonialeClient() {
                 <img
                   src={getCardImage(selected) || ''}
                   alt={selected.animal_name || 'Adoptie'}
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
+                  style={{ backgroundColor: '#FBEFEE' }}
                   onError={(e) => {
                     const el = e.currentTarget
                     el.style.display = 'none'

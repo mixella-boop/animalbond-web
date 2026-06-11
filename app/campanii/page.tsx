@@ -199,7 +199,7 @@ export default function CampaniiPage() {
                   <div className="relative aspect-[4/3] bg-orange-50">
                     {item.image_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={item.image_url} alt={item.title} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
+                      <img src={item.image_url} alt={item.title} className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300" style={{ backgroundColor: '#FBEFEE' }} />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-5xl">
                         {item.type === 'organization' ? '🏛️' : '🐾'}
@@ -248,7 +248,7 @@ export default function CampaniiPage() {
           <div className="bg-white rounded-t-3xl sm:rounded-2xl w-full sm:max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
             {selected.image_url ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={selected.image_url} alt={selected.title} className="w-full aspect-video object-cover rounded-t-3xl sm:rounded-t-2xl" />
+              <img src={selected.image_url} alt={selected.title} className="w-full aspect-video object-contain rounded-t-3xl sm:rounded-t-2xl" style={{ backgroundColor: '#FBEFEE' }} />
             ) : (
               <div className="w-full h-40 bg-orange-50 flex items-center justify-center text-6xl rounded-t-3xl sm:rounded-t-2xl">
                 {selected.type === 'organization' ? '🏛️' : '🐾'}

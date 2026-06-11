@@ -97,7 +97,8 @@ export default function AnimalCard({
             <img
               src={photoUrl}
               alt={`${name} - ${label}`}
-              className="object-cover w-full h-full"
+              className="object-contain w-full h-full"
+              style={{ backgroundColor: '#FBEFEE' }}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-5xl bg-gradient-to-br from-pink-50 to-red-50">

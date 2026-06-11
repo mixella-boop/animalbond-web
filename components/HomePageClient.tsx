@@ -211,7 +211,7 @@ export default function HomePageClient({ partners, testimonials, lostFoundBanner
                     return imgSrc ? (
                       <div className="aspect-[4/3] overflow-hidden relative">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={imgSrc} alt={item.animal_name || ''} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
+                        <img src={imgSrc} alt={item.animal_name || ''} className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300" style={{ backgroundColor: '#FBEFEE' }} />
                         {item.video_url && (
                           <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                             <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">

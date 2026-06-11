@@ -264,7 +264,8 @@ export default function PierduteGasitePage() {
                       <img
                         src={photo}
                         alt={animal.name}
-                        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        style={{ backgroundColor: '#FBEFEE' }}
                         onError={() => setImgErrors(prev => ({ ...prev, [animal.id]: true }))}
                       />
                     ) : (

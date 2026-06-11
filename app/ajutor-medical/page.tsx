@@ -190,7 +190,7 @@ export default function AjutorMedicalPage() {
                   <div className="relative aspect-[4/3] bg-indigo-50">
                     {photo ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={photo} alt={animal.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
+                      <img src={photo} alt={animal.name} className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300" style={{ backgroundColor: '#FBEFEE' }} />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-5xl">{emoji}</div>
                     )}
