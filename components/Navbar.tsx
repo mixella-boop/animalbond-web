@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -18,7 +18,7 @@ function ComingSoonModal({ onClose }: { onClose: () => void }) {
         className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="text-5xl mb-4">🚀</div>
+        <div className="text-5xl mb-4">ðŸš€</div>
         <h3 className="text-xl font-bold text-text-main mb-2">{t('coming_soon')}</h3>
         <p className="text-text-muted text-sm leading-relaxed mb-6">{t('coming_soon_desc')}</p>
         <button
@@ -50,7 +50,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
 
-          {/* Logo → feed (toate anunțurile) */}
+          {/* Logo â†’ feed (toate anunÈ›urile) */}
           <Link href="/adoptii" className="flex items-center gap-1.5 font-bold text-xl text-primary shrink-0">
             <Image src="/logo.svg" alt="AnimalBond" width={30} height={30} className="rounded-lg" />
             <span className="hidden sm:inline">AnimalBond</span>
@@ -59,7 +59,7 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-4 lg:gap-5">
             <Link href="/adoptii" className="text-text-main hover:text-primary transition-colors font-medium text-sm whitespace-nowrap">
-              🐾 {t('feed_title')}
+              ðŸ¾ {t('feed_title')}
             </Link>
             <Link href="/ajutor-medical" className="text-red-500 hover:text-red-600 transition-colors font-medium text-sm whitespace-nowrap">
               {t('nav_medical')}
@@ -71,7 +71,7 @@ export default function Navbar() {
               {t('nav_parteneri')}
             </Link>
             <Link href="/campanii" className="text-orange-500 hover:text-orange-600 transition-colors font-medium text-sm whitespace-nowrap">
-              💝 {t('nav_campanii')}
+              ðŸ’ {t('nav_campanii')}
             </Link>
             <Link href="/povesti" className="text-text-main hover:text-primary transition-colors font-medium text-sm whitespace-nowrap">
               {t('nav_povesti')}
@@ -79,9 +79,9 @@ export default function Navbar() {
             <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium text-sm whitespace-nowrap">
               {t('nav_despre')}
             </Link>
-            {/* pricing hidden — reactivate when partners are monetized */}
+            {/* pricing hidden â€” reactivate when partners are monetized */}
 
-            {/* Language selector — pulsating */}
+            {/* Language selector â€” pulsating */}
             <div className="relative">
               <select
                 value={lang}
@@ -91,11 +91,11 @@ export default function Navbar() {
               >
                 {LANG_OPTIONS.map(l => (
                   <option key={l.code} value={l.code}>
-                    {l.flag} {l.label}
+                    {l.label}
                   </option>
                 ))}
               </select>
-              <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white text-xs font-bold">▾</div>
+              <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white text-xs font-bold">â–¾</div>
             </div>
 
             <button
@@ -117,11 +117,11 @@ export default function Navbar() {
               >
                 {LANG_OPTIONS.map(l => (
                   <option key={l.code} value={l.code}>
-                    {l.flag} {l.label}
+                    {l.label}
                   </option>
                 ))}
               </select>
-              <div className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-white text-xs font-bold">▾</div>
+              <div className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-white text-xs font-bold">â–¾</div>
             </div>
             <button
               className="p-2 rounded-lg text-text-main hover:bg-gray-100 transition-colors"
@@ -145,7 +145,7 @@ export default function Navbar() {
         {menuOpen && (
           <div className="md:hidden py-4 border-t border-border-light flex flex-col gap-3">
             <Link href="/adoptii" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
-              🐾 {t('feed_title')}
+              ðŸ¾ {t('feed_title')}
             </Link>
             <Link href="/ajutor-medical" className="text-red-500 hover:text-red-600 transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_medical')}
@@ -157,7 +157,7 @@ export default function Navbar() {
               {t('nav_parteneri')}
             </Link>
             <Link href="/campanii" className="text-orange-500 hover:text-orange-600 transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
-              💝 {t('nav_campanii')}
+              ðŸ’ {t('nav_campanii')}
             </Link>
             <Link href="/povesti" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_povesti')}
@@ -165,7 +165,7 @@ export default function Navbar() {
             <Link href="/despre" className="text-text-main hover:text-primary transition-colors font-medium py-2" onClick={() => setMenuOpen(false)}>
               {t('nav_despre')}
             </Link>
-            {/* pricing hidden — reactivate when partners are monetized */}
+            {/* pricing hidden â€” reactivate when partners are monetized */}
             <button
               onClick={() => { setShowComingSoon(true); setMenuOpen(false) }}
               className="bg-primary text-white px-5 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors text-sm text-center"
