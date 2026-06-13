@@ -29,6 +29,7 @@ export default function TestimonialeClient() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [loading, setLoading] = useState(true)
   const [selected, setSelected] = useState<Testimonial | null>(null)
+  const [fullscreenPhoto, setFullscreenPhoto] = useState<string | null>(null)
 
   const selectedCountryObj = COUNTRIES.find(c => c.code === country)
 
@@ -182,7 +183,10 @@ export default function TestimonialeClient() {
             onClick={(e) => e.stopPropagation()}
           >
             {getCardImage(selected) && (
-              <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-pink-50">
+              <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-pink-50 group cursor-zoom-in"
+                onClick={(e) => { e.stopPropagation(); setFullscreenPhoto(getCardImage(selected)) }}
+              >
+                <div className="absolute top-2 right-2 z-10 bg-black/50 rounded-full w-8 h-8 flex items-center justify-center text-white text-sm pointer-events-none">⛶</div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={getCardImage(selected) || ''}
@@ -230,6 +234,24 @@ export default function TestimonialeClient() {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Lightbox foto fullscreen */}
+      {fullscreenPhoto && (
+        <div
+          className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4 cursor-zoom-out"
+          onClick={() => setFullscreenPhoto(null)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={fullscreenPhoto} alt="" className="max-w-full max-h-full object-contain" />
+          <button
+            onClick={() => setFullscreenPhoto(null)}
+            className="absolute top-4 right-4 text-white text-3xl leading-none w-10 h-10 flex items-center justify-center"
+            aria-label="Close"
+          >
+            ✕
+          </button>
         </div>
       )}
     </div>
